@@ -2,6 +2,14 @@
     <string name="app_name">207_demo</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+
+    <string-array name="user_types">
+        <item>Organizer</item>
+        <item>Attendee</item>
+        <item>Speaker</item>
+        <item>VIPUser</item>
+    </string-array>
+
     <string name="signUp">Sign up</string>
     <string name="login">Login</string>
     <string name="signOut">Sign out</string>

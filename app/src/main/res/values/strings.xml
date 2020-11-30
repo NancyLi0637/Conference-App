@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">207_demo</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signUp">Sign up</string>
+    <string name="login">Login</string>
+    <string name="signOut">Sign out</string>
+    <string name="settings">Settings</string>
+    <string name="contacts">Contact</string>
+    <string name="allevents">All Events</string>
+    <string name="myevents">My Events</string>
+    <string name="announcements">Announcements</string>
+    <string name="msgHint">Type your message here</string>
+    <string name="send">Send</string>
+    <string name="firstname">First name</string>
+    <string name="lastname">Last name</string>
+
+    <string name="attendeeAcc">Attendee</string>
+    <string name="username">Nancie Lee</string>
+    <string name="useremail">nancielee@gmail.com</string>
+</resources>

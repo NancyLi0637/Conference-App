@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signUp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="50dp"
+        android:layout_marginTop="60dp"/>
+
+    <EditText
+        android:id="@+id/firstname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="50dp"
+        android:hint="@string/firstname"
+        android:textSize="24sp"/>
+
+    <EditText
+        android:id="@+id/lastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:hint="@string/lastname"
+        android:textSize="24sp"/>
+
+    <EditText
+        android:id="@+id/email_signUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:hint="@string/email"
+        android:textSize="24sp"/>
+
+    <EditText
+        android:id="@+id/password_signUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:hint="@string/password"
+        android:textSize="24sp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already a member?"
+            android:layout_marginStart="100dp" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_signUp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:text="@string/signUp" />
+
+</LinearLayout>

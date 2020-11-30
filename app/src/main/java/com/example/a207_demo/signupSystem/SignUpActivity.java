@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.a207_demo.ActivityCollector;
 import com.example.a207_demo.MainActivity;
@@ -51,6 +52,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         EditText firstName = findViewById(R.id.firstname);
         EditText lastName = findViewById(R.id.lastname);
+
+        Spinner userType = (Spinner) findViewById(R.id.userType);
+        // Use getSelectedItem() to get the selected item in a spinner:
+        String userTypeStr = String.valueOf(userType.getSelectedItem());
 
     }
 

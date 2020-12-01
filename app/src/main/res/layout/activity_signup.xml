@@ -18,7 +18,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:hint="@string/firstname"
         android:textSize="24sp"/>
 
@@ -58,7 +58,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"/>
 

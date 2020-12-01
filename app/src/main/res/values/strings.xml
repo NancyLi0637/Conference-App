@@ -6,7 +6,6 @@
     <string-array name="user_types">
         <item>Organizer</item>
         <item>Attendee</item>
-        <item>Speaker</item>
         <item>VIPUser</item>
     </string-array>
 

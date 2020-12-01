@@ -1,5 +1,6 @@
 package com.example.a207_demo.messageSystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,12 +11,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a207_demo.ActivityCollector;
+import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
+import com.example.a207_demo.utility.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,15 +56,6 @@ public class MsgActivity extends AppCompatActivity implements View.OnClickListen
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void createRecyclerView(){

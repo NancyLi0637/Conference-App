@@ -21,7 +21,7 @@
             android:label="My Events"
             android:launchMode="singleTask" />
         <activity
-            android:name=".Settings"
+            android:name=".utility.Settings"
             android:label="Settings"
             android:launchMode="singleTask" />
         <activity

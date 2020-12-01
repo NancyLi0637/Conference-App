@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.a207_demo.eventSystem.EventActivity;
 import com.example.a207_demo.signupSystem.SignUpActivity;
+import com.example.a207_demo.utility.ActivityCollector;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 

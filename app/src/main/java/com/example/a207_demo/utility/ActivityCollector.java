@@ -1,4 +1,4 @@
-package com.example.a207_demo;
+package com.example.a207_demo.utility;
 
 import android.app.Activity;
 

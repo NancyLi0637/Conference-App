@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.a207_demo.ActivityCollector;
+import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.MainActivity;
 import com.example.a207_demo.R;
 import com.example.a207_demo.eventSystem.EventActivity;
@@ -39,12 +39,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void attainData(){
-        // get Intent() returns the intent that started the activity, and you can use this to
-        // retrieve any extra info that was sent along with it.
         Intent intent = getIntent();
-        EditText emailView = findViewById(R.id.email_signUp);
-        EditText passwordView = findViewById(R.id.password_signUp);
-
+        EditText email = findViewById(R.id.email_signUp);
+        EditText password = findViewById(R.id.password_signUp);
 
 //        if(intent.getStringExtra("email") != null){
 //            email.setText(intent.getStringExtra("email"));
@@ -53,18 +50,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 //            password.setText(intent.getStringExtra("password"));
 //        }
 
-        EditText firstNameView = findViewById(R.id.firstname);
-        EditText lastNameView = findViewById(R.id.lastname);
+        EditText firstName = findViewById(R.id.firstname);
+        EditText lastName = findViewById(R.id.lastname);
 
         Spinner userType = (Spinner) findViewById(R.id.userType);
         // Use getSelectedItem() to get the selected item in a spinner:
         String userTypeStr = String.valueOf(userType.getSelectedItem());
-
-        String email = emailView.getText().toString();
-        String password = passwordView.getText().toString();
-
-        String firstName = firstNameView.getText().toString();
-        String lastName = lastNameView.getText().toString();
 
     }
 

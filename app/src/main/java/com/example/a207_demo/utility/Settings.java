@@ -1,4 +1,4 @@
-package com.example.a207_demo;
+package com.example.a207_demo.utility;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,6 +6,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.example.a207_demo.R;
+import com.example.a207_demo.utility.ActivityCollector;
 
 public class Settings extends AppCompatActivity {
 

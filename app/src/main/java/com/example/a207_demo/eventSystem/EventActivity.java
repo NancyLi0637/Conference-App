@@ -4,8 +4,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
@@ -34,7 +32,6 @@ public class EventActivity extends SetUpActivity {
         init();
 
         ActivityCollector.addActivity(this);
-
     }
 
     /**
@@ -46,26 +43,9 @@ public class EventActivity extends SetUpActivity {
         createEventMenu();
     }
 
-    /**
-     * Set up action bar
-     * @param menu Menu items of the activity
-     * @return true if created successfully
-     */
-    public boolean onCreateOptionsMenu(Menu menu){
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    /**
-     * Menu item listener for clicking events.
-     * @param item Item clicked
-     * @return true if clicked successfully
-     */
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
+    protected void createEventMenu(){
 
-    private void createEventMenu(){
-        // initialize events data:
         initEvents();
 
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
@@ -75,9 +55,10 @@ public class EventActivity extends SetUpActivity {
         recyclerView.setAdapter(eventAdapter);
     }
 
-    private void initEvents(){
-        //Todo: access Event Use case to generate event
-        for (int i = 0; i < 50; i++){
+    protected void initEvents(){
+        //Todo: generate Event through use case
+
+        for(int i = 0; i < 2; i++) {
             Event event1 = new Event("Event1", "BF101", "", "13:00", R.drawable.default_image);
             eventList.add(event1);
             Event event2 = new Event("Event2", "TH305", "", "13:00", R.drawable.default_image);
@@ -88,7 +69,6 @@ public class EventActivity extends SetUpActivity {
             eventList.add(event4);
             Event event5 = new Event("Event5", "SU302", "", "13:00", R.drawable.default_image);
             eventList.add(event5);
-
         }
     }
 }

@@ -60,8 +60,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if(!validEmail()){
                     //Todo: implement error message
                 }else{
-                    setUpData();
                     intent = new Intent(SignUpActivity.this, MainActivity.class);
+                    setUpData();
                     startActivity(intent);
                 }
                 break;
@@ -97,6 +97,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         // Use getSelectedItem() to get the selected item in a spinner:
         String userTypeStr = String.valueOf(userType.getSelectedItem());
 
+        //Todo: initiate new Attendee object through manager
         //Todo: save data into database
 //        if (userTypeStr.equals("Organizer")) {
 //            return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ATTENDEE");

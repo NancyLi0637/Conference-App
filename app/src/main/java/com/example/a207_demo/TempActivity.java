@@ -33,10 +33,10 @@ public class TempActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(TempActivity.this, EventActivity.class));
                 break;
             case R.id.btn_organizer:
-                startActivity(new Intent(TempActivity.this, OrganizerEventActivity.class));
+                //startActivity(new Intent(TempActivity.this, OrganizerEventActivity.class));
                 break;
             case R.id.btn_speaker:
-                startActivity(new Intent(TempActivity.this, SpeakerMyEventActivity.class));
+                //startActivity(new Intent(TempActivity.this, SpeakerMyEventActivity.class));
                 break;
         }
     }

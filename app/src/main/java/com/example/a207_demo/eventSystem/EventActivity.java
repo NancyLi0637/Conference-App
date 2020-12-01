@@ -65,6 +65,7 @@ public class EventActivity extends SetUpActivity {
     }
 
     private void createEventMenu(){
+        // initialize events data:
         initEvents();
 
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);

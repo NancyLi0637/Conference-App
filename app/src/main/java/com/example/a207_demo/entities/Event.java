@@ -1,4 +1,4 @@
-package com.example.a207_demo.eventSystem;
+package com.example.a207_demo.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,59 +8,31 @@ import java.util.UUID;
 /**
  * The entities.Event class, this is the conference scheduled by entities.Organizer for Attendees and Speakers.
  */
-public class Event implements Serializable {
+public abstract class Event implements Serializable {
 
-    private String title;
-    private String eventID;
-    private String roomID;
+    private final String title;
+    private final String eventID;
+    private final String roomID;
     private ArrayList<String> userIDs;
-    private ArrayList<String> speakers;
     private String startTime;
-    private String duration = "1";
-
-    private int imageId;
+    private String duration;
 
     /**
      * The constructor No.1 for an event
      *
      * @param title     event title
      * @param roomID    which room the event will be held in
-     * @param speakerID the speaker id for the event
      * @param startTime event starting time
      */
-    public Event(String title, String roomID, String speakerID, String startTime, int imageId) {
+    public Event(String title, String roomID, String startTime, String duration) {
         this.title = title;
         this.eventID = UUID.randomUUID().toString().split("-")[0];
         this.roomID = roomID;
         this.userIDs = new ArrayList<>();
-        this.speakers = new ArrayList<>(1);
-        this.speakers.add(speakerID);
         this.startTime = startTime;
-
-        this.imageId = imageId;
+        this.duration = duration;
     }
 
-
-    /**
-     * The constructor No.2 for an event
-     *
-     * @param title     event title
-     * @param roomID    which room the event will be held in
-     * @param speakerID the speaker id for the event
-     * @param startTime event starting time
-     * @param eventID   event ID
-     */
-    public Event(String title, String roomID, String speakerID, String startTime, String eventID, int imageId) {
-        this.title = title;
-        this.eventID = eventID;
-        this.roomID = roomID;
-        this.userIDs = new ArrayList<>();
-        this.speakers = new ArrayList<>(1);
-        this.speakers.add(speakerID);
-        this.startTime = startTime;
-
-        this.imageId = imageId;
-    }
 
     /**
      * Get the value of timeSlot, i.e., startTime
@@ -83,12 +55,9 @@ public class Event implements Serializable {
             return false;
         }
         for (Event event : events) {
-//            if (event.getAttendees().contains(attendeeID) && event.getStartTime().equals(this.getStartTime())) {
-//                return false;
-//            }
             if (event.getAttendees().contains(attendeeID) &&
                     !((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration()) <= Integer.parseInt(this.startTime)) ||
-                            Integer.parseInt(this.startTime) + Integer.parseInt(this.duration) <= Integer.parseInt(event.getStartTime()))) {
+                    Integer.parseInt(this.startTime) + Integer.parseInt(this.duration) <= Integer.parseInt(event.getStartTime()))) {
                 return false;
             }
         }
@@ -109,34 +78,6 @@ public class Event implements Serializable {
         return false;
     }
 
-    /**
-     * Try to add a speaker to a list of events
-     *
-     * @param speakerID speakerID String
-     * @param events    a list of events
-     */
-    public boolean addSpeaker(String speakerID, List<Event> events) {
-        for (Event event : events) {
-            if (event.speakers.contains(speakerID) && event.getStartTime().equals(this.getStartTime())) {
-                return false;
-            }
-        }
-        this.speakers.add(speakerID);
-        return true;
-    }
-
-    /**
-     * Try to remove a speaker from a list of events
-     *
-     * @param speakerID String
-     * @return boolean true if person existed in attendee list
-     */
-    public boolean removeSpeaker(String speakerID) {
-        if (this.speakers.contains(speakerID)) {
-            return this.speakers.remove(speakerID);
-        }
-        return false;
-    }
 
     /**
      * Return the ID String of this event
@@ -165,14 +106,12 @@ public class Event implements Serializable {
         return this.roomID;
     }
 
-    /**
-     * Returns all speakers for this event
-     *
-     * @return all speakers
-     */
-    public String getSpeakers() {
-        return speakers.get(0);
+    public String getDuration(){
+        return this.duration;
     }
+
+    public abstract ArrayList<String> getSpeakers();
+
 
     /**
      * Returns all attendees for this event
@@ -182,11 +121,6 @@ public class Event implements Serializable {
     public ArrayList<String> getAttendees() {
         return userIDs;
     }
-
-//    public int getDuration(){return duration;}
-    public String getDuration(){
-    return this.duration;
-}
 
     /**
      * Formats and returns the time slot
@@ -215,10 +149,6 @@ public class Event implements Serializable {
      *
      * @return a formatted string with more data
      */
-    public String fullString() {
-        return this.toString() + " in room " + this.roomID + " with speaker: " + this.speakers.get(0);
-    }
-
-    public int getImageId(){return imageId;}
+    public abstract String toFullString();
 }
 

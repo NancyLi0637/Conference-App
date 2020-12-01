@@ -13,6 +13,8 @@ import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.MainActivity;
 import com.example.a207_demo.R;
 
+
+
 /**
  * Activity class for user sign up.
  */
@@ -96,6 +98,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String userTypeStr = String.valueOf(userType.getSelectedItem());
 
         //Todo: save data into database
+//        if (userTypeStr.equals("Organizer")) {
+//            return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ATTENDEE");
+//        } else if (CurrentAction.equals("2")) {
+//            return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ORGANIZER");
+//        } else if(CurrentAction.equals("cancel")){
+//            return false;
+//        }
     }
 
 }

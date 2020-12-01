@@ -3,13 +3,8 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
 
-    <string-array name="user_types">
-        <item>Organizer</item>
-        <item>Attendee</item>
-        <item>VIPUser</item>
-    </string-array>
-
     <string name="signUp">Sign up</string>
+
     <string name="login">Login</string>
     <string name="signOut">Sign out</string>
     <string name="settings">Settings</string>
@@ -21,8 +16,13 @@
     <string name="send">Send</string>
     <string name="firstname">First name</string>
     <string name="lastname">Last name</string>
-
     <string name="attendeeAcc">Attendee</string>
+
     <string name="username">Nancie Lee</string>
     <string name="useremail">nancielee@gmail.com</string>
+    <string-array name="user_types">
+        <item>Organizer</item>
+        <item>Attendee</item>
+        <item>VIPUser</item>
+    </string-array>
 </resources>

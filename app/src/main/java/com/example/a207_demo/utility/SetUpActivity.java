@@ -14,7 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.a207_demo.R;
 import com.example.a207_demo.contactSystem.ContactActivity;
 import com.example.a207_demo.eventSystem.EventActivity;
-import com.example.a207_demo.eventSystem.MyEventActivity;
+import com.example.a207_demo.eventSystem.AttendeeMyEventActivity;
 import com.example.a207_demo.messageSystem.AnnouncementActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -44,7 +44,7 @@ public class SetUpActivity extends AppCompatActivity{
                         break;
                     case R.id.nav_myEvents:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, MyEventActivity.class));
+                        startActivity(new Intent(context, AttendeeMyEventActivity.class));
                         break;
                     case R.id.nav_contacts:
                         mDrawerLayout.closeDrawers();

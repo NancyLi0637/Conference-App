@@ -9,15 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".TempActivity"></activity>
         <activity
             android:name=".signupSystem.SignUpActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".messageSystem.AnnouncementActivity"
             android:label="Announcements"
             android:launchMode="singleTask" />
         <activity
-            android:name=".eventSystem.MyEventActivity"
+            android:name=".eventSystem.AttendeeMyEventActivity"
             android:label="My Events"
             android:launchMode="singleTask" />
         <activity
@@ -29,7 +30,7 @@
             android:label="All Events"
             android:launchMode="singleTask" />
         <activity
-            android:name=".eventSystem.EventContentActivity"
+            android:name=".eventSystem.AttendeeEventContentActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".contactSystem.ContactActivity"

@@ -36,6 +36,7 @@ public class Event implements Serializable {
         this.speakers = new ArrayList<>(1);
         this.speakers.add(speakerID);
         this.startTime = startTime;
+
         this.imageId = imageId;
     }
 
@@ -57,6 +58,7 @@ public class Event implements Serializable {
         this.speakers = new ArrayList<>(1);
         this.speakers.add(speakerID);
         this.startTime = startTime;
+
         this.imageId = imageId;
     }
 
@@ -175,6 +177,8 @@ public class Event implements Serializable {
     public ArrayList<String> getAttendees() {
         return userIDs;
     }
+
+    public int getDuration(){return duration;}
 
     /**
      * Formats and returns the time slot

@@ -15,7 +15,7 @@ import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-public class EventContentActivity extends AppCompatActivity {
+public class AttendeeEventContentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +46,11 @@ public class EventContentActivity extends AppCompatActivity {
         String eventTitle = intent.getStringExtra("event_title");
         String eventRoom = intent.getStringExtra("event_room");
         String eventTime = intent.getStringExtra("event_time");
+        String eventDuration = intent.getStringExtra("event_duration");
         int eventImageId = intent.getIntExtra("event_image_id", 0);
 
         String eventContent = "Room: " + eventRoom + "\n" +
-                "Time: " + eventTime;
+                "Time: " + eventTime + "Duration: " + eventDuration;
         fillContent(eventTitle, eventContent, eventImageId);
     }
 

@@ -11,7 +11,7 @@ import com.example.a207_demo.utility.SetUpActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyEventActivity extends SetUpActivity {
+public class AttendeeMyEventActivity extends SetUpActivity {
 
     //Todo: access Event Use case
     private List<Event> eventList = new ArrayList<>();

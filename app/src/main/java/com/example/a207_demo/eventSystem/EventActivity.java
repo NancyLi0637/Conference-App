@@ -11,16 +11,21 @@ import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.SetUpActivity;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Event activity to show attendee.
+ */
 public class EventActivity extends SetUpActivity {
 
     //Todo: access Event Use case
     private List<Event> eventList = new ArrayList<>();
 
-
+    /**
+     * Required function to initiate an Activity class.
+     * @param savedInstanceState saved data for unexpected crush
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,21 +37,34 @@ public class EventActivity extends SetUpActivity {
 
     }
 
+    /**
+     * Set up the activity.
+     */
     public void init(){
         super.createActionBar();
         super.createNavView(this, R.id.nav_allevents);
         createEventMenu();
     }
 
+    /**
+     * Set up action bar
+     * @param menu Menu items of the activity
+     * @return true if created successfully
+     */
     public boolean onCreateOptionsMenu(Menu menu){
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Menu item listener for clicking events.
+     * @param item Item clicked
+     * @return true if clicked successfully
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
-    public void createEventMenu(){
+    private void createEventMenu(){
         initEvents();
 
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
@@ -56,7 +74,7 @@ public class EventActivity extends SetUpActivity {
         recyclerView.setAdapter(eventAdapter);
     }
 
-    public void initEvents(){
+    private void initEvents(){
         //Todo: access Event Use case to generate event
         for (int i = 0; i < 50; i++){
             Event event1 = new Event("Event1", "BF101", "", "13:00", R.drawable.default_image);

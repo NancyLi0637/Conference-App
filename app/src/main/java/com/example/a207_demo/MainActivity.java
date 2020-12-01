@@ -8,12 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.a207_demo.eventSystem.EventActivity;
 import com.example.a207_demo.signupSystem.SignUpActivity;
 import com.example.a207_demo.utility.ActivityCollector;
 
+/**
+ * The top level class for running the app.
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    /**
+     * Required function to initiate an Activity class.
+     * @param savedInstanceState saved data for unexpected crush
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Set up the activity.
+     */
     public void init(){
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
@@ -33,32 +42,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         login.setOnClickListener(this);
     }
 
+    /**
+     * Button Listener for clicking events.
+     * @param v Button clicked
+     */
     @Override
     public void onClick(View v){
+        Intent intent;
+
         switch(v.getId()){
             case R.id.btn_signUp:
-                //Todo: connect to signUp system
-                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-                //setUpData(intent);
+                intent = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login:
-                //Todo: connect to login system
-                intent = new Intent(MainActivity.this, EventActivity.class);
+//                if(info_matched()) {
+//                    //Todo: distinguish account
+//                    String type = account_type();
+//                    if(type.equals("ATTENDEE")){
+//                        intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
+//                    }else if(account_type().equals("Organizer"){
+//                        intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
+//                    }else{
+//                        intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
+//                    }
+//                    startActivity(intent);
+//                }else{
+//                    //Todo: implement error message
+//                }
+                //Todo: delete after above if-else implemented
+                intent = new Intent(MainActivity.this, TempActivity.class);
                 startActivity(intent);
                 break;
         }
     }
 
-    public void setUpData(Intent intent){
+    private boolean info_matched(){
         EditText email = findViewById(R.id.email);
         EditText password = findViewById(R.id.password);
+        String userEM = email.getText().toString();
+        String userPW = password.getText().toString();
 
-        if(!email.getText().toString().equals("")){
-            intent.putExtra("email",email.getText());
-        }
-        if(!password.getText().toString().equals("")){
-            intent.putExtra("password",password.getText());
-        }
+        //Todo: validate email and password through manager
+        return true;
     }
+
+    private String account_type(){
+        //Todo: check type through manager
+        return "";
+    }
+
 }

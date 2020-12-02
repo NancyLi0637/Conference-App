@@ -60,6 +60,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_signUp:
                 if(!validEmail()){
                     //Todo: implement error message
+                }else if(!validUsername()){
+                    //Todo: implement error message
                 }else{
                     intent = new Intent(SignUpActivity.this, MainActivity.class);
                     setUpData();
@@ -77,12 +79,39 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         EditText email = findViewById(R.id.email_signUp);
         String userEM = email.getText().toString();
 
-//        //Todo: validate email through manager
-//        if(!validNewEmail(userEM)){
-//
-//        }
-        return true;
+        UserManager userManager = new UserManager();
+
+        return isValidEmail(userEM, userManager);
     }
+
+    private boolean isValidEmail(String email, UserManager userManager) {
+        if (!userManager.validNewEmail(email)) {
+            return false;
+        } else if (email.length() >= 6 && email.contains("@") && email.charAt(0) != '@' && email.contains(".") &&
+                email.charAt(email.length() - 1) != '.' && email.length() - email.replace(".", "").length() == 1 &&
+                email.length() - email.replace("@", "").length() == 1 && email.indexOf('@') < email.indexOf('.') &&
+                email.indexOf('@') != email.indexOf('.') - 1 && userManager.validNewEmail(email)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean validUsername(){
+        EditText firstName = findViewById(R.id.firstname);
+        EditText lastName = findViewById(R.id.lastname);
+        String userFN = firstName.getText().toString();
+        String userLN = lastName.getText().toString();
+
+        UserManager userManager = new UserManager();
+
+        return isValidUserName(userFN + userLN, userManager);
+    }
+
+    private boolean isValidUserName(String user, UserManager userManager) {
+        return user.length() >= 2 && userManager.validNewName(user);
+    }
+
 
     private void setUpData(){
         EditText email = findViewById(R.id.email_signUp);
@@ -98,12 +127,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         // Use getSelectedItem() to get the selected item in a spinner:
         String userTypeStr = String.valueOf(userType.getSelectedItem());
 
-        //Todo: initiate new Attendee object through manager
+        //Todo: initiate new User object through manager
         //Todo: save data into database
-//        AttendeeManager attendeeManager;
-//        OrganizerManager organizerManager;
-//        SpeakerManager speakerManager;
-//        UserManager userManager;
+        createNewAccount(userTypeStr, userFN + userLN, userEM, userPW);
+
+
+//        AttendeeManager attendeeManager = new AttendeeManager();
+//        OrganizerManager organizerManager = new OrganizerManager();
+//        SpeakerManager speakerManager = new SpeakerManager();
+//        UserManager userManager = new UserManager();
 //        if (userTypeStr.equals("Organizer")) {
 //            return CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ORGANIZER");
 //        } else if (CurrentAction.equals("2")) {
@@ -111,9 +143,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 //        } else if(CurrentAction.equals("cancel")){
 //            return false;
 //        }
-//    }
-//
-//
+    }
+
+    private void createNewAccount(String userType, String username, String userEmail, String userPassword){
+        AttendeeManager attendeeManager = new AttendeeManager();
+        OrganizerManager organizerManager = new OrganizerManager();
+        //TODO: add VipUserManager
+        //VipUserManager vipUserManager = new VipUserManager();
+
+        if(userType.equals("Attendee")){
+            attendeeManager.createAttendee(username, userEmail, userPassword);
+        }else if(userType.equals("Organizer")){
+            organizerManager.createOrganizer(username, userEmail, userPassword);
+        }else if(userType.equals("VIP User")){
+            //vipUserManger.createVipUser(username, userEmail, userPassword);
+        }
+    }
+
+
 //    public boolean CreateNewAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
 //                                    SpeakerManager speakerManager, UserManager userManager, String type) {
 //        String email = input.getInputString("Please enter the email for new account: (ex. 12345@abc.com), or " +
@@ -171,36 +218,5 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 //        }
 //        return true;
 //    }
-//
-//    /**
-//     * The method to check if a given email is in valid form, or already existed in the system.
-//     *
-//     * @param email       The given email.
-//     * @param userManager user manager class.
-//     * @return true iff the email is valid.
-//     */
-//    public boolean isValidEmail(String email, UserManager userManager) {
-//        if (!userManager.validNewEmail(email)) {
-//            return false;
-//        } else if (email.length() >= 6 && email.contains("@") && email.charAt(0) != '@' && email.contains(".") &&
-//                email.charAt(email.length() - 1) != '.' && email.length() - email.replace(".", "").length() == 1 &&
-//                email.length() - email.replace("@", "").length() == 1 && email.indexOf('@') < email.indexOf('.') &&
-//                email.indexOf('@') != email.indexOf('.') - 1 && userManager.validNewEmail(email)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//
-//    /**
-//     * The check if the user name is valid.
-//     *
-//     * @param user        the user name.
-//     * @param userManager user manager class.
-//     * @return true iff the name is valid.
-//     */
-//    public boolean isValidUserName(String user, UserManager userManager) {
-//        return user.length() >= 2 && userManager.validNewName(user);
-    }
 
 }

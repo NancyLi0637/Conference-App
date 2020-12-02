@@ -75,6 +75,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    /**
+     * Check if the email entered is valid
+     * @return boolean
+     */
     private boolean validEmail(){
         EditText email = findViewById(R.id.email_signUp);
         String userEM = email.getText().toString();
@@ -84,6 +88,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         return isValidEmail(userEM, userManager);
     }
 
+    /**
+     * Check if the email entered is valid with userManager
+     * @param email email of the user
+     * @param userManager an instance of userManager
+     * @return boolean
+     */
     private boolean isValidEmail(String email, UserManager userManager) {
         if (!userManager.validNewEmail(email)) {
             return false;
@@ -97,6 +107,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    /**
+     * Check if the userName entered is valid
+     * @return boolean
+     */
     private boolean validUsername(){
         EditText firstName = findViewById(R.id.firstname);
         EditText lastName = findViewById(R.id.lastname);
@@ -108,11 +122,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         return isValidUserName(userFN + userLN, userManager);
     }
 
+    /**
+     * Check if the userName entered is valid with userManager
+     * @param user String username
+     * @param userManager an instance of userManager
+     * @return boolean
+     */
     private boolean isValidUserName(String user, UserManager userManager) {
         return user.length() >= 2 && userManager.validNewName(user);
     }
 
 
+    /**
+     * set up data and save data into database
+     */
     private void setUpData(){
         EditText email = findViewById(R.id.email_signUp);
         EditText firstName = findViewById(R.id.firstname);
@@ -132,19 +155,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         createNewAccount(userTypeStr, userFN + userLN, userEM, userPW);
 
 
-//        AttendeeManager attendeeManager = new AttendeeManager();
-//        OrganizerManager organizerManager = new OrganizerManager();
-//        SpeakerManager speakerManager = new SpeakerManager();
-//        UserManager userManager = new UserManager();
-//        if (userTypeStr.equals("Organizer")) {
-//            return CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ORGANIZER");
-//        } else if (CurrentAction.equals("2")) {
-//            return createAccount.CreateNewAccount(attendeeManager, organizerManager, speakerManager, userManager,"ORGANIZER");
-//        } else if(CurrentAction.equals("cancel")){
-//            return false;
-//        }
     }
 
+    /**
+     * create a New Account
+     * @param userType String, the type of the user
+     * @param username username
+     * @param userEmail userEmail
+     * @param userPassword userPassword
+     */
     private void createNewAccount(String userType, String username, String userEmail, String userPassword){
         AttendeeManager attendeeManager = new AttendeeManager();
         OrganizerManager organizerManager = new OrganizerManager();
@@ -159,64 +178,5 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             //vipUserManger.createVipUser(username, userEmail, userPassword);
         }
     }
-
-
-//    public boolean CreateNewAccount(AttendeeManager attendeeManager, OrganizerManager organizerManager,
-//                                    SpeakerManager speakerManager, UserManager userManager, String type) {
-//        String email = input.getInputString("Please enter the email for new account: (ex. 12345@abc.com), or " +
-//                "enter 'cancel' at any point to exit account creation\n");
-//        if (email.contains(" ")) {
-//            return false;
-//        }
-//        ;
-//        while (true) {
-//            if (email.equals("cancel")) {
-//                return false;
-//            } else if (isValidEmail(email, userManager)) {
-//                break;
-//            } else {
-//                email = input.getInputString("Please enter another one, or enter 'cancel' at any point to exit" +
-//                        " account creation\n");
-//            }
-//        }
-//
-//        String user = input.getInputString("Please enter a user name for new account: (must have length of at " +
-//                "least 2 and does NOT contain space), or enter 'cancel' at any point to exit account creation\n");
-//        if (user.contains(" ")){
-//            return false;
-//        };
-//        while (true) {
-//            if (user.equals("cancel")) {
-//                return false;
-//            } else if (isValidUserName(user, userManager)) {
-//                break;
-//            } else {
-//                user = input.getInputString("Invalid User name or user name already used, please enter another " +
-//                        "one, or enter 'cancel' at any point to exit account creation\n");
-//            }
-//        }
-//        String password = input.getInputString("Please enter a password for " + user + ":\n");
-//        if (password.contains(" ")){
-//            return false;
-//        };
-//        while (true) {
-//            if (password.equals("cancel")) {
-//                return false;
-//            } else if (password.length() >= 8) {
-//                break;
-//            } else {
-//                password = input.getInputString("Password must be at least length 8, please try again, or enter " +
-//                        "'cancel' at any point to exit account creation\n");
-//            }
-//        }
-//        if (type.equals("SPEAKER")) {
-//            speakerManager.createSpeaker(email, user, password);
-//        } else if (type.equals("ORGANIZER")) {
-//            organizerManager.createOrganizer(email, user, password);
-//        } else {
-//            attendeeManager.createAttendee(email, user, password);
-//        }
-//        return true;
-//    }
 
 }

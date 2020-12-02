@@ -29,8 +29,7 @@ public class ContactActivity extends SetUpActivity {
     }
 
     public void init(){
-        super.createActionBar();
-        super.createNavView(this, R.id.nav_contacts);
+        super.init(this, R.id.nav_contacts);
         createContactMenu();
     }
 

@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TempActivity"></activity>
+        <activity android:name=".messageSystem.SpeakerAnnouncementActivity"></activity>
+        <activity
+            android:name=".eventSystem.SpeakerMyEventActivity"
+            android:label="My Events"
+            android:launchMode="singleTask" />
+        <activity android:name=".TempActivity" />
         <activity
             android:name=".signupSystem.SignUpActivity"
             android:launchMode="singleTask" />
@@ -26,7 +31,7 @@
             android:label="Settings"
             android:launchMode="singleTask" />
         <activity
-            android:name=".eventSystem.EventActivity"
+            android:name=".eventSystem.AttendeeEventActivity"
             android:label="All Events"
             android:launchMode="singleTask" />
         <activity

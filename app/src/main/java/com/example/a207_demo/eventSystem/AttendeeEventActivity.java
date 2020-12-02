@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Event activity to show attendee.
  */
-public class EventActivity extends SetUpActivity {
+public class AttendeeEventActivity extends SetUpActivity {
 
     //Todo: access Event Use case
     private List<Event> eventList = new ArrayList<>();
@@ -27,7 +27,7 @@ public class EventActivity extends SetUpActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event);
+        setContentView(R.layout.activity_event_attendee);
 
         init();
 
@@ -38,8 +38,7 @@ public class EventActivity extends SetUpActivity {
      * Set up the activity.
      */
     public void init(){
-        super.createActionBar();
-        super.createNavView(this, R.id.nav_allevents);
+        super.init(this, R.id.nav_allevents);
         createEventMenu();
     }
 

@@ -29,7 +29,7 @@ public class AttendeeEventContentActivity extends AppCompatActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_content);
+        setContentView(R.layout.activity_event_content_attendee);
 
         init();
 

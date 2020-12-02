@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Event activity of events attendee signed up for.
  */
-public class AttendeeMyEventActivity extends EventActivity {
+public class AttendeeMyEventActivity extends AttendeeEventActivity {
 
     //Todo: access Event Use case
     private List<Event> eventList = new ArrayList<>();
@@ -21,8 +21,7 @@ public class AttendeeMyEventActivity extends EventActivity {
      */
     @Override
     public void init(){
-        super.createActionBar();
-        super.createNavView(this, R.id.nav_myEvents);
+        super.init(this, R.id.nav_myEvents);
         createEventMenu();
     }
 

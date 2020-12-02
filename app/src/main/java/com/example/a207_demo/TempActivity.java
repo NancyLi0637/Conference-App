@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.a207_demo.eventSystem.EventActivity;
+import com.example.a207_demo.eventSystem.AttendeeEventActivity;
+import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
 
 public class TempActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -30,13 +31,13 @@ public class TempActivity extends AppCompatActivity implements View.OnClickListe
 
         switch(v.getId()){
             case R.id.btn_attendee:
-                startActivity(new Intent(TempActivity.this, EventActivity.class));
+                startActivity(new Intent(TempActivity.this, AttendeeEventActivity.class));
                 break;
             case R.id.btn_organizer:
                 //startActivity(new Intent(TempActivity.this, OrganizerEventActivity.class));
                 break;
             case R.id.btn_speaker:
-                //startActivity(new Intent(TempActivity.this, SpeakerMyEventActivity.class));
+                startActivity(new Intent(TempActivity.this, SpeakerMyEventActivity.class));
                 break;
         }
     }

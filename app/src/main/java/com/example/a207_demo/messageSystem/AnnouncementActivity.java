@@ -21,7 +21,7 @@ public class AnnouncementActivity extends SetUpActivity {
     }
 
     public void init(){
-        super.init(this, R.id.nav_announcements);
+        super.init(this, R.id.nav_view_attendee, R.id.nav_announcements);
     }
 
 }

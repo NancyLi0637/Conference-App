@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".messageSystem.SpeakerAnnouncementActivity"></activity>
+        <activity
+            android:name=".contactSystem.SpeakerContactActivity"
+            android:label="Contacts"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".messageSystem.SpeakerAnnouncementActivity"
+            android:label="Announcements"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".eventSystem.SpeakerMyEventActivity"
             android:label="My Events"

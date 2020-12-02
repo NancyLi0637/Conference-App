@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class AttendeeEventActivity extends SetUpActivity {
 
-    //Todo: access Event Use case
-    private List<Event> eventList = new ArrayList<>();
+    //Todo: generate event list through manager
+    List<Event> eventList = new ArrayList<>();
 
     /**
      * Required function to initiate an Activity class.
@@ -38,14 +38,14 @@ public class AttendeeEventActivity extends SetUpActivity {
      * Set up the activity.
      */
     public void init(){
-        super.init(this, R.id.nav_allevents);
-        createEventMenu();
+        super.init(this, R.id.nav_view_attendee, R.id.nav_allevents);
+
+        createEventMenu(eventList);
     }
 
 
-    protected void createEventMenu(){
-
-        initEvents();
+    protected void createEventMenu(List<Event> eventList){
+        initEvents(eventList);
 
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -54,7 +54,7 @@ public class AttendeeEventActivity extends SetUpActivity {
         recyclerView.setAdapter(eventAdapter);
     }
 
-    protected void initEvents(){
+    protected void initEvents(List<Event> eventList){
         //Todo: generate Event through use case
 
         for(int i = 0; i < 2; i++) {

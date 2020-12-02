@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
+import com.example.a207_demo.utility.ActivityCollector;
 
 public class TempActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -24,6 +25,8 @@ public class TempActivity extends AppCompatActivity implements View.OnClickListe
         attendee.setOnClickListener(this);
         organizer.setOnClickListener(this);
         speaker.setOnClickListener(this);
+
+        ActivityCollector.addActivity(this);
     }
 
     @Override

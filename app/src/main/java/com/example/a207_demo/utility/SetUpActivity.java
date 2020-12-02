@@ -13,17 +13,20 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.contactSystem.ContactActivity;
+import com.example.a207_demo.contactSystem.SpeakerContactActivity;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
 import com.example.a207_demo.eventSystem.AttendeeMyEventActivity;
+import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
 import com.example.a207_demo.messageSystem.AnnouncementActivity;
+import com.example.a207_demo.messageSystem.SpeakerAnnouncementActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class SetUpActivity extends AppCompatActivity{
     private DrawerLayout mDrawerLayout;
 
-    public void init(AppCompatActivity context, int id){
+    public void init(AppCompatActivity context, int id_nav_view, int id_nav_item){
         createActionBar();
-        createNavView(context, id);
+        createNavView(context, id_nav_view, id_nav_item);
     }
 
     protected void createActionBar(){
@@ -36,9 +39,9 @@ public class SetUpActivity extends AppCompatActivity{
         actionBarDrawerToggle.syncState();
     }
 
-    protected void createNavView(final AppCompatActivity context, int id){
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setCheckedItem(id);
+    protected void createNavView(final AppCompatActivity context, int id_nav_view, int id_nav_item){
+        NavigationView navigationView = findViewById(id_nav_view);
+        navigationView.setCheckedItem(id_nav_item);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -58,6 +61,18 @@ public class SetUpActivity extends AppCompatActivity{
                     case R.id.nav_announcements:
                         mDrawerLayout.closeDrawers();
                         startActivity(new Intent(context, AnnouncementActivity.class));
+                        break;
+                    case R.id.nav_myEvents_speaker:
+                        mDrawerLayout.closeDrawers();
+                        startActivity(new Intent(context, SpeakerMyEventActivity.class));
+                        break;
+                    case R.id.nav_contacts_speaker:
+                        mDrawerLayout.closeDrawers();
+                        startActivity(new Intent(context, SpeakerContactActivity.class));
+                        break;
+                    case R.id.nav_announcements_speaker:
+                        mDrawerLayout.closeDrawers();
+                        startActivity(new Intent(context, SpeakerAnnouncementActivity.class));
                 }
 
                 return true;

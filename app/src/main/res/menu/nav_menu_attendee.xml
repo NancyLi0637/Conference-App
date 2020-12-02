@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Events">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_allevents"
+                    android:title="@string/allevents"
+                    android:icon="@drawable/event"/>
+
+                <item
+                    android:id="@+id/nav_myEvents"
+                    android:title="@string/myevents"
+                    android:icon="@drawable/myevent"/>
+            </group>
+        </menu>
+
+    </item>
+
+    <item
+        android:title="@string/contacts">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_contacts"
+                    android:title="Attendees"
+                    android:icon="@drawable/icon_contact_gray"/>
+                <item
+                    android:title="Speakers"
+                    android:icon="@drawable/icon_contact_gray"/>
+            </group>
+        </menu>
+    </item>
+
+
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_allevents"
-            android:title="@string/allevents"
-            android:icon="@drawable/event"/>
-
-        <item
-            android:id="@+id/nav_myEvents"
-            android:title="@string/myevents"
-            android:icon="@drawable/myevent"/>
-
-        <item
-            android:id="@+id/nav_contacts"
-            android:title="@string/contacts"
-            android:icon="@drawable/icon_contact_gray"/>
-
         <item
             android:id="@+id/nav_announcements"
             android:title="@string/announcements"

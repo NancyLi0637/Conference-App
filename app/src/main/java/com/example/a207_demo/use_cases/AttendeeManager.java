@@ -1,6 +1,6 @@
 package com.example.a207_demo.use_cases;
 
-import entities.Attendee;
+import com.example.a207_demo.entities.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

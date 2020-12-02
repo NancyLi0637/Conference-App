@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Events">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_allevents_organizer"
+                    android:title="@string/allevents"
+                    android:icon="@drawable/event"/>
+
+            </group>
+        </menu>
+
+    </item>
+
+    <item
+        android:title="@string/contacts">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_contacts_organizer"
+                    android:title="Attendees"
+                    android:icon="@drawable/icon_contact_gray"/>
+                <item
+                    android:title="Speakers"
+                    android:icon="@drawable/icon_contact_gray"/>
+            </group>
+        </menu>
+    </item>
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Manager">
+            <menu>
+                <item
+                    android:id="@+id/nav_room"
+                    android:title="Room"
+                    android:icon="@drawable/announcement"/>
+            </menu>
+        </item>
+    </group>
+
+</menu>

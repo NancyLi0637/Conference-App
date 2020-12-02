@@ -17,10 +17,7 @@ import com.example.a207_demo.R;
 
 import java.util.List;
 
-/**
- * A user case class for setting up scrolling view for Event in android.
- */
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHEvent> {
+public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHEvent> {
     private Context context;
     private List<Event> eventList;
 
@@ -28,23 +25,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHEvent> {
         this.context = context;
         this.eventList = eventList;
     }
+    
+    abstract public VHEvent onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
 
-    @NonNull
-    @Override
-    public VHEvent onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_event, parent, false);
-        VHEvent holder = new VHEvent(v);
-        setClickEventListener(holder);
-        return holder;
-    }
-
-    public void setClickEventListener(final VHEvent holder){
+    public void setClickEventListener(final VHEvent holder, final Class nextClass){
         holder.cardView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
                 Event event = eventList.get(position);
-                Intent intent = new Intent(context, AttendeeEventContentActivity.class);
+                Intent intent = new Intent(context, nextClass);
                 intent.putExtra("event_title", event.getTitle());
                 intent.putExtra("event_room", event.getRoomID());
                 intent.putExtra("event_time", event.getStartTime());

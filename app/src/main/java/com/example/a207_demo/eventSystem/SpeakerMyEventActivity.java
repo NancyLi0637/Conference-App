@@ -12,7 +12,7 @@ import com.example.a207_demo.utility.SetUpActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpeakerMyEventActivity extends SetUpActivity {
+public class SpeakerMyEventActivity extends EventActivity {
 
     //Todo: generate event list by use case
     private List<Event> eventList = new ArrayList<>();
@@ -29,18 +29,14 @@ public class SpeakerMyEventActivity extends SetUpActivity {
 
     public void init(){
         super.init(this, R.id.nav_view_speaker, R.id.nav_myEvents_speaker);
-
         createEventMenu(eventList);
     }
 
     protected void createEventMenu(List<Event> eventList){
-        initEvents(eventList);
-
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(layoutManager);
-        EventAdapter eventAdapter = new EventAdapter(this, eventList);
-        recyclerView.setAdapter(eventAdapter);
+        super.createEventMenu(eventList, recyclerView);
+        SpeakerEventAdapter speakerEventAdapter = new SpeakerEventAdapter(this, eventList);
+        recyclerView.setAdapter(speakerEventAdapter);
     }
 
     protected void initEvents(List<Event> eventList){

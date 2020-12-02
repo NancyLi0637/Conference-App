@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
+import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
 import com.example.a207_demo.utility.ActivityCollector;
 
@@ -37,7 +38,7 @@ public class TempActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(TempActivity.this, AttendeeEventActivity.class));
                 break;
             case R.id.btn_organizer:
-                //startActivity(new Intent(TempActivity.this, OrganizerEventActivity.class));
+                startActivity(new Intent(TempActivity.this, OrganizerEventActivity.class));
                 break;
             case R.id.btn_speaker:
                 startActivity(new Intent(TempActivity.this, SpeakerMyEventActivity.class));

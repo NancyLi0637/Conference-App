@@ -9,14 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".eventSystem.AttendeeMyEventContentActivity"></activity>
+        <activity
+            android:name=".eventSystem.SpeakerEventContentActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".eventSystem.EventActivity" />
+        <activity android:name=".eventSystem.EventContentActivity" />
+        <activity
+            android:name=".eventSystem.OrganizerEventContentActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".eventSystem.OrganizerEventActivity"
+            android:label="All Events"
+            android:launchMode="singleTask" />
         <activity
             android:name=".contactSystem.SpeakerContactActivity"
             android:label="Contacts"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".messageSystem.SpeakerAnnouncementActivity"
             android:label="Announcements"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".eventSystem.SpeakerMyEventActivity"
             android:label="My Events"

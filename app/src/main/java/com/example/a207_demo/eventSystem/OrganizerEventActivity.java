@@ -4,49 +4,51 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
-import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
+import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.utility.SetUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Event activity to show attendee.
- */
-public class AttendeeEventActivity extends EventActivity {
+public class OrganizerEventActivity extends EventActivity implements View.OnClickListener{
 
-    //Todo: generate event list through manager
-    List<Event> eventList = new ArrayList<>();
+    //TODO: generate event list through manager
+    private List<Event> eventList = new ArrayList<>();
 
-    /**
-     * Required function to initiate an Activity class.
-     * @param savedInstanceState saved data for unexpected crush
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_attendee);
+        setContentView(R.layout.activity_event_organizer);
 
         init();
 
         ActivityCollector.addActivity(this);
     }
 
-    /**
-     * Set up the activity.
-     */
     public void init(){
-        super.init(this, R.id.nav_view_attendee, R.id.nav_allevents);
+        super.init(this, R.id.nav_view_organizer, R.id.nav_allevents_organizer);
+
+        Button addEvent = findViewById(R.id.btn_addEvent);
+        addEvent.setOnClickListener(this);
+
         createEventMenu(eventList);
+    }
+
+    @Override
+    public void onClick(View v){
+        Toast.makeText(this,"Clicked",Toast.LENGTH_LONG).show();
     }
 
     protected void createEventMenu(List<Event> eventList){
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         super.createEventMenu(eventList, recyclerView);
-        AttendeeEventAdapter attendeeEventAdapter = new AttendeeEventAdapter(this, eventList);
-        recyclerView.setAdapter(attendeeEventAdapter);
+        OrganizerEventAdapter eventAdapter = new OrganizerEventAdapter(this, eventList);
+        recyclerView.setAdapter(eventAdapter);
     }
 
     protected void initEvents(List<Event> eventList){

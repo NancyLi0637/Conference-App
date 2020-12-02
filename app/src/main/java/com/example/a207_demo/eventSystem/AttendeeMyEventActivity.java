@@ -22,12 +22,15 @@ public class AttendeeMyEventActivity extends AttendeeEventActivity {
     @Override
     public void init(){
         super.init(this, R.id.nav_view_attendee, R.id.nav_myEvents);
-
         createEventMenu(eventList);
     }
 
+    @Override
     protected void createEventMenu(List<Event> eventList){
-        super.createEventMenu(eventList);
+        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
+        super.createEventMenu(eventList, recyclerView);
+        AttendeeMyEventAdapter attendeeMyEventAdapter = new AttendeeMyEventAdapter(this, eventList);
+        recyclerView.setAdapter(attendeeMyEventAdapter);
     }
 
     @Override

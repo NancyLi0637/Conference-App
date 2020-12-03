@@ -68,6 +68,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SignUpActivity.this, "Your name is invalid, please try again",
                             Toast.LENGTH_LONG).show();
                 }else{
+                    Toast.makeText(SignUpActivity.this, "You have signed up SUCCESSFULLY!",
+                            Toast.LENGTH_LONG).show();
                     intent = new Intent(SignUpActivity.this, MainActivity.class);
                     setUpData();
                     startActivity(intent);
@@ -123,7 +125,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //Todo: create account using CreateANewAccount (factory)
         //Todo: save data into database
         accountCreater.createNewAccount(userTypeStr, userFN + userLN, userEM, userPW);
-
     }
 
 }

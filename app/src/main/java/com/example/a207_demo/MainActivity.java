@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
 import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
+import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.signupSystem.SignUpActivity;
 import com.example.a207_demo.use_cases.UserManager;
 import com.example.a207_demo.utility.ActivityCollector;
@@ -21,6 +22,7 @@ import com.example.a207_demo.utility.ActivityCollector;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private final FileReadWriter fileReadWriter = new FileReadWriter();
     private static String ID;
     private static String type;
 
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Set up the activity.
      */
     public void init(){
+        fileReadWriter.reset();
+        fileReadWriter.connectReaders(this);
+
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
 
@@ -72,14 +77,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else {
                         intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
                     }
+                    //Todo: too many lines written in Users.txt (FileReadWriter -> connectWrtier -> UserWriter method)
+                    fileReadWriter.connectWriters(this);
                     startActivity(intent);
                 } else{
                     Toast.makeText(MainActivity.this, "Your username and password do not match. Please try again.",
                             Toast.LENGTH_LONG).show();
                 }
-                //Todo: delete after above if-else implemented
-//                intent = new Intent(MainActivity.this, TempActivity.class);
-//                startActivity(intent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());

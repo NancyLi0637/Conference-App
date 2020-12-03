@@ -21,11 +21,11 @@ public class CreateAccount {
      */
     public void createNewAccount(String type, String username, String userEM, String userPW) {
 
-        if (type.equals("Organizer")) {
+        if (type.equals("ORGANIZER")) {
             organizerManager.createOrganizer(userEM, username, userPW);
-        } else if(type.equals("Attendee")){
+        } else if(type.equals("ATTENDEE")){
             attendeeManager.createAttendee(userEM, username, userPW);
-        } else if(type.equals("VipUser")) {
+        } else if(type.equals("VIPUser")) {
             //Todo: implement vipUserManager
             //vipUserManager.createVipUser(userEM, username, userPW);
         }

@@ -1,6 +1,7 @@
 package com.example.a207_demo.gateway;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -54,7 +55,8 @@ public class FileReadWriter {
                 lines.add(line);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Users.txt File Not Found");
+//            System.out.println("Users.txt File Not Found");
+            printMessage(context, "Users.txt File Not Found");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,10 +107,22 @@ public class FileReadWriter {
             }
             writer.close();
         } catch (FileNotFoundException e){
-            System.out.println("Users.txt File Not Found.");
+//            System.out.println("Users.txt File Not Found.");
+            printMessage(context, "Users.txt File Not Found.");
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Print error message as a toast
+     * @param context AppCompatActivity
+     * @param msg message string
+     */
+    public void printMessage(AppCompatActivity context, String msg) {
+        Toast.makeText(context,
+                msg,
+                Toast.LENGTH_LONG).show();
     }
 
     /**

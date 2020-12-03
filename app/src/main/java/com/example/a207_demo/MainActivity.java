@@ -65,24 +65,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_login:
                 if (info_matched()) {
-                    //Todo: distinguish account
-                    String type = account_type();
                     if (type.equals("ATTENDEE")) {
                         intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
-                    } else if (account_type().equals("Organizer")) {
+                    } else if (type.equals("ORGANIZER")) {
                         intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
                     } else {
                         intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
                     }
                     startActivity(intent);
                 } else{
-                    //Todo: implement error message
-                    Toast.makeText(MainActivity.this, "Account does not exist, please try again",
+                    Toast.makeText(MainActivity.this, "Your username and password do not match. Please try again.",
                             Toast.LENGTH_LONG).show();
                 }
                 //Todo: delete after above if-else implemented
-                intent = new Intent(MainActivity.this, TempActivity.class);
-                startActivity(intent);
+//                intent = new Intent(MainActivity.this, TempActivity.class);
+//                startActivity(intent);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
@@ -95,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String userEM = email.getText().toString();
         String userPW = password.getText().toString();
 
-        //Todo: validate email and password through manager
         UserManager userManager = new UserManager();
         if (!userManager.validLogIn(userEM, userPW).equals("NULL")){
             ID = userManager.validLogIn(userEM, userPW);
@@ -103,12 +99,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return false;
-//        return true;
-    }
-
-    private String account_type(){
-        //Todo: check type through manager
-        return type;
     }
 
 }

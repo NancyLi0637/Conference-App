@@ -12,11 +12,40 @@ public class UserManager {
     public static List<User> users = new ArrayList<>();
 
     /**
+     * Check if the given String is a valid new email
+     * @param email String email to be checked
+     * @return true iff the email is a valid new email
+     */
+    public boolean validEmail(String email){
+        return validNewEmail(email) && emailFormat(email);
+    }
+
+    private boolean validNewEmail(String email) {
+        for (User user : users) {
+            if (user.getEmail().equals(email)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean emailFormat(String email){
+        return email.length() >= 6 && email.contains("@") && email.charAt(0) != '@' && email.contains(".") &&
+                email.charAt(email.length() - 1) != '.' && email.length() - email.replace(".", "").length() == 1 &&
+                email.length() - email.replace("@", "").length() == 1 && email.indexOf('@') < email.indexOf('.') &&
+                email.indexOf('@') != email.indexOf('.') - 1;
+    }
+
+    /**
      * Check if the given String is a valid new user Name
      * @param name String name to be checked
      * @return true iff the name is a valid new user Name
      */
-    public boolean validNewName(String name) {
+    public boolean validName(String name){
+        return validNewName(name) && name.length() >= 2;
+    }
+
+    private boolean validNewName(String name) {
         for (User user : users) {
             if (user.getUserName().equals(name)) {
                 return false;
@@ -27,20 +56,6 @@ public class UserManager {
 
     public void reset(){
         users = new ArrayList<>();
-    }
-
-    /**
-     * Check if the given String is a valid new email
-     * @param email String email to be checked
-     * @return true iff the email is a valid new email
-     */
-    public boolean validNewEmail(String email) {
-        for (User user : users) {
-            if (user.getEmail().equals(email)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**

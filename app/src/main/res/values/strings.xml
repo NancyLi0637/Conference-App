@@ -24,8 +24,8 @@
     <string name="username">Nancie Lee</string>
     <string name="useremail">nancielee@gmail.com</string>
     <string-array name="user_types">
-        <item>Organizer</item>
-        <item>Attendee</item>
+        <item>ORGANIZER</item>
+        <item>ATTENDEE</item>
         <item>VIPUser</item>
     </string-array>
 </resources>

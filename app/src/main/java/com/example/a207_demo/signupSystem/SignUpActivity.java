@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.a207_demo.use_cases.*;
 import com.example.a207_demo.utility.ActivityCollector;
@@ -60,8 +61,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_signUp:
                 if(!validEmail()){
                     //Todo: implement error message
+                    Toast.makeText(SignUpActivity.this, "Your email is invalid, please try again",
+                            Toast.LENGTH_LONG).show();
                 }else if(!validUsername()){
                     //Todo: implement error message
+                    Toast.makeText(SignUpActivity.this, "Your name is invalid, please try again",
+                            Toast.LENGTH_LONG).show();
                 }else{
                     intent = new Intent(SignUpActivity.this, MainActivity.class);
                     setUpData();

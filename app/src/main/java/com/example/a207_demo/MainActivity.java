@@ -7,14 +7,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.a207_demo.eventSystem.AttendeeEventActivity;
+import com.example.a207_demo.eventSystem.OrganizerEventActivity;
+import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
 import com.example.a207_demo.signupSystem.SignUpActivity;
+import com.example.a207_demo.use_cases.UserManager;
 import com.example.a207_demo.utility.ActivityCollector;
 
 /**
  * The top level class for running the app.
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private static String ID;
+    private static String type;
 
     /**
      * Required function to initiate an Activity class.
@@ -56,24 +64,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.btn_login:
-//                if(info_matched()) {
-//                    //Todo: distinguish account
-//                    String type = account_type();
-//                    if(type.equals("ATTENDEE")){
-//                        intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
-//                    }else if(account_type().equals("Organizer"){
-//                        intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
-//                    }else{
-//                        intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
-//                    }
-//                    startActivity(intent);
-//                }else{
-//                    //Todo: implement error message
-//                }
+                if (info_matched()) {
+                    //Todo: distinguish account
+                    String type = account_type();
+                    if (type.equals("ATTENDEE")) {
+                        intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
+                    } else if (account_type().equals("Organizer")) {
+                        intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
+                    } else {
+                        intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
+                    }
+                    startActivity(intent);
+                } else{
+                    //Todo: implement error message
+                    Toast.makeText(MainActivity.this, "Account does not exist, please try again",
+                            Toast.LENGTH_LONG).show();
+                }
                 //Todo: delete after above if-else implemented
                 intent = new Intent(MainActivity.this, TempActivity.class);
                 startActivity(intent);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + v.getId());
         }
     }
 
@@ -84,12 +96,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String userPW = password.getText().toString();
 
         //Todo: validate email and password through manager
-        return true;
+        UserManager userManager = new UserManager();
+        if (!userManager.validLogIn(userEM, userPW).equals("NULL")){
+            ID = userManager.validLogIn(userEM, userPW);
+            type = userManager.getUserType(userEM, userPW);
+            return true;
+        }
+        return false;
+//        return true;
     }
 
     private String account_type(){
         //Todo: check type through manager
-        return "";
+        return type;
     }
 
 }

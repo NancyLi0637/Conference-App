@@ -24,6 +24,7 @@ public class AttendeeEventActivity extends EventActivity {
 
     //Todo: generate event list through manager
     private List<Event> eventList = new ArrayList<>();
+    private AttendeeEventAdapter attendeeEventAdapter;
     private EventManager eventManager;
 
     /**
@@ -53,40 +54,17 @@ public class AttendeeEventActivity extends EventActivity {
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         super.createEventMenu(recyclerView);
         initEvents();
-        AttendeeEventAdapter attendeeEventAdapter = new AttendeeEventAdapter(this, eventList);
+        attendeeEventAdapter = new AttendeeEventAdapter(this, eventList);
         recyclerView.setAdapter(attendeeEventAdapter);
     }
 
     protected void initEvents(){
-//        eventManager.loadEvent("TALK", "Exercise with Hardy!", "og12jd3a",
-//                "041e891e", new ArrayList(Arrays.asList("c5201361")), "2020111509", "2");
-//        eventManager.loadEvent("DISCUSSION", "Practice with Steve!", "djn120da",
-//                "041e891e", new ArrayList(Arrays.asList("1a251123")), "2020122010", "4");
-        //super.initEvents();
+        super.initEvents();
         eventList = eventManager.getAllEvent();
 
-        //System.out.println("HELLLLOOOOOOO");
+        //Todo: implement image later
         for (Event event : eventList){
-            //System.out.println("nancyli");
             event.setImageId(R.drawable.default_image);
         }
-
-//        for(int i = 0; i < 2; i++){
-//            Event event1 = new Party("event1", "bf202", "20201102", "4");
-//            event1.setImageId(R.drawable.default_image);
-//            eventList.add(event1);
-//            Event event2 = new Party("event2", "bf202", "20201102", "4");
-//            event2.setImageId(R.drawable.default_image);
-//            eventList.add(event2);
-//            Event event3 = new Party("event3", "bf202", "20201102", "4");
-//            event3.setImageId(R.drawable.default_image);
-//            eventList.add(event3);
-//            Event event4 = new Party("event4", "bf202", "20201102", "4");
-//            event4.setImageId(R.drawable.default_image);
-//            eventList.add(event4);
-//            Event event5 = new Party("event5", "bf202", "20201102", "4");
-//            event5.setImageId(R.drawable.default_image);
-//            eventList.add(event5);
-//        }
     }
 }

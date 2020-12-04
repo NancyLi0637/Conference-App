@@ -37,23 +37,11 @@
                 android:layout_marginTop="60dp"
                 android:text="@string/addEvent" />
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/event_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/event_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/event_recycler_view"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                />-->
+                />
 
         </LinearLayout>
 

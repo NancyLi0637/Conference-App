@@ -19,7 +19,7 @@ public class EventActivity extends SetUpActivity {
 
     protected void initEvents(){
         fileReadWriter = getFileReadWriter();
-        //fileReadWriter.reset();
+        fileReadWriter.reset();
         fileReadWriter.EventReader();
     }
 }

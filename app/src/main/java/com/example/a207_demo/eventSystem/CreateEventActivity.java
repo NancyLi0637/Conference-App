@@ -57,22 +57,36 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         Intent intent;
         switch (v.getId()){
             case R.id.btn_to_room:
-                if(!dataMissing()){
+                if(dataMissing()){
+                    Toast.makeText(this, "INFORMATION missing", Toast.LENGTH_LONG).show();
+                }else if(eventTitle.length() < 3){
+                    Toast.makeText(this, "EVENT TITLE needs to be at least length 3", Toast.LENGTH_LONG).show();
+                }else if(!validTime()){
+                    Toast.makeText(this, "TIME entered is invalid!", Toast.LENGTH_LONG).show();
+                }else{
                     //Todo: implement Room system
                     //intent = new Intent(CreateEventActivity.this, ChooseRoom.class);
                     //startActivityForResult(intent, 1);
                     //Todo: implement Speaker system
                     ArrayList<String> speakerId = new ArrayList<>(Arrays.asList("speaker1"));
 
-                    eventManager.createEvent(eventTitle, "room1", speakerId, eventTime, eventDuration, restriction, eventType);
+                    boolean created = eventManager.createEvent(eventTitle, "room1", speakerId,
+                            eventTime, eventDuration, restriction, eventType);
+
                     fileReadWriter.EventWriter();
                     intent = new Intent();
-//                   intent = new Intent(CreateEventActivity.this, OrganizerEventActivity.class);
-//                    startActivity(intent);
                     setResult(RESULT_OK, intent);
                     finish();
-                }else{
-                    Toast.makeText(this, "Information missing", Toast.LENGTH_LONG).show();
+
+//                    if(created){
+//                        fileReadWriter.EventWriter();
+//                        intent = new Intent();
+//                        setResult(RESULT_OK, intent);
+//                        finish();
+//                    }else{
+//                        //Todo: better time suggestion
+//                        Toast.makeText(this, "There is TIME CONFLICT in your event.", Toast.LENGTH_LONG).show();
+//                    }
                 }
                 break;
         }
@@ -84,6 +98,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         switch (v.getId()){
             case(R.id.vip_only):
                 if(checked) {
+                    //Todo: fix null checkbox
                     restriction = "VIP-ONLY";
                 }else{
                     restriction = "PUBLIC";
@@ -106,6 +121,10 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
 
     private boolean dataMissing(){
         return eventType == null || eventTitle == null || eventTime == null || eventDuration == null;
+    }
+
+    private boolean validTime(){
+        return eventManager.checkValidTimeFormat(eventTime) && eventManager.checkValidFutureTime(eventTime);
     }
 
 }

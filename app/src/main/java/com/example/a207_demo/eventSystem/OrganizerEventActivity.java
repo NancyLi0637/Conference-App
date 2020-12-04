@@ -24,8 +24,6 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
     private OrganizerEventAdapter eventAdapter;
     private EventManager eventManager;
 
-    private SwipeRefreshLayout swipeRefreshLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,14 +75,7 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         switch (requestCode){
             case 1:
                 if(resultCode == RESULT_OK){
-                    swipeRefreshLayout = findViewById(R.id.swipe_refresh);
-                    swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-                    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                        @Override
-                        public void onRefresh() {
-                            refreshEvents();
-                        }
-                    });
+                    refreshEvents();
                 }
                 break;
         }
@@ -102,9 +93,8 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        initEvents();
+                        createEventMenu();
                         eventAdapter.notifyDataSetChanged();
-                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }

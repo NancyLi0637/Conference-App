@@ -63,7 +63,7 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
             case R.id.btn_signUp:
                 //fileReadWriter.reset();
                 //intent = new Intent(MainActivity.this, SignUpActivity.class);
-                intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
+                intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login:

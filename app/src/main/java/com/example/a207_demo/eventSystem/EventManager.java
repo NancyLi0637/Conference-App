@@ -5,7 +5,9 @@ import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.use_cases.RoomManager;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -73,27 +75,35 @@ public class EventManager implements Serializable {
      * @param  startTime startTime of the event
      * @return the newly created event or null
      */
-    public Event createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
+    public boolean createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
                              String restriction, String type) {
-        for (Event event : this.events) {
-            for (String speaker: event.getSpeakers()) {
-                if ((event.getSpeakers().contains(speaker) || roomID.equals(event.getRoomID())) &&
-                        (!((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration())<= Integer.parseInt(startTime)) ||
-                                (Integer.parseInt(startTime) + Integer.parseInt(duration)<= Integer.parseInt(event.getStartTime()))))) {
-                    return null;
-                }
-            }
-        }
-        if (title.length() <= 3) {
-            return null;
-        }
+//        for (Event event : this.events) {
+//            for (String speaker: event.getSpeakers()) {
+//                if ((event.getSpeakers().contains(speaker) || roomID.equals(event.getRoomID())) &&
+//                        (!((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration())<= Integer.parseInt(startTime)) ||
+//                                (Integer.parseInt(startTime) + Integer.parseInt(duration)<= Integer.parseInt(event.getStartTime()))))) {
+//                    return false;
+//                }
+//            }
+//        }
+//        for(Event event : this.events){
+//            //Todo: implement timeConflict
+//            if(timeConflict(event, startTime, duration)){
+//                return false;
+//            }
+//        }
         // create this new event:
         Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
-        return newEvent;
+        return true;
     }
+
+//    private boolean timeConflict(Event event, String startTime, String duration){
+//        if(Integer.parseInt(event.getStartTime()) <= Integer.parseInt(startTime) &&
+//                Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration()))
+//    }
 
     /**
      * Create a new event (full version)
@@ -319,10 +329,11 @@ public class EventManager implements Serializable {
      * @return a formatted string representation
      */
     public String generateFormattedStartTime(String startTime) {
-        int HourTime = Integer.parseInt(startTime.substring(8, 10));
+        int HourTime = Integer.parseInt(startTime.substring(11, 13));
+        //Todo: change i.e. 17 to 5
         String Ending = String.format("%s", (HourTime >= 12) ? "PM" : "AM");
-        return String.format("%s/%s/%s/%s%s", startTime.substring(0, 4), startTime.substring(4, 6),
-                startTime.substring(6, 8), startTime.substring(8, 10), Ending);
+        return String.format("%s/%s/%s/%s%s", startTime.substring(0, 4), startTime.substring(5, 7),
+                startTime.substring(8, 10), startTime.substring(11, 13), Ending);
     }
 
     /**
@@ -362,6 +373,52 @@ public class EventManager implements Serializable {
 
     public void setEvents(Event event){
         this.events.add(event);
+    }
+
+    /**
+     * To check if a time format is valid.
+     * @param time given time string
+     * @return true iff the time format is correct
+     */
+    public boolean checkValidTimeFormat(String time) {
+        if (time.length() == 13 && time.charAt(4) == '/' && time.charAt(7) == '/' && time.charAt(10) == '/') {
+            String[] timeList = time.split("/");
+            try {
+                int year = Integer.parseInt(timeList[0]);
+                int month = Integer.parseInt(timeList[1]);
+                int date = Integer.parseInt(timeList[2]);
+                int hour = Integer.parseInt(timeList[3]);
+                if (hour < 9 || hour > 16 || month > 12 || month < 1 || date < 1 || date > 31 || year < 2020) {
+                    return false;
+                }
+                switch (month) {
+                    case 2:
+                        return date <= 28;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        return date < 30;
+                }
+            } catch (NumberFormatException e) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * To check if a given event time can be added.
+     * @param time given time
+     * @return true iff the time slot is available
+     */
+    public boolean checkValidFutureTime(String time) {
+        String eventTime = time.replace("/", "");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd/HH");
+        Date date = new Date();
+        String currentTime = formatter.format(date).replace("/", "");
+        return Long.parseLong(eventTime) > Long.parseLong(currentTime);
     }
 
 }

@@ -21,7 +21,7 @@ import com.example.a207_demo.utility.CleanArchActivity;
 /**
  * Activity class for user sign up.
  */
-public class SignUpActivity extends CleanArchActivity implements View.OnClickListener{
+public class SignUpActivity extends CleanArchActivity implements View.OnClickListener {
 
     private final CreateAccount accountCreater = new CreateAccount();
     private FileReadWriter fileReadWriter;
@@ -33,6 +33,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
 
     /**
      * Required function to initiate an Activity class.
+     *
      * @param savedInstanceState saved data for unexpected crush
      */
     @Override
@@ -50,7 +51,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
     /**
      * Set up activity.
      */
-    public void init(){
+    public void init() {
         fileReadWriter = getFileReadWriter();
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
@@ -61,21 +62,22 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
 
     /**
      * Button Listener for clicking events.
+     *
      * @param v Buttom clicked
      */
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
         Intent intent;
 
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.btn_signUp:
-                if(!validEmail()){
+                if (!validEmail()) {
                     Toast.makeText(SignUpActivity.this, "Your email is invalid, please try again",
                             Toast.LENGTH_LONG).show();
-                }else if(!validUsername()){
+                } else if (!validUsername()) {
                     Toast.makeText(SignUpActivity.this, "Your name is invalid, please try again",
                             Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     Toast.makeText(SignUpActivity.this, "You have signed up SUCCESSFULLY!",
                             Toast.LENGTH_LONG).show();
                     setUpData();
@@ -92,9 +94,10 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
 
     /**
      * Check if the email entered is valid
+     *
      * @return boolean
      */
-    private boolean validEmail(){
+    private boolean validEmail() {
         EditText email = findViewById(R.id.email_signUp);
         userEmail = email.getText().toString();
 
@@ -103,9 +106,10 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
 
     /**
      * Check if the userName entered is valid
+     *
      * @return boolean
      */
-    private boolean validUsername(){
+    private boolean validUsername() {
         EditText firstName = findViewById(R.id.firstname);
         EditText lastName = findViewById(R.id.lastname);
         userName = firstName.getText().toString() + lastName.getText().toString();
@@ -116,7 +120,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
     /**
      * set up data and save data into database
      */
-    private void setUpData(){
+    private void setUpData() {
         EditText password = findViewById(R.id.password_signUp);
         Spinner type = findViewById(R.id.userType);
 

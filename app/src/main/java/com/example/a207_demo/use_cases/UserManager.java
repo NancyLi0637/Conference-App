@@ -13,13 +13,20 @@ public class UserManager {
 
     /**
      * Check if the given String is a valid new email
+     *
      * @param email String email to be checked
      * @return true iff the email is a valid new email
      */
-    public boolean validEmail(String email){
+    public boolean validEmail(String email) {
         return validNewEmail(email) && emailFormat(email);
     }
 
+    /**
+     * Check if the given String is a valid new user email
+     *
+     * @param email email the user typed in
+     * @return boolean
+     */
     private boolean validNewEmail(String email) {
         for (User user : users) {
             if (user.getEmail().equals(email)) {
@@ -29,7 +36,13 @@ public class UserManager {
         return true;
     }
 
-    private boolean emailFormat(String email){
+    /**
+     * Check if the given String is a valid new user email format
+     *
+     * @param email email the user typed in
+     * @return boolean
+     */
+    private boolean emailFormat(String email) {
         return email.length() >= 6 && email.contains("@") && email.charAt(0) != '@' && email.contains(".") &&
                 email.charAt(email.length() - 1) != '.' && email.length() - email.replace(".", "").length() == 1 &&
                 email.length() - email.replace("@", "").length() == 1 && email.indexOf('@') < email.indexOf('.') &&
@@ -38,13 +51,20 @@ public class UserManager {
 
     /**
      * Check if the given String is a valid new user Name
+     *
      * @param name String name to be checked
      * @return true iff the name is a valid new user Name
      */
-    public boolean validName(String name){
+    public boolean validName(String name) {
         return validNewName(name) && name.length() >= 2;
     }
 
+    /**
+     * Check if the given String is a valid new user name
+     *
+     * @param name String name to be checked
+     * @return boolean
+     */
     private boolean validNewName(String name) {
         for (User user : users) {
             if (user.getUserName().equals(name)) {
@@ -54,14 +74,17 @@ public class UserManager {
         return true;
     }
 
-    public void reset(){
+    /**
+     * Reset the users: no user exists
+     */
+    public void reset() {
         users = new ArrayList<>();
     }
 
     /**
      * Return the String user ID of a user given his account and password, or "NULL" if not found
      *
-     * @param account String email of the user
+     * @param account  String email of the user
      * @param password String password of the user
      * @return the String user ID of this user given his account and password, or "NULL"
      */
@@ -77,7 +100,7 @@ public class UserManager {
     /**
      * Return the String user type of a user given his account and password, or "NULL" if not found
      *
-     * @param account String email of the user
+     * @param account  String email of the user
      * @param password String password of the user
      * @return the String user type of this user given his account and password, or "NULL"
      */
@@ -139,6 +162,7 @@ public class UserManager {
 
     /**
      * Given a user ID, return the corresponding user name
+     *
      * @param userId user ID
      * @return the corresponding user name
      */
@@ -153,6 +177,7 @@ public class UserManager {
 
     /**
      * Given a user name, return the corresponding user id
+     *
      * @param userName the user Name
      * @return the corresponding user id
      */
@@ -167,6 +192,7 @@ public class UserManager {
 
     /**
      * Given a user ID, return the corresponding user name
+     *
      * @param userID the user Name
      * @return the corresponding user name
      */
@@ -220,6 +246,7 @@ public class UserManager {
 
     /**
      * Get the friend list of the user with user ID
+     *
      * @param userID String user ID
      * @return the friend list of the user with user ID or null if this user does not exist
      */
@@ -234,12 +261,13 @@ public class UserManager {
 
     /**
      * Generate the formatted user's information.
-     * @param eventID the id of an user.
+     *
+     * @param userID the id of an user.
      * @return a string of formatted event's information.
      */
-    public String generateFormattedUserInfo(String userID){
-        for (User user: users){
-            if (user.getUserID().equals(userID)){
+    public String generateFormattedUserInfo(String userID) {
+        for (User user : users) {
+            if (user.getUserID().equals(userID)) {
                 return user.getType() + " " + user.getUserName() + " " + user.getEmail() + " "
                         + user.getPassword() + " " + userID;
             }

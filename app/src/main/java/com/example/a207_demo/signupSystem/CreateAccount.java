@@ -2,14 +2,16 @@ package com.example.a207_demo.signupSystem;
 
 import com.example.a207_demo.use_cases.UserFactory;
 import com.example.a207_demo.use_cases.UserManager;
+import com.example.a207_demo.utility.CleanArchActivity;
 
 /**
  * Create a new account
  */
-public class CreateAccount {
+public class CreateAccount extends CleanArchActivity{
 
     private final UserManager userManager = new UserManager();
-    private final UserFactory userFactory = new UserFactory();
+    private final UserFactory userFactory = new UserFactory(getAttendeeManager(),
+            getOrganizerManager(), getSpeakerManager());
 
 
     /**

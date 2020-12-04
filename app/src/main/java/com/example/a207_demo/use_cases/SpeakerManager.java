@@ -111,4 +111,11 @@ public class SpeakerManager extends UserManager implements Serializable {
         }
         return "NULL";
     }
+
+    /**
+     * Reset the speakers: no user exists
+     */
+    public void reset() {
+        speakers = new ArrayList<>();
+    }
 }

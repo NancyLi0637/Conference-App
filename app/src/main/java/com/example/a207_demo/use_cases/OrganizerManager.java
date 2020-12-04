@@ -47,4 +47,11 @@ public class OrganizerManager extends UserManager implements Serializable {
         this.organizers.add(organizer);
         UserManager.users.add(organizer);
     }
+
+    /**
+     * Reset the organizers: no user exists
+     */
+    public void reset() {
+        organizers = new ArrayList<>();
+    }
 }

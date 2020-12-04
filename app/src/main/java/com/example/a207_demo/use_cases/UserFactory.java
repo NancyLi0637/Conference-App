@@ -5,18 +5,31 @@ import com.example.a207_demo.utility.CleanArchActivity;
  * A Factory class to create a new user account according to the type of the user. As a result, the
  * newly created user will be stored in managers.
  */
-public class UserFactory extends CleanArchActivity {
+public class UserFactory {
 //    private final AttendeeManager attendeeManager = new AttendeeManager();
-    private final AttendeeManager attendeeManager = getAttendeeManager();
+    private final AttendeeManager attendeeManager;
 
 
     //    private final VIPUserManager vipUserManager = new VIPUserManager();
 
 //    private final OrganizerManager organizerManager = new OrganizerManager();
-    private final OrganizerManager organizerManager = getOrganizerManager();
+    private final OrganizerManager organizerManager;
 
 //    private final SpeakerManager speakerManager = new SpeakerManager();
-    private final SpeakerManager speakerManager = getSpeakerManager();
+    private final SpeakerManager speakerManager;
+
+    /**
+     * Use dependency injection: pass in the constructor all the necessary managers
+     * @param attendeeManager AttendeeManager
+     * @param organizerManager OrganizerManager
+     * @param speakerManager SpeakerManager
+     */
+    public UserFactory (AttendeeManager attendeeManager, OrganizerManager organizerManager,
+                        SpeakerManager speakerManager) {
+        this.attendeeManager = attendeeManager;
+        this.organizerManager = organizerManager;
+        this.speakerManager = speakerManager;
+    }
 
 
     /**

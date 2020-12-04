@@ -60,8 +60,8 @@ public class FileReadWriter {
         this.userManager.reset();
         this.eventManager.reset();
         this.attendeeManager.reset();
-        this.organizerManager = new OrganizerManager();
-        this.speakerManager = new SpeakerManager();
+        this.organizerManager.reset();
+        this.speakerManager.reset();
     }
 
     /**
@@ -137,6 +137,11 @@ public class FileReadWriter {
         }
     }
 
+    /**
+     * print Message as a toast
+     * @param context AppCompatActivity
+     * @param msg String
+     */
     private void printMessage(AppCompatActivity context, String msg) {
         Toast.makeText(context,
                 msg,

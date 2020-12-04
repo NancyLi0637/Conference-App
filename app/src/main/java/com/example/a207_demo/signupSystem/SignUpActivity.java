@@ -1,7 +1,5 @@
 package com.example.a207_demo.signupSystem;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +9,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.a207_demo.gateway.FileReadWriter;
-import com.example.a207_demo.use_cases.*;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.MainActivity;
 import com.example.a207_demo.R;

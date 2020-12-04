@@ -77,4 +77,12 @@ public class AttendeeManager extends UserManager implements Serializable {
     public boolean cancel(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
         return eventManager.removeAttendeeFromEvent(userID, eventID, roomManager);
     }
+
+    /**
+     * Reset the attendees: no user exists
+     */
+    public void reset() {
+        attendees = new ArrayList<>();
+    }
+
 }

@@ -19,9 +19,12 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Read from and write to text files
+ */
 public class FileReadWriter {
-    //private EventsController eventsController;
-    private EventManager eventManager;
+
+    private final EventManager eventManager;
     private AttendeeManager attendeeManager;
     private OrganizerManager organizerManager;
     private SpeakerManager speakerManager;
@@ -29,7 +32,15 @@ public class FileReadWriter {
     private AppCompatActivity context;
 
     /**
-     * Reads and saves data to and from txt files
+     * Constructor for the FileReadWriter class: Reads and saves data to and from txt files
+     * This constructor is used in CleanArchActivity.java
+     *
+     * @param context AppCompatActivity
+     * @param eventManager EventManager
+     * @param userManager UserManager
+     * @param attendeeManager AttendeeManager
+     * @param organizerManager OrganizerManager
+     * @param speakerManager SpeakerManager
      */
     public FileReadWriter(AppCompatActivity context, EventManager eventManager, UserManager userManager,
                           AttendeeManager attendeeManager, OrganizerManager organizerManager,
@@ -41,10 +52,14 @@ public class FileReadWriter {
         this.speakerManager = speakerManager;
         this.context = context;
     }
-    public void reset(){
+
+    /**
+     * Reset the managers so that the list of objects are empty
+     */
+    public void reset() {
         this.userManager.reset();
         this.eventManager.reset();
-        this.attendeeManager = new AttendeeManager();
+        this.attendeeManager.reset();
         this.organizerManager = new OrganizerManager();
         this.speakerManager = new SpeakerManager();
     }
@@ -100,12 +115,12 @@ public class FileReadWriter {
      * Saves a user's all relevant data to Users.txt. User info can be extracted using the UserReader() method if
      * needed.
      */
-    public void UserWriter(){
+    public void UserWriter() {
         List<String> userIDs = userManager.UsersIdsGetter();
         try {
             FileOutputStream out = context.openFileOutput("Users", Context.MODE_APPEND);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-            for (String userID : userIDs){
+            for (String userID : userIDs) {
                 String line = userManager.generateFormattedUserInfo(userID);
 //                for (String friendID : userManager.friendListGetter(userID)){
 //                    line += " " + friendID;
@@ -114,7 +129,7 @@ public class FileReadWriter {
                 writer.write(line);
             }
             writer.close();
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
 //            System.out.println("Users.txt File Not Found.");
             printMessage(context, "Users.txt File Not Found.");
         } catch (IOException e) {
@@ -173,7 +188,7 @@ public class FileReadWriter {
      * Reads Events.txt and loads saved events.
      */
     //Todo: accessing Event?
-    public void EventReader(){
+    public void EventReader() {
         ArrayList<String> lines = new ArrayList<>();
         try {
             FileInputStream in = context.openFileInput("Events");
@@ -212,17 +227,16 @@ public class FileReadWriter {
     }
 
 
-
     /**
      * Saves created events to Events.txt.
      */
-    public void EventWriter(){
+    public void EventWriter() {
         List<String> eventIds = eventManager.getAllIDAndName().get(0);
         System.out.println(eventManager.getAllEvent().get(0).getTitle());
         try {
             FileOutputStream out = context.openFileOutput("Events", Context.MODE_APPEND);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-            for (String eventId : eventIds){
+            for (String eventId : eventIds) {
                 String line = eventManager.generateFormattedEventInfo(eventId);
 //                for (String attendee : eventsController.getEventManager().getAttendeesFromEvent(ID)) {
 //                    line += " " + attendee;
@@ -231,7 +245,7 @@ public class FileReadWriter {
                 writer.write(line);
             }
             writer.close();
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Events.txt File Not Found.");
         } catch (IOException e) {
             e.printStackTrace();
@@ -244,13 +258,15 @@ public class FileReadWriter {
 //    public EventsController GetEventsController(){
 //        return eventsController;
 //    }
-    public OrganizerManager GetOrganizerManager(){
+    public OrganizerManager GetOrganizerManager() {
         return organizerManager;
     }
-    public AttendeeManager GetAttendeeManager(){
+
+    public AttendeeManager GetAttendeeManager() {
         return attendeeManager;
     }
-    public UserManager GetUserManager(){
+
+    public UserManager GetUserManager() {
         return userManager;
     }
 

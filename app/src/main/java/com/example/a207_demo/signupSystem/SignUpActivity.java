@@ -23,7 +23,7 @@ import com.example.a207_demo.utility.CleanArchActivity;
  */
 public class SignUpActivity extends CleanArchActivity implements View.OnClickListener {
 
-    private final CreateAccount accountCreater = new CreateAccount();
+    private final CreateAccount accountCreator = new CreateAccount();
     private FileReadWriter fileReadWriter;
 
     private String userName;
@@ -63,7 +63,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
     /**
      * Button Listener for clicking events.
      *
-     * @param v Buttom clicked
+     * @param v Button clicked
      */
     @Override
     public void onClick(View v) {
@@ -101,7 +101,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
         EditText email = findViewById(R.id.email_signUp);
         userEmail = email.getText().toString();
 
-        return accountCreater.isValidEmail(userEmail);
+        return accountCreator.isValidEmail(userEmail);
     }
 
     /**
@@ -114,7 +114,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
         EditText lastName = findViewById(R.id.lastname);
         userName = firstName.getText().toString() + lastName.getText().toString();
 
-        return accountCreater.isValidUserName(userName);
+        return accountCreator.isValidUserName(userName);
     }
 
     /**
@@ -127,7 +127,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
         userPassword = password.getText().toString();
         userType = String.valueOf(type.getSelectedItem());
 
-        accountCreater.createNewAccount(userName, userEmail, userPassword, userType);
+        accountCreator.createNewAccount(userName, userEmail, userPassword, userType);
         fileReadWriter.UserWriter();
     }
 

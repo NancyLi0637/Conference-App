@@ -3,6 +3,9 @@ package com.example.a207_demo.signupSystem;
 import com.example.a207_demo.use_cases.UserFactory;
 import com.example.a207_demo.use_cases.UserManager;
 
+/**
+ * Create a new account
+ */
 public class CreateAccount {
 
     private final UserManager userManager = new UserManager();

@@ -22,9 +22,9 @@ public abstract class User implements Serializable {
      * @param userName the userName of the user
      * @param password the password of the user
      */
-    public User(String email, String userName, String password) {
-        this.email = email;
+    public User(String userName, String email, String password) {
         this.userName = userName;
+        this.email = email;
         this.password = password;
         this.friendList = new ArrayList<String>();
     }

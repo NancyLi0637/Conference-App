@@ -50,12 +50,11 @@ public class FileReadWriter {
         try {
             FileInputStream in = context.openFileInput("Users");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
+            String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
         } catch (FileNotFoundException e) {
-//            System.out.println("Users.txt File Not Found");
             printMessage(context, "Users.txt File Not Found");
         } catch (IOException e) {
             e.printStackTrace();
@@ -93,12 +92,11 @@ public class FileReadWriter {
      */
     public void UserWriter(AppCompatActivity context){
         try {
-            //PrintWriter pw = new PrintWriter("Users.txt");
             FileOutputStream out = context.openFileOutput("Users", Context.MODE_APPEND);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String userID : userManager.UsersIdsGetter()){
-                String line = userManager.getUserType(userID) + " " + userManager.getUserEmail(userID) + " " +
-                        userManager.getUserName(userID) + " "+ userManager.getUserPassword(userID) + " " + userID;
+                String line = userManager.getUserType(userID) + " " + userManager.getUserName(userID) + " " +
+                        userManager.getUserEmail(userID) + " "+ userManager.getUserPassword(userID) + " " + userID;
 //                for (String friendID : userManager.friendListGetter(userID)){
 //                    line += " " + friendID;
 //                }
@@ -114,12 +112,7 @@ public class FileReadWriter {
         }
     }
 
-    /**
-     * Print error message as a toast
-     * @param context AppCompatActivity
-     * @param msg message string
-     */
-    public void printMessage(AppCompatActivity context, String msg) {
+    private void printMessage(AppCompatActivity context, String msg) {
         Toast.makeText(context,
                 msg,
                 Toast.LENGTH_LONG).show();

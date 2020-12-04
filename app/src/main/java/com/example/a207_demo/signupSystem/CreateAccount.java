@@ -2,13 +2,13 @@ package com.example.a207_demo.signupSystem;
 
 import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.use_cases.OrganizerManager;
+import com.example.a207_demo.use_cases.UserFactory;
 import com.example.a207_demo.use_cases.UserManager;
 
 public class CreateAccount {
 
     private final UserManager userManager = new UserManager();
-    private final AttendeeManager attendeeManager = new AttendeeManager();
-    private final OrganizerManager organizerManager = new OrganizerManager();
+    private final UserFactory userFactory = new UserFactory();
 
 
     /**
@@ -19,16 +19,8 @@ public class CreateAccount {
      * @param userPW Password of user
      * @return True if created successfully
      */
-    public void createNewAccount(String type, String username, String userEM, String userPW) {
-
-        if (type.equals("ORGANIZER")) {
-            organizerManager.createOrganizer(userEM, username, userPW);
-        } else if(type.equals("ATTENDEE")){
-            attendeeManager.createAttendee(userEM, username, userPW);
-        } else if(type.equals("VIPUser")) {
-            //Todo: implement vipUserManager
-            //vipUserManager.createVipUser(userEM, username, userPW);
-        }
+    public void createNewAccount(String username, String userEM, String userPW, String type) {
+        userFactory.createANewUser(username, userEM, userPW, type);
     }
 
     /**

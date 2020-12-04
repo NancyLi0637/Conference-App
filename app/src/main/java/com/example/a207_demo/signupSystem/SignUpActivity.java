@@ -126,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         //Todo: create account using CreateANewAccount (factory)
         //Todo: save data into database
-        accountCreater.createNewAccount(userTypeStr, userFN + userLN, userEM, userPW);
+        accountCreater.createNewAccount(userFN + userLN, userEM, userPW, userTypeStr);
         fileReadWriter.connectWriters(this);
     }
 

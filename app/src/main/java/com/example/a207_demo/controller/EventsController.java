@@ -1,10 +1,9 @@
 package com.example.a207_demo.controller;
 
-import com.example.a207_demo.entities.Event;
-import com.example.a207_demo.entities.Room;
-import com.example.a207_demo.use_cases.EventManager;
-import com.example.a207_demo.use_cases.RoomManager;
-import com.example.a207_demo.use_cases.SpeakerManager;
+import com.example.a207_demo.eventSystem.Event;
+import com.example.a207_demo.eventSystem.EventManager;
+import com.example.a207_demo.use_cases.*;
+import com.example.a207_demo.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,16 +113,17 @@ public class EventsController {
      * @param startTime startTime
      * @return true iff this event is created successfully
      */
-    public boolean createEvent(String title, String roomID, String speakerName, String startTime, String duration, String type) {
-        ArrayList<String> speakerID = new ArrayList<>();
-        speakerID.add(speakerManager.getIdFromName(speakerName));
-        Event newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime, duration, type);
-        if (newEvent == null) {
-            return false;
-        }
-        this.roomManager.addEventToRoom(newEvent.getEventID(), roomID);
-        return true;
-    }
+//    public boolean createEvent(String title, String roomID, String speakerName, String startTime, String duration,
+//                               String restriction, String type) {
+//        ArrayList<String> speakerID = new ArrayList<>();
+//        speakerID.add(speakerManager.getIdFromName(speakerName));
+//        Event newEvent = this.eventManager.createEvent(title, roomID, speakerID, startTime, duration, restriction, type);
+//        if (newEvent == null) {
+//            return false;
+//        }
+//        this.roomManager.addEventToRoom(newEvent.getEventID(), roomID);
+//        return true;
+//    }
 
     /**
      * Return a list of String with information about this event with event ID: title, start time, speakers, current
@@ -142,6 +142,7 @@ public class EventsController {
         }
         info.add(Integer.toString(room.getCurrentNum()));
         info.add(Integer.toString(room.getCapacity()));
+//        info.add(event.getRestriction());
         return info;
     }
 
@@ -171,6 +172,8 @@ public class EventsController {
     public ArrayList<ArrayList<String>> getAllIDAndName(){
         return eventManager.getAllIDAndName();
     }
+
+//    public ArrayList<String> getAllVIPEvents() { return eventManager.getAllVIPEvents();}
 
     public boolean cancelEvent(String eventID){
         Event currentEvent = eventManager.getEventFromID(eventID);

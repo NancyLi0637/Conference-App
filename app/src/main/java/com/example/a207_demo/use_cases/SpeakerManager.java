@@ -1,6 +1,8 @@
 package com.example.a207_demo.use_cases;
 
 import com.example.a207_demo.entities.*;
+import com.example.a207_demo.eventSystem.Event;
+import com.example.a207_demo.eventSystem.EventManager;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -16,13 +16,14 @@ import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.signupSystem.SignUpActivity;
 import com.example.a207_demo.use_cases.UserManager;
 import com.example.a207_demo.utility.ActivityCollector;
+import com.example.a207_demo.utility.CleanArchActivity;
 
 /**
  * The top level class for running the app.
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends CleanArchActivity implements View.OnClickListener{
 
-    private final FileReadWriter fileReadWriter = new FileReadWriter();
+    private FileReadWriter fileReadWriter;
     private static String ID;
     private static String type;
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Set up the activity.
      */
     public void init(){
+        fileReadWriter = getFileReadWriter();
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
 
@@ -57,16 +59,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v){
         Intent intent;
-
         switch(v.getId()){
             case R.id.btn_signUp:
-                fileReadWriter.reset();
-                intent = new Intent(MainActivity.this, SignUpActivity.class);
+                //fileReadWriter.reset();
+                //intent = new Intent(MainActivity.this, SignUpActivity.class);
+                intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login:
                 fileReadWriter.reset();
-                fileReadWriter.connectReaders(this);
+                fileReadWriter.UserReader();
 
                 if (info_matched()) {
                     if (type.equals("ATTENDEE")) {

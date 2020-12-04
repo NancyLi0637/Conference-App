@@ -138,6 +138,48 @@ public class UserManager {
     }
 
     /**
+     * Given a user ID, return the corresponding user name
+     * @param userId user ID
+     * @return the corresponding user name
+     */
+    public String getUserName(String userId) {
+        for (User user : users) {
+            if (user.getUserID().equals(userId)) {
+                return user.getUserName();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Given a user name, return the corresponding user id
+     * @param userName the user Name
+     * @return the corresponding user id
+     */
+    public String getUserIdFromName(String userName) {
+        for (User user : users) {
+            if (user.getUserName().equals(userName)) {
+                return user.getUserID();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Given a user ID, return the corresponding user name
+     * @param userID the user Name
+     * @return the corresponding user name
+     */
+    public String getUserNameFromID(String userID) {
+        for (User user : users) {
+            if (user.getUserID().equals(userID)) {
+                return user.getUserName();
+            }
+        }
+        return null;
+    }
+
+    /**
      * Return List<String> of user IDs
      *
      * @return List<String> of user IDs
@@ -191,57 +233,17 @@ public class UserManager {
     }
 
     /**
-     * Return an ArrayList of all userIDs
-     * @return an ArrayList of all userIDs
+     * Generate the formatted user's information.
+     * @param eventID the id of an user.
+     * @return a string of formatted event's information.
      */
-    public ArrayList<String> userListGetter() {
-        ArrayList<String> idList = new ArrayList<String>();
-        for (User user : users) {
-            idList.add(user.getUserID());
-        }
-        return idList;
-
-    }
-
-    /**
-     * Given a user ID, return the corresponding user name
-     * @param userId user ID
-     * @return the corresponding user name
-     */
-    public String getUserName(String userId) {
-        for (User user : users) {
-            if (user.getUserID().equals(userId)) {
-                return user.getUserName();
+    public String generateFormattedUserInfo(String userID){
+        for (User user: users){
+            if (user.getUserID().equals(userID)){
+                return user.getType() + " " + user.getUserName() + " " + user.getEmail() + " "
+                        + user.getPassword() + " " + userID;
             }
         }
-        return null;
-    }
-
-    /**
-     * Given a user name, return the corresponding user id
-     * @param userName the user Name
-     * @return the corresponding user id
-     */
-    public String getUserIdFromName(String userName) {
-        for (User user : users) {
-            if (user.getUserName().equals(userName)) {
-                return user.getUserID();
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Given a user ID, return the corresponding user name
-     * @param userID the user Name
-     * @return the corresponding user name
-     */
-    public String getUserNameFromID(String userID) {
-        for (User user : users) {
-            if (user.getUserID().equals(userID)) {
-                return user.getUserName();
-            }
-        }
-        return null;
+        return "NULL";
     }
 }

@@ -1,7 +1,9 @@
-package com.example.a207_demo.use_cases;
+package com.example.a207_demo.eventSystem;
 
 import com.example.a207_demo.entities.Room;
-import com.example.a207_demo.entities.Event;
+import com.example.a207_demo.use_cases.AttendeeManager;
+import com.example.a207_demo.use_cases.RoomManager;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +73,8 @@ public class EventManager implements Serializable {
      * @param  startTime startTime of the event
      * @return the newly created event or null
      */
-    public Event createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration, String type) {
+    public Event createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
+                             String restriction, String type) {
         for (Event event : this.events) {
             for (String speaker: event.getSpeakers()) {
                 if ((event.getSpeakers().contains(speaker) || roomID.equals(event.getRoomID())) &&
@@ -85,7 +88,7 @@ public class EventManager implements Serializable {
             return null;
         }
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, type);
+        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
@@ -104,18 +107,34 @@ public class EventManager implements Serializable {
      * @param roomManager roomManager
      * @return  the newly created event
      */
-    public Event loadEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String eventID,String duration, String type,
-                           ArrayList<String> attendeeID, RoomManager roomManager) {
+    public Event loadEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String eventID,
+                           String duration, String restriction, String type, ArrayList<String> attendeeID,
+                           RoomManager roomManager, AttendeeManager attendeeManager) {
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, type);
+        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
         // add attendee's IDs to this event
         for (String ID : attendeeID) {
-            addAttendeeToEvent(ID, eventID, roomManager);
+            addAttendeeToEvent(ID, eventID, roomManager, attendeeManager);
         }
         return newEvent;
+    }
+
+    //Todo: eventId?
+    public void loadEvent(String type, String title, String eventID, String roomID, ArrayList<String> speakerID,
+                          String startTime, String duration, String restriction) {
+        // create this new event:
+        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, restriction, type);
+        // update the events list:
+        events.add(newEvent);
+
+        // add attendee's IDs to this event
+//        for (String ID : attendeeID) {
+//            addAttendeeToEvent(ID, eventID, roomManager);
+//        }
+
     }
 
     /**
@@ -125,6 +144,10 @@ public class EventManager implements Serializable {
      */
     public List<Event> getAllEvent() {
         return events;
+    }
+
+    public void reset(){
+       events = new ArrayList<>();
     }
 
     /**
@@ -146,16 +169,20 @@ public class EventManager implements Serializable {
      * @param roomManager a RoomManager object
      * @return true iff the user has been successfully added to this event
      */
-    public boolean addAttendeeToEvent(String userID, String eventID, RoomManager roomManager) {
+    public boolean addAttendeeToEvent(String userID, String eventID, RoomManager roomManager, AttendeeManager attendeeManager) {
         Event event = getEventFromID(eventID);
         if (event != null) {
-            //Todo: update room in room manager
-            //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
-            Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
-            if (room.getCurrentNum() < room.getCapacity()) {
-                if (event.addAttendee(userID, events)) {
-                    room.increaseCurrentNum();
-                    return true;
+            String restriction = event.getRestriction();
+            String userType = attendeeManager.getUserType(userID);
+            if (!(restriction.equals("VIP-ONLY") && !userType.equals("VIPUser"))) {
+                //Todo: update room in room manager
+                //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
+                Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
+                if (room.getCurrentNum() < room.getCapacity()) {
+                    if (event.addAttendee(userID, events)) {
+                        room.increaseCurrentNum();
+                        return true;
+                    }
                 }
             }
         }
@@ -189,6 +216,11 @@ public class EventManager implements Serializable {
             return event.getAttendees();
         }
         return new ArrayList<>();
+    }
+
+    public String getEventRestrictionWithID(String eventID) {
+        Event event = getEventFromID(eventID);
+        return event.getRestriction();
     }
 
     /**
@@ -301,9 +333,9 @@ public class EventManager implements Serializable {
     public String generateFormattedEventInfo(String eventID){
         for (Event event : events){
             if (event.getEventID().equals(eventID)){
-                return event.getTitle().replace(" ", "_") + " " + event.getRoomID() + " " +
-                        event.getSpeakers() + " " + event.getStartTime() + " " +
-                        event.getEventID();
+                return event.getType() + " " + event.getTitle().replace(" ", "_")
+                        + " " + event.getEventID() + " " + event.getRoomID() + " " + event.getSpeakers()
+                        + " " + event.getStartTime() + " " + event.getDuration() + " " + event.getRestriction();
             }
         }
         return "NULL";
@@ -311,6 +343,25 @@ public class EventManager implements Serializable {
 
     public ArrayList<String> getAllEventType (){
         return this.allEventType;
+    }
+
+    /**
+     * Return a list all the VIP-only event id's
+     * @return ArrayList<String> containing the event ID of all VIP-only events
+     */
+    public ArrayList<String> getAllVIPEvents() {
+        List<Event> allEvents = this.getAllEvent();
+        ArrayList<String> vipEvents = new ArrayList<>();
+        for (Event event : allEvents){
+            if (event.getRestriction().equals("VIP-ONLY")){
+                vipEvents.add(event.getEventID());
+            }
+        }
+        return vipEvents;
+    }
+
+    public void setEvents(Event event){
+        this.events.add(event);
     }
 
 }

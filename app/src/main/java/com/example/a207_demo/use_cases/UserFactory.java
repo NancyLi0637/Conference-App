@@ -8,7 +8,15 @@ public class UserFactory {
     private final OrganizerManager organizerManager = new OrganizerManager();
     private final SpeakerManager speakerManager = new SpeakerManager();
 
-    public User createANewUser(String userName, String email, String password, String type){
+
+    /**
+     * Create a new user account and store it in managers.
+     * @param userName
+     * @param email
+     * @param password
+     * @param type
+     */
+    public void createNewUserAccount(String userName, String email, String password, String type){
         switch (type) {
             case "ATTENDEE":
                 attendeeManager.createAttendee(userName, email, password);
@@ -23,6 +31,5 @@ public class UserFactory {
                 speakerManager.createSpeaker(userName, email, password);
                 break;
         }
-        return null;
     }
 }

@@ -1,7 +1,5 @@
 package com.example.a207_demo.signupSystem;
 
-import com.example.a207_demo.use_cases.AttendeeManager;
-import com.example.a207_demo.use_cases.OrganizerManager;
 import com.example.a207_demo.use_cases.UserFactory;
 import com.example.a207_demo.use_cases.UserManager;
 
@@ -20,7 +18,7 @@ public class CreateAccount {
      * @return True if created successfully
      */
     public void createNewAccount(String username, String userEM, String userPW, String type) {
-        userFactory.createANewUser(username, userEM, userPW, type);
+        userFactory.createNewUserAccount(username, userEM, userPW, type);
     }
 
     /**

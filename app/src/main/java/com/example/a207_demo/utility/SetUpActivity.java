@@ -21,7 +21,7 @@ import com.example.a207_demo.messageSystem.AnnouncementActivity;
 import com.example.a207_demo.messageSystem.SpeakerAnnouncementActivity;
 import com.google.android.material.navigation.NavigationView;
 
-public class SetUpActivity extends AppCompatActivity{
+public class SetUpActivity extends CleanArchActivity {
     private DrawerLayout mDrawerLayout;
 
     public void init(AppCompatActivity context, int id_nav_view, int id_nav_item){

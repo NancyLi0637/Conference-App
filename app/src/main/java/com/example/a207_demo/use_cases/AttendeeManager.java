@@ -1,6 +1,8 @@
 package com.example.a207_demo.use_cases;
 
 import com.example.a207_demo.entities.*;
+import com.example.a207_demo.eventSystem.EventManager;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,9 +62,9 @@ public class AttendeeManager extends UserManager implements Serializable {
      * @param roomManager a roomManager
      * @return boolean value, return true iff signed up successfully
      */
-    public boolean signUp(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
-        return eventManager.addAttendeeToEvent(userID, eventID, roomManager);
-    }
+//    public boolean signUp(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
+//        return eventManager.addAttendeeToEvent(userID, eventID, roomManager);
+//    }
 
     /**
      * Try to cancel an entities.Attendee from an event.

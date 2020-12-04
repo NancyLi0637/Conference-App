@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.use_cases.*;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.MainActivity;
@@ -23,6 +24,7 @@ import com.example.a207_demo.R;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
 
     private final CreateAccount accountCreater = new CreateAccount();
+    private final FileReadWriter fileReadWriter = new FileReadWriter();
 
     /**
      * Required function to initiate an Activity class.
@@ -70,8 +72,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }else{
                     Toast.makeText(SignUpActivity.this, "You have signed up SUCCESSFULLY!",
                             Toast.LENGTH_LONG).show();
-                    intent = new Intent(SignUpActivity.this, MainActivity.class);
                     setUpData();
+                    intent = new Intent(SignUpActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
                 break;
@@ -125,6 +127,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //Todo: create account using CreateANewAccount (factory)
         //Todo: save data into database
         accountCreater.createNewAccount(userTypeStr, userFN + userLN, userEM, userPW);
+        fileReadWriter.connectWriters(this);
     }
 
 }

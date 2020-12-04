@@ -37,17 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         init();
 
-        ActivityCollector.addActivity(this);
-
     }
 
     /**
      * Set up the activity.
      */
     public void init(){
-        fileReadWriter.reset();
-        fileReadWriter.connectReaders(this);
-
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
 
@@ -65,10 +60,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch(v.getId()){
             case R.id.btn_signUp:
+                fileReadWriter.reset();
                 intent = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login:
+                fileReadWriter.reset();
+                fileReadWriter.connectReaders(this);
+
                 if (info_matched()) {
                     if (type.equals("ATTENDEE")) {
                         intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
                     }
                     //Todo: too many lines written in Users.txt (FileReadWriter -> connectWrtier -> UserWriter method)
-                    fileReadWriter.connectWriters(this);
                     startActivity(intent);
                 } else{
                     Toast.makeText(MainActivity.this, "Your username and password do not match. Please try again.",

@@ -48,7 +48,7 @@ public class FileReadWriter {
     public void UserReader(AppCompatActivity context) {
         ArrayList<String> lines = new ArrayList();
         try {
-            FileInputStream in = context.openFileInput("Users.txt");
+            FileInputStream in = context.openFileInput("Users");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line = "";
             while ((line = reader.readLine()) != null) {
@@ -78,13 +78,13 @@ public class FileReadWriter {
             }
             LineList.add(wordList);
         }
-        for (ArrayList<String> wordList : LineList){
-            if (wordList.size() > 5){
-                for (int index = 5; index < wordList.size(); index++){
-                    userManager.addFriend(wordList.get(4), wordList.get(index));
-                }
-            }
-        }
+//        for (ArrayList<String> wordList : LineList){
+//            if (wordList.size() > 5){
+//                for (int index = 5; index < wordList.size(); index++){
+//                    userManager.addFriend(wordList.get(4), wordList.get(index));
+//                }
+//            }
+//        }
     }
 
     /**
@@ -94,14 +94,14 @@ public class FileReadWriter {
     public void UserWriter(AppCompatActivity context){
         try {
             //PrintWriter pw = new PrintWriter("Users.txt");
-            FileOutputStream out = context.openFileOutput("Users.txt", Context.MODE_APPEND);
+            FileOutputStream out = context.openFileOutput("Users", Context.MODE_APPEND);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String userID : userManager.UsersIdsGetter()){
                 String line = userManager.getUserType(userID) + " " + userManager.getUserEmail(userID) + " " +
                         userManager.getUserName(userID) + " "+ userManager.getUserPassword(userID) + " " + userID;
-                for (String friendID : userManager.friendListGetter(userID)){
-                    line += " " + friendID;
-                }
+//                for (String friendID : userManager.friendListGetter(userID)){
+//                    line += " " + friendID;
+//                }
                 line += "\n";
                 writer.write(line);
             }

@@ -18,12 +18,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class OrganizerEventActivity extends EventActivity implements View.OnClickListener{
+/**
+ * OrganizerEventActivity
+ */
+public class OrganizerEventActivity extends EventActivity implements View.OnClickListener {
 
     private List<Event> eventList = new ArrayList<>();
     private OrganizerEventAdapter eventAdapter;
     private EventManager eventManager;
 
+    /**
+     * onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +41,10 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         ActivityCollector.addActivity(this);
     }
 
-    public void init(){
+    /**
+     * init
+     */
+    public void init() {
         super.init(this, R.id.nav_view_organizer, R.id.nav_allevents_organizer);
         eventManager = getEventManager();
 
@@ -44,13 +54,20 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         createEventMenu();
     }
 
+    /**
+     * onClick
+     * @param v View
+     */
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
         Intent intent = new Intent(OrganizerEventActivity.this, CreateEventActivity.class);
         startActivityForResult(intent, 1);
     }
 
-    protected void createEventMenu(){
+    /**
+     * createEventMenu
+     */
+    protected void createEventMenu() {
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         super.createEventMenu(recyclerView);
         initEvents();
@@ -58,36 +75,48 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         recyclerView.setAdapter(eventAdapter);
     }
 
-    protected void initEvents(){
+    /**
+     * initEvents
+     */
+    protected void initEvents() {
         super.initEvents();
         eventList = eventManager.getAllEvent();
 
         //Todo: implement image later
-        for (Event event : eventList){
+        for (Event event : eventList) {
             event.setImageId(R.drawable.default_image);
         }
 
     }
 
+    /**
+     * onActivityResult
+     * @param requestCode requestCode
+     * @param resultCode resultCode
+     * @param data Intent
+     */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
+        switch (requestCode) {
             case 1:
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     refreshEvents();
                 }
                 break;
         }
     }
 
-    private void refreshEvents(){
+    /**
+     * refresh Events, update the screen to show events
+     */
+    private void refreshEvents() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     Thread.sleep(2000);
-                }catch(InterruptedException e){
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 runOnUiThread(new Runnable() {

@@ -7,8 +7,15 @@ import android.widget.Button;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
+/**
+ * OrganizerEventContentActivity
+ */
 public class OrganizerEventContentActivity extends EventContentActivity{
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +26,12 @@ public class OrganizerEventContentActivity extends EventContentActivity{
         ActivityCollector.addActivity(this);
     }
 
+    /**
+     * fillContent
+     * @param eventTitle String eventTitle
+     * @param eventContent String eventContent
+     * @param eventImageId int eventImageId
+     */
     protected void fillContent(String eventTitle, String eventContent, int eventImageId){
         super.fillContent(eventTitle, eventContent, eventImageId);
         Button eventCancel = findViewById(R.id.btn_cancel_event);

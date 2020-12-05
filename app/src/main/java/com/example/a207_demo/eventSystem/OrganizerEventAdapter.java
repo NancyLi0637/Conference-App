@@ -12,14 +12,28 @@ import com.example.a207_demo.R;
 
 import java.util.List;
 
+/**
+ * OrganizerEventAdapter
+ */
 public class OrganizerEventAdapter extends EventAdapter {
     private Context context;
 
-    public OrganizerEventAdapter(Context context, List<Event> eventList){
+    /**
+     * OrganizerEventAdapter Constructor
+     * @param context
+     * @param eventList
+     */
+    public OrganizerEventAdapter(Context context, List<Event> eventList) {
         super(context, eventList);
         this.context = context;
     }
 
+    /**
+     * onCreateViewHolder for OrganizerEventAdapter
+     * @param parent parent ViewGroup
+     * @param viewType viewType
+     * @return
+     */
     @NonNull
     @Override
     public VHEvent onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

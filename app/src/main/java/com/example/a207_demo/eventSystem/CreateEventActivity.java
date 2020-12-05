@@ -21,7 +21,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateEventActivity extends CleanArchActivity implements View.OnClickListener{
+/**
+ * CreateEventActivity for creating a new event
+ */
+public class CreateEventActivity extends CleanArchActivity implements View.OnClickListener {
     private String eventType;
     private String eventTitle;
     private String eventTime;
@@ -31,6 +34,10 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
     private FileReadWriter fileReadWriter;
     private EventManager eventManager;
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +48,10 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         ActivityCollector.addActivity(this);
     }
 
-    private void init(){
+    /**
+     * init
+     */
+    private void init() {
         eventManager = getEventManager();
         fileReadWriter = getFileReadWriter();
 
@@ -52,18 +62,22 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         vipOnly.setOnClickListener(this);
     }
 
-    public void onClick(View v){
+    /**
+     * onClick
+     * @param v View
+     */
+    public void onClick(View v) {
         setUpData();
         Intent intent;
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_to_room:
-                if(dataMissing()){
+                if (dataMissing()) {
                     Toast.makeText(this, "INFORMATION missing", Toast.LENGTH_LONG).show();
-                }else if(eventTitle.length() < 3){
+                } else if (eventTitle.length() < 3) {
                     Toast.makeText(this, "EVENT TITLE needs to be at least length 3", Toast.LENGTH_LONG).show();
-                }else if(!validTime()){
+                } else if (!validTime()) {
                     Toast.makeText(this, "TIME entered is invalid!", Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     //Todo: implement Room system
                     //intent = new Intent(CreateEventActivity.this, ChooseRoom.class);
                     //startActivityForResult(intent, 1);
@@ -92,22 +106,29 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         }
     }
 
-    public void onCheckBoxClicked(View v){
-        boolean checked = ((CheckBox)v).isChecked();
+    /**
+     * onCheckBoxClicked
+     * @param v View
+     */
+    public void onCheckBoxClicked(View v) {
+        boolean checked = ((CheckBox) v).isChecked();
 
-        switch (v.getId()){
-            case(R.id.vip_only):
-                if(checked) {
+        switch (v.getId()) {
+            case (R.id.vip_only):
+                if (checked) {
                     //Todo: fix null checkbox
                     restriction = "VIP-ONLY";
-                }else{
+                } else {
                     restriction = "PUBLIC";
                 }
                 break;
         }
     }
 
-    private void setUpData(){
+    /**
+     * setUpData
+     */
+    private void setUpData() {
         Spinner type = findViewById(R.id.event_type);
         EditText title = findViewById(R.id.event_title);
         EditText startTime = findViewById(R.id.event_time);
@@ -119,11 +140,19 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         eventDuration = duration.getText().toString();
     }
 
-    private boolean dataMissing(){
+    /**
+     * check if there is data missing
+     * @return boolean
+     */
+    private boolean dataMissing() {
         return eventType == null || eventTitle == null || eventTime == null || eventDuration == null;
     }
 
-    private boolean validTime(){
+    /**
+     * check if it is a valid Time
+     * @return boolean
+     */
+    private boolean validTime() {
         return eventManager.checkValidTimeFormat(eventTime) && eventManager.checkValidFutureTime(eventTime);
     }
 

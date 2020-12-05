@@ -22,7 +22,7 @@ import com.example.a207_demo.messageSystem.SpeakerAnnouncementActivity;
 import com.google.android.material.navigation.NavigationView;
 
 /**
- *
+ * SetUpActivity class
  */
 public class SetUpActivity extends CleanArchActivity {
     private DrawerLayout mDrawerLayout;

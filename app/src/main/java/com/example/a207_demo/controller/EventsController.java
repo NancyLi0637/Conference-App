@@ -100,9 +100,9 @@ public class EventsController {
      * @param time starting time String
      * @return ArrayList<String>, which is the list of all available rooms
      */
-    public ArrayList<String> getAvailableRoom(String time) {
-        return this.roomManager.getAvailableRoom(time, this.eventManager);
-    }
+//    public ArrayList<String> getAvailableRoom(String time) {
+//        return this.roomManager.getAvailableRoom(time, this.eventManager);
+//    }
 
     /**
      * Create an event
@@ -138,9 +138,9 @@ public class EventsController {
         Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
         info.add(event.getTitle());
         info.add(event.getStartTime());
-        for (String speaker : event.getSpeakers()) {
-            info.add(speakerManager.getSpeakerNameFromID(speaker));
-        }
+//        for (String speaker : event.getSpeakers()) {
+//            info.add(speakerManager.getSpeakerNameFromID(speaker));
+//        }
         info.add(Integer.toString(room.getCurrentNum()));
         info.add(Integer.toString(room.getCapacity()));
 //        info.add(event.getRestriction());

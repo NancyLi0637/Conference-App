@@ -21,7 +21,7 @@ import com.example.a207_demo.utility.CleanArchActivity;
 /**
  * The top level class for running the app.
  */
-public class MainActivity extends CleanArchActivity implements View.OnClickListener{
+public class MainActivity extends CleanArchActivity implements View.OnClickListener {
 
     private FileReadWriter fileReadWriter;
     private static String ID;
@@ -29,6 +29,7 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
 
     /**
      * Required function to initiate an Activity class.
+     *
      * @param savedInstanceState saved data for unexpected crush
      */
     @Override
@@ -43,7 +44,7 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
     /**
      * Set up the activity.
      */
-    public void init(){
+    public void init() {
         fileReadWriter = getFileReadWriter();
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
@@ -54,12 +55,13 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
 
     /**
      * Button Listener for clicking events.
+     *
      * @param v Button clicked
      */
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
         Intent intent;
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.btn_signUp:
                 //fileReadWriter.reset();
                 //intent = new Intent(MainActivity.this, SignUpActivity.class);
@@ -80,7 +82,7 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
                     }
                     //Todo: too many lines written in Users.txt (FileReadWriter -> connectWrtier -> UserWriter method)
                     startActivity(intent);
-                } else{
+                } else {
                     Toast.makeText(MainActivity.this, "Your username and password do not match. Please try again.",
                             Toast.LENGTH_LONG).show();
                 }
@@ -90,14 +92,19 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
         }
     }
 
-    private boolean info_matched(){
+    /**
+     * Check if the information entered by the user match the data stored in the database
+     *
+     * @return boolean
+     */
+    private boolean info_matched() {
         EditText email = findViewById(R.id.email);
         EditText password = findViewById(R.id.password);
         String userEM = email.getText().toString();
         String userPW = password.getText().toString();
 
         UserManager userManager = new UserManager();
-        if (!userManager.validLogIn(userEM, userPW).equals("NULL")){
+        if (!userManager.validLogIn(userEM, userPW).equals("NULL")) {
             ID = userManager.validLogIn(userEM, userPW);
             type = userManager.getUserType(userEM, userPW);
             return true;

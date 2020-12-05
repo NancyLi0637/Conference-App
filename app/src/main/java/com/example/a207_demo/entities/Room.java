@@ -6,7 +6,7 @@ import java.util.UUID;
 /**
  * The entities.Room class, this is used to create room objects, it holds conference meeting objects held in the room.
  */
-public class Room implements Serializable{
+public class Room implements Serializable {
 
     private final String roomID;
     private final int capacity = 2;
@@ -27,7 +27,7 @@ public class Room implements Serializable{
      * Constructor No.2 for Room
      *
      * @param roomNum unique identification roomNum of the room
-     * @param roomID unique identification roomID of the room
+     * @param roomID  unique identification roomID of the room
      */
     public Room(String roomNum, String roomID) {
         this.roomNum = roomNum;
@@ -39,7 +39,7 @@ public class Room implements Serializable{
      *
      * @return the room Number in String format
      */
-    public String getRoomNum(){
+    public String getRoomNum() {
         return roomNum;
     }
 
@@ -57,7 +57,7 @@ public class Room implements Serializable{
      *
      * @return current number
      */
-    public int getCurrentNum(){
+    public int getCurrentNum() {
         return this.currentNum;
     }
 
@@ -66,24 +66,26 @@ public class Room implements Serializable{
      *
      * @return capacity
      */
-    public int getCapacity(){
+    public int getCapacity() {
         return this.capacity;
     }
 
     /**
      * Increase the number of people by 1 in this room
      */
-    public void increaseCurrentNum(){
-        if (this.currentNum < this.capacity){
-            this.currentNum +=1;}
+    public void increaseCurrentNum() {
+        if (this.currentNum < this.capacity) {
+            this.currentNum += 1;
+        }
     }
 
     /**
      * Decrease the number of people by 1 in this room
      */
-    public void decreaseCurrentNum(){
-        if (this.currentNum > 0){
-            this.currentNum -=1;}
+    public void decreaseCurrentNum() {
+        if (this.currentNum > 0) {
+            this.currentNum -= 1;
+        }
     }
 
 //    public void resetTheCurrentNum(){

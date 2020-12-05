@@ -12,8 +12,16 @@ import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
 import com.example.a207_demo.utility.ActivityCollector;
 
-public class TempActivity extends AppCompatActivity implements View.OnClickListener{
+/**
+ * TempActivity
+ */
+public class TempActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * onCreate
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +38,15 @@ public class TempActivity extends AppCompatActivity implements View.OnClickListe
         ActivityCollector.addActivity(this);
     }
 
+    /**
+     * onClick
+     *
+     * @param v View
+     */
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
 
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.btn_attendee:
                 startActivity(new Intent(TempActivity.this, AttendeeEventActivity.class));
                 break;

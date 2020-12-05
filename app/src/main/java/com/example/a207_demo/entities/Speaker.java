@@ -13,7 +13,7 @@ public class Speaker extends User implements Serializable {
      * Constructor No.1 for the speaker
      *
      * @param userName the userName of this speaker
-     * @param email the email of this speaker
+     * @param email    the email of this speaker
      * @param password the password of this speaker
      */
     public Speaker(String userName, String email, String password) {
@@ -26,9 +26,9 @@ public class Speaker extends User implements Serializable {
      * Constructor No.2 for the speaker, adding a parameter: ID of this speaker
      *
      * @param userName the userName of this speaker
-     * @param email the email of this speaker
+     * @param email    the email of this speaker
      * @param password the password of this speaker
-     * @param ID the user ID of this speaker
+     * @param ID       the user ID of this speaker
      */
     public Speaker(String userName, String email, String password, String ID) {
         super(userName, email, password);
@@ -38,6 +38,7 @@ public class Speaker extends User implements Serializable {
 
     /**
      * Getter method to access this speaker's userID
+     *
      * @return userID of this speaker
      */
     public String getUserID() {

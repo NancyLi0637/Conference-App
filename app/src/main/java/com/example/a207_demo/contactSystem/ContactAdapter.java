@@ -28,6 +28,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
 
     /**
      * ContactAdapter
+     *
      * @param context
      * @param contactsList
      */
@@ -38,7 +39,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
 
     /**
      * onCreateViewHolder
-     * @param parent @NonNull ViewGroup parent
+     *
+     * @param parent   @NonNull ViewGroup parent
      * @param viewType int viewType
      * @return VHContact
      */
@@ -53,6 +55,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
 
     /**
      * setClickContactListener
+     *
      * @param holder ContactAdapter.VHContact holder
      */
     public void setClickContactListener(final ContactAdapter.VHContact holder) {
@@ -67,7 +70,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
 
     /**
      * onBindViewHolder
-     * @param holder @NonNull VHContact holder
+     *
+     * @param holder   @NonNull VHContact holder
      * @param position final int position
      */
     @Override
@@ -81,6 +85,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
 
     /**
      * getItemCount
+     *
      * @return int
      */
     @Override
@@ -98,6 +103,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
 
         /**
          * VHContact constructor
+         *
          * @param v View
          */
         public VHContact(View v) {

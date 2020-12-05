@@ -19,6 +19,7 @@ public class SpeakerContactActivity extends SetUpActivity {
 
     /**
      * onCreate
+     *
      * @param savedInstanceState Bundle
      */
     @Override
@@ -42,6 +43,7 @@ public class SpeakerContactActivity extends SetUpActivity {
 
     /**
      * createContactMenu
+     *
      * @param contactList List<Contact> contactList
      */
     public void createContactMenu(List<Contact> contactList) {
@@ -56,6 +58,7 @@ public class SpeakerContactActivity extends SetUpActivity {
 
     /**
      * initContacts
+     *
      * @param contactList List<Contact> contactList
      */
     public void initContacts(List<Contact> contactList) {

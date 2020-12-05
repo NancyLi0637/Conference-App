@@ -86,7 +86,7 @@ public class EventsController {
     /**
      * Cancel event with eventID for this user with userID
      *
-     * @param userID userID
+     * @param userID  userID
      * @param eventID eventID
      * @return true iff the cancellation is successful
      */
@@ -128,6 +128,7 @@ public class EventsController {
     /**
      * Return a list of String with information about this event with event ID: title, start time, speakers, current
      * number of people for this room, and capacity for this room
+     *
      * @param eventID eventID
      * @return ArrayList<String> a information about this event with event ID
      */
@@ -137,8 +138,8 @@ public class EventsController {
         Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
         info.add(event.getTitle());
         info.add(event.getStartTime());
-        for (String speaker : event.getSpeakers()){
-        info.add(speakerManager.getSpeakerNameFromID(speaker));
+        for (String speaker : event.getSpeakers()) {
+            info.add(speakerManager.getSpeakerNameFromID(speaker));
         }
         info.add(Integer.toString(room.getCurrentNum()));
         info.add(Integer.toString(room.getCapacity()));
@@ -158,6 +159,7 @@ public class EventsController {
 
     /**
      * Return a list of Attendees from an event with the given ID
+     *
      * @param eventID eventID
      * @return a list of Attendees
      */
@@ -167,20 +169,21 @@ public class EventsController {
 
     /**
      * Return all Attendees' ids and user names.
+     *
      * @return a list of two list containing user ids and user names respectively.
      */
-    public ArrayList<ArrayList<String>> getAllIDAndName(){
+    public ArrayList<ArrayList<String>> getAllIDAndName() {
         return eventManager.getAllIDAndName();
     }
 
 //    public ArrayList<String> getAllVIPEvents() { return eventManager.getAllVIPEvents();}
 
-    public boolean cancelEvent(String eventID){
+    public boolean cancelEvent(String eventID) {
         Event currentEvent = eventManager.getEventFromID(eventID);
         List<Event> eventList = eventManager.getAllEvent();
         eventList.remove(currentEvent);
         ArrayList<String> attendeeList = currentEvent.getAttendees();
-        for (String attendee : attendeeList){
+        for (String attendee : attendeeList) {
             eventManager.removeAttendeeFromEvent(attendee, eventID, roomManager);
         }
         return roomManager.getRoomBasedOnItsID(currentEvent.getRoomID()).getCurrentNum() == 0;

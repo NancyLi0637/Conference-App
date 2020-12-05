@@ -14,7 +14,7 @@ public class Organizer extends User implements Serializable {
      * Constructor No.1 for the Organizer
      *
      * @param userName the userName of this Organizer
-     * @param email the email of this Organizer
+     * @param email    the email of this Organizer
      * @param password the password of this Organizer
      */
     public Organizer(String userName, String email, String password) {
@@ -27,9 +27,9 @@ public class Organizer extends User implements Serializable {
      * Constructor No.2 for the Organizer, adding a parameter: ID of this Organizer
      *
      * @param userName the userName of this Organizer
-     * @param email the email of this Organizer
+     * @param email    the email of this Organizer
      * @param password the password of this Organizer
-     * @param ID the user ID of this Organizer
+     * @param ID       the user ID of this Organizer
      */
     public Organizer(String userName, String email, String password, String ID) {
         super(userName, email, password);

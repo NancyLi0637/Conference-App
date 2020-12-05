@@ -11,27 +11,30 @@ public class Contact {
 
     /**
      * a Contact with name and imageId
-     * @param name String
+     *
+     * @param name    String
      * @param imageId int
      */
-    public Contact(String name, int imageId){
+    public Contact(String name, int imageId) {
         this.name = name;
         this.imageId = imageId;
     }
 
     /**
      * getName
+     *
      * @return String
      */
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
     /**
      * getImageId
+     *
      * @return int
      */
-    public int getImageId(){
+    public int getImageId() {
         return this.imageId;
     }
 }

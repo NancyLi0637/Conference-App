@@ -182,6 +182,12 @@ public abstract class Event implements Serializable {
         return this.title + " at " + this.getFormattedStartTime();
     }
 
+    /**
+     * Returns a formatted string with more data
+     *
+     * @return a formatted string with more data
+     */
+    public abstract String toFullString();
 
     /**
      * setImageId

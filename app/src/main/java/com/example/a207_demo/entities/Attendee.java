@@ -14,7 +14,7 @@ public class Attendee extends User implements Serializable {
      * Constructor No.1 for the Attendee
      *
      * @param userName the userName of this Attendee
-     * @param email the email of this Attendee
+     * @param email    the email of this Attendee
      * @param password the password of this Attendee
      */
     public Attendee(String userName, String email, String password) {
@@ -27,9 +27,9 @@ public class Attendee extends User implements Serializable {
      * Constructor No.2 for the Attendee, adding a parameter: ID of this Attendee
      *
      * @param userName the userName of this Attendee
-     * @param email the email of this Attendee
+     * @param email    the email of this Attendee
      * @param password the password of this Attendee
-     * @param ID the user ID of this Attendee
+     * @param ID       the user ID of this Attendee
      */
     public Attendee(String userName, String email, String password, String ID) {
         super(userName, email, password);
@@ -39,6 +39,7 @@ public class Attendee extends User implements Serializable {
 
     /**
      * Getter method to access this Attendee's userID
+     *
      * @return userID of this Attendee
      */
     public String getUserID() {

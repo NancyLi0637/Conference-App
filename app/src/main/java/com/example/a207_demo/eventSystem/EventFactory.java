@@ -3,12 +3,13 @@ package com.example.a207_demo.eventSystem;
 
 import com.example.a207_demo.entities.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Contains the createEvent method to create an event according to the type
  */
-public class EventFactory {
+public class EventFactory implements Serializable {
     /**
      * create an event according to the type
      *

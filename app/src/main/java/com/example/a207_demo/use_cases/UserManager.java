@@ -190,6 +190,14 @@ public class UserManager {
         return null;
     }
 
+    public List<String> getUserIdsFromName(List<String> userNames){
+        List<String> ids = new ArrayList<>();
+        for(String userName : userNames){
+            ids.add(getUserIdFromName(userName));
+        }
+        return ids;
+    }
+
     /**
      * Given a user ID, return the corresponding user name
      *

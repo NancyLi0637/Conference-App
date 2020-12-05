@@ -10,6 +10,7 @@ import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.use_cases.OrganizerManager;
+import com.example.a207_demo.use_cases.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
 import com.example.a207_demo.use_cases.UserManager;
 
@@ -29,6 +30,7 @@ public class FileReadWriter {
     private OrganizerManager organizerManager;
     private SpeakerManager speakerManager;
     private final UserManager userManager;
+    private RoomManager roomManager;
     private AppCompatActivity context;
 
     /**
@@ -44,12 +46,13 @@ public class FileReadWriter {
      */
     public FileReadWriter(AppCompatActivity context, EventManager eventManager, UserManager userManager,
                           AttendeeManager attendeeManager, OrganizerManager organizerManager,
-                          SpeakerManager speakerManager) {
+                          SpeakerManager speakerManager, RoomManager roomManager) {
         this.eventManager = eventManager;
         this.userManager = userManager;
         this.attendeeManager = attendeeManager;
         this.organizerManager = organizerManager;
         this.speakerManager = speakerManager;
+        this.roomManager = roomManager;
         this.context = context;
     }
 
@@ -62,6 +65,7 @@ public class FileReadWriter {
         this.attendeeManager.reset();
         this.organizerManager.reset();
         this.speakerManager.reset();
+        this.roomManager.reset();
     }
 
     /**
@@ -138,58 +142,6 @@ public class FileReadWriter {
     }
 
     /**
-     * print Message as a toast
-     * @param context AppCompatActivity
-     * @param msg String
-     */
-    private void printMessage(AppCompatActivity context, String msg) {
-        Toast.makeText(context,
-                msg,
-                Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * Reads rooms.txt file and loads saved rooms.
-     */
-//    public void RoomReader(){
-//        ArrayList<String> lines = new ArrayList<>();
-//        try {
-//            File UserFile = new File("./phase1/rooms.txt");
-//            Scanner myReader = new Scanner(UserFile);
-//            while (myReader.hasNextLine()) {
-//                while (myReader.hasNextLine()) {
-//                    lines.add(myReader.nextLine());
-//                }
-//            }
-//        } catch (FileNotFoundException e) {
-//            System.out.println("rooms.txt File Not Found");
-//        }
-//        for (String line : lines) {
-//            ArrayList<String> wordList = new ArrayList<String>(Arrays.asList(line.split(" ")));
-//            eventsController.getRoomManager().loadRoom(wordList.get(0), wordList.get(1));
-//        }
-//    }
-
-    /**
-     * Saves created room/rooms to rooms.txt file.
-     */
-//    public void RoomWriter(){
-//        ArrayList<String> NumList = eventsController.getRoomManager().getAllRoomNum();
-//        ArrayList<String> IDList = eventsController.getRoomManager().getAllRoomID();
-//        try {
-//            PrintWriter pw = new PrintWriter("./phase1/rooms.txt");
-//            for (int index = 0; index < NumList.size(); index++){
-//                String line = NumList.get(index) + " " + IDList.get(index);
-//                line += "\n";
-//                pw.write(line);
-//            }
-//            pw.close();
-//        } catch (FileNotFoundException e){
-//            System.out.println("rooms.txt File Not Found.");
-//        }
-//    }
-
-    /**
      * Reads Events.txt and loads saved events.
      */
     //Todo: accessing Event?
@@ -237,7 +189,6 @@ public class FileReadWriter {
      */
     public void EventWriter() {
         List<String> eventIds = eventManager.getAllIDAndName().get(0);
-        System.out.println(eventManager.getAllEvent().get(0).getTitle());
         try {
             FileOutputStream out = context.openFileOutput("Events", Context.MODE_APPEND);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
@@ -255,6 +206,68 @@ public class FileReadWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * Reads rooms.txt file and loads saved rooms.
+     */
+    public void RoomReader(){
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            FileInputStream in = context.openFileInput("Rooms");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (FileNotFoundException e) {
+            printMessage(context, "Rooms File Not Found");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (String line : lines) {
+            String[] wordList = line.split(" ");
+            String roomNum = wordList[0] + " " + wordList[1];
+            String roomId = wordList[2];
+            int capacity = Integer.parseInt(wordList[3]);
+
+            roomManager.loadRoom(roomNum, roomId, capacity);
+        }
+    }
+
+    /**
+     * Saves created room/rooms to rooms.txt file.
+     */
+    public void RoomWriter(){
+        ArrayList<String> IDList = roomManager.getAllRoomID();
+        try {
+            FileOutputStream out = context.openFileOutput("Rooms", Context.MODE_PRIVATE);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+            for (String id: IDList){
+                String line = roomManager.generateFormattedRoomInfo(id);
+                line += "\n";
+                writer.write(line);
+            }
+            writer.close();
+        } catch (FileNotFoundException e){
+            System.out.println("Rooms File Not Found.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * print Message as a toast
+     * @param context AppCompatActivity
+     * @param msg String
+     */
+    private void printMessage(AppCompatActivity context, String msg) {
+        Toast.makeText(context,
+                msg,
+                Toast.LENGTH_LONG).show();
     }
 
     /**

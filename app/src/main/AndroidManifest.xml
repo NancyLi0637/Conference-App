@@ -9,10 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".speakerSystem.SelectSpeakerActivity"></activity>
+        <activity
+            android:name=".roomSystem.SelectRoomActivity"
+            android:launchMode="singleTask"></activity>
         <activity
             android:name=".eventSystem.CreateEventActivity"
-            android:launchMode="singleTask">
-        </activity>
+            android:launchMode="singleTask" />
         <activity android:name=".utility.CleanArchActivity" />
         <activity
             android:name=".eventSystem.AttendeeMyEventContentActivity"
@@ -75,13 +78,11 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

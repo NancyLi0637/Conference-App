@@ -2,8 +2,8 @@ package com.example.a207_demo.controller;
 
 import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.eventSystem.EventManager;
+import com.example.a207_demo.roomSystem.Room;
 import com.example.a207_demo.use_cases.*;
-import com.example.a207_demo.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +70,7 @@ public class EventsController {
      * @return ArrayList<String>, which is a list of all events for this Attendee
      */
     public ArrayList<String> getALLAttendeeEvents(String userID) {
-        return this.eventManager.getAllEventForTheAttendee(userID);
+        return this.eventManager.getEventsFromAttendee(userID);
     }
 
     /**
@@ -80,7 +80,7 @@ public class EventsController {
      * @return ArrayList<String>, which is a list of all events for this Speaker
      */
     public ArrayList<String> getAllEventsForTheSpeaker(String userID) {
-        return this.eventManager.getAllEventForTheSpeaker(userID);
+        return this.eventManager.getEventsFromSpeaker(userID);
     }
 
     /**

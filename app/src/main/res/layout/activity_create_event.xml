@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:text="@string/createEvent"
         android:layout_gravity="center_horizontal"
-        android:textSize="50dp"
+        android:textSize="50sp"
         android:layout_marginTop="60dp"/>
 
     <LinearLayout
@@ -90,11 +90,45 @@
        android:onClick="onCheckBoxClicked"/>
 
     <Button
-        android:id="@+id/btn_to_room"
-        android:layout_width="150dp"
+        android:id="@+id/select_room"
+        android:layout_width="137dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:text="@string/next" />
+        android:layout_marginTop="20dp"
+        android:text="@string/selectRoom" />
+
+    <Button
+        android:id="@+id/select_speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/selectSpeaker"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:id="@+id/create_back_event"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:layout_weight="1"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="10dp"/>
+
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/finish"
+            android:layout_weight="1"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

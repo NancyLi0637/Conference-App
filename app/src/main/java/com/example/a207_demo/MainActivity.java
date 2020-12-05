@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
+import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
 import com.example.a207_demo.gateway.FileReadWriter;
@@ -24,6 +25,7 @@ import com.example.a207_demo.utility.CleanArchActivity;
 public class MainActivity extends CleanArchActivity implements View.OnClickListener {
 
     private FileReadWriter fileReadWriter;
+    private EventManager eventManager;
     private UserManager userManager;
     private static String ID;
     private static String type;
@@ -48,6 +50,7 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
     public void init() {
         fileReadWriter = getFileReadWriter();
         userManager = getUserManager();
+
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
 
@@ -67,7 +70,7 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
             case R.id.btn_signUp:
                 fileReadWriter.reset();
                 intent = new Intent(MainActivity.this, SignUpActivity.class);
-                //intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
+                //intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login:

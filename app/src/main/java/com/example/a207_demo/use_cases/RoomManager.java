@@ -1,7 +1,7 @@
 package com.example.a207_demo.use_cases;
 
 
-import com.example.a207_demo.entities.Room;
+import com.example.a207_demo.roomSystem.Room;
 import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.eventSystem.EventManager;
 
@@ -28,6 +28,19 @@ public class RoomManager implements Serializable {
         rooms = new ArrayList<>();
         events = new ArrayList<>();
         eventsMap = new HashMap<>();
+    }
+
+    /**
+     * Reset the room list.
+     */
+    public void reset(){this.rooms = new ArrayList<>();}
+
+    /**
+     * Return all rooms
+     * @return List of rooms
+     */
+    public List<Room> getAllRoom(){
+        return this.rooms;
     }
 
     /**
@@ -164,10 +177,10 @@ public class RoomManager implements Serializable {
     public ArrayList<String> getAvailableRoom(String time, EventManager eventManager, String duration) {
         ArrayList<String> roomList = new ArrayList<>();
 
-        // First step, add all room numbers to the roomList
-        for (Room room : rooms) {
-            roomList.add(changeIdTONum(room.getRoomID()));
-        }
+//        // First step, add all room numbers to the roomList
+//        for (Room room : rooms) {
+//            roomList.add(changeIdTONum(room.getRoomID()));
+//        }
 
         // Next step, remove unavailable room numbers from the roomList
         for (String roomID : eventsMap.keySet()) {
@@ -177,13 +190,21 @@ public class RoomManager implements Serializable {
                 Event event = eventManager.getEventFromID(eventID);
 
                 // if the time conflicts, then the room is not available
-                if (!(Integer.parseInt(event.getStartTime())<= Integer.parseInt(time)) &&
-                        (Integer.parseInt(time) <= Integer.parseInt(event.getStartTime() +Integer.parseInt(duration)))) {
-                    roomList.remove(changeIdTONum(roomID));
+                if (!event.timeConflict(time, duration)) {
+                    roomList.add(changeIdTONum(roomID));
                 }
             }
         }
         return roomList;
+    }
+
+    public String generateFormattedRoomInfo(String roomId){
+        for(Room room : rooms){
+            if(room.getRoomID().equals(roomId)){
+                return room.getRoomNum() + " " + roomId + " " + room.getCapacity();
+            }
+        }
+        return null;
     }
 
 

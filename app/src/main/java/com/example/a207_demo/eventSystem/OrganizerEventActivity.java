@@ -25,7 +25,6 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
 
     private List<Event> eventList = new ArrayList<>();
     private OrganizerEventAdapter eventAdapter;
-    private EventManager eventManager;
 
     /**
      * onCreate
@@ -46,7 +45,6 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
      */
     public void init() {
         super.init(this, R.id.nav_view_organizer, R.id.nav_allevents_organizer);
-        eventManager = getEventManager();
 
         Button addEvent = findViewById(R.id.btn_addEvent);
         addEvent.setOnClickListener(this);
@@ -80,7 +78,7 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
      */
     protected void initEvents() {
         super.initEvents();
-        eventList = eventManager.getAllEvent();
+        eventList = getEventManager().getAllEvent();
 
         //Todo: implement image later
         for (Event event : eventList) {
@@ -107,26 +105,13 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         }
     }
 
-    /**
-     * refresh Events, update the screen to show events
-     */
-    private void refreshEvents() {
-        new Thread(new Runnable() {
+    private void refreshEvents(){
+        runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        createEventMenu();
-                        eventAdapter.notifyDataSetChanged();
-                    }
-                });
+                createEventMenu();
+                eventAdapter.notifyDataSetChanged();
             }
-        }).start();
+        });
     }
 }

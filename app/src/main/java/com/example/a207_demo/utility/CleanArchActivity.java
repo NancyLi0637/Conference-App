@@ -6,6 +6,7 @@ import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.use_cases.OrganizerManager;
+import com.example.a207_demo.use_cases.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
 import com.example.a207_demo.use_cases.UserManager;
 
@@ -19,8 +20,9 @@ public class CleanArchActivity extends AppCompatActivity {
     private final AttendeeManager attendeeManager = new AttendeeManager();
     private final OrganizerManager organizerManager = new OrganizerManager();
     private final SpeakerManager speakerManager = new SpeakerManager();
+    private final RoomManager roomManager = new RoomManager();
     private final FileReadWriter fileReadWriter = new FileReadWriter(this, eventManager,
-            userManager, attendeeManager, organizerManager, speakerManager);
+            userManager, attendeeManager, organizerManager, speakerManager, roomManager);
 
     /**
      * Get EventManager of the whole system
@@ -55,11 +57,19 @@ public class CleanArchActivity extends AppCompatActivity {
     public SpeakerManager getSpeakerManager() {return this.speakerManager; }
 
     /**
+     * Get RoomManager of the whole system
+     * @return RoomManager
+     */
+    public RoomManager getRoomManager() {return this.roomManager;}
+
+    /**
      * Get FileReadWriter of the whole system
      * @return FileReadWriter
      */
     public FileReadWriter getFileReadWriter() {
         return this.fileReadWriter;
     }
+
+
 
 }

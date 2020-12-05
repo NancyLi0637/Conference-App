@@ -21,11 +21,6 @@
     <string name="addEvent">Add Event</string>
     <string name="cancelEnrolment">Cancel Enrolment</string>
     <string name="createEvent">Create Event</string>
-    <string-array name="event_types">
-        <item>TALK</item>
-        <item>DISCUSSION</item>
-        <item>PARTY</item>
-    </string-array>
     <string name="eventTitle">Event Title</string>
     <string name="startTime">Start Time</string>
     <string name="duration">Duration in Hours</string>
@@ -33,9 +28,18 @@
     <string name="time">yyyy/mm/dd/hh</string>
     <string name="next">Next</string>
     <string name="eventType">Event Type</string>
-
     <string name="username">Nancie Lee</string>
+    <string name="selectRoom">Select ROOM</string>
+    <string name="back"> Back</string>
+    <string name="finish">Finish</string>
+    <string name="selectSpeaker">Select SPEAKER</string>
+
     <string name="useremail">nancielee@gmail.com</string>
+    <string-array name="event_types">
+        <item>TALK</item>
+        <item>DISCUSSION</item>
+        <item>PARTY</item>
+    </string-array>
     <string-array name="user_types">
         <item>ORGANIZER</item>
         <item>ATTENDEE</item>

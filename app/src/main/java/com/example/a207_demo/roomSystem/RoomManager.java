@@ -1,4 +1,4 @@
-package com.example.a207_demo.use_cases;
+package com.example.a207_demo.roomSystem;
 
 
 import com.example.a207_demo.roomSystem.Room;
@@ -34,14 +34,6 @@ public class RoomManager implements Serializable {
      * Reset the room list.
      */
     public void reset(){this.rooms = new ArrayList<>();}
-
-    /**
-     * Return all rooms
-     * @return List of rooms
-     */
-    public List<Room> getAllRoom(){
-        return this.rooms;
-    }
 
     /**
      * Creates a new room
@@ -174,13 +166,13 @@ public class RoomManager implements Serializable {
      * @param eventManager an EventManager object
      * @return an ArrayList<String> of room numbers that are available for the given time
      */
-    public ArrayList<String> getAvailableRoom(String time, EventManager eventManager, String duration) {
+    public ArrayList<String> getAvailableRoom(String time, String duration, EventManager eventManager) {
         ArrayList<String> roomList = new ArrayList<>();
 
-//        // First step, add all room numbers to the roomList
-//        for (Room room : rooms) {
-//            roomList.add(changeIdTONum(room.getRoomID()));
-//        }
+        // First step, add all room numbers to the roomList
+        for (Room room : rooms) {
+            roomList.add(changeIdTONum(room.getRoomID()));
+        }
 
         // Next step, remove unavailable room numbers from the roomList
         for (String roomID : eventsMap.keySet()) {
@@ -191,7 +183,7 @@ public class RoomManager implements Serializable {
 
                 // if the time conflicts, then the room is not available
                 if (!event.timeConflict(time, duration)) {
-                    roomList.add(changeIdTONum(roomID));
+                    roomList.remove(changeIdTONum(roomID));
                 }
             }
         }

@@ -14,7 +14,7 @@ public class EventFactory implements Serializable {
      * create an event according to the type
      *
      * @param title String title
-     * @param roomID String roomID
+     * @param roomName String roomID
      * @param speakerID ArrayList<String> speakerID
      * @param startTime String startTime
      * @param duration String duration
@@ -22,15 +22,15 @@ public class EventFactory implements Serializable {
      * @param type String type
      * @return Event that is just created
      */
-    public Event createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
+    public Event createEvent(String title, String roomName, ArrayList<String> speakerID, String startTime, String duration,
                              String restriction, String type) {
         switch (type) {
             case "TALK":
-                return new Talk(title, roomID, speakerID, startTime, duration, restriction);
+                return new Talk(title, roomName, speakerID, startTime, duration, restriction);
             case "DISCUSSION":
-                return new Discussion(title, roomID, startTime, speakerID, duration, restriction);
+                return new Discussion(title, roomName, startTime, speakerID, duration, restriction);
             case "PARTY":
-                return new Party(title, roomID, startTime, duration, restriction);
+                return new Party(title, roomName, startTime, duration, restriction);
         }
         return null;
     }

@@ -6,14 +6,14 @@ import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.use_cases.OrganizerManager;
-import com.example.a207_demo.use_cases.RoomManager;
+import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
 import com.example.a207_demo.use_cases.UserManager;
 
 /**
  * The central Activity: Superclass of child activities
  */
-public class CleanArchActivity extends AppCompatActivity {
+public class CleanArchActivity extends AppCompatActivity{
 
     private final EventManager eventManager = new EventManager();
     private final UserManager userManager = new UserManager();

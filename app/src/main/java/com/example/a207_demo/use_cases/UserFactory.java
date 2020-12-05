@@ -2,11 +2,13 @@ package com.example.a207_demo.use_cases;
 
 import com.example.a207_demo.utility.CleanArchActivity;
 
+import java.io.Serializable;
+
 /**
  * A Factory class to create a new user account according to the type of the user. As a result, the
  * newly created user will be stored in managers.
  */
-public class UserFactory {
+public class UserFactory implements Serializable {
     //    private final AttendeeManager attendeeManager = new AttendeeManager();
     private final AttendeeManager attendeeManager;
 

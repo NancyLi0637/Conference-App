@@ -1,4 +1,6 @@
-package com.example.a207_demo.entities;
+package com.example.a207_demo.speakerSystem;
+
+import com.example.a207_demo.entities.User;
 
 import java.io.Serializable;
 import java.util.UUID;

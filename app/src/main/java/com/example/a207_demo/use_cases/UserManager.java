@@ -2,13 +2,14 @@ package com.example.a207_demo.use_cases;
 
 import com.example.a207_demo.entities.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The use_cases.UserManager class, this is the use case class to manage the entities.User for this conference.
  */
-public class UserManager {
+public class UserManager implements Serializable {
     public static List<User> users = new ArrayList<>();
 
     /**
@@ -190,8 +191,8 @@ public class UserManager {
         return null;
     }
 
-    public List<String> getUserIdsFromName(List<String> userNames){
-        List<String> ids = new ArrayList<>();
+    public ArrayList<String> getUserIdsFromName(List<String> userNames){
+        ArrayList<String> ids = new ArrayList<>();
         for(String userName : userNames){
             ids.add(getUserIdFromName(userName));
         }

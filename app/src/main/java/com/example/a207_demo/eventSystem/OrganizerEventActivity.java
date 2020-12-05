@@ -14,6 +14,7 @@ import com.example.a207_demo.entities.Party;
 import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.utility.ActivityCollector;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,9 +22,11 @@ import java.util.List;
 /**
  * OrganizerEventActivity
  */
-public class OrganizerEventActivity extends EventActivity implements View.OnClickListener {
+public class OrganizerEventActivity extends EventActivity implements View.OnClickListener, Serializable {
 
     private List<Event> eventList = new ArrayList<>();
+    private FileReadWriter fileReadWriter;
+    private EventManager eventManager;
     private OrganizerEventAdapter eventAdapter;
 
     /**
@@ -44,6 +47,9 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
      * init
      */
     public void init() {
+        fileReadWriter = getFileReadWriter();
+        eventManager = getEventManager();
+
         super.init(this, R.id.nav_view_organizer, R.id.nav_allevents_organizer);
 
         Button addEvent = findViewById(R.id.btn_addEvent);
@@ -59,6 +65,8 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(OrganizerEventActivity.this, CreateEventActivity.class);
+        intent.putExtra("fileReadWriter", fileReadWriter);
+        intent.putExtra("eventManager", eventManager);
         startActivityForResult(intent, 1);
     }
 
@@ -77,8 +85,10 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
      * initEvents
      */
     protected void initEvents() {
-        super.initEvents();
-        eventList = getEventManager().getAllEvent();
+        //super.initEvents();
+        fileReadWriter.reset();
+        fileReadWriter.EventReader();
+        eventList = eventManager.getAllEvent();
 
         //Todo: implement image later
         for (Event event : eventList) {

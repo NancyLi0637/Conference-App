@@ -24,12 +24,12 @@ public class EventActivity extends SetUpActivity {
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    /**
-     * initEvents
-     */
-    protected void initEvents() {
-        fileReadWriter = getFileReadWriter();
-        fileReadWriter.reset();
-        fileReadWriter.EventReader();
-    }
+//    /**
+//     * initEvents
+//     */
+//    protected void initEvents() {
+//        fileReadWriter = getFileReadWriter();
+//        fileReadWriter.reset();
+//        fileReadWriter.EventReader();
+//    }
 }

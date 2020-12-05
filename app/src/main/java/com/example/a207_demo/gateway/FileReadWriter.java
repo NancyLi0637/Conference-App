@@ -5,12 +5,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.a207_demo.entities.Organizer;
-import com.example.a207_demo.eventSystem.Event;
+import com.example.a207_demo.speakerSystem.SelectSpeakerAdapter;
 import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.use_cases.OrganizerManager;
-import com.example.a207_demo.use_cases.RoomManager;
+import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
 import com.example.a207_demo.use_cases.UserManager;
 
@@ -23,9 +22,9 @@ import java.util.List;
 /**
  * Read from and write to text files
  */
-public class FileReadWriter {
+public class FileReadWriter implements Serializable {
 
-    private final EventManager eventManager;
+    private EventManager eventManager;
     private AttendeeManager attendeeManager;
     private OrganizerManager organizerManager;
     private SpeakerManager speakerManager;
@@ -67,6 +66,9 @@ public class FileReadWriter {
         this.speakerManager.reset();
         this.roomManager.reset();
     }
+
+    //Todo: to be removed
+    public EventManager getEventManager(){return this.eventManager;}
 
     /**
      * Method reads User.txt file and loads in any Users stored in said file. Each line in the file represent one user
@@ -122,7 +124,7 @@ public class FileReadWriter {
     public void UserWriter() {
         List<String> userIDs = userManager.UsersIdsGetter();
         try {
-            FileOutputStream out = context.openFileOutput("Users", Context.MODE_APPEND);
+            FileOutputStream out = context.openFileOutput("Users", Context.MODE_PRIVATE);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String userID : userIDs) {
                 String line = userManager.generateFormattedUserInfo(userID);
@@ -148,7 +150,7 @@ public class FileReadWriter {
     public void EventReader() {
         ArrayList<String> lines = new ArrayList<>();
         try {
-            FileInputStream in = context.openFileInput("Events");
+            FileInputStream in = context.openFileInput("Events.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -161,13 +163,25 @@ public class FileReadWriter {
         }
 
         for (String line : lines) {
+            ArrayList<String> speakerId = new ArrayList<>();
+            //find speakerId list
+            if(line.contains("{")){
+                //Todo: attendee also in list later
+                int start = line.indexOf("{");
+                int end = line.indexOf("}");
+                line = line.substring(0, start) + line.substring(end+1);
+                String speakers = line.substring(start+1, end);
+                speakerId = processSpeakers(speakers);
+            }
             String[] wordList = line.split(" ");
             String type = wordList[0];
             String title = wordList[1].replace("_", " ");
             String eventId = wordList[2];
-            String roomId = wordList[3];
-            //Todo: use String[] instead?
-            ArrayList<String> speakerId = new ArrayList<>(Arrays.asList(wordList[4]));
+            String roomName = wordList[3] + " " + wordList[4];
+
+            System.out.println("HIIIIIIIIIII");
+            System.out.println(speakerId);
+
             String startTime = wordList[5];
             String duration = wordList[6];
             String restriction = wordList[7];
@@ -179,8 +193,27 @@ public class FileReadWriter {
 //                }
 //            }
 //            eventsController.getRoomManager().addEventToRoom(wordList.get(4), wordList.get(1));
-            eventManager.loadEvent(type, title, eventId, roomId, speakerId, startTime, duration, restriction);
+            eventManager.loadEvent(type, title, eventId, roomName, speakerId, startTime, duration, restriction);
         }
+    }
+
+    private ArrayList<String> processSpeakers(String speakerId){
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        if(speakerId.equals("null")){
+            return arrayList;
+        }else if(speakerId.contains(", ")){
+            String[] wordList = speakerId.split(", ");
+            System.out.println("THIRDDDD");
+            for(String word: wordList){
+                arrayList.add(word);
+                System.out.println(arrayList);
+            }
+        }else{
+            arrayList.add(speakerId);
+        }
+
+        return arrayList;
     }
 
 
@@ -190,10 +223,11 @@ public class FileReadWriter {
     public void EventWriter() {
         List<String> eventIds = eventManager.getAllIDAndName().get(0);
         try {
-            FileOutputStream out = context.openFileOutput("Events", Context.MODE_APPEND);
+            FileOutputStream out = context.openFileOutput("Events.txt", Context.MODE_APPEND);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String eventId : eventIds) {
                 String line = eventManager.generateFormattedEventInfo(eventId);
+                System.out.println("HIIIIIII 1" + line);
 //                for (String attendee : eventsController.getEventManager().getAttendeesFromEvent(ID)) {
 //                    line += " " + attendee;
 //                }
@@ -243,7 +277,7 @@ public class FileReadWriter {
     public void RoomWriter(){
         ArrayList<String> IDList = roomManager.getAllRoomID();
         try {
-            FileOutputStream out = context.openFileOutput("Rooms", Context.MODE_PRIVATE);
+            FileOutputStream out = context.openFileOutput("Rooms", Context.MODE_APPEND);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String id: IDList){
                 String line = roomManager.generateFormattedRoomInfo(id);
@@ -288,15 +322,15 @@ public class FileReadWriter {
 //        return userManager;
 //    }
 
-    public void connectReaders(AppCompatActivity context) {
+    public void connectReaders() {
         UserReader();
-        //RoomReader();
-        //EventReader();
+        RoomReader();
+        EventReader();
     }
 
-    public void connectWriters(AppCompatActivity context) {
+    public void connectWriters() {
         UserWriter();
-        //RoomWriter();
+        RoomWriter();
         //EventWriter();
     }
 }

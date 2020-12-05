@@ -2,7 +2,7 @@ package com.example.a207_demo.eventSystem;
 
 import com.example.a207_demo.roomSystem.Room;
 import com.example.a207_demo.use_cases.AttendeeManager;
-import com.example.a207_demo.use_cases.RoomManager;
+import com.example.a207_demo.roomSystem.RoomManager;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -80,12 +80,12 @@ public class EventManager implements Serializable{
      * Creates a new event
      *
      * @param title title of the event
-     * @param roomID roomID of the event
+     * @param roomName roomID of the event
      * @param speakerID speakerID of the event
      * @param  startTime startTime of the event
      * @return the newly created event or null
      */
-    public boolean createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
+    public boolean createEvent(String title, String roomName, ArrayList<String> speakerID, String startTime, String duration,
                              String restriction, String type) {
 //        for (Event event : this.events) {
 //            for (String speaker: event.getSpeakers()) {
@@ -97,13 +97,15 @@ public class EventManager implements Serializable{
 //            }
 //        }
 
+        System.out.println("WTFFFFF" + startTime);
         for(Event event : this.events){
+            System.out.println("THISSSS" + event.getStartTime());
             if(event.timeConflict(startTime, duration)){
                 return false;
             }
         }
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, restriction, type);
+        Event newEvent = eventFactory.createEvent(title, roomName, speakerID, startTime,duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
@@ -115,7 +117,7 @@ public class EventManager implements Serializable{
      * Create a new event (full version)
      *
      * @param title title
-     * @param roomID roomID
+     * @param roomName roomID
      * @param speakerID speakerID
      * @param startTime startTime
      * @param eventID eventID
@@ -123,11 +125,11 @@ public class EventManager implements Serializable{
      * @param roomManager roomManager
      * @return  the newly created event
      */
-    public Event loadEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String eventID,
+    public Event loadEvent(String title, String roomName, ArrayList<String> speakerID, String startTime, String eventID,
                            String duration, String restriction, String type, ArrayList<String> attendeeID,
                            RoomManager roomManager, AttendeeManager attendeeManager) {
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, restriction, type);
+        Event newEvent = eventFactory.createEvent(title, roomName, speakerID, startTime,duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
@@ -139,10 +141,10 @@ public class EventManager implements Serializable{
     }
 
     //Todo: eventId?
-    public void loadEvent(String type, String title, String eventID, String roomID, ArrayList<String> speakerID,
+    public void loadEvent(String type, String title, String eventID, String roomName, ArrayList<String> speakerID,
                           String startTime, String duration, String restriction) {
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, restriction, type);
+        Event newEvent = eventFactory.createEvent(title, roomName, speakerID, startTime,duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
@@ -181,7 +183,7 @@ public class EventManager implements Serializable{
             if (!(restriction.equals("VIP-ONLY") && !userType.equals("VIPUser"))) {
                 //Todo: update room in room manager
                 //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
-                Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
+                Room room = roomManager.getRoomBasedOnItsID(event.getRoomName());
                 if (room.getCurrentNum() < room.getCapacity()) {
                     if (event.addAttendee(userID, events)) {
                         room.increaseCurrentNum();
@@ -224,8 +226,8 @@ public class EventManager implements Serializable{
     public boolean removeAttendeeFromEvent(String userID, String eventID, RoomManager roomManager) {
         Event event = getEventFromID(eventID);
         if (event != null) {
-            Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
-            room.decreaseCurrentNum();
+            //Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
+            //room.decreaseCurrentNum();
             //Todo: check remove success first
             return event.removeAttendee(userID);
         }
@@ -447,9 +449,10 @@ public class EventManager implements Serializable{
     public String generateFormattedEventInfo(String eventID){
         for (Event event : events){
             if (event.getEventID().equals(eventID)){
+                System.out.println("HIIIIIIII 2" + event.getSpeakers());
                 return event.getType() + " " + event.getTitle().replace(" ", "_")
-                        + " " + eventID + " " + event.getRoomID() + " " + event.getSpeakers()
-                        + " " + event.getStartTime() + " " + event.getDuration() + " " + event.getRestriction();
+                        + " " + eventID + " " + event.getRoomName() + " {" + event.getSpeakers() + "} "
+                        + event.getStartTime() + " " + event.getDuration() + " " + event.getRestriction();
             }
         }
         return "NULL";

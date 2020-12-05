@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.gateway.FileReadWriter;
@@ -20,9 +23,11 @@ import java.util.List;
 
 public class SelectRoomActivity extends CleanArchActivity implements View.OnClickListener{
 
-    private List<Room> roomList = new ArrayList<>();
-    private FileReadWriter fileReadWriter;
+    private List<String> roomList = new ArrayList<>();
+    //private FileReadWriter fileReadWriter;
     private Intent intent;
+    private boolean selected;
+    private String roomNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +40,14 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
     }
 
     private void init(){
-        fileReadWriter = getFileReadWriter();
+        //fileReadWriter = getFileReadWriter();
         intent = new Intent();
 
         Button back = findViewById(R.id.room_selected_back);
-        Button next = findViewById(R.id.room_selected_next);
+        Button finish = findViewById(R.id.room_selected_finish);
 
         back.setOnClickListener(this);
-        next.setOnClickListener(this);
+        finish.setOnClickListener(this);
 
         createRoomMenu();
     }
@@ -50,26 +55,27 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
     @Override
     public void onClick(View v){
         switch (v.getId()){
+            case R.id.room_selected_finish:
+                setUpData();
+                if(!selected){
+                    Toast.makeText(this, "You need to select a room!", Toast.LENGTH_LONG).show();
+                }else{
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+                break;
             case R.id.room_selected_back:
                 setResult(RESULT_CANCELED, intent);
                 finish();
-            case R.id.room_selected_next:
-                intent = new Intent(SelectRoomActivity.this, SelectSpeakerActivity.class);
-                setUpData();
-                startActivity(intent);
+                break;
         }
     }
 
     private void setUpData(){
-        Intent lastIntent = getIntent();
-        intent.putExtra("eventType", lastIntent.getStringExtra("eventType"));
-        intent.putExtra("eventTitle", lastIntent.getStringExtra("eventTitle"));
-        intent.putExtra("eventTime", lastIntent.getStringExtra("eventTime"));
-        intent.putExtra("eventDuration", lastIntent.getStringExtra("eventDuration"));
-        intent.putExtra("eventRestriction",lastIntent.getStringExtra("eventRestriction"));
-
-        RadioButton room = findViewById(R.id.room_selected);
-        String roomNum = room.getText().toString();
+        RadioButton select = findViewById(R.id.room_selected);
+        TextView room = findViewById(R.id.room_num);
+        selected = select.isChecked();
+        roomNum = room.getText().toString();
         intent.putExtra("roomNum", roomNum);
     }
 
@@ -85,21 +91,12 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
 
     private void initRooms(){
         //Todo: clean up after implementing Room System
-        fileReadWriter.reset();
-        fileReadWriter.RoomReader();
+        getFileReadWriter().reset();
+        getFileReadWriter().RoomReader();
 
-        roomList = getRoomManager().getAllRoom();
-//        for(int i = 0; i < 3; i++){
-//            Room room1 = new Room("BF201", 5);
-//            roomList.add(room1);
-//            Room room2 = new Room("BF201", 5);
-//            roomList.add(room2);
-//            Room room3 = new Room("BF201", 5);
-//            roomList.add(room3);
-//            Room room4 = new Room("BF201", 5);
-//            roomList.add(room4);
-//            Room room5 = new Room("BF201", 5);
-//            roomList.add(room5);
-//        }
+        Intent lastIntent = getIntent();
+        String time = lastIntent.getStringExtra("eventTime");
+        String duration = lastIntent.getStringExtra("eventDuration");
+        roomList = getRoomManager().getAvailableRoom(time, duration, getEventManager());
     }
 }

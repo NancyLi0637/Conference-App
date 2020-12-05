@@ -10,12 +10,13 @@ import androidx.annotation.NonNull;
 
 import com.example.a207_demo.R;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * OrganizerEventAdapter
  */
-public class OrganizerEventAdapter extends EventAdapter {
+public class OrganizerEventAdapter extends EventAdapter implements Serializable {
     private Context context;
 
     /**

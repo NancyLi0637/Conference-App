@@ -14,12 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Abstract class EventAdapter
  */
-public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHEvent> {
+public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHEvent> implements Serializable {
     private Context context;
     private List<Event> eventList;
 
@@ -54,7 +55,7 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
                 Event event = eventList.get(position);
                 Intent intent = new Intent(context, nextClass);
                 intent.putExtra("event_title", event.getTitle());
-                intent.putExtra("event_room", event.getRoomID());
+                intent.putExtra("event_room", event.getRoomName());
                 intent.putExtra("event_time", event.getStartTime());
                 intent.putExtra("event_duration", event.getDuration());
                 intent.putExtra("event_image_id", event.getImageId());

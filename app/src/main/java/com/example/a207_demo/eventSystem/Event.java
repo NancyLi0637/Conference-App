@@ -12,7 +12,7 @@ public abstract class Event implements Serializable {
 
     private final String title;
     private final String eventID;
-    private final String roomID;
+    private final String roomName;
     private ArrayList<String> userIDs;
     private String startTime;
     private String duration;
@@ -25,15 +25,15 @@ public abstract class Event implements Serializable {
      * The constructor No.1 for an event
      *
      * @param title       event title
-     * @param roomID      which room the event will be held in
+     * @param roomName      which room the event will be held in
      * @param startTime   event starting time
      * @param duration    duration of the event
      * @param restriction event restriction
      */
-    public Event(String title, String roomID, String startTime, String duration, String restriction) {
+    public Event(String title, String roomName, String startTime, String duration, String restriction) {
         this.title = title;
         this.eventID = UUID.randomUUID().toString().split("-")[0];
-        this.roomID = roomID;
+        this.roomName = roomName;
         this.userIDs = new ArrayList<>();
         this.startTime = startTime;
         this.duration = duration;
@@ -107,8 +107,8 @@ public abstract class Event implements Serializable {
      *
      * @return the roomID
      */
-    public String getRoomID() {
-        return this.roomID;
+    public String getRoomName() {
+        return this.roomName;
     }
 
     /**
@@ -173,6 +173,8 @@ public abstract class Event implements Serializable {
     }
 
     public boolean timeConflict(String startTime, String duration){
+        System.out.println("HELLLOO" + startTime);
+        System.out.println("YESSSSS" + this.startTime);
         int thisTime = convertStartTimeToNum(this.startTime);
         int checkTime = convertStartTimeToNum(startTime);
         int thisDuration = Integer.parseInt(this.duration);

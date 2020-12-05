@@ -3,6 +3,7 @@ package com.example.a207_demo.controller;
 import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.roomSystem.Room;
+import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.*;
 
 import java.util.ArrayList;
@@ -135,7 +136,7 @@ public class EventsController {
     public ArrayList<String> getEventInfo(String eventID) {
         ArrayList<String> info = new ArrayList<>();
         Event event = this.eventManager.getEventFromID(eventID);
-        Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
+        Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomName());
         info.add(event.getTitle());
         info.add(event.getStartTime());
 //        for (String speaker : event.getSpeakers()) {
@@ -153,9 +154,9 @@ public class EventsController {
      * @param time time String
      * @return a list of String which is the available speakers
      */
-    public ArrayList<String> getAllAvailableSpeaker(String time, String duration) {
-        return this.speakerManager.getAllAvailableSpeaker(time, eventManager, duration);
-    }
+//    public ArrayList<String> getAllAvailableSpeaker(String time, String duration) {
+//        return this.speakerManager.getAllAvailableSpeaker(time, eventManager, duration);
+//    }
 
     /**
      * Return a list of Attendees from an event with the given ID
@@ -186,6 +187,6 @@ public class EventsController {
         for (String attendee : attendeeList) {
             eventManager.removeAttendeeFromEvent(attendee, eventID, roomManager);
         }
-        return roomManager.getRoomBasedOnItsID(currentEvent.getRoomID()).getCurrentNum() == 0;
+        return roomManager.getRoomBasedOnItsID(currentEvent.getRoomName()).getCurrentNum() == 0;
     }
 }

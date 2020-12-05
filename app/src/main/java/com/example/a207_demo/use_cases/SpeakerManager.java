@@ -1,6 +1,6 @@
 package com.example.a207_demo.use_cases;
 
-import com.example.a207_demo.entities.Speaker;
+import com.example.a207_demo.speakerSystem.Speaker;
 import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.eventSystem.EventManager;
 
@@ -73,7 +73,7 @@ public class SpeakerManager extends UserManager implements Serializable {
      * @param eventManager an EventManager
      * @return ArrayList<String> of all Available Speaker
      */
-    public ArrayList<String> getAllAvailableSpeaker(String time, EventManager eventManager, String duration) {
+    public ArrayList<String> getAllAvailableSpeaker(String time, String duration, EventManager eventManager) {
         ArrayList<String> availableSpeaker = new ArrayList<>();
         List<Event> events = eventManager.getAllEvent();
         for (Speaker speaker : speakers) {

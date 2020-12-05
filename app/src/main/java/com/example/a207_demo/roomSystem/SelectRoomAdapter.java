@@ -12,14 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a207_demo.R;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class SelectRoomAdapter extends RecyclerView.Adapter<SelectRoomAdapter.VHSelectRoom> {
+public class SelectRoomAdapter extends RecyclerView.Adapter<SelectRoomAdapter.VHSelectRoom> implements Serializable {
     private Context context;
-    private List<Room> roomList;
+    private List<String> roomList;
     private int lastSelectedRoom = -1;
 
-    public SelectRoomAdapter(Context context, List<Room> roomList){
+    public SelectRoomAdapter(Context context, List<String> roomList){
         this.context = context;
         this.roomList = roomList;
     }
@@ -27,15 +28,15 @@ public class SelectRoomAdapter extends RecyclerView.Adapter<SelectRoomAdapter.VH
     @NonNull
     @Override
     public VHSelectRoom onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_room, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.item_select_room, parent, false);
         VHSelectRoom holder = new VHSelectRoom(v);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull VHSelectRoom holder, int position) {
-        Room room = roomList.get(position);
-        holder.roomNum.setText(room.getRoomNum());
+        String room = roomList.get(position);
+        holder.roomNum.setText(room);
         holder.selectedRoom.setChecked(lastSelectedRoom == position);
     }
 

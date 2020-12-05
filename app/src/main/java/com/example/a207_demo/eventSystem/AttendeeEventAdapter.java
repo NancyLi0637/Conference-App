@@ -17,11 +17,22 @@ import java.util.List;
 public class AttendeeEventAdapter extends EventAdapter {
     private Context context;
 
+    /**
+     * AttendeeEventAdapter
+     * @param context Context
+     * @param eventList List<Event> eventList
+     */
     public AttendeeEventAdapter(Context context, List<Event> eventList){
         super(context, eventList);
         this.context = context;
     }
 
+    /**
+     * onCreateViewHolder
+     * @param parent parent ViewGroup @NonNull ViewGroup parent
+     * @param viewType viewType
+     * @return VHEvent
+     */
     @NonNull
     @Override
     public VHEvent onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

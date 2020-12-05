@@ -10,11 +10,18 @@ import com.example.a207_demo.utility.ActivityCollector;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class SpeakerMyEventActivity extends EventActivity {
 
     //Todo: generate event list by use case
     private List<Event> eventList = new ArrayList<>();
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,11 +32,17 @@ public class SpeakerMyEventActivity extends EventActivity {
         ActivityCollector.addActivity(this);
     }
 
+    /**
+     * init
+     */
     public void init(){
         super.init(this, R.id.nav_view_speaker, R.id.nav_myEvents_speaker);
         createEventMenu();
     }
 
+    /**
+     * createEventMenu
+     */
     protected void createEventMenu(){
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         super.createEventMenu(recyclerView);
@@ -37,6 +50,9 @@ public class SpeakerMyEventActivity extends EventActivity {
         recyclerView.setAdapter(speakerEventAdapter);
     }
 
+    /**
+     * initEvents
+     */
     protected void initEvents(){
 //        //Todo: generate Event list of this speaker
 //        for(int i = 0; i < 2; i++) {

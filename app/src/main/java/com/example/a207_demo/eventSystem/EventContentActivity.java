@@ -17,6 +17,9 @@ import com.example.a207_demo.R;
 import com.example.a207_demo.utility.CleanArchActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
+/**
+ * EventContentActivity
+ */
 public abstract class EventContentActivity extends CleanArchActivity implements View.OnClickListener{
     private EventManager eventManager;
 
@@ -41,6 +44,9 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
         }
     }
 
+    /**
+     * setUpData
+     */
     protected void setUpData(){
         Intent intent = getIntent();
         String eventTitle = intent.getStringExtra("event_title");
@@ -54,6 +60,12 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
         fillContent(eventTitle, eventContent, eventImageId);
     }
 
+    /**
+     * fillContent
+     * @param eventTitle eventTitle
+     * @param eventContent eventContent
+     * @param eventImageId eventImageId
+     */
     protected void fillContent(String eventTitle, String eventContent, int eventImageId){
         ImageView eventImageView = findViewById(R.id.event_image_view);
         TextView eventInfo = findViewById(R.id.event_info);

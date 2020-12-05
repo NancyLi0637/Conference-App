@@ -19,21 +19,27 @@ public class AttendeeMyEventActivity extends AttendeeEventActivity {
      * Set up the activity.
      */
     @Override
-    public void init(){
+    public void init() {
         super.init(this, R.id.nav_view_attendee, R.id.nav_myEvents);
         createEventMenu();
     }
 
+    /**
+     * create Event Menu
+     */
     @Override
-    protected void createEventMenu(){
+    protected void createEventMenu() {
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         super.createEventMenu(recyclerView);
         AttendeeMyEventAdapter attendeeMyEventAdapter = new AttendeeMyEventAdapter(this, eventList);
         recyclerView.setAdapter(attendeeMyEventAdapter);
     }
 
+    /**
+     *  initialise Events
+     */
     @Override
-    protected void initEvents(){
+    protected void initEvents() {
 //        //Todo: generate event list of this attendee
 //        for(int i = 0; i < 2; i++) {
 //            Event event1 = new Event("Event5", "BF101", "", "13:00", R.drawable.default_image);

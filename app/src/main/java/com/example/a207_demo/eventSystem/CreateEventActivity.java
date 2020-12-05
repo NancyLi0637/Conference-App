@@ -49,7 +49,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
     }
 
     /**
-     * init
+     * initialize
      */
     private void init() {
         eventManager = getEventManager();

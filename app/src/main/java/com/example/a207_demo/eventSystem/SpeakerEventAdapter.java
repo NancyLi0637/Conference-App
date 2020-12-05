@@ -11,14 +11,28 @@ import com.example.a207_demo.R;
 
 import java.util.List;
 
-public class SpeakerEventAdapter extends EventAdapter{
+/**
+ * SpeakerEventAdapter
+ */
+public class SpeakerEventAdapter extends EventAdapter {
     private Context context;
 
-    public SpeakerEventAdapter(Context context, List<Event> eventList){
+    /**
+     * SpeakerEventAdapter
+     * @param context Context
+     * @param eventList List<Event>
+     */
+    public SpeakerEventAdapter(Context context, List<Event> eventList) {
         super(context, eventList);
         this.context = context;
     }
 
+    /**
+     * onCreateViewHolder
+     * @param parent parent ViewGroup
+     * @param viewType viewType
+     * @return VHEvent
+     */
     @NonNull
     @Override
     public VHEvent onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

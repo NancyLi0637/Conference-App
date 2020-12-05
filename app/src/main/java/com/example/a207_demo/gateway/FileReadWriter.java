@@ -263,17 +263,17 @@ public class FileReadWriter {
 //    public EventsController GetEventsController(){
 //        return eventsController;
 //    }
-    public OrganizerManager GetOrganizerManager() {
-        return organizerManager;
-    }
-
-    public AttendeeManager GetAttendeeManager() {
-        return attendeeManager;
-    }
-
-    public UserManager GetUserManager() {
-        return userManager;
-    }
+//    public OrganizerManager GetOrganizerManager() {
+//        return organizerManager;
+//    }
+//
+//    public AttendeeManager GetAttendeeManager() {
+//        return attendeeManager;
+//    }
+//
+//    public UserManager GetUserManager() {
+//        return userManager;
+//    }
 
     public void connectReaders(AppCompatActivity context) {
         UserReader();

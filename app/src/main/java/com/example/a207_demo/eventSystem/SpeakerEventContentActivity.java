@@ -6,6 +6,9 @@ import android.view.View;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
+/**
+ * SpeakerEventContentActivity
+ */
 public class SpeakerEventContentActivity extends EventContentActivity implements View.OnClickListener{
 
     /**

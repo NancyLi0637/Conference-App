@@ -29,6 +29,7 @@ public class AttendeeEventActivity extends EventActivity {
 
     /**
      * Required function to initiate an Activity class.
+     *
      * @param savedInstanceState saved data for unexpected crush
      */
     @Override
@@ -44,13 +45,16 @@ public class AttendeeEventActivity extends EventActivity {
     /**
      * Set up the activity.
      */
-    public void init(){
+    public void init() {
         super.init(this, R.id.nav_view_attendee, R.id.nav_allevents);
         eventManager = getEventManager();
         createEventMenu();
     }
 
-    protected void createEventMenu(){
+    /**
+     * create Event Menu
+     */
+    protected void createEventMenu() {
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         super.createEventMenu(recyclerView);
         initEvents();
@@ -58,12 +62,15 @@ public class AttendeeEventActivity extends EventActivity {
         recyclerView.setAdapter(attendeeEventAdapter);
     }
 
-    protected void initEvents(){
+    /**
+     * initialise Events
+     */
+    protected void initEvents() {
         super.initEvents();
         eventList = eventManager.getAllEvent();
 
         //Todo: implement image later
-        for (Event event : eventList){
+        for (Event event : eventList) {
             event.setImageId(R.drawable.default_image);
         }
     }

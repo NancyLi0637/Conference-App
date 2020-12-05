@@ -21,31 +21,50 @@ import com.example.a207_demo.messageSystem.AnnouncementActivity;
 import com.example.a207_demo.messageSystem.SpeakerAnnouncementActivity;
 import com.google.android.material.navigation.NavigationView;
 
+/**
+ *
+ */
 public class SetUpActivity extends CleanArchActivity {
     private DrawerLayout mDrawerLayout;
 
-    public void init(AppCompatActivity context, int id_nav_view, int id_nav_item){
+    /**
+     * initialize action bar and navigation view
+     * @param context context
+     * @param id_nav_view int
+     * @param id_nav_item int
+     */
+    public void init(AppCompatActivity context, int id_nav_view, int id_nav_item) {
         createActionBar();
         createNavView(context, id_nav_view, id_nav_item);
     }
 
-    protected void createActionBar(){
+    /**
+     * create Action Bar
+     */
+    protected void createActionBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, 0,0);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
+                mDrawerLayout, toolbar, 0, 0);
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
     }
 
-    protected void createNavView(final AppCompatActivity context, int id_nav_view, int id_nav_item){
+    /**
+     * create Nav View
+     * @param context context
+     * @param id_nav_view int
+     * @param id_nav_item int
+     */
+    protected void createNavView(final AppCompatActivity context, int id_nav_view, int id_nav_item) {
         NavigationView navigationView = findViewById(id_nav_view);
         navigationView.setCheckedItem(id_nav_item);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch(menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.nav_allevents:
                         mDrawerLayout.closeDrawers();
                         startActivity(new Intent(context, AttendeeEventActivity.class));
@@ -80,13 +99,23 @@ public class SetUpActivity extends CleanArchActivity {
         });
     }
 
-    public boolean onCreateOptionsMenu(Menu menu){
+    /**
+     * on Create Options Menu
+     * @param menu Menu
+     * @return boolean
+     */
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
 
+    /**
+     * on Options Item Selected
+     * @param item MenuItem
+     * @return boolean
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;

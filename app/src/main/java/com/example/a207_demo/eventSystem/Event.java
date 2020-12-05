@@ -24,9 +24,11 @@ public abstract class Event implements Serializable {
     /**
      * The constructor No.1 for an event
      *
-     * @param title     event title
-     * @param roomID    which room the event will be held in
-     * @param startTime event starting time
+     * @param title       event title
+     * @param roomID      which room the event will be held in
+     * @param startTime   event starting time
+     * @param duration    duration of the event
+     * @param restriction event restriction
      */
     public Event(String title, String roomID, String startTime, String duration, String restriction) {
         this.title = title;
@@ -39,11 +41,23 @@ public abstract class Event implements Serializable {
         System.out.println(eventID);
     }
 
-    public void setType(String type){
+    /**
+     * Set the type of this event
+     *
+     * @param type String, the type of this event
+     */
+    public void setType(String type) {
         this.type = type;
     }
 
-    public String getType(){return this.type;}
+    /**
+     * Return the type of this event
+     *
+     * @return String, the type of this event
+     */
+    public String getType() {
+        return this.type;
+    }
 
 
     /**
@@ -69,7 +83,7 @@ public abstract class Event implements Serializable {
         for (Event event : events) {
             if (event.getAttendees().contains(attendeeID) &&
                     !((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration()) <= Integer.parseInt(this.startTime)) ||
-                    Integer.parseInt(this.startTime) + Integer.parseInt(this.duration) <= Integer.parseInt(event.getStartTime())) ) {
+                            Integer.parseInt(this.startTime) + Integer.parseInt(this.duration) <= Integer.parseInt(event.getStartTime()))) {
                 return false;
             }
         }
@@ -118,10 +132,18 @@ public abstract class Event implements Serializable {
         return this.roomID;
     }
 
-    public String getDuration(){
+    /**
+     * get Duration for the event
+     * @return String: duration
+     */
+    public String getDuration() {
         return this.duration;
     }
 
+    /**
+     * Abstract method: get speakers for the event
+     * @return list of String
+     */
     public abstract ArrayList<String> getSpeakers();
 
 
@@ -134,7 +156,9 @@ public abstract class Event implements Serializable {
         return userIDs;
     }
 
-    public String getRestriction() {return restriction;}
+    public String getRestriction() {
+        return restriction;
+    }
 
     /**
      * Formats and returns the time slot
@@ -158,17 +182,21 @@ public abstract class Event implements Serializable {
         return this.title + " at " + this.getFormattedStartTime();
     }
 
-    /**
-     * Returns a formatted string with more data
-     *
-     * @return a formatted string with more data
-     */
-    public abstract String toFullString();
 
+    /**
+     * setImageId
+     * @param imageId imageId
+     */
     public void setImageId(int imageId) {
         this.imageId = imageId;
     }
 
-    public int getImageId(){return this.imageId;}
+    /**
+     * getImageId
+     * @return imageId
+     */
+    public int getImageId() {
+        return this.imageId;
+    }
 }
 

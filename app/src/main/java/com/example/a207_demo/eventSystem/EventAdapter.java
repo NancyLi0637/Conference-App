@@ -16,19 +16,38 @@ import com.example.a207_demo.R;
 
 import java.util.List;
 
+/**
+ * Abstract class EventAdapter
+ */
 public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHEvent> {
     private Context context;
     private List<Event> eventList;
 
-    public EventAdapter(Context context, List<Event> eventList){
+    /**
+     * Event Adapter for this Event Activity
+     * @param context
+     * @param eventList
+     */
+    public EventAdapter(Context context, List<Event> eventList) {
         this.context = context;
         this.eventList = eventList;
     }
-    
+
+    /**
+     * on Create View Holder
+     * @param parent parent ViewGroup
+     * @param viewType viewType
+     * @return VHEvent
+     */
     abstract public VHEvent onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
 
-    public void setClickEventListener(final VHEvent holder, final Class nextClass){
-        holder.cardView.setOnClickListener(new View.OnClickListener(){
+    /**
+     * set Click Event Listener
+     * @param holder VHEvent
+     * @param nextClass Class
+     */
+    public void setClickEventListener(final VHEvent holder, final Class nextClass) {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
@@ -44,6 +63,11 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
         });
     }
 
+    /**
+     * on Bind View Holder
+     * @param holder VHEvent
+     * @param position int
+     */
     @Override
     public void onBindViewHolder(@NonNull VHEvent holder, int position) {
         Event event = eventList.get(position);
@@ -51,21 +75,29 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
         Glide.with(context).load(event.getImageId()).into(holder.eventImage);
     }
 
+    /**
+     * getItemCount
+     * @return int
+     */
     @Override
     public int getItemCount() {
         return eventList.isEmpty() ? 0 : eventList.size();
     }
 
+    /**
+     * VHEvent
+     */
     static class VHEvent extends RecyclerView.ViewHolder {
         CardView cardView;
         ImageView eventImage;
         TextView eventTitle;
 
-        public VHEvent(View v){
+        public VHEvent(View v) {
             super(v);
             cardView = (CardView) v;
             eventImage = v.findViewById(R.id.event_image);
-            eventTitle = v.findViewById(R.id.event_title);;
+            eventTitle = v.findViewById(R.id.event_title);
+            ;
         }
     }
 

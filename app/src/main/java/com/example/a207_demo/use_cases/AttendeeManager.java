@@ -68,11 +68,12 @@ public class AttendeeManager extends UserManager implements Serializable {
 
     /**
      * Try to cancel an entities.Attendee from an event.
+     *
      * @param eventManager an eventManager
-     * @param userID String userIDv
-     * @param eventID String eventID
+     * @param userID       String userIDv
+     * @param eventID      String eventID
      * @param roomManager  a roomManager
-     * @return  boolean value, return true iff canceled successfully
+     * @return boolean value, return true iff canceled successfully
      */
     public boolean cancel(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
         return eventManager.removeAttendeeFromEvent(userID, eventID, roomManager);

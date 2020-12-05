@@ -1,6 +1,7 @@
 package com.example.a207_demo.use_cases;
 
 import com.example.a207_demo.entities.*;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class OrganizerManager extends UserManager implements Serializable {
      * Create an organizer account and store it in the organizers and users lists
      *
      * @param userName userName of this organizer
-     * @param email email of this organizer
+     * @param email    email of this organizer
      * @param password password of this organizer
      */
     public void createOrganizer(String userName, String email, String password) {
@@ -38,9 +39,9 @@ public class OrganizerManager extends UserManager implements Serializable {
      * Create an organizer account (with parameter: ID) and store it in the organizers and users lists
      *
      * @param userName userName of this organizer
-     * @param email email of this organizer
+     * @param email    email of this organizer
      * @param password password of this organizer
-     * @param ID user ID of this organizer
+     * @param ID       user ID of this organizer
      */
     public void loadOrganizer(String userName, String email, String password, String ID) {
         Organizer organizer = new Organizer(userName, email, password, ID);

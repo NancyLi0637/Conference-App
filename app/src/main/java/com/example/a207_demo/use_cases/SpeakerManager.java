@@ -26,7 +26,7 @@ public class SpeakerManager extends UserManager implements Serializable {
      * Creates a entities.Speaker and adds it to the lists
      *
      * @param userName userName of this speaker
-     * @param email email of this speaker
+     * @param email    email of this speaker
      * @param password password of this speaker
      */
     public void createSpeaker(String userName, String email, String password) {
@@ -39,9 +39,9 @@ public class SpeakerManager extends UserManager implements Serializable {
      * Load a entities.Speaker from file and adds it to the lists
      *
      * @param userName userName of this speaker
-     * @param email email of this speaker
+     * @param email    email of this speaker
      * @param password password of this speaker
-     * @param ID user ID of this speaker
+     * @param ID       user ID of this speaker
      */
     public void loadSpeaker(String userName, String email, String password, String ID) {
         Speaker speaker = new Speaker(userName, email, password, ID);
@@ -69,7 +69,8 @@ public class SpeakerManager extends UserManager implements Serializable {
 
     /**
      * Get an ArrayList<String> of all Available Speakers given a starting time
-     * @param time String, start time
+     *
+     * @param time         String, start time
      * @param eventManager an EventManager
      * @return ArrayList<String> of all Available Speaker
      */
@@ -79,8 +80,8 @@ public class SpeakerManager extends UserManager implements Serializable {
         for (Speaker speaker : speakers) {
             availableSpeaker.add(speaker.getUserName());
             for (Event event : events) {
-                for (String currentSpeaker: event.getSpeakers()) {
-                    if (currentSpeaker.equals(speaker.getUserName()) && (Integer.parseInt(event.getStartTime())<= Integer.parseInt(time)) && (Integer.parseInt(time) <= Integer.parseInt(event.getStartTime() +Integer.parseInt(duration)))) {
+                for (String currentSpeaker : event.getSpeakers()) {
+                    if (currentSpeaker.equals(speaker.getUserName()) && (Integer.parseInt(event.getStartTime()) <= Integer.parseInt(time)) && (Integer.parseInt(time) <= Integer.parseInt(event.getStartTime() + Integer.parseInt(duration)))) {
                         availableSpeaker.remove(speaker.getUserName());
                     }
                 }
@@ -91,6 +92,7 @@ public class SpeakerManager extends UserManager implements Serializable {
 
     /**
      * Get ID of a speaker given his user name
+     *
      * @param name name of the speaker
      * @return user ID of the speaker, or "NULL" if not found
      */
@@ -103,9 +105,9 @@ public class SpeakerManager extends UserManager implements Serializable {
         return "NULL";
     }
 
-    public String getSpeakerNameFromID(String speakerId){
-        for (Speaker speaker : speakers){
-            if (speaker.getUserID().equals(speakerId)){
+    public String getSpeakerNameFromID(String speakerId) {
+        for (Speaker speaker : speakers) {
+            if (speaker.getUserID().equals(speakerId)) {
                 return speaker.getUserName();
             }
         }

@@ -50,7 +50,7 @@ public class RoomManager implements Serializable {
      * Creates a new room and add it to rooms list
      *
      * @param roomNum the room to create and add
-     * @param roomID the room ID
+     * @param roomID  the room ID
      */
     public void loadRoom(String roomNum, String roomID) {
         Room room = new Room(roomNum, roomID);
@@ -60,7 +60,7 @@ public class RoomManager implements Serializable {
     /**
      * Get an ArrayList<String> of all room numbers
      *
-     * @return  ArrayList<String> of all room numbers
+     * @return ArrayList<String> of all room numbers
      */
     public ArrayList<String> getAllRoomNum() {
         ArrayList<String> roomNumbers = new ArrayList<>();
@@ -73,7 +73,7 @@ public class RoomManager implements Serializable {
     /**
      * Get an ArrayList<String> of all room IDs
      *
-     * @return  ArrayList<String> of all room IDs
+     * @return ArrayList<String> of all room IDs
      */
     public ArrayList<String> getAllRoomID() {
         ArrayList<String> roomIDs = new ArrayList<>();
@@ -86,7 +86,7 @@ public class RoomManager implements Serializable {
     /**
      * Check if a room with roomID is full
      *
-     * @param  roomID roomID
+     * @param roomID roomID
      * @return true iff the room is full
      */
     public boolean isFull(String roomID) {
@@ -156,7 +156,8 @@ public class RoomManager implements Serializable {
 
     /**
      * Get an ArrayList<String> of room numbers that are available for the given time
-     * @param time the starting time
+     *
+     * @param time         the starting time
      * @param eventManager an EventManager object
      * @return an ArrayList<String> of room numbers that are available for the given time
      */

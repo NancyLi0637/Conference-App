@@ -9,13 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".contactSystem.OrganizerContactSpeakerActivity"></activity>
-        <activity android:name=".contactSystem.OrganizerContactAttendeeActivity" />
+        <activity
+            android:name=".contactSystem.OrganizerContactSpeakerActivity"
+            android:label="Speakers"
+            android:launchMode="singleTask"/>
+        <activity android:name=".contactSystem.OrganizerContactAttendeeActivity"
+            android:label="Attendees"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".contactSystem.AttendeeContactAttendeeActivity"
             android:label="Attendees"
             android:launchMode="singleTask">
-
         </activity>
         <activity
             android:name=".contactSystem.AttendeeContactSpeakerActivity"

@@ -35,13 +35,13 @@ public class OrganizerContactAttendeeActivity extends ContactActivity {
      * init
      */
     public void init() {
-        super.init(this, R.id.nav_view_organizer, R.id.nav_contacts_speaker_for_attendee);
+        super.init(this, R.id.nav_view_organizer, R.id.nav_contacts_attendee_for_organizer);
         createContactMenu();
     }
 
     public void createContactMenu() {
         initContacts();
-        RecyclerView recyclerView = findViewById(R.id.attendee_contact_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.organizer_contact_recycler_view);
         ContactAdapter contactAdapter = new ContactAdapter(this, contactList);
         super.createContactMenu(recyclerView, contactAdapter);
     }

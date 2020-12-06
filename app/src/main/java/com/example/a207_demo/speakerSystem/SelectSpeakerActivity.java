@@ -20,7 +20,10 @@ import com.example.a207_demo.utility.CleanArchActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectSpeakerActivity extends CleanArchActivity implements View.OnClickListener{
+/**
+ * SelectSpeakerActivity
+ */
+public class SelectSpeakerActivity extends CleanArchActivity implements View.OnClickListener {
 
     private List<String> speakerList;
     private SelectSpeakerAdapter selectSpeakerAdapter;
@@ -29,7 +32,7 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
     private Intent intent;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_speaker);
 
@@ -38,7 +41,7 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
         ActivityCollector.addActivity(this);
     }
 
-    private void init(){
+    private void init() {
         fileReadWriter = getFileReadWriter();
         intent = new Intent();
 
@@ -51,9 +54,14 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
         createSpeakerMenu();
     }
 
+    /**
+     * onClick
+     *
+     * @param v View
+     */
     @Override
-    public void onClick(View v){
-        switch (v.getId()){
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.speaker_selected_finish:
                 setUpData();
                 setResult(RESULT_OK, intent);
@@ -66,12 +74,12 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
         }
     }
 
-    private void setUpData(){
+    private void setUpData() {
         ArrayList<String> speakerNames = selectSpeakerAdapter.getSpeakerNames();
         intent.putStringArrayListExtra("speakerNames", speakerNames);
     }
 
-    private void createSpeakerMenu(){
+    private void createSpeakerMenu() {
         initSpeakers();
 
         RecyclerView speakerRecycleView = findViewById(R.id.speaker_recycler_view);
@@ -81,7 +89,7 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
         speakerRecycleView.setAdapter(selectSpeakerAdapter);
     }
 
-    private void initSpeakers(){
+    private void initSpeakers() {
         //Todo: clean up after implementing speaker System
         fileReadWriter.reset();
         fileReadWriter.UserReader();

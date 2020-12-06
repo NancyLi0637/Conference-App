@@ -16,16 +16,26 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SelectSpeakerAdapter
+ */
 public class SelectSpeakerAdapter extends RecyclerView.Adapter<SelectSpeakerAdapter.VHSelectSpeaker> {
     private Context context;
     private List<String> speakerList;
     private ArrayList<String> speakerNames;
 
-    public SelectSpeakerAdapter(Context context, List<String> speakerList){
+    public SelectSpeakerAdapter(Context context, List<String> speakerList) {
         this.context = context;
         this.speakerList = speakerList;
     }
 
+    /**
+     * onCreateViewHolder
+     *
+     * @param parent   NonNull ViewGroup parent
+     * @param viewType int viewType
+     * @return VHSelectSpeaker
+     */
     @NonNull
     @Override
     public VHSelectSpeaker onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,6 +44,12 @@ public class SelectSpeakerAdapter extends RecyclerView.Adapter<SelectSpeakerAdap
         return holder;
     }
 
+    /**
+     * onBindViewHolder
+     *
+     * @param holder   NonNull final VHSelectSpeaker holder
+     * @param position int
+     */
     @Override
     public void onBindViewHolder(@NonNull final VHSelectSpeaker holder, int position) {
         final String name = speakerList.get(position);
@@ -41,9 +57,9 @@ public class SelectSpeakerAdapter extends RecyclerView.Adapter<SelectSpeakerAdap
         holder.selectedSpeaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(holder.selectedSpeaker.isChecked()){
+                if (holder.selectedSpeaker.isChecked()) {
                     speakerNames.add(name);
-                }else{
+                } else {
                     speakerNames.remove(name);
                 }
             }
@@ -51,19 +67,34 @@ public class SelectSpeakerAdapter extends RecyclerView.Adapter<SelectSpeakerAdap
 
     }
 
-    public ArrayList<String> getSpeakerNames(){return this.speakerNames;}
+    /**
+     * getSpeakerNames
+     *
+     * @return ArrayList<String>
+     */
+    public ArrayList<String> getSpeakerNames() {
+        return this.speakerNames;
+    }
 
+    /**
+     * getItemCount
+     *
+     * @return int
+     */
     @Override
     public int getItemCount() {
         return speakerList.size();
     }
 
-    public class VHSelectSpeaker extends RecyclerView.ViewHolder{
+    /**
+     * VHSelectSpeaker
+     */
+    public class VHSelectSpeaker extends RecyclerView.ViewHolder {
 
         private TextView speakerNum;
         private CheckBox selectedSpeaker;
 
-        public VHSelectSpeaker(View v){
+        public VHSelectSpeaker(View v) {
             super(v);
             speakerNum = v.findViewById(R.id.speaker_name);
             selectedSpeaker = v.findViewById(R.id.speaker_selected);

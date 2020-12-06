@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.use_cases.AttendeeManager;
+import com.example.a207_demo.use_cases.ConversationManager;
 import com.example.a207_demo.use_cases.OrganizerManager;
 import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
@@ -21,6 +22,7 @@ public class CleanArchActivity extends AppCompatActivity{
     private final OrganizerManager organizerManager = new OrganizerManager();
     private final SpeakerManager speakerManager = new SpeakerManager();
     private final RoomManager roomManager = new RoomManager();
+    private final ConversationManager conversationManager = new ConversationManager();
 //    private final FileReadWriter fileReadWriter = new FileReadWriter(this, eventManager,
 //            userManager, attendeeManager, organizerManager, speakerManager, roomManager);
     private FileReadWriter fileReadWriter = new FileReadWriter(this);
@@ -62,6 +64,8 @@ public class CleanArchActivity extends AppCompatActivity{
      * @return RoomManager
      */
     public RoomManager getRoomManager() {return this.roomManager;}
+
+    public ConversationManager getConversationManager(){return this.conversationManager;}
 
     /**
      * Get FileReadWriter of the whole system

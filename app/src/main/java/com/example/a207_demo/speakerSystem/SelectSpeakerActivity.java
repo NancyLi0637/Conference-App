@@ -24,7 +24,6 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
 
     private List<String> speakerList;
     private SelectSpeakerAdapter selectSpeakerAdapter;
-    private FileReadWriter fileReadWriter;
 
     private Intent intent;
 
@@ -39,7 +38,6 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
     }
 
     private void init(){
-        fileReadWriter = getFileReadWriter();
         intent = new Intent();
 
         Button back = findViewById(R.id.speaker_selected_back);
@@ -83,8 +81,8 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
 
     private void initSpeakers(){
         //Todo: clean up after implementing speaker System
-        fileReadWriter.reset();
-        fileReadWriter.UserReader();
+        super.reset();
+        super.read();
 
         Intent lastIntent = getIntent();
         String time = lastIntent.getStringExtra("eventTime");

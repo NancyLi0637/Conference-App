@@ -91,8 +91,8 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
 
     private void initRooms(){
         //Todo: clean up after implementing Room System
-        getFileReadWriter().reset();
-        getFileReadWriter().RoomReader();
+        super.reset();
+        super.read();
 
         Intent lastIntent = getIntent();
         String time = lastIntent.getStringExtra("eventTime");

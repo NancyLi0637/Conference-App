@@ -12,7 +12,6 @@
         <activity
             android:name=".roomSystem.CreateRoomActivity"
             android:label="Adding Room"
-            android:launchMode="singleTask"/>
         <activity
             android:name=".roomSystem.RoomActivity"
             android:label="Room"

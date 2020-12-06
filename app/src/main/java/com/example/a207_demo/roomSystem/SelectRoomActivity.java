@@ -21,9 +21,9 @@ import java.util.List;
 public class SelectRoomActivity extends CleanArchActivity implements View.OnClickListener{
 
     private List<String> roomList = new ArrayList<>();
-    //private FileReadWriter fileReadWriter;
+    private SelectRoomAdapter selectRoomAdapter;
     private Intent intent;
-    private boolean selected;
+    private boolean selected = false;
     private String roomID;
 
     @Override
@@ -69,11 +69,12 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
     }
 
     private void setUpData(){
-        RadioButton select = findViewById(R.id.room_selected);
-        TextView room = findViewById(R.id.room_num);
-        selected = select.isChecked();
-        roomID = getRoomManager().changeNumTOID(room.getText().toString());
-        intent.putExtra("roomID", roomID);
+        int position = selectRoomAdapter.getPosition();
+        if(position != -1){
+            selected = true;
+            roomID = getRoomManager().changeNumTOID(roomList.get(position));
+            intent.putExtra("roomID", roomID);
+        }
     }
 
     private void createRoomMenu(){
@@ -82,7 +83,7 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
         RecyclerView roomRecycleView = findViewById(R.id.select_room_recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         roomRecycleView.setLayoutManager(linearLayoutManager);
-        SelectRoomAdapter selectRoomAdapter = new SelectRoomAdapter(this, roomList);
+        selectRoomAdapter = new SelectRoomAdapter(this, roomList);
         roomRecycleView.setAdapter(selectRoomAdapter);
     }
 

@@ -53,6 +53,7 @@ public class SelectRoomAdapter extends RecyclerView.Adapter<SelectRoomAdapter.VH
     public void onBindViewHolder(@NonNull VHSelectRoom holder, int position) {
         String room = roomList.get(position);
         holder.roomNum.setText(room);
+        System.out.println("POSITION" + position);
         holder.selectedRoom.setChecked(lastSelectedRoom == position);
     }
 
@@ -84,14 +85,21 @@ public class SelectRoomAdapter extends RecyclerView.Adapter<SelectRoomAdapter.VH
             roomNum = v.findViewById(R.id.room_num);
             selectedRoom = v.findViewById(R.id.room_selected);
 
-            selectedRoom.setOnClickListener(new View.OnClickListener() {
+            View.OnClickListener clickListener = new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
                     lastSelectedRoom = getAdapterPosition();
+                    System.out.println("LASTCHECKED" + lastSelectedRoom);
                     notifyDataSetChanged();
                 }
-            });
+            };
+            itemView.setOnClickListener(clickListener);
+            selectedRoom.setOnClickListener(clickListener);
         }
 
+    }
+
+    public int getPosition(){
+        return lastSelectedRoom;
     }
 }

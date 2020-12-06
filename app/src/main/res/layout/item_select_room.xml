@@ -23,5 +23,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.864"
-        app:layout_constraintStart_toEndOf="@+id/room_num" />
+        app:layout_constraintStart_toEndOf="@+id/room_num"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -411,7 +411,13 @@ public class EventManager implements Serializable{
         return Long.parseLong(eventTime) > Long.parseLong(currentTime);
     }
 
-    //Todo: title is larger than 3 characters and not the same as other events
+    // title is larger than 3 characters and not the same as other events
+
+    /**
+     * checkValidTitle
+     * @param title String
+     * @return boolean
+     */
 
     public boolean checkValidTitle(String title){
         if (title.length() < 3) {
@@ -426,9 +432,19 @@ public class EventManager implements Serializable{
     }
 
 
+    /**
+     * checkValidDuration
+     * @param duration String
+     * @return boolean
+     */
     //Todo: duration is integer and larger than 0
     public boolean checkValidDuration(String duration){
-        return true;
+        try {
+            Integer.parseInt(duration);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
     }
 
     /**

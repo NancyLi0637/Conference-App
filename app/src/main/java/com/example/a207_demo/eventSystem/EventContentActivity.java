@@ -53,6 +53,7 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
      */
     protected void setUpData(){
         ArrayList<String> event = getIntent().getStringArrayListExtra("event");
+        assert event != null;
         String eventTitle = event.get(0);
         String eventRoom = getRoomManager().changeIdTONum(event.get(1));
         String eventTime = getEventManager().generateFormattedStartTime(event.get(2));

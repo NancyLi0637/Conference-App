@@ -38,8 +38,12 @@ public class OrganizerEventContentActivity extends EventContentActivity{
         eventCancel.setOnClickListener(this);
     }
 
+    /**
+     * onClick
+     * @param view View
+     */
     public void onClick(View view){
-
+        // TODO: Organizer cancel an event
     }
 
 }

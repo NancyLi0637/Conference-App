@@ -1,20 +1,18 @@
 package com.example.a207_demo.contactSystem;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
-import com.example.a207_demo.utility.SetUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpeakerContactActivity extends SetUpActivity {
+public class AttendeeContactAttendeeActivity extends ContactActivity {
 
-    //Todo: access Contact Controller
     private List<Contact> contactList = new ArrayList<>();
 
     /**
@@ -26,7 +24,7 @@ public class SpeakerContactActivity extends SetUpActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact_speaker);
+        setContentView(R.layout.activity_contact_attendee);
 
         init();
 
@@ -37,31 +35,18 @@ public class SpeakerContactActivity extends SetUpActivity {
      * init
      */
     public void init() {
-        super.init(this, R.id.nav_view_speaker, R.id.nav_contacts_speaker);
-        createContactMenu(contactList);
+        super.init(this, R.id.nav_view_attendee, R.id.nav_contacts_attendee_for_attendee);
+        createContactMenu();
     }
 
-    /**
-     * createContactMenu
-     *
-     * @param contactList List<Contact> contactList
-     */
-    public void createContactMenu(List<Contact> contactList) {
-        initContacts(contactList);
-
-        RecyclerView recyclerView = findViewById(R.id.contact_recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+    public void createContactMenu() {
+        initContacts();
+        RecyclerView recyclerView = findViewById(R.id.attendee_contact_recycler_view);
         ContactAdapter contactAdapter = new ContactAdapter(this, contactList);
-        recyclerView.setAdapter(contactAdapter);
+        super.createContactMenu(recyclerView, contactAdapter);
     }
 
-    /**
-     * initContacts
-     *
-     * @param contactList List<Contact> contactList
-     */
-    public void initContacts(List<Contact> contactList) {
+    protected void initContacts() {
         //Todo: access Contact Use case to generate contacts
         Contact contact1 = new Contact("Jenny Su", R.drawable.jenny);
         contactList.add(contact1);

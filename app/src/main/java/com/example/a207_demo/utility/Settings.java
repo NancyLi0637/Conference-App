@@ -6,11 +6,13 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
 public class Settings extends AppCompatActivity {
+    private String ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,9 @@ public class Settings extends AppCompatActivity {
     }
 
     public void init(){
+        ID = getIntent().getStringExtra("ID");
+        TextView userId = findViewById(R.id.username_setting);
+        userId.setText(ID);
         createActionBar();
     }
 

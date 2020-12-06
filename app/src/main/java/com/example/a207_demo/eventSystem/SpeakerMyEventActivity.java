@@ -54,6 +54,8 @@ public class SpeakerMyEventActivity extends EventActivity {
      * initEvents
      */
     protected void initEvents(){
+        super.initEvents();
+        //eventList = getEventManager().generateAllInfo(getEventManager().getEventsFromSpeaker());
 //        //Todo: generate Event list of this speaker
 //        for(int i = 0; i < 2; i++) {
 //            Event event1 = new Event("Event10", "BF101", "", "13:00", R.drawable.default_image);

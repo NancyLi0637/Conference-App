@@ -27,8 +27,6 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
     private ArrayList<ArrayList<String>> eventList;
     private OrganizerEventAdapter eventAdapter;
 
-    private String ID = getIntent().getStringExtra("ID");
-
     /**
      * onCreate
      * @param savedInstanceState

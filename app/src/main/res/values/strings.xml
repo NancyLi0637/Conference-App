@@ -38,6 +38,8 @@
     <string name="rooms">Rooms</string>
     <string name="roomNum">Room Number</string>
     <string name="roomCap">Room Capacity</string>
+    <string name="newSpeaker">New Speaker Account</string>
+    <string name="newAttendee">New Attendee Account</string>
 
     <string name="useremail">nancielee@gmail.com</string>
     <string-array name="event_types">

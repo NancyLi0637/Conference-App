@@ -12,8 +12,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.a207_demo.R;
+import com.example.a207_demo.contactSystem.AttendeeContactAttendeeActivity;
+import com.example.a207_demo.contactSystem.AttendeeContactSpeakerActivity;
 import com.example.a207_demo.contactSystem.ContactActivity;
-import com.example.a207_demo.contactSystem.SpeakerContactActivity;
+import com.example.a207_demo.contactSystem.OrganizerContactAttendeeActivity;
+import com.example.a207_demo.contactSystem.OrganizerContactSpeakerActivity;
+import com.example.a207_demo.contactSystem.SpeakerContactAttendeeActivity;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
 import com.example.a207_demo.eventSystem.AttendeeMyEventActivity;
 import com.example.a207_demo.eventSystem.OrganizerEventActivity;
@@ -28,6 +32,8 @@ import com.google.android.material.navigation.NavigationView;
  */
 public class SetUpActivity extends CleanArchActivity {
     private DrawerLayout mDrawerLayout;
+    private String ID;
+    private Intent intent;
 
     /**
      * initialize action bar and navigation view
@@ -36,6 +42,7 @@ public class SetUpActivity extends CleanArchActivity {
      * @param id_nav_item int
      */
     public void init(AppCompatActivity context, int id_nav_view, int id_nav_item) {
+        ID = getIntent().getStringExtra("ID");
         createActionBar();
         createNavView(context, id_nav_view, id_nav_item);
     }
@@ -69,42 +76,55 @@ public class SetUpActivity extends CleanArchActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.nav_allevents:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, AttendeeEventActivity.class));
+                        intent = new Intent(context, AttendeeEventActivity.class);
                         break;
                     case R.id.nav_myEvents:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, AttendeeMyEventActivity.class));
+                        intent = new Intent(context, AttendeeMyEventActivity.class);
                         break;
-                    case R.id.nav_contacts:
+                    case R.id. nav_contacts_attendee_for_attendee:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, ContactActivity.class));
+                        intent = new Intent(context, AttendeeContactAttendeeActivity.class);
+                        break;
+                    case R.id.nav_contacts_speaker_for_attendee:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, AttendeeContactSpeakerActivity.class);
                         break;
                     case R.id.nav_announcements:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, AnnouncementActivity.class));
+                        intent = new Intent(context, AnnouncementActivity.class);
+                        break;
+                    case R.id.nav_contacts_attendee_for_organizer:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, OrganizerContactAttendeeActivity.class);
+                        break;
+                    case R.id.nav_contacts_speaker_for_organizer:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, OrganizerContactSpeakerActivity.class);
                         break;
                     case R.id.nav_myEvents_speaker:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, SpeakerMyEventActivity.class));
+                        intent = new Intent(context, SpeakerMyEventActivity.class);
                         break;
-                    case R.id.nav_contacts_speaker:
+                    case R.id.nav_contacts_attendee_for_speaker:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, SpeakerContactActivity.class));
+                        startActivity(new Intent(context, AttendeeContactSpeakerActivity.class));
                         break;
                     case R.id.nav_announcements_speaker:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, SpeakerAnnouncementActivity.class));
+                        intent = new Intent(context, SpeakerAnnouncementActivity.class);
                         break;
                     case R.id.nav_allevents_organizer:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, OrganizerEventActivity.class));
+                        intent = new Intent(context, OrganizerEventActivity.class);
                         break;
                     case R.id.nav_room:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, RoomActivity.class));
+                        intent = new Intent(context, RoomActivity.class);
                         break;
                 }
-
+                intent.putExtra("ID", ID);
+                startActivity(intent);
                 return true;
             }
         });
@@ -131,7 +151,9 @@ public class SetUpActivity extends CleanArchActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.settings:
-                startActivity(new Intent(SetUpActivity.this, Settings.class));
+                intent = new Intent(SetUpActivity.this, Settings.class);
+                intent.putExtra("ID", ID);
+                startActivity(intent);
                 break;
             case R.id.signOut:
                 ActivityCollector.finishAll();

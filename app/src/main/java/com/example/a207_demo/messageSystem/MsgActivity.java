@@ -18,15 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
+import com.example.a207_demo.utility.SetUpActivity;
 import com.example.a207_demo.utility.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.example.a207_demo.entities.*;
 /**
  *
  */
-public class MsgActivity extends AppCompatActivity implements View.OnClickListener {
+public class MsgActivity extends SetUpActivity implements View.OnClickListener {
     //Todo: access MsgSystem Controller
     private List<Msg> msgList = new ArrayList<>();
     private DrawerLayout mDrawerLayout;

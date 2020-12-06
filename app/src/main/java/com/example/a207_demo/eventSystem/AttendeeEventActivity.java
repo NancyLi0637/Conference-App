@@ -52,9 +52,15 @@ public class AttendeeEventActivity extends EventActivity {
      * create Event Menu
      */
     protected void createEventMenu() {
+
+        // Firstly, setLayoutManager for this recyclerView
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         super.createEventMenu(recyclerView);
+
+        // Secondly, prepare data: list of events to show
         initEvents();
+
+        // Third, setAdapter for this recyclerView
         attendeeEventAdapter = new AttendeeEventAdapter(this, eventList);
         recyclerView.setAdapter(attendeeEventAdapter);
     }

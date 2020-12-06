@@ -56,6 +56,7 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
                 int position = holder.getAdapterPosition();
                 ArrayList<String> event = eventList.get(position);
                 Intent intent = new Intent(context, nextClass);
+                // Pass the list of events to the next activity
                 intent.putStringArrayListExtra("event", event);
                 context.startActivity(intent);
             }

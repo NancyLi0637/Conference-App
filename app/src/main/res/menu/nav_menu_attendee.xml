@@ -23,10 +23,11 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/nav_contacts"
+                    android:id="@+id/nav_contacts_attendee_for_attendee"
                     android:title="Attendees"
                     android:icon="@drawable/icon_contact_gray"/>
                 <item
+                    android:id="@+id/nav_contacts_speaker_for_attendee"
                     android:title="Speakers"
                     android:icon="@drawable/icon_contact_gray"/>
             </group>

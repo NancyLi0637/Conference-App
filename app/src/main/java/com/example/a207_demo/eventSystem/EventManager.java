@@ -469,10 +469,12 @@ public class EventManager implements Serializable{
      * Generate the event info for laoding into event activity
      * @return
      */
-    public ArrayList<ArrayList<String>> generateAllInfo(){
+    public ArrayList<ArrayList<String>> generateAllInfo(ArrayList<String> eventIDs){
         ArrayList<ArrayList<String>> result = new ArrayList<>();
-        for (Event event : events){
+        for(String eventID : eventIDs){
             ArrayList<String> info = new ArrayList<>();
+
+            Event event = getEventFromID(eventID);
             info.add(event.getTitle());
             info.add(event.getRoomID());
             info.add(event.getStartTime());

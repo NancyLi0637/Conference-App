@@ -30,5 +30,6 @@ public class EventActivity extends SetUpActivity {
         super.reset();
         super.readEvent();
         super.readRoom();
+        super.readUser();
     }
 }

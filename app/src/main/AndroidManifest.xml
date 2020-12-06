@@ -9,14 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".contactSystem.OrganizerContactSpeakerActivity"></activity>
+        <activity android:name=".contactSystem.OrganizerContactAttendeeActivity" />
+        <activity
+            android:name=".contactSystem.AttendeeContactAttendeeActivity"
+            android:label="Attendees"
+            android:launchMode="singleTask">
+
+        </activity>
+        <activity
+            android:name=".contactSystem.AttendeeContactSpeakerActivity"
+            android:label="Speakers"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".contactSystem.SpeakerContactAttendeeActivity"
+            android:label="Attendees"
+            android:launchMode="singleTask" />
         <activity
             android:name=".roomSystem.CreateRoomActivity"
-            android:label="Adding Room"
+            android:label="Adding Room"/>
         <activity
             android:name=".roomSystem.RoomActivity"
             android:label="Room"
-            android:launchMode="singleTask">
-        </activity>
+            android:launchMode="singleTask" />
         <activity
             android:name=".speakerSystem.SelectSpeakerActivity"
             android:label="Speaker Selection"
@@ -28,7 +43,7 @@
         <activity
             android:name=".eventSystem.CreateEventActivity"
             android:label="Event Information"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
         <activity android:name=".utility.CleanArchActivity" />
         <activity
             android:name=".eventSystem.AttendeeMyEventContentActivity"
@@ -44,10 +59,6 @@
         <activity
             android:name=".eventSystem.OrganizerEventActivity"
             android:label="All Events"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".contactSystem.SpeakerContactActivity"
-            android:label="Contacts"
             android:launchMode="singleTask" />
         <activity
             android:name=".messageSystem.SpeakerAnnouncementActivity"
@@ -90,7 +101,7 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

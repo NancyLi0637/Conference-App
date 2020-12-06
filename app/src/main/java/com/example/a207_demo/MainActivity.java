@@ -75,7 +75,7 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
             case R.id.btn_login:
                 super.reset();
                 super.readUser();
-                super.setUserID(ID);
+                //super.setUserID(ID);
                 if (info_matched()) {
                     if (type.equals("ATTENDEE")) {
                         intent = new Intent(MainActivity.this, AttendeeEventActivity.class);

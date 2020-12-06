@@ -64,7 +64,7 @@ public class AttendeeEventActivity extends EventActivity {
      */
     protected void initEvents() {
         super.initEvents();
-        eventList = getEventManager().generateAllInfo();
+        eventList = getEventManager().generateAllInfo(getEventManager().getAllIDAndName().get(0));
 
 //        //Todo: implement image later
 //        for (Event event : eventList) {

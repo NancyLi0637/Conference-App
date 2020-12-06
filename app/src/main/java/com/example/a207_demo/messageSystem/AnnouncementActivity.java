@@ -6,7 +6,9 @@ import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.SetUpActivity;
 
-
+/**
+ * AnnouncementActivity
+ */
 public class AnnouncementActivity extends SetUpActivity {
 
     @Override
@@ -20,7 +22,10 @@ public class AnnouncementActivity extends SetUpActivity {
         ActivityCollector.addActivity(this);
     }
 
-    public void init(){
+    /**
+     * init
+     */
+    public void init() {
         super.init(this, R.id.nav_view_attendee, R.id.nav_announcements);
     }
 

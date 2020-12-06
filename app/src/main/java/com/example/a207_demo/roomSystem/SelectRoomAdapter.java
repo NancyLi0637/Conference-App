@@ -15,16 +15,26 @@ import com.example.a207_demo.R;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * SelectRoomAdapter
+ */
 public class SelectRoomAdapter extends RecyclerView.Adapter<SelectRoomAdapter.VHSelectRoom> implements Serializable {
     private Context context;
     private List<String> roomList;
     private int lastSelectedRoom = -1;
 
-    public SelectRoomAdapter(Context context, List<String> roomList){
+    public SelectRoomAdapter(Context context, List<String> roomList) {
         this.context = context;
         this.roomList = roomList;
     }
 
+    /**
+     * onCreateViewHolder
+     *
+     * @param parent   NonNull ViewGroup parent
+     * @param viewType int
+     * @return VHSelectRoom
+     */
     @NonNull
     @Override
     public VHSelectRoom onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,6 +43,12 @@ public class SelectRoomAdapter extends RecyclerView.Adapter<SelectRoomAdapter.VH
         return holder;
     }
 
+    /**
+     * onBindViewHolder
+     *
+     * @param holder   NonNull VHSelectRoom holder
+     * @param position int
+     */
     @Override
     public void onBindViewHolder(@NonNull VHSelectRoom holder, int position) {
         String room = roomList.get(position);
@@ -40,17 +56,30 @@ public class SelectRoomAdapter extends RecyclerView.Adapter<SelectRoomAdapter.VH
         holder.selectedRoom.setChecked(lastSelectedRoom == position);
     }
 
+    /**
+     * getItemCount
+     *
+     * @return int
+     */
     @Override
     public int getItemCount() {
         return roomList.size();
     }
 
-    public class VHSelectRoom extends RecyclerView.ViewHolder{
+    /**
+     * VHSelectRoom
+     */
+    public class VHSelectRoom extends RecyclerView.ViewHolder {
 
         private TextView roomNum;
         private RadioButton selectedRoom;
 
-        public VHSelectRoom(View v){
+        /**
+         * VHSelectRoom
+         *
+         * @param v View
+         */
+        public VHSelectRoom(View v) {
             super(v);
             roomNum = v.findViewById(R.id.room_num);
             selectedRoom = v.findViewById(R.id.room_selected);

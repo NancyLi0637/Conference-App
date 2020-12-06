@@ -16,12 +16,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a207_demo.use_cases.ConversationManager;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.SetUpActivity;
 import com.example.a207_demo.utility.Settings;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import com.example.a207_demo.entities.*;
 /**
@@ -33,6 +36,7 @@ public class MsgActivity extends SetUpActivity implements View.OnClickListener {
     private DrawerLayout mDrawerLayout;
     private MsgAdapter msgAdapter;
     private RecyclerView msgRecyclerView;
+    private Conversation currentConversation;
 
 
     @Override
@@ -111,12 +115,29 @@ public class MsgActivity extends SetUpActivity implements View.OnClickListener {
      * initMsg
      */
     public void initMsg() {
-        Msg msg1 = new Msg("Hello guys.", Msg.TYPE_RECEIVED);
-        msgList.add(msg1);
-        Msg msg2 = new Msg("No hello.", Msg.TYPE_SENT);
-        msgList.add(msg2);
-        Msg msg3 = new Msg("Ok fine", Msg.TYPE_RECEIVED);
-        msgList.add(msg3);
+//        Msg msg1 = new Msg("Hello guys.", Msg.TYPE_RECEIVED);
+//        msgList.add(msg1);
+//        Msg msg2 = new Msg("No hello.", Msg.TYPE_SENT);
+//        msgList.add(msg2);
+//        Msg msg3 = new Msg("Ok fine", Msg.TYPE_RECEIVED);
+//        msgList.add(msg3);
+        // Todo: intent should get the other user id from contact adapter (otherID) hard code rightnow
+        String otherID = "abc123456";
+        ConversationManager conversationManager = getConversationManager();
+        HashSet<String> talkerList = new HashSet<String>();
+        talkerList.add(getID());
+        talkerList.add(otherID);
+        conversationManager.currentConversationSetter(talkerList);
+        ArrayList<String[]> messages = conversationManager.getMessagesOfCurrentConversation();
+        for (String[] message: messages){
+            Msg msg;
+            if (message[0].equals(getID())){
+                msg = new Msg(message[1], Msg.TYPE_SENT);
+            }else{
+                msg = new Msg(message[1], Msg.TYPE_RECEIVED);
+            }
+            msgList.add(msg);
+        }
     }
 
 }

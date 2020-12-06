@@ -23,9 +23,8 @@ public class CleanArchActivity extends AppCompatActivity{
     private final SpeakerManager speakerManager = new SpeakerManager();
     private final RoomManager roomManager = new RoomManager();
     private final ConversationManager conversationManager = new ConversationManager();
-//    private final FileReadWriter fileReadWriter = new FileReadWriter(this, eventManager,
-//            userManager, attendeeManager, organizerManager, speakerManager, roomManager);
     private FileReadWriter fileReadWriter = new FileReadWriter(this);
+    private String userID;
 
     /**
      * Get EventManager of the whole system
@@ -103,5 +102,13 @@ public class CleanArchActivity extends AppCompatActivity{
     public void writeRoom(){
         fileReadWriter.RoomWriter(roomManager);
     }
+
+//    public void setUserID(String userID){
+//        this.userID = userID;
+//    }
+//
+//    public String getUserID(){
+//        return this.userID;
+//    }
 
 }

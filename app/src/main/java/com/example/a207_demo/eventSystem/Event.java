@@ -173,8 +173,6 @@ public abstract class Event implements Serializable {
     }
 
     public boolean timeConflict(String startTime, String duration){
-        System.out.println("HELLLOO" + startTime);
-        System.out.println("YESSSSS" + this.startTime);
         int thisTime = convertStartTimeToNum(this.startTime);
         int checkTime = convertStartTimeToNum(startTime);
         int thisDuration = Integer.parseInt(this.duration);

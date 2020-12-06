@@ -25,7 +25,6 @@ public class AttendeeEventActivity extends EventActivity {
     //Todo: generate event list through manager
     private List<Event> eventList = new ArrayList<>();
     private AttendeeEventAdapter attendeeEventAdapter;
-    private EventManager eventManager;
 
     /**
      * Required function to initiate an Activity class.
@@ -47,7 +46,6 @@ public class AttendeeEventActivity extends EventActivity {
      */
     public void init() {
         super.init(this, R.id.nav_view_attendee, R.id.nav_allevents);
-        eventManager = getEventManager();
         createEventMenu();
     }
 
@@ -66,8 +64,8 @@ public class AttendeeEventActivity extends EventActivity {
      * initialise Events
      */
     protected void initEvents() {
-        //super.initEvents();
-        eventList = eventManager.getAllEvent();
+        super.initEvents();
+        eventList = getEventManager().getAllEvent();
 
         //Todo: implement image later
         for (Event event : eventList) {

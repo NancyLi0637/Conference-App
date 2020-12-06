@@ -21,8 +21,9 @@ public class CleanArchActivity extends AppCompatActivity{
     private final OrganizerManager organizerManager = new OrganizerManager();
     private final SpeakerManager speakerManager = new SpeakerManager();
     private final RoomManager roomManager = new RoomManager();
-    private final FileReadWriter fileReadWriter = new FileReadWriter(this, eventManager,
-            userManager, attendeeManager, organizerManager, speakerManager, roomManager);
+//    private final FileReadWriter fileReadWriter = new FileReadWriter(this, eventManager,
+//            userManager, attendeeManager, organizerManager, speakerManager, roomManager);
+    private FileReadWriter fileReadWriter = new FileReadWriter(this);
 
     /**
      * Get EventManager of the whole system
@@ -70,6 +71,22 @@ public class CleanArchActivity extends AppCompatActivity{
         return this.fileReadWriter;
     }
 
+    public void reset(){
+        fileReadWriter.reset(eventManager, userManager,
+                attendeeManager, organizerManager,
+                speakerManager, roomManager);
+    }
 
+    public void read(){
+        fileReadWriter.UserReader(attendeeManager, speakerManager, organizerManager);
+        fileReadWriter.EventReader(eventManager);
+        fileReadWriter.RoomReader(roomManager);
+    }
+
+    public void write(){
+        fileReadWriter.UserWriter(userManager);
+        fileReadWriter.EventWriter(eventManager);
+        fileReadWriter.RoomReader(roomManager);
+    }
 
 }

@@ -21,7 +21,6 @@ import com.example.a207_demo.utility.CleanArchActivity;
 public class SignUpActivity extends CleanArchActivity implements View.OnClickListener {
 
     private final CreateAccount accountCreator = new CreateAccount();
-    private FileReadWriter fileReadWriter;
 
     private String userName;
     private String userEmail;
@@ -49,7 +48,6 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
      * Set up activity.
      */
     public void init() {
-        fileReadWriter = getFileReadWriter();
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
 
@@ -125,7 +123,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
         userType = String.valueOf(type.getSelectedItem());
 
         accountCreator.createNewAccount(userName, userEmail, userPassword, userType);
-        fileReadWriter.UserWriter();
+        super.write();
     }
 
 }

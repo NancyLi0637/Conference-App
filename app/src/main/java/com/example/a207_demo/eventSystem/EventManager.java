@@ -97,9 +97,7 @@ public class EventManager implements Serializable{
 //            }
 //        }
 
-        System.out.println("WTFFFFF" + startTime);
         for(Event event : this.events){
-            System.out.println("THISSSS" + event.getStartTime());
             if(event.timeConflict(startTime, duration)){
                 return false;
             }

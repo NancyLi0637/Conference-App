@@ -13,7 +13,6 @@ import java.util.List;
  * EventActivity
  */
 public class EventActivity extends SetUpActivity {
-    private FileReadWriter fileReadWriter;
 
     /**
      * createEventMenu
@@ -24,12 +23,11 @@ public class EventActivity extends SetUpActivity {
         recyclerView.setLayoutManager(layoutManager);
     }
 
-//    /**
-//     * initEvents
-//     */
-//    protected void initEvents() {
-//        fileReadWriter = getFileReadWriter();
-//        fileReadWriter.reset();
-//        fileReadWriter.EventReader();
-//    }
+    /**
+     * initEvents
+     */
+    protected void initEvents() {
+        super.reset();
+        super.read();
+    }
 }

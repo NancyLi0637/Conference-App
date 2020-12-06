@@ -50,10 +50,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
      * initialize
      */
     private void init() {
-        getFileReadWriter().reset();
-        getFileReadWriter().UserReader();
-        getFileReadWriter().EventReader();
-        getFileReadWriter().RoomReader();
+        super.read();
         intent = new Intent();
 
         Button selectRoom = findViewById(R.id.select_room);
@@ -116,11 +113,11 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                 } else if(!validDuration()){
                     Toast.makeText(this, "DURATION entered is invalid!", Toast.LENGTH_LONG).show();
                 } else {
-                    boolean created = getFileReadWriter().getEventManager().createEvent(eventTitle, roomName, speakerId,
+                    boolean created = getEventManager().createEvent(eventTitle, roomName, speakerId,
                             eventTime, eventDuration, eventRestriction, eventType);
 
                     if(created){
-                        getFileReadWriter().EventWriter();
+                        super.write();
                         speakerId = new ArrayList<>();
                         intent = new Intent();
                         setResult(RESULT_OK, intent);

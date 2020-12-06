@@ -25,8 +25,6 @@ import java.util.List;
 public class OrganizerEventActivity extends EventActivity implements View.OnClickListener, Serializable {
 
     private List<Event> eventList = new ArrayList<>();
-    private FileReadWriter fileReadWriter;
-    private EventManager eventManager;
     private OrganizerEventAdapter eventAdapter;
 
     /**
@@ -47,9 +45,6 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
      * init
      */
     public void init() {
-        fileReadWriter = getFileReadWriter();
-        eventManager = getEventManager();
-
         super.init(this, R.id.nav_view_organizer, R.id.nav_allevents_organizer);
 
         Button addEvent = findViewById(R.id.btn_addEvent);
@@ -65,8 +60,6 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(OrganizerEventActivity.this, CreateEventActivity.class);
-        intent.putExtra("fileReadWriter", fileReadWriter);
-        intent.putExtra("eventManager", eventManager);
         startActivityForResult(intent, 1);
     }
 
@@ -85,14 +78,14 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
      * initEvents
      */
     protected void initEvents() {
-        //super.initEvents();
-        fileReadWriter.reset();
-        fileReadWriter.EventReader();
-        eventList = eventManager.getAllEvent();
+        super.initEvents();
+        eventList = getEventManager().getAllEvent();
 
         //Todo: implement image later
         for (Event event : eventList) {
             event.setImageId(R.drawable.default_image);
+            System.out.println("HIIIIIII");
+            System.out.println(event.getStartTime());
         }
 
     }

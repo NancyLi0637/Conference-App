@@ -21,13 +21,11 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
  * EventContentActivity
  */
 public abstract class EventContentActivity extends CleanArchActivity implements View.OnClickListener{
-    private EventManager eventManager;
 
     /**
      * Set the activity up
      */
     public void init(){
-        eventManager = getEventManager();
         createActionBar();
         setUpData();
     }
@@ -51,7 +49,7 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
         Intent intent = getIntent();
         String eventTitle = intent.getStringExtra("event_title");
         String eventRoom = intent.getStringExtra("event_room");
-        String eventTime = eventManager.generateFormattedStartTime(intent.getStringExtra("event_time"));
+        String eventTime = getEventManager().generateFormattedStartTime(intent.getStringExtra("event_time"));
         String eventDuration = intent.getStringExtra("event_duration");
         int eventImageId = intent.getIntExtra("event_image_id", 0);
 

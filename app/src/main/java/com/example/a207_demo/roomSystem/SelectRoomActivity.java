@@ -24,7 +24,6 @@ import java.util.List;
 public class SelectRoomActivity extends CleanArchActivity implements View.OnClickListener{
 
     private List<String> roomList = new ArrayList<>();
-    //private FileReadWriter fileReadWriter;
     private Intent intent;
     private boolean selected;
     private String roomNum;
@@ -40,7 +39,6 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
     }
 
     private void init(){
-        //fileReadWriter = getFileReadWriter();
         intent = new Intent();
 
         Button back = findViewById(R.id.room_selected_back);
@@ -91,8 +89,8 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
 
     private void initRooms(){
         //Todo: clean up after implementing Room System
-        getFileReadWriter().reset();
-        getFileReadWriter().RoomReader();
+        super.reset();
+        super.read();
 
         Intent lastIntent = getIntent();
         String time = lastIntent.getStringExtra("eventTime");

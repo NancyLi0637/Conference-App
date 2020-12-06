@@ -24,9 +24,6 @@ import com.example.a207_demo.utility.CleanArchActivity;
  */
 public class MainActivity extends CleanArchActivity implements View.OnClickListener {
 
-    private FileReadWriter fileReadWriter;
-    private EventManager eventManager;
-    private UserManager userManager;
     private static String ID;
     private static String type;
 
@@ -48,9 +45,6 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
      * Set up the activity.
      */
     public void init() {
-        fileReadWriter = getFileReadWriter();
-        userManager = getUserManager();
-
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
 
@@ -68,14 +62,14 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {
             case R.id.btn_signUp:
-                fileReadWriter.reset();
+                super.reset();
                 intent = new Intent(MainActivity.this, SignUpActivity.class);
                 //intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login:
-                fileReadWriter.reset();
-                fileReadWriter.UserReader();
+                super.reset();
+                super.read();
 
                 if (info_matched()) {
                     if (type.equals("ATTENDEE")) {
@@ -108,9 +102,9 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
         String userEM = email.getText().toString();
         String userPW = password.getText().toString();
 
-        if (!userManager.validLogIn(userEM, userPW).equals("NULL")) {
-            ID = userManager.validLogIn(userEM, userPW);
-            type = userManager.getUserType(userEM, userPW);
+        if (!getUserManager().validLogIn(userEM, userPW).equals("NULL")) {
+            ID = getUserManager().validLogIn(userEM, userPW);
+            type = getUserManager().getUserType(userEM, userPW);
             return true;
         }
         return false;

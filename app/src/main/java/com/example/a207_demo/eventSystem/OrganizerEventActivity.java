@@ -29,7 +29,7 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
 
     /**
      * onCreate
-     * @param savedInstanceState
+     * @param savedInstanceState Bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

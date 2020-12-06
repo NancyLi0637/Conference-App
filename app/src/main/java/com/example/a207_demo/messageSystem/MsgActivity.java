@@ -36,6 +36,7 @@ public class MsgActivity extends SetUpActivity implements View.OnClickListener {
     private DrawerLayout mDrawerLayout;
     private MsgAdapter msgAdapter;
     private RecyclerView msgRecyclerView;
+    private Conversation currentConversation;
 
 
     @Override

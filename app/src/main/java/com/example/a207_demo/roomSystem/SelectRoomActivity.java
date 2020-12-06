@@ -21,7 +21,7 @@ import com.example.a207_demo.utility.CleanArchActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectRoomActivity extends CleanArchActivity implements View.OnClickListener{
+public class SelectRoomActivity extends CleanArchActivity implements View.OnClickListener {
 
     private List<String> roomList = new ArrayList<>();
     //private FileReadWriter fileReadWriter;
@@ -29,6 +29,10 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
     private boolean selected;
     private String roomNum;
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +43,7 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
         ActivityCollector.addActivity(this);
     }
 
-    private void init(){
+    private void init() {
         //fileReadWriter = getFileReadWriter();
         intent = new Intent();
 
@@ -52,14 +56,18 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
         createRoomMenu();
     }
 
+    /**
+     * onClick
+     * @param v View
+     */
     @Override
-    public void onClick(View v){
-        switch (v.getId()){
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.room_selected_finish:
                 setUpData();
-                if(!selected){
+                if (!selected) {
                     Toast.makeText(this, "You need to select a room!", Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     setResult(RESULT_OK, intent);
                     finish();
                 }
@@ -71,7 +79,8 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
         }
     }
 
-    private void setUpData(){
+
+    private void setUpData() {
         RadioButton select = findViewById(R.id.room_selected);
         TextView room = findViewById(R.id.room_num);
         selected = select.isChecked();
@@ -79,7 +88,7 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
         intent.putExtra("roomNum", roomNum);
     }
 
-    private void createRoomMenu(){
+    private void createRoomMenu() {
         initRooms();
 
         RecyclerView roomRecycleView = findViewById(R.id.room_recycler_view);
@@ -89,7 +98,7 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
         roomRecycleView.setAdapter(selectRoomAdapter);
     }
 
-    private void initRooms(){
+    private void initRooms() {
         //Todo: clean up after implementing Room System
         getFileReadWriter().reset();
         getFileReadWriter().RoomReader();

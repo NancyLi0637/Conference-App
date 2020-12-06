@@ -24,7 +24,6 @@ public class CleanArchActivity extends AppCompatActivity{
     private final RoomManager roomManager = new RoomManager();
     private final ConversationManager conversationManager = new ConversationManager();
     private FileReadWriter fileReadWriter = new FileReadWriter(this);
-    private String userID;
 
     /**
      * Get EventManager of the whole system

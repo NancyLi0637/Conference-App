@@ -61,6 +61,10 @@ public class SetUpActivity extends CleanArchActivity {
         actionBarDrawerToggle.syncState();
     }
 
+    public String getID(){
+        return ID;
+    }
+
     /**
      * create Nav View
      * @param context context

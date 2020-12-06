@@ -9,15 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".speakerSystem.SelectSpeakerActivity"
+        <activity
+            android:name=".roomSystem.CreateRoomActivity"
+            android:label="Adding Room"
             android:launchMode="singleTask"/>
         <activity
-            android:name=".roomSystem.SelectRoomActivity"
-            android:launchMode="singleTask"></activity>
-        <activity
-            android:name=".eventSystem.CreateEventActivity"
+            android:name=".roomSystem.RoomActivity"
+            android:label="Room"
             android:launchMode="singleTask">
         </activity>
+        <activity
+            android:name=".speakerSystem.SelectSpeakerActivity"
+            android:label="Speaker Selection"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".roomSystem.SelectRoomActivity"
+            android:label="Room Selection"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".eventSystem.CreateEventActivity"
+            android:label="Event Information"
+            android:launchMode="singleTask"></activity>
         <activity android:name=".utility.CleanArchActivity" />
         <activity
             android:name=".eventSystem.AttendeeMyEventContentActivity"
@@ -86,6 +98,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

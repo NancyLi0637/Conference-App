@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.example.a207_demo.R;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class OrganizerEventAdapter extends EventAdapter implements Serializable 
      * @param context
      * @param eventList
      */
-    public OrganizerEventAdapter(Context context, List<Event> eventList) {
+    public OrganizerEventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
         super(context, eventList);
         this.context = context;
     }

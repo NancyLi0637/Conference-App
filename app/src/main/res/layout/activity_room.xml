@@ -30,16 +30,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btn_addRoom"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="60dp"
-                android:text="@string/welcome"
-                android:textSize="30sp" />
+                android:text="@string/addRoom" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/event_recycler_view"
+                android:id="@+id/room_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />
@@ -49,11 +48,11 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view_attendee"
+        android:id="@+id/nav_view_organizer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/nav_menu_attendee"
+        app:menu="@menu/nav_menu_organizer"
         app:headerLayout="@layout/nav_header"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

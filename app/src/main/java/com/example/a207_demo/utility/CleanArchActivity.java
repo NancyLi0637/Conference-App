@@ -77,16 +77,27 @@ public class CleanArchActivity extends AppCompatActivity{
                 speakerManager, roomManager);
     }
 
-    public void read(){
+    public void readUser(){
         fileReadWriter.UserReader(attendeeManager, speakerManager, organizerManager);
+    }
+
+    public void readEvent(){
         fileReadWriter.EventReader(eventManager);
+    }
+    public void readRoom(){
         fileReadWriter.RoomReader(roomManager);
     }
 
-    public void write(){
+    public void writeUser(){
         fileReadWriter.UserWriter(userManager);
+    }
+
+    public void writeEvent(){
         fileReadWriter.EventWriter(eventManager);
-        fileReadWriter.RoomReader(roomManager);
+    }
+
+    public void writeRoom(){
+        fileReadWriter.RoomWriter(roomManager);
     }
 
 }

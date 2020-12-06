@@ -22,6 +22,8 @@ public class SpeakerManager extends UserManager implements Serializable {
         speakers = new ArrayList<>();
     }
 
+    public boolean hasSpeakers(){return this.speakers.size() > 0;}
+
     /**
      * Creates a entities.Speaker and adds it to the lists
      *

@@ -7,13 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.gateway.FileReadWriter;
-import com.example.a207_demo.roomSystem.SelectRoomAdapter;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.utility.CleanArchActivity;
 
@@ -30,7 +25,7 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_speaker);
+        setContentView(R.layout.activity_speaker_select);
 
         init();
 
@@ -82,7 +77,7 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
     private void initSpeakers(){
         //Todo: clean up after implementing speaker System
         super.reset();
-        super.read();
+        super.readUser();
 
         Intent lastIntent = getIntent();
         String time = lastIntent.getStringExtra("eventTime");

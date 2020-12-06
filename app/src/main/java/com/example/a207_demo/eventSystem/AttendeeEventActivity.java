@@ -22,8 +22,7 @@ import java.util.List;
  */
 public class AttendeeEventActivity extends EventActivity {
 
-    //Todo: generate event list through manager
-    private List<Event> eventList = new ArrayList<>();
+    private ArrayList<ArrayList<String>> eventList;
     private AttendeeEventAdapter attendeeEventAdapter;
 
     /**
@@ -65,11 +64,11 @@ public class AttendeeEventActivity extends EventActivity {
      */
     protected void initEvents() {
         super.initEvents();
-        eventList = getEventManager().getAllEvent();
+        eventList = getEventManager().generateAllInfo();
 
-        //Todo: implement image later
-        for (Event event : eventList) {
-            event.setImageId(R.drawable.default_image);
-        }
+//        //Todo: implement image later
+//        for (Event event : eventList) {
+//            event.setImageId(R.drawable.default_image);
+//        }
     }
 }

@@ -98,6 +98,7 @@ public class UserManager implements Serializable {
         return "NULL";
     }
 
+
     /**
      * Return the String user type of a user given his account and password, or "NULL" if not found
      *
@@ -167,13 +168,27 @@ public class UserManager implements Serializable {
      * @param userId user ID
      * @return the corresponding user name
      */
-    public String getUserName(String userId) {
+    public String getUserNameFromID(String userId) {
         for (User user : users) {
             if (user.getUserID().equals(userId)) {
                 return user.getUserName();
             }
         }
         return null;
+    }
+
+    /**
+     * Given a user ID, return the corresponding user name
+     *
+     * @param userIDs the user IDS
+     * @return the corresponding user names
+     */
+    public ArrayList<String> getUserNamesFromID(List<String> userIDs) {
+        ArrayList<String> names = new ArrayList<>();
+        for(String userID : userIDs){
+            names.add(getUserNameFromID(userID));
+        }
+        return names;
     }
 
     /**
@@ -199,20 +214,6 @@ public class UserManager implements Serializable {
         return ids;
     }
 
-    /**
-     * Given a user ID, return the corresponding user name
-     *
-     * @param userID the user Name
-     * @return the corresponding user name
-     */
-    public String getUserNameFromID(String userID) {
-        for (User user : users) {
-            if (user.getUserID().equals(userID)) {
-                return user.getUserName();
-            }
-        }
-        return null;
-    }
 
     /**
      * Return List<String> of user IDs

@@ -9,7 +9,7 @@ import com.example.a207_demo.utility.ActivityCollector;
 /**
  * SpeakerEventContentActivity
  */
-public class SpeakerEventContentActivity extends EventContentActivity implements View.OnClickListener{
+public class SpeakerEventContentActivity extends EventContentActivity{
 
     /**
      * Required function to initiate an Activity class.
@@ -23,6 +23,10 @@ public class SpeakerEventContentActivity extends EventContentActivity implements
         init();
 
         ActivityCollector.addActivity(this);
+    }
+
+    public void onClick(View view){
+
     }
 
 }

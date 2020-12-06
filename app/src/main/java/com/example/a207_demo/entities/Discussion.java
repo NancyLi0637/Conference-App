@@ -15,15 +15,15 @@ public class Discussion extends Event {
      * Discussion
      *
      * @param title       title
-     * @param roomName      roomID
+     * @param roomID      roomID
      * @param startTime   startTime
      * @param speakers    speakers
      * @param duration    duration
      * @param restriction restriction
      */
-    public Discussion(String title, String roomName, String startTime, ArrayList<String> speakers, String duration,
+    public Discussion(String title, String roomID, String startTime, ArrayList<String> speakers, String duration,
                       String restriction) {
-        super(title, roomName, startTime, duration, restriction);
+        super(title, roomID, startTime, duration, restriction);
         setType("DISCUSSION");
         this.speakers = speakers;
     }
@@ -58,6 +58,6 @@ public class Discussion extends Event {
      */
     @Override
     public String toFullString() {
-        return this.toString() + " in room " + this.getRoomName() + " with speaker: " + this.speakersToString();
+        return this.toString() + " in room " + this.getRoomID() + " with speaker: " + this.speakersToString();
     }
 }

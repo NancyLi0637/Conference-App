@@ -1,6 +1,8 @@
 package com.example.a207_demo.roomSystem;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -12,6 +14,7 @@ public class Room implements Serializable{
     private int capacity;
     private int currentNum = 0;
     private final String roomNum;
+    private Map<String, Integer> currentNumAssociateWithEvent;
 
     /**
      * Constructor No.1 for Room
@@ -63,6 +66,10 @@ public class Room implements Serializable{
         return this.currentNum;
     }
 
+    public int getCurrentNumAssociateWithEvent(String eventID){
+        return this.currentNumAssociateWithEvent.get(eventID);
+    }
+
     /**
      * Get the capacity for this room
      *
@@ -89,12 +96,32 @@ public class Room implements Serializable{
             this.currentNum +=1;}
     }
 
+
     /**
      * Decrease the number of people by 1 in this room
      */
     public void decreaseCurrentNum(){
         if (this.currentNum > 0){
             this.currentNum -=1;}
+    }
+
+
+    public void increaseCurrentNumAssociateWithEvent(String eventID) {
+        Integer currentNum = this.currentNumAssociateWithEvent.get(eventID);
+        if ( currentNum < this.capacity) {
+            this.currentNumAssociateWithEvent.replace(eventID, currentNum + 1);
+        }
+    }
+
+    public void decreaseCurrentNumAssociateWithEvent(String eventID) {
+        Integer currentNum = this.currentNumAssociateWithEvent.get(eventID);
+        if ( currentNum > 0) {
+            this.currentNumAssociateWithEvent.replace(eventID, currentNum - 1);
+        }
+    }
+
+    public void setCurrentNumAssociateWithEvent(String eventID){
+        this.currentNumAssociateWithEvent.put(eventID, 0);
     }
 
 //    public void resetTheCurrentNum(){

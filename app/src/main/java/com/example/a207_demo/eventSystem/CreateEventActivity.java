@@ -27,7 +27,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
     private String eventTime;
     private String eventDuration;
     private String eventRestriction = "PUBLIC";
-    private String roomName;
+    private String roomID;
     private ArrayList<String> speakerId;
 
     private Intent intent;
@@ -50,7 +50,10 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
      * initialize
      */
     private void init() {
-        super.read();
+        super.reset();
+        super.readEvent();
+        super.readRoom();
+        super.readUser();
         intent = new Intent();
 
         Button selectRoom = findViewById(R.id.select_room);
@@ -82,7 +85,9 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                 }
                 break;
             case R.id.select_room:
-                if(!validTime()){
+                if(!getRoomManager().hasRooms()){
+                    Toast.makeText(this, "No Room available. Go create one first!", Toast.LENGTH_LONG).show();
+                }else if(!validTime()){
                     Toast.makeText(this, "You must enter VALID TIME first!", Toast.LENGTH_LONG).show();
                 }else{
                     intent = new Intent(CreateEventActivity.this, SelectRoomActivity.class);
@@ -93,6 +98,8 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
             case R.id.select_speaker:
                 if(eventType.equals("PARTY")){
                     Toast.makeText(this, "NO SPEAKER needed for PARTY", Toast.LENGTH_LONG).show();
+                }else if(!getSpeakerManager().hasSpeakers()){
+                    Toast.makeText(this, "No Speaker available. Go create one first!", Toast.LENGTH_LONG).show();
                 }else if(!validTime()){
                     Toast.makeText(this, "You must enter VALID TIME first!", Toast.LENGTH_LONG).show();
                 }else {
@@ -113,11 +120,12 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                 } else if(!validDuration()){
                     Toast.makeText(this, "DURATION entered is invalid!", Toast.LENGTH_LONG).show();
                 } else {
-                    boolean created = getEventManager().createEvent(eventTitle, roomName, speakerId,
+                    boolean created = getEventManager().createEvent(eventTitle, roomID, speakerId,
                             eventTime, eventDuration, eventRestriction, eventType);
 
                     if(created){
-                        super.write();
+                        getRoomManager().addEventToRoom(getEventManager().changeEventTitleIntoEventID(eventTitle), roomID);
+                        super.writeEvent();
                         speakerId = new ArrayList<>();
                         intent = new Intent();
                         setResult(RESULT_OK, intent);
@@ -154,7 +162,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
 
     private boolean dataMissing() {
         return eventTitle.equals("") || eventTime.equals("") || eventDuration.equals("") ||
-                roomName == null;
+                roomID == null;
     }
 
     private boolean validTitle(){
@@ -162,8 +170,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
     }
 
     private boolean validTime() {
-        return getEventManager().checkValidTimeFormat(eventTime) && getEventManager().checkValidFutureTime(eventTime);
-        //return true;
+        return getEventManager().checkValidTime(eventTime);
     }
 
     private boolean validDuration(){
@@ -182,7 +189,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                   roomName = data.getStringExtra("roomNum");
+                   roomID = data.getStringExtra("roomID");
                 }
                 break;
             case 2:

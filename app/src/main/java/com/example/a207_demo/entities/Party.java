@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class Party extends Event {
     private final ArrayList<String> speaker = new ArrayList<>();
 
-    public Party(String title, String roomName, String startTime, String duration, String restriction) {
-        super(title, roomName, startTime, duration, restriction);
+    public Party(String title, String roomID, String startTime, String duration, String restriction) {
+        super(title, roomID, startTime, duration, restriction);
         setType("PARTY");
     }
 
@@ -32,6 +32,6 @@ public class Party extends Event {
      */
     @Override
     public String toFullString() {
-        return this.toString() + " in room " + this.getRoomName();
+        return this.toString() + " in room " + this.getRoomID();
     }
 }

@@ -17,6 +17,8 @@ import com.example.a207_demo.R;
 import com.example.a207_demo.utility.CleanArchActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
+import java.util.ArrayList;
+
 /**
  * EventContentActivity
  */
@@ -26,6 +28,10 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
      * Set the activity up
      */
     public void init(){
+        super.reset();
+        super.readEvent();
+        super.readRoom();
+        super.readUser();
         createActionBar();
         setUpData();
     }
@@ -46,31 +52,52 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
      * setUpData
      */
     protected void setUpData(){
-        Intent intent = getIntent();
-        String eventTitle = intent.getStringExtra("event_title");
-        String eventRoom = intent.getStringExtra("event_room");
-        String eventTime = getEventManager().generateFormattedStartTime(intent.getStringExtra("event_time"));
-        String eventDuration = intent.getStringExtra("event_duration");
-        int eventImageId = intent.getIntExtra("event_image_id", 0);
+        ArrayList<String> event = getIntent().getStringArrayListExtra("event");
+        String eventTitle = event.get(0);
+        String eventRoom = getRoomManager().changeIdTONum(event.get(1));
+        String eventTime = getEventManager().generateFormattedStartTime(event.get(2));
+        String eventDuration = event.get(3);
+        String eventType = event.get(4);
+        String eventRestriction = event.get(5);
+        String eventSpeakers = processSpeakers(event.get(6));
+        String eventContent = "Room: " + eventRoom + "\n" + "Time: " + eventTime + "\n" +
+                "Duration: " + eventDuration + "\n" + "Type: " + eventType + "\n" +
+                "Restriction: " + eventRestriction + "\n" + "Speakers: " + eventSpeakers;
+        fillContent(eventTitle, eventContent);
+    }
 
-        String eventContent = "Room: " + eventRoom + "\n" +
-                "Time: " + eventTime + "\n" + "Duration: " + eventDuration;
-        fillContent(eventTitle, eventContent, eventImageId);
+    private String processSpeakers(String speakerIDs){
+        String result = "";
+        if (speakerIDs.equals("[]") || speakerIDs.equals("null")) {
+            return result;
+        }
+        //remove bracket
+        String content = speakerIDs.substring(1, speakerIDs.length()-1);
+        if (content.contains(", ")) {
+            String[] idList = content.split(", ");
+            for (String id : idList) {
+                String speakerName = getUserManager().getUserNameFromID(id);
+                result += speakerName + "/";
+            }
+        }else {
+            result = getUserManager().getUserNameFromID(content);
+        }
+        return result;
     }
 
     /**
      * fillContent
      * @param eventTitle eventTitle
      * @param eventContent eventContent
-     * @param eventImageId eventImageId
      */
-    protected void fillContent(String eventTitle, String eventContent, int eventImageId){
+    protected void fillContent(String eventTitle, String eventContent){
         ImageView eventImageView = findViewById(R.id.event_image_view);
         TextView eventInfo = findViewById(R.id.event_info);
 
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle(eventTitle);
-        Glide.with(this).load(eventImageId).into(eventImageView);
+        //Todo: implement image later
+        Glide.with(this).load(R.drawable.default_image).into(eventImageView);
         eventInfo.setText(eventContent);
     }
 
@@ -79,9 +106,7 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
      * @param v Button Sign up
      */
     @Override
-    public void onClick(View v){
-        //Todo: add attendee to this event through manager
-    }
+    abstract public void onClick(View v);
 
     /**
      * Return to last menu

@@ -32,9 +32,13 @@ public class AttendeeMyEventContentActivity extends EventContentActivity impleme
      * @param eventImageId int eventImageId
      */
     protected void fillContent(String eventTitle, String eventContent, int eventImageId){
-        super.fillContent(eventTitle, eventContent, eventImageId);
+        ///super.fillContent(eventTitle, eventContent, eventImageId);
         Button eventCancel = findViewById(R.id.btn_cancel_enrolment);
         eventCancel.setOnClickListener(this);
+    }
+
+    public void onClick(View view){
+
     }
 
 }

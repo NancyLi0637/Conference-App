@@ -1,31 +1,26 @@
-package com.example.a207_demo.eventSystem;
-
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+package com.example.a207_demo.roomSystem;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.entities.Party;
-import com.example.a207_demo.gateway.FileReadWriter;
+import com.example.a207_demo.eventSystem.CreateEventActivity;
+import com.example.a207_demo.eventSystem.OrganizerEventActivity;
+import com.example.a207_demo.eventSystem.OrganizerEventAdapter;
 import com.example.a207_demo.utility.ActivityCollector;
+import com.example.a207_demo.utility.SetUpActivity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-/**
- * OrganizerEventActivity
- */
-public class OrganizerEventActivity extends EventActivity implements View.OnClickListener, Serializable {
+public class RoomActivity extends SetUpActivity implements View.OnClickListener{
 
-    private ArrayList<ArrayList<String>> eventList;
-    private OrganizerEventAdapter eventAdapter;
+    private ArrayList<ArrayList<String>> roomList;
+    private RoomAdapter roomAdapter;
 
     /**
      * onCreate
@@ -34,7 +29,7 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_organizer);
+        setContentView(R.layout.activity_room);
 
         init();
 
@@ -45,12 +40,12 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
      * init
      */
     public void init() {
-        super.init(this, R.id.nav_view_organizer, R.id.nav_allevents_organizer);
+        super.init(this, R.id.nav_view_organizer, R.id.nav_room);
 
-        Button addEvent = findViewById(R.id.btn_addEvent);
+        Button addEvent = findViewById(R.id.btn_addRoom);
         addEvent.setOnClickListener(this);
 
-        createEventMenu();
+        createRoomMenu();
     }
 
     /**
@@ -59,29 +54,31 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
      */
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(OrganizerEventActivity.this, CreateEventActivity.class);
+        Intent intent = new Intent(RoomActivity.this, CreateRoomActivity.class);
         startActivityForResult(intent, 1);
     }
 
     /**
      * createEventMenu
      */
-    protected void createEventMenu() {
-        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
-        super.createEventMenu(recyclerView);
-        initEvents();
-        eventAdapter = new OrganizerEventAdapter(this, eventList);
-        recyclerView.setAdapter(eventAdapter);
+    protected void createRoomMenu() {
+        RecyclerView recyclerView = findViewById(R.id.room_recycler_view);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(layoutManager);
+        initRooms();
+        roomAdapter = new RoomAdapter(this, roomList);
+        recyclerView.setAdapter(roomAdapter);
     }
 
     /**
      * initEvents
      */
-    protected void initEvents() {
-        super.initEvents();
+    protected void initRooms() {
+        super.reset();
+        super.readRoom();
 
-       //eventList = getEventManager().getAllEvent();
-        eventList = getEventManager().generateAllInfo();
+        //eventList = getEventManager().getAllEvent();
+        roomList = getRoomManager().generateAllInfo();
 
 //        //Todo: implement image later
 //        for (Event event : eventList) {
@@ -102,18 +99,18 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    refreshEvents();
+                    refreshRooms();
                 }
                 break;
         }
     }
 
-    private void refreshEvents(){
+    private void refreshRooms(){
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                createEventMenu();
-                eventAdapter.notifyDataSetChanged();
+                createRoomMenu();
+                roomAdapter.notifyDataSetChanged();
             }
         });
     }

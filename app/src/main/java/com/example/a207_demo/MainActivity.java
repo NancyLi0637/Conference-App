@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.a207_demo.entities.Attendee;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
+import com.example.a207_demo.eventSystem.AttendeeMyEventActivity;
 import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
@@ -66,6 +68,7 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
                 //intent = new Intent(MainActivity.this, SignUpActivity.class);
                 intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
                 //intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
+                //intent = new Intent(MainActivity.this, AttendeeMyEventActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login:
@@ -75,10 +78,13 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
                 if (info_matched()) {
                     if (type.equals("ATTENDEE")) {
                         intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
+                        intent.putExtra("ID", ID);
                     } else if (type.equals("ORGANIZER")) {
                         intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
+                        intent.putExtra("ID", ID);
                     } else {
                         intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
+                        intent.putExtra("ID", ID);
                     }
                     //Todo: too many lines written in Users.txt (FileReadWriter -> connectWrtier -> UserWriter method)
                     startActivity(intent);

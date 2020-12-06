@@ -27,6 +27,8 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
     private ArrayList<ArrayList<String>> eventList;
     private OrganizerEventAdapter eventAdapter;
 
+    private String ID = getIntent().getStringExtra("ID");
+
     /**
      * onCreate
      * @param savedInstanceState
@@ -81,7 +83,7 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         super.initEvents();
 
        //eventList = getEventManager().getAllEvent();
-        eventList = getEventManager().generateAllInfo();
+        eventList = getEventManager().generateAllInfo(getEventManager().getAllIDAndName().get(0));
 
 //        //Todo: implement image later
 //        for (Event event : eventList) {
@@ -117,4 +119,5 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
             }
         });
     }
+
 }

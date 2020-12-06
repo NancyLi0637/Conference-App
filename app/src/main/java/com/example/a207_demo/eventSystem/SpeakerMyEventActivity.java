@@ -16,7 +16,7 @@ import java.util.List;
 public class SpeakerMyEventActivity extends EventActivity {
 
     //Todo: generate event list by use case
-    private List<Event> eventList = new ArrayList<>();
+    private ArrayList<ArrayList<String>> eventList;
 
     /**
      * onCreate

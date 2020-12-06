@@ -43,9 +43,13 @@ public class AttendeeEventContentActivity extends EventContentActivity implement
      * @param eventImageId int eventImageId
      */
     protected void fillContent(String eventTitle, String eventContent, int eventImageId){
-        super.fillContent(eventTitle, eventContent, eventImageId);
+        //super.fillContent(eventTitle, eventContent, eventImageId);
         Button eventSignUp = findViewById(R.id.btn_signUp_event);
         eventSignUp.setOnClickListener(this);
+    }
+
+    public void onClick(View view){
+
     }
 
 }

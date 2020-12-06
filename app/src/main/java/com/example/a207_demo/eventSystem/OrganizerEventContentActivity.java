@@ -2,6 +2,7 @@ package com.example.a207_demo.eventSystem;
 
 import android.os.Bundle;
 
+import android.view.View;
 import android.widget.Button;
 
 import com.example.a207_demo.R;
@@ -30,12 +31,15 @@ public class OrganizerEventContentActivity extends EventContentActivity{
      * fillContent
      * @param eventTitle String eventTitle
      * @param eventContent String eventContent
-     * @param eventImageId int eventImageId
      */
-    protected void fillContent(String eventTitle, String eventContent, int eventImageId){
-        super.fillContent(eventTitle, eventContent, eventImageId);
+    protected void fillContent(String eventTitle, String eventContent){
+        super.fillContent(eventTitle, eventContent);
         Button eventCancel = findViewById(R.id.btn_cancel_event);
         eventCancel.setOnClickListener(this);
+    }
+
+    public void onClick(View view){
+
     }
 
 }

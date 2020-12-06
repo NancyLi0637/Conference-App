@@ -20,9 +20,9 @@ public class Talk extends Event {
      * @param duration duration
      * @param restriction restriction
      */
-    public Talk (String title, String roomName, ArrayList<String> speakerID, String startTime, String duration,
+    public Talk (String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
                  String restriction){
-        super(title, roomName, startTime, duration, restriction);
+        super(title, roomID, startTime, duration, restriction);
         setType("TALK");
         this.speaker = speakerID;
     }
@@ -43,7 +43,7 @@ public class Talk extends Event {
      */
     @Override
     public String toFullString(){
-        return this.toString() + " in room " + this.getRoomName() + " with speaker: " + this.getSpeakers().get(0);}
+        return this.toString() + " in room " + this.getRoomID() + " with speaker: " + this.getSpeakers().get(0);}
 
 }
 

@@ -35,6 +35,8 @@ public class RoomManager implements Serializable {
      */
     public void reset(){this.rooms = new ArrayList<>();}
 
+    public boolean hasRooms(){return this.rooms.size() > 0;}
+
     /**
      * Creates a new room
      *
@@ -51,6 +53,18 @@ public class RoomManager implements Serializable {
         this.rooms.add(room);
         return true;
     }
+
+    public boolean checkValidNum(String roomNum){
+        try
+        {
+            int num = Integer.parseInt(roomNum);
+            return num > 0;
+        } catch (NumberFormatException ex)
+        {
+            return false;
+        }
+    }
+
 
     /**
      * Creates a new room and add it to rooms list
@@ -190,13 +204,29 @@ public class RoomManager implements Serializable {
         return roomList;
     }
 
+
     public String generateFormattedRoomInfo(String roomId){
         for(Room room : rooms){
             if(room.getRoomID().equals(roomId)){
-                return room.getRoomNum() + " " + roomId + " " + room.getCapacity();
+                return "Room" + room.getRoomNum() + " " + roomId + " " + room.getCapacity();
             }
         }
         return null;
+    }
+
+    /**
+     * Generate the event info for loading into event activity
+     * @return
+     */
+    public ArrayList<ArrayList<String>> generateAllInfo(){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for (Room room: rooms){
+            ArrayList<String> info = new ArrayList<>();
+            info.add("Room"+room.getRoomNum());
+            info.add(String.valueOf(room.getCapacity()));
+            result.add(info);
+        }
+        return result;
     }
 
 

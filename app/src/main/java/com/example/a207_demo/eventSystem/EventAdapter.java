@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,14 +23,14 @@ import java.util.List;
  */
 public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHEvent> implements Serializable {
     private Context context;
-    private List<Event> eventList;
+    private ArrayList<ArrayList<String>> eventList;
 
     /**
      * Event Adapter for this Event Activity
      * @param context
      * @param eventList
      */
-    public EventAdapter(Context context, List<Event> eventList) {
+    public EventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
         this.context = context;
         this.eventList = eventList;
     }
@@ -52,13 +53,9 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
             @Override
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
-                Event event = eventList.get(position);
+                ArrayList<String> event = eventList.get(position);
                 Intent intent = new Intent(context, nextClass);
-                intent.putExtra("event_title", event.getTitle());
-                intent.putExtra("event_room", event.getRoomName());
-                intent.putExtra("event_time", event.getStartTime());
-                intent.putExtra("event_duration", event.getDuration());
-                intent.putExtra("event_image_id", event.getImageId());
+                intent.putStringArrayListExtra("event", event);
                 context.startActivity(intent);
             }
         });
@@ -71,9 +68,10 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
      */
     @Override
     public void onBindViewHolder(@NonNull VHEvent holder, int position) {
-        Event event = eventList.get(position);
-        holder.eventTitle.setText(event.getTitle());
-        Glide.with(context).load(event.getImageId()).into(holder.eventImage);
+        List<String> event= eventList.get(position);
+        holder.eventTitle.setText(event.get(0));
+        //Todo: implement image later
+        Glide.with(context).load(R.drawable.default_image).into(holder.eventImage);
     }
 
     /**

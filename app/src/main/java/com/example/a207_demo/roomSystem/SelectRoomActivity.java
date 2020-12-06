@@ -10,11 +10,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.gateway.FileReadWriter;
-import com.example.a207_demo.speakerSystem.SelectSpeakerActivity;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.utility.CleanArchActivity;
 
@@ -27,12 +24,12 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
     //private FileReadWriter fileReadWriter;
     private Intent intent;
     private boolean selected;
-    private String roomNum;
+    private String roomID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_room);
+        setContentView(R.layout.activity_room_select);
 
         init();
 
@@ -75,14 +72,14 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
         RadioButton select = findViewById(R.id.room_selected);
         TextView room = findViewById(R.id.room_num);
         selected = select.isChecked();
-        roomNum = room.getText().toString();
-        intent.putExtra("roomNum", roomNum);
+        roomID = getRoomManager().changeNumTOID(room.getText().toString());
+        intent.putExtra("roomID", roomID);
     }
 
     private void createRoomMenu(){
         initRooms();
 
-        RecyclerView roomRecycleView = findViewById(R.id.room_recycler_view);
+        RecyclerView roomRecycleView = findViewById(R.id.select_room_recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         roomRecycleView.setLayoutManager(linearLayoutManager);
         SelectRoomAdapter selectRoomAdapter = new SelectRoomAdapter(this, roomList);
@@ -92,7 +89,7 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
     private void initRooms(){
         //Todo: clean up after implementing Room System
         super.reset();
-        super.read();
+        super.readRoom();
 
         Intent lastIntent = getIntent();
         String time = lastIntent.getStringExtra("eventTime");

@@ -13,7 +13,7 @@ import java.util.List;
 public class AttendeeMyEventActivity extends AttendeeEventActivity {
 
     //Todo: access Event Use case
-    private List<Event> eventList = new ArrayList<>();
+    private ArrayList<ArrayList<String>> eventList;
 
     /**
      * Set up the activity.

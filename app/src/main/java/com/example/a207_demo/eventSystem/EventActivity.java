@@ -28,6 +28,7 @@ public class EventActivity extends SetUpActivity {
      */
     protected void initEvents() {
         super.reset();
-        super.read();
+        super.readEvent();
+        super.readRoom();
     }
 }

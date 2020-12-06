@@ -16,9 +16,11 @@ import com.example.a207_demo.contactSystem.ContactActivity;
 import com.example.a207_demo.contactSystem.SpeakerContactActivity;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
 import com.example.a207_demo.eventSystem.AttendeeMyEventActivity;
+import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
 import com.example.a207_demo.messageSystem.AnnouncementActivity;
 import com.example.a207_demo.messageSystem.SpeakerAnnouncementActivity;
+import com.example.a207_demo.roomSystem.RoomActivity;
 import com.google.android.material.navigation.NavigationView;
 
 /**
@@ -60,7 +62,7 @@ public class SetUpActivity extends CleanArchActivity {
      */
     protected void createNavView(final AppCompatActivity context, int id_nav_view, int id_nav_item) {
         NavigationView navigationView = findViewById(id_nav_view);
-        navigationView.setCheckedItem(id_nav_item);
+        //navigationView.setCheckedItem(id_nav_item);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -92,6 +94,15 @@ public class SetUpActivity extends CleanArchActivity {
                     case R.id.nav_announcements_speaker:
                         mDrawerLayout.closeDrawers();
                         startActivity(new Intent(context, SpeakerAnnouncementActivity.class));
+                        break;
+                    case R.id.nav_allevents_organizer:
+                        mDrawerLayout.closeDrawers();
+                        startActivity(new Intent(context, OrganizerEventActivity.class));
+                        break;
+                    case R.id.nav_room:
+                        mDrawerLayout.closeDrawers();
+                        startActivity(new Intent(context, RoomActivity.class));
+                        break;
                 }
 
                 return true;

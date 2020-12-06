@@ -107,7 +107,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
     private boolean validUsername() {
         EditText firstName = findViewById(R.id.firstname);
         EditText lastName = findViewById(R.id.lastname);
-        userName = firstName.getText().toString() + lastName.getText().toString();
+        userName = firstName.getText().toString() + " " + lastName.getText().toString();
 
         return accountCreator.isValidUserName(userName);
     }
@@ -123,7 +123,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
         userType = String.valueOf(type.getSelectedItem());
 
         accountCreator.createNewAccount(userName, userEmail, userPassword, userType);
-        super.write();
+        super.writeUser();
     }
 
 }

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 
 import com.example.a207_demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class SpeakerEventAdapter extends EventAdapter {
      * @param context Context
      * @param eventList List<Event>
      */
-    public SpeakerEventAdapter(Context context, List<Event> eventList) {
+    public SpeakerEventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
         super(context, eventList);
         this.context = context;
     }

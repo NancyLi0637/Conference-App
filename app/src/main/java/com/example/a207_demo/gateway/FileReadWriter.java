@@ -92,10 +92,10 @@ public class FileReadWriter implements Serializable {
         for (String line : lines) {
             String[] wordList = line.split(" ");
             String type = wordList[0];
-            String username = wordList[1];
-            String email = wordList[2];
-            String password = wordList[3];
-            String userId = wordList[4];
+            String username = wordList[1] + " " + wordList[2];
+            String email = wordList[3];
+            String password = wordList[4];
+            String userId = wordList[5];
 
 
             if (type.equals("SPEAKER")) {
@@ -123,7 +123,7 @@ public class FileReadWriter implements Serializable {
     public void UserWriter(UserManager userManager) {
         List<String> userIDs = userManager.UsersIdsGetter();
         try {
-            FileOutputStream out = context.openFileOutput("Users", Context.MODE_PRIVATE);
+            FileOutputStream out = context.openFileOutput("Users", Context.MODE_APPEND);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String userID : userIDs) {
                 String line = userManager.generateFormattedUserInfo(userID);
@@ -176,10 +176,10 @@ public class FileReadWriter implements Serializable {
             String type = wordList[0];
             String title = wordList[1].replace("_", " ");
             String eventId = wordList[2];
-            String roomName = wordList[3] + " " + wordList[4];
-            String startTime = wordList[5];
-            String duration = wordList[6];
-            String restriction = wordList[7];
+            String roomID = wordList[3];
+            String startTime = wordList[4];
+            String duration = wordList[5];
+            String restriction = wordList[6];
 
 
 //            ArrayList<String> Attendees = new ArrayList<>();
@@ -189,7 +189,7 @@ public class FileReadWriter implements Serializable {
 //                }
 //            }
 //            eventsController.getRoomManager().addEventToRoom(wordList.get(4), wordList.get(1));
-            eventManager.loadEvent(type, title, eventId, roomName, speakerId, startTime, duration, restriction);
+            eventManager.loadEvent(type, title, eventId, roomID, speakerId, startTime, duration, restriction);
         }
     }
 
@@ -259,9 +259,9 @@ public class FileReadWriter implements Serializable {
 
         for (String line : lines) {
             String[] wordList = line.split(" ");
-            String roomNum = wordList[0] + " " + wordList[1];
-            String roomId = wordList[2];
-            int capacity = Integer.parseInt(wordList[3]);
+            String roomNum = wordList[0].substring(wordList[0].indexOf("m")+1);
+            String roomId = wordList[1];
+            int capacity = Integer.parseInt(wordList[2]);
 
             roomManager.loadRoom(roomNum, roomId, capacity);
         }
@@ -273,7 +273,7 @@ public class FileReadWriter implements Serializable {
     public void RoomWriter(RoomManager roomManager) {
         ArrayList<String> IDList = roomManager.getAllRoomID();
         try {
-            FileOutputStream out = context.openFileOutput("Rooms", Context.MODE_APPEND);
+            FileOutputStream out = context.openFileOutput("Rooms", Context.MODE_PRIVATE);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String id : IDList) {
                 String line = roomManager.generateFormattedRoomInfo(id);

@@ -136,7 +136,7 @@ public class EventsController {
     public ArrayList<String> getEventInfo(String eventID) {
         ArrayList<String> info = new ArrayList<>();
         Event event = this.eventManager.getEventFromID(eventID);
-        Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomName());
+        Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
         info.add(event.getTitle());
         info.add(event.getStartTime());
 //        for (String speaker : event.getSpeakers()) {
@@ -187,6 +187,6 @@ public class EventsController {
         for (String attendee : attendeeList) {
             eventManager.removeAttendeeFromEvent(attendee, eventID, roomManager);
         }
-        return roomManager.getRoomBasedOnItsID(currentEvent.getRoomName()).getCurrentNum() == 0;
+        return roomManager.getRoomBasedOnItsID(currentEvent.getRoomID()).getCurrentNum() == 0;
     }
 }

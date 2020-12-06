@@ -3,6 +3,8 @@ package com.example.a207_demo.eventSystem;
 import com.example.a207_demo.roomSystem.Room;
 import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.roomSystem.RoomManager;
+import com.example.a207_demo.use_cases.SpeakerManager;
+import com.example.a207_demo.use_cases.UserManager;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -80,12 +82,12 @@ public class EventManager implements Serializable{
      * Creates a new event
      *
      * @param title title of the event
-     * @param roomName roomID of the event
+     * @param roomID roomID of the event
      * @param speakerID speakerID of the event
      * @param  startTime startTime of the event
      * @return the newly created event or null
      */
-    public boolean createEvent(String title, String roomName, ArrayList<String> speakerID, String startTime, String duration,
+    public boolean createEvent(String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
                              String restriction, String type) {
 //        for (Event event : this.events) {
 //            for (String speaker: event.getSpeakers()) {
@@ -103,7 +105,7 @@ public class EventManager implements Serializable{
             }
         }
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomName, speakerID, startTime,duration, restriction, type);
+        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime, duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
@@ -139,10 +141,10 @@ public class EventManager implements Serializable{
     }
 
     //Todo: eventId?
-    public void loadEvent(String type, String title, String eventID, String roomName, ArrayList<String> speakerID,
+    public void loadEvent(String type, String title, String eventID, String roomID, ArrayList<String> speakerID,
                           String startTime, String duration, String restriction) {
         // create this new event:
-        Event newEvent = eventFactory.createEvent(title, roomName, speakerID, startTime,duration, restriction, type);
+        Event newEvent = eventFactory.createEvent(title, roomID, speakerID, startTime,duration, restriction, type);
         // update the events list:
         events.add(newEvent);
 
@@ -181,7 +183,7 @@ public class EventManager implements Serializable{
             if (!(restriction.equals("VIP-ONLY") && !userType.equals("VIPUser"))) {
                 //Todo: update room in room manager
                 //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
-                Room room = roomManager.getRoomBasedOnItsID(event.getRoomName());
+                Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
                 if (room.getCurrentNum() < room.getCapacity()) {
                     if (event.addAttendee(userID, events)) {
                         room.increaseCurrentNum();
@@ -370,13 +372,11 @@ public class EventManager implements Serializable{
         return "NULL";
     }
 
+    public boolean checkValidTime(String time){
+        return checkValidTimeFormat(time) && checkValidFutureTime(time);
+    }
 
-    /**
-     * To check if a time format is valid.
-     * @param time given time string
-     * @return true iff the time format is correct
-     */
-    public boolean checkValidTimeFormat(String time) {
+    private boolean checkValidTimeFormat(String time) {
         if (time.length() == 13 && time.charAt(4) == '/' && time.charAt(7) == '/' && time.charAt(10) == '/') {
             String[] timeList = time.split("/");
             try {
@@ -403,12 +403,7 @@ public class EventManager implements Serializable{
         return false;
     }
 
-    /**
-     * To check if a given event time can be added.
-     * @param time given time
-     * @return true iff the time slot is available
-     */
-    public boolean checkValidFutureTime(String time) {
+    private boolean checkValidFutureTime(String time) {
         String eventTime = time.replace("/", "");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd/HH");
         Date date = new Date();
@@ -450,20 +445,39 @@ public class EventManager implements Serializable{
     }
 
     /**
-     * Generate the formatted event's information.
+     * Generate the formatted event's information for writing into database.
      * @param eventID the id of an event.
      * @return a string of formatted event's information.
      */
     public String generateFormattedEventInfo(String eventID){
         for (Event event : events){
             if (event.getEventID().equals(eventID)){
-                System.out.println("HIIIIIIII 2" + event.getSpeakers());
                 return event.getType() + " " + event.getTitle().replace(" ", "_")
-                        + " " + eventID + " " + event.getRoomName() + " {" + event.getSpeakers() + "} "
+                        + " " + eventID + " " + event.getRoomID() + " {" + event.getSpeakers() + "} "
                         + event.getStartTime() + " " + event.getDuration() + " " + event.getRestriction();
             }
         }
         return "NULL";
+    }
+
+    /**
+     * Generate the event info for laoding into event activity
+     * @return
+     */
+    public ArrayList<ArrayList<String>> generateAllInfo(){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for (Event event : events){
+            ArrayList<String> info = new ArrayList<>();
+            info.add(event.getTitle());
+            info.add(event.getRoomID());
+            info.add(event.getStartTime());
+            info.add(event.getDuration());
+            info.add(event.getType());
+            info.add(event.getRestriction());
+            info.add(""+event.getSpeakers());
+            result.add(info);
+        }
+        return result;
     }
 
 }

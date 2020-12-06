@@ -417,9 +417,24 @@ public class EventManager implements Serializable{
     }
 
     //Todo: title is larger than 3 characters and not the same as other events
+
+    /**
+     * checkValidTitle
+     * @param title String title
+     * @return boolean
+     */
     public boolean checkValidTitle(String title){
+        if (title.length() < 3) {
+            return false;
+        }
+        for (Event event : events) {
+            if (event.getTitle().equals(title)) {
+                return false;
+            }
+        }
         return true;
     }
+
 
     //Todo: duration is integer and larger than 0
     public boolean checkValidDuration(String duration){

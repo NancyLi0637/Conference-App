@@ -8,10 +8,18 @@ import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.utility.SetUpActivity;
 
+/**
+ * SpeakerAnnouncementActivity
+ */
 public class SpeakerAnnouncementActivity extends SetUpActivity {
 
     private DrawerLayout mDrawerLayout;
 
+    /**
+     * onCreate
+     *
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -23,6 +31,9 @@ public class SpeakerAnnouncementActivity extends SetUpActivity {
         ActivityCollector.addActivity(this);
     }
 
+    /**
+     * init
+     */
     public void init() {
         super.init(this, R.id.nav_view_speaker, R.id.nav_announcements_speaker);
     }

@@ -27,8 +27,8 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
 
     /**
      * Event Adapter for this Event Activity
-     * @param context
-     * @param eventList
+     * @param context Context
+     * @param eventList ArrayList<ArrayList<String>>
      */
     public EventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
         this.context = context;

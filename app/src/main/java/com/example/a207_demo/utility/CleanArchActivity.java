@@ -64,6 +64,10 @@ public class CleanArchActivity extends AppCompatActivity{
      */
     public RoomManager getRoomManager() {return this.roomManager;}
 
+    /**
+     * getConversationManager
+     * @return ConversationManager
+     */
     public ConversationManager getConversationManager(){return this.conversationManager;}
 
     /**

@@ -18,6 +18,9 @@ import com.example.a207_demo.utility.CleanArchActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SelectRoomActivity
+ */
 public class SelectRoomActivity extends CleanArchActivity implements View.OnClickListener{
 
     private List<String> roomList = new ArrayList<>();
@@ -49,6 +52,10 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
         createRoomMenu();
     }
 
+    /**
+     * onClick
+     * @param v View
+     */
     @Override
     public void onClick(View v){
         switch (v.getId()){

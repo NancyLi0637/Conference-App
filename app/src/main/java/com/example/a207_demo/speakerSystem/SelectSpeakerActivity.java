@@ -15,6 +15,9 @@ import com.example.a207_demo.utility.CleanArchActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SelectSpeakerActivity
+ */
 public class SelectSpeakerActivity extends CleanArchActivity implements View.OnClickListener{
 
     private List<String> speakerList;
@@ -22,6 +25,10 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
 
     private Intent intent;
 
+    /**
+     * onCreate
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -44,6 +51,10 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
         createSpeakerMenu();
     }
 
+    /**
+     * onClick
+     * @param v View
+     */
     @Override
     public void onClick(View v){
         switch (v.getId()){

@@ -11,11 +11,19 @@ import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.utility.CleanArchActivity;
 
-public class CreateRoomActivity extends CleanArchActivity implements View.OnClickListener{
+/**
+ * CreateRoomActivity
+ */
+public class CreateRoomActivity extends CleanArchActivity implements View.OnClickListener {
     private Intent intent;
     private String roomNum;
     private String roomCap;
 
+    /**
+     * onCreate
+     *
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +34,8 @@ public class CreateRoomActivity extends CleanArchActivity implements View.OnClic
         ActivityCollector.addActivity(this);
     }
 
-    private void init(){
+
+    private void init() {
         super.reset();
         super.readRoom();
         intent = new Intent();
@@ -38,23 +47,28 @@ public class CreateRoomActivity extends CleanArchActivity implements View.OnClic
         finish.setOnClickListener(this);
     }
 
-    public void onClick(View view){
-        switch(view.getId()){
+    /**
+     * onClick
+     *
+     * @param view View
+     */
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.room_added_finish:
                 setUpData();
-                if(dataMissing()){
+                if (dataMissing()) {
                     Toast.makeText(this, "Information missing!", Toast.LENGTH_LONG).show();
-                }else if(!validRoomNum()){
+                } else if (!validRoomNum()) {
                     Toast.makeText(this, "ROOM NUMBER entered is invalid!", Toast.LENGTH_LONG).show();
-                }else if(!validRoomCap()){
+                } else if (!validRoomCap()) {
                     Toast.makeText(this, "ROOM CAPACITY entered is invalid!", Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     boolean created = getRoomManager().createRoom(roomNum, Integer.parseInt(roomCap));
-                    if(created){
+                    if (created) {
                         super.writeRoom();
                         setResult(RESULT_OK, intent);
                         finish();
-                    }else{
+                    } else {
                         Toast.makeText(this, "There is ROOM NUMBER CONFLICT!", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -66,22 +80,22 @@ public class CreateRoomActivity extends CleanArchActivity implements View.OnClic
         }
     }
 
-    private void setUpData(){
+    private void setUpData() {
         EditText num = findViewById(R.id.room_num_added);
         EditText cap = findViewById(R.id.room_cap_added);
         roomNum = num.getText().toString();
         roomCap = cap.getText().toString();
     }
 
-    private boolean dataMissing(){
+    private boolean dataMissing() {
         return roomNum.equals("") || roomCap.equals("");
     }
 
-    private boolean validRoomNum(){
+    private boolean validRoomNum() {
         return getRoomManager().checkValidNum(roomNum);
     }
 
-    private boolean validRoomCap(){
+    private boolean validRoomCap() {
         return getRoomManager().checkValidNum(roomCap);
     }
 }

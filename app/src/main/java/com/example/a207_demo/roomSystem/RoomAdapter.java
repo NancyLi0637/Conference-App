@@ -22,6 +22,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RoomAdapter
+ */
 public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.VHRoom> implements Serializable {
     private Context context;
     private ArrayList<ArrayList<String>> roomList;

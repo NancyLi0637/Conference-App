@@ -105,7 +105,10 @@ public class Room implements Serializable{
             this.currentNum -=1;}
     }
 
-
+    /**
+     * increaseCurrentNumAssociateWithEvent
+     * @param eventID String
+     */
     public void increaseCurrentNumAssociateWithEvent(String eventID) {
         Integer currentNum = this.currentNumAssociateWithEvent.get(eventID);
         if ( currentNum < this.capacity) {

@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
+/**
+ * Settings
+ */
 public class Settings extends AppCompatActivity {
     private String ID;
 
@@ -25,6 +28,9 @@ public class Settings extends AppCompatActivity {
         ActivityCollector.addActivity(this);
     }
 
+    /**
+     * init
+     */
     public void init(){
         ID = getIntent().getStringExtra("ID");
         TextView userId = findViewById(R.id.username_setting);
@@ -32,6 +38,9 @@ public class Settings extends AppCompatActivity {
         createActionBar();
     }
 
+    /**
+     * createActionBar
+     */
     public void createActionBar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,6 +50,11 @@ public class Settings extends AppCompatActivity {
         }
     }
 
+    /**
+     * onOptionsItemSelected
+     * @param item MenuItem
+     * @return boolean
+     */
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case android.R.id.home:

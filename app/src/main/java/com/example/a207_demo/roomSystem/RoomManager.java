@@ -33,9 +33,13 @@ public class RoomManager implements Serializable {
     /**
      * Reset the room list.
      */
-    public void reset(){this.rooms = new ArrayList<>();}
+    public void reset() {
+        this.rooms = new ArrayList<>();
+    }
 
-    public boolean hasRooms(){return this.rooms.size() > 0;}
+    public boolean hasRooms() {
+        return this.rooms.size() > 0;
+    }
 
     /**
      * Creates a new room
@@ -54,13 +58,17 @@ public class RoomManager implements Serializable {
         return true;
     }
 
-    public boolean checkValidNum(String roomNum){
-        try
-        {
+    /**
+     * checkValidNum
+     *
+     * @param roomNum String
+     * @return boolean
+     */
+    public boolean checkValidNum(String roomNum) {
+        try {
             int num = Integer.parseInt(roomNum);
             return num > 0;
-        } catch (NumberFormatException ex)
-        {
+        } catch (NumberFormatException ex) {
             return false;
         }
     }
@@ -70,7 +78,7 @@ public class RoomManager implements Serializable {
      * Creates a new room and add it to rooms list
      *
      * @param roomNum the room to create and add
-     * @param roomID the room ID
+     * @param roomID  the room ID
      */
     public void loadRoom(String roomNum, String roomID, int capacity) {
         Room room = new Room(roomNum, roomID, capacity);
@@ -80,7 +88,7 @@ public class RoomManager implements Serializable {
     /**
      * Get an ArrayList<String> of all room numbers
      *
-     * @return  ArrayList<String> of all room numbers
+     * @return ArrayList<String> of all room numbers
      */
     public ArrayList<String> getAllRoomNum() {
         ArrayList<String> roomNumbers = new ArrayList<>();
@@ -93,7 +101,7 @@ public class RoomManager implements Serializable {
     /**
      * Get an ArrayList<String> of all room IDs
      *
-     * @return  ArrayList<String> of all room IDs
+     * @return ArrayList<String> of all room IDs
      */
     public ArrayList<String> getAllRoomID() {
         ArrayList<String> roomIDs = new ArrayList<>();
@@ -106,7 +114,7 @@ public class RoomManager implements Serializable {
     /**
      * Check if a room with roomID is full
      *
-     * @param  roomID roomID
+     * @param roomID roomID
      * @return true iff the room is full
      */
     public boolean isFull(String roomID) {
@@ -176,7 +184,8 @@ public class RoomManager implements Serializable {
 
     /**
      * Get an ArrayList<String> of room numbers that are available for the given time
-     * @param time the starting time
+     *
+     * @param time         the starting time
      * @param eventManager an EventManager object
      * @return an ArrayList<String> of room numbers that are available for the given time
      */
@@ -205,9 +214,9 @@ public class RoomManager implements Serializable {
     }
 
 
-    public String generateFormattedRoomInfo(String roomId){
-        for(Room room : rooms){
-            if(room.getRoomID().equals(roomId)){
+    public String generateFormattedRoomInfo(String roomId) {
+        for (Room room : rooms) {
+            if (room.getRoomID().equals(roomId)) {
                 return "Room" + room.getRoomNum() + " " + roomId + " " + room.getCapacity();
             }
         }
@@ -216,13 +225,14 @@ public class RoomManager implements Serializable {
 
     /**
      * Generate the event info for loading into event activity
+     *
      * @return
      */
-    public ArrayList<ArrayList<String>> generateAllInfo(){
+    public ArrayList<ArrayList<String>> generateAllInfo() {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
-        for (Room room: rooms){
+        for (Room room : rooms) {
             ArrayList<String> info = new ArrayList<>();
-            info.add("Room"+room.getRoomNum());
+            info.add("Room" + room.getRoomNum());
             info.add(String.valueOf(room.getCapacity()));
             result.add(info);
         }

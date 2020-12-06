@@ -17,14 +17,18 @@ import com.example.a207_demo.utility.SetUpActivity;
 
 import java.util.ArrayList;
 
-public class RoomActivity extends SetUpActivity implements View.OnClickListener{
+/**
+ * RoomActivity
+ */
+public class RoomActivity extends SetUpActivity implements View.OnClickListener {
 
     private ArrayList<ArrayList<String>> roomList;
     private RoomAdapter roomAdapter;
 
     /**
      * onCreate
-     * @param savedInstanceState
+     *
+     * @param savedInstanceState Bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class RoomActivity extends SetUpActivity implements View.OnClickListener{
 
     /**
      * onClick
+     *
      * @param v View
      */
     @Override
@@ -89,9 +94,10 @@ public class RoomActivity extends SetUpActivity implements View.OnClickListener{
 
     /**
      * onActivityResult
+     *
      * @param requestCode requestCode
-     * @param resultCode resultCode
-     * @param data Intent
+     * @param resultCode  resultCode
+     * @param data        Intent
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -105,7 +111,7 @@ public class RoomActivity extends SetUpActivity implements View.OnClickListener{
         }
     }
 
-    private void refreshRooms(){
+    private void refreshRooms() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

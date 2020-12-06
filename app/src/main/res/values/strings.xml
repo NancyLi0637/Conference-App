@@ -4,6 +4,7 @@
     <string name="password">Password</string>
 
     <string name="signUp">Sign up</string>
+    <string name="search">Search</string>
     <string name="login">Login</string>
     <string name="signOut">Sign out</string>
     <string name="settings">Settings</string>
@@ -40,6 +41,8 @@
     <string name="roomCap">Room Capacity</string>
     <string name="newSpeaker">New Speaker Account</string>
     <string name="newAttendee">New Attendee Account</string>
+    <string name="friendName">Friend Name</string>
+
 
     <string name="useremail">nancielee@gmail.com</string>
     <string-array name="event_types">

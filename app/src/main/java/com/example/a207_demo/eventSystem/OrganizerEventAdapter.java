@@ -22,8 +22,8 @@ public class OrganizerEventAdapter extends EventAdapter implements Serializable 
 
     /**
      * OrganizerEventAdapter Constructor
-     * @param context
-     * @param eventList
+     * @param context Context
+     * @param eventList ArrayList<ArrayList<String>> eventList
      */
     public OrganizerEventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
         super(context, eventList);
@@ -34,7 +34,7 @@ public class OrganizerEventAdapter extends EventAdapter implements Serializable 
      * onCreateViewHolder for OrganizerEventAdapter
      * @param parent parent ViewGroup
      * @param viewType viewType
-     * @return
+     * @return VHEvent
      */
     @NonNull
     @Override

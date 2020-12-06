@@ -41,6 +41,7 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
      * @param viewType viewType
      * @return VHEvent
      */
+    @Override
     abstract public VHEvent onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
 
     /**

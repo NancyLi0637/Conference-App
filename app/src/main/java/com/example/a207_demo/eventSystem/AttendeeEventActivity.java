@@ -44,7 +44,7 @@ public class AttendeeEventActivity extends EventActivity {
      * Set up the activity.
      */
     public void init() {
-        super.init(this, R.id.nav_view_attendee, R.id.nav_allevents);
+        super.init(this, R.id.nav_view_attendee, R.id.nav_allevents); // From SetUpActivity
         createEventMenu();
     }
 

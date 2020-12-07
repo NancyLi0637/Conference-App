@@ -10,7 +10,7 @@ import com.example.a207_demo.utility.CleanArchActivity;
 public class CreateAccount extends CleanArchActivity {
 
     private final UserManager userManager = getUserManager();
-    private final UserFactory userFactory = new UserFactory(getAttendeeManager(),
+    private final UserFactory userFactory = new UserFactory(getAttendeeManager(), getVipUserManager(),
             getOrganizerManager(), getSpeakerManager());
 
 
@@ -23,8 +23,8 @@ public class CreateAccount extends CleanArchActivity {
      * @param userPW   Password of user
      * @return True if created successfully
      */
-    public void createNewAccount(String username, String userEM, String userPW, String type) {
-        userFactory.createNewUserAccount(username, userEM, userPW, type);
+    public void createNewAccount(String type, String username, String userEM, String userPW) {
+        userFactory.createNewUserAccount(type, username, userEM, userPW);
     }
 
     /**

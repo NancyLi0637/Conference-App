@@ -13,6 +13,7 @@ public abstract class User implements Serializable {
     private String email;
     private String password;
     private String type;
+    private String userID;
     private ArrayList<String> friendList;
 
     /**
@@ -30,70 +31,17 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Getter method for this user's friendList
-     *
-     * @return A copy of the friendList of this user
-     */
-    public ArrayList<String> friendListGetter() {
-        return (ArrayList) friendList.clone();
-    }
-
-    /**
-     * Add a friend to this user's friendList
-     *
-     * @param userId the userID of the new friend to add
-     */
-    public void friendListSetter(String userId) {
-        friendList.add(userId);
-    }
-
-    /**
-     * Get the type of this user
-     *
-     * @return the type of this user
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Abstract method to get this user's ID, all subclasses should implement this method
-     *
-     * @return userID for this user
-     */
-    public abstract String getUserID();
-
-    /**
-     * Set the type of this user
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
-     * Get the value of userName
-     *
-     * @return the value of lastName
-     */
-    public String getUserName() {
-        return this.userName;
-    }
-
-    /**
      * Set the value of userName
      */
     public void setUsername(String userName) {
         this.userName = userName;
     }
 
-
     /**
-     * Get the value of email
-     *
-     * @return the value of email
+     * Set the type of this user
      */
-    public String getEmail() {
-        return email;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
@@ -106,12 +54,78 @@ public abstract class User implements Serializable {
     }
 
     /**
+     * Set the value of password
+     *
+     * @param password new value of email
+     */
+    public void setPassword(String password){ this.password = password;}
+
+    /**
+     * Set the value of userID
+     * @param userID the userID of the user
+     */
+    public void setUserID(String userID){this.userID = userID;}
+
+    /**
+     * Add a friend to this user's friendList
+     *
+     * @param userId the userID of the new friend to add
+     */
+    public void setFriendList(String userId) {
+        friendList.add(userId);
+    }
+
+    /**
+     * Get the value of userName
+     *
+     * @return the value of lastName
+     */
+    public String getUserName() {
+        return this.userName;
+    }
+
+    /**
+     * Get the type of this user
+     *
+     * @return the type of this user
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Get the value of email
+     *
+     * @return the value of email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
      * Get the password of this user
      *
      * @return the value of password
      */
     public String getPassword() {
         return this.password;
+    }
+
+    /**
+     * AGet this user's ID
+     *
+     * @return userID for this user
+     */
+    public String getUserID(){return this.userID;}
+
+
+    /**
+     * Getter method for this user's friendList
+     *
+     * @return A copy of the friendList of this user
+     */
+    public ArrayList<String> getFriendList() {
+        return (ArrayList) friendList.clone();
     }
 
     /**

@@ -5,20 +5,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.a207_demo.entities.Organizer;
-import com.example.a207_demo.roomSystem.Room;
-import com.example.a207_demo.speakerSystem.SelectSpeakerAdapter;
+import com.example.a207_demo.entities.VIPUser;
 import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.use_cases.OrganizerManager;
 import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
 import com.example.a207_demo.use_cases.UserManager;
+import com.example.a207_demo.use_cases.VIPUserManager;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,30 +24,8 @@ import java.util.List;
  */
 public class FileReadWriter implements Serializable {
 
-    private AppCompatActivity context;
+    private final AppCompatActivity context;
 
-    //    /**
-//     * Constructor for the FileReadWriter class: Reads and saves data to and from txt files
-//     * This constructor is used in CleanArchActivity.java
-//     *
-//     * @param context AppCompatActivity
-//     * @param eventManager EventManager
-//     * @param userManager UserManager
-//     * @param attendeeManager AttendeeManager
-//     * @param organizerManager OrganizerManager
-//     * @param speakerManager SpeakerManager
-//     */
-//    public FileReadWriter(AppCompatActivity context, EventManager eventManager, UserManager userManager,
-//                          AttendeeManager attendeeManager, OrganizerManager organizerManager,
-//                          SpeakerManager speakerManager, RoomManager roomManager) {
-//        this.eventManager = eventManager;
-//        this.userManager = userManager;
-//        this.attendeeManager = attendeeManager;
-//        this.organizerManager = organizerManager;
-//        this.speakerManager = speakerManager;
-//        this.roomManager = roomManager;
-//        this.context = context;
-//    }
     public FileReadWriter(AppCompatActivity context) {
         this.context = context;
     }
@@ -57,12 +33,13 @@ public class FileReadWriter implements Serializable {
     /**
      * Reset the managers so that the list of objects are empty
      */
-    //Todo: to add parameters
     public void reset(EventManager eventManager, UserManager userManager, AttendeeManager attendeeManager,
-                      OrganizerManager organizerManager, SpeakerManager speakerManager, RoomManager roomManager) {
+                      VIPUserManager vipUserManager, OrganizerManager organizerManager,
+                      SpeakerManager speakerManager, RoomManager roomManager) {
         userManager.reset();
         eventManager.reset();
         attendeeManager.reset();
+        vipUserManager.reset();
         organizerManager.reset();
         speakerManager.reset();
         roomManager.reset();
@@ -72,8 +49,8 @@ public class FileReadWriter implements Serializable {
      * Method reads User.txt file and loads in any Users stored in said file. Each line in the file represent one user
      * and the type of user is identified with a title of "SPEAKER", "ATTENDEE", or "ORGANIZER".
      */
-    public void UserReader(AttendeeManager attendeeManager, SpeakerManager speakerManager,
-                           OrganizerManager organizerManager) {
+    public void UserReader(AttendeeManager attendeeManager, VIPUserManager vipUserManager,
+                           OrganizerManager organizerManager, SpeakerManager speakerManager) {
         ArrayList<String> lines = new ArrayList();
         try {
             FileInputStream in = context.openFileInput("Users");
@@ -97,16 +74,18 @@ public class FileReadWriter implements Serializable {
             String password = wordList[4];
             String userId = wordList[5];
 
-
-            if (type.equals("SPEAKER")) {
-                speakerManager.loadSpeaker(username, email, password, userId);
-            } else if (type.equals("ATTENDEE")) {
+            if(type.equals("ATTENDEE")) {
                 attendeeManager.loadAttendee(username, email, password, userId);
-            } else if (type.equals("ORGANIZER")) {
+            }else if(type.equals("VIPUser")) {
+                vipUserManager.loadVIPUser(username, email, password, userId);
+            }else if (type.equals("ORGANIZER")) {
                 organizerManager.loadOrganizer(username, email, password, userId);
+            }else{
+                speakerManager.loadSpeaker(username, email, password, userId);
             }
             LineList.add(wordList);
         }
+
 //        for (ArrayList<String> wordList : LineList){
 //            if (wordList.size() > 5){
 //                for (int index = 5; index < wordList.size(); index++){
@@ -121,7 +100,7 @@ public class FileReadWriter implements Serializable {
      * needed.
      */
     public void UserWriter(UserManager userManager) {
-        List<String> userIDs = userManager.UsersIdsGetter();
+        List<String> userIDs = userManager.getUserIDs();
         try {
             FileOutputStream out = context.openFileOutput("Users", Context.MODE_APPEND);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
@@ -146,7 +125,7 @@ public class FileReadWriter implements Serializable {
      * Reads Events.txt and loads saved events.
      */
     //Todo: accessing Event?
-    public void EventReader(EventManager eventManager) {
+    public void EventReader(EventManager eventManager, RoomManager roomManager) {
         ArrayList<String> lines = new ArrayList<>();
         try {
             FileInputStream in = context.openFileInput("Events.txt");
@@ -170,16 +149,17 @@ public class FileReadWriter implements Serializable {
                 int end = line.indexOf("}");
                 String speakers = line.substring(start + 1, end);
                 speakerId = processSpeakers(speakers);
-                line = line.substring(0, start) + line.substring(end + 2);
+                line = line.substring(0, start-1);
             }
             String[] wordList = line.split(" ");
             String type = wordList[0];
             String title = wordList[1].replace("_", " ");
-            String eventId = wordList[2];
+            String eventID = wordList[2];
             String roomID = wordList[3];
             String startTime = wordList[4];
             String duration = wordList[5];
             String restriction = wordList[6];
+            int capacity = Integer.parseInt(wordList[7]);
 
 
 //            ArrayList<String> Attendees = new ArrayList<>();
@@ -188,8 +168,9 @@ public class FileReadWriter implements Serializable {
 //                    Attendees.add(wordList.get(index));
 //                }
 //            }
-//            eventsController.getRoomManager().addEventToRoom(wordList.get(4), wordList.get(1));
-            eventManager.loadEvent(type, title, eventId, roomID, speakerId, startTime, duration, restriction);
+            eventManager.loadEvent(type, title, eventID, roomID, startTime, duration,
+                    restriction, capacity, speakerId);
+            roomManager.addEventToRoom(eventID, roomID);
         }
     }
 
@@ -218,7 +199,7 @@ public class FileReadWriter implements Serializable {
      * Saves created events to Events.txt.
      */
     public void EventWriter(EventManager eventManager) {
-        List<String> eventIds = eventManager.getAllIDAndName().get(0);
+        List<String> eventIds = eventManager.getAllEventID();
         try {
             FileOutputStream out = context.openFileOutput("Events.txt", Context.MODE_PRIVATE);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
@@ -302,24 +283,6 @@ public class FileReadWriter implements Serializable {
     }
 
 }
-//    /**
-//     * Getters that return EventsController, OrganizerManager, AttendeeManager and UserManager.
-//     */
-
-//    public EventsController GetEventsController(){
-//        return eventsController;
-//    }
-//    public OrganizerManager GetOrganizerManager() {
-//        return organizerManager;
-//    }
-//
-//    public AttendeeManager GetAttendeeManager() {
-//        return attendeeManager;
-//    }
-//
-//    public UserManager GetUserManager() {
-//        return userManager;
-//    }
 
 //    public void connectReaders() {
 //        UserReader();

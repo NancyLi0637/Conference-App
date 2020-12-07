@@ -7,7 +7,6 @@ import android.widget.Button;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.roomSystem.Room;
-import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.utility.ActivityCollector;
 
 
@@ -80,7 +79,7 @@ public class OrganizerEventContentActivity extends EventContentActivity{
         Event event = getEventManager().getEventFromTitle(eventTitle);
         if (event != null) {
             // decrease number of people in the room
-            Room room = getRoomManager().getRoomBasedOnItsID(event.getRoomID());
+            Room room = getRoomManager().getRoomFromID(event.getRoomID());
             room.decreaseCurrentNum();
 
             // remove the attendee

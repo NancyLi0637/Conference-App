@@ -9,7 +9,6 @@ import java.util.List;
  * Discussion is a type of event
  */
 public class Discussion extends Event {
-    private ArrayList<String> speakers;
 
     /**
      * Discussion
@@ -21,22 +20,30 @@ public class Discussion extends Event {
      * @param duration    duration
      * @param restriction restriction
      */
-    public Discussion(String title, String roomID, String startTime, ArrayList<String> speakers, String duration,
-                      String restriction) {
-        super(title, roomID, startTime, duration, restriction);
+    public Discussion(String title, String roomID, String startTime, String duration,
+                      String restriction, int capacity, ArrayList<String> speakers) {
+        super(title, roomID, startTime, duration, restriction, capacity);
         setType("DISCUSSION");
-        this.speakers = speakers;
+        setSpeakerUserIDs(speakers);
     }
 
     /**
-     * getSpeakers
-     *
-     * @return ArrayList<String>
+     * Discussion
+     * @param title title
+     * @paramt eventID eventID
+     * @param roomID roomID
+     * @param speakerID speakerID
+     * @param startTime startTime
+     * @param duration duration
+     * @param restriction restriction
      */
-    @Override
-    public ArrayList<String> getSpeakers() {
-        return this.speakers;
+    public Discussion (String title, String eventID, String roomID, String startTime,
+                       String duration, String restriction, int capacity, ArrayList<String> speakerID){
+        super(title, eventID, roomID, startTime, duration, restriction, capacity);
+        setType("DISCUSSION");
+        setSpeakerUserIDs(speakerID);
     }
+
 
     /**
      * speakersToString
@@ -45,7 +52,7 @@ public class Discussion extends Event {
      */
     public StringBuilder speakersToString() {
         StringBuilder totalString = new StringBuilder();
-        for (String s : speakers) {
+        for (String s : getSpeakers()) {
             totalString.append(s);
         }
         return totalString;

@@ -8,8 +8,6 @@ import java.util.UUID;
  */
 public class Attendee extends User implements Serializable {
 
-    private final String userID;
-
     /**
      * Constructor No.1 for the Attendee
      *
@@ -20,7 +18,7 @@ public class Attendee extends User implements Serializable {
     public Attendee(String userName, String email, String password) {
         super(userName, email, password);
         setType("ATTENDEE");
-        userID = UUID.randomUUID().toString().split("-")[0];
+        setUserID(UUID.randomUUID().toString().split("-")[0]);
     }
 
     /**
@@ -34,15 +32,7 @@ public class Attendee extends User implements Serializable {
     public Attendee(String userName, String email, String password, String ID) {
         super(userName, email, password);
         setType("ATTENDEE");
-        userID = ID;
+        setUserID(ID);
     }
 
-    /**
-     * Getter method to access this Attendee's userID
-     *
-     * @return userID of this Attendee
-     */
-    public String getUserID() {
-        return this.userID;
-    }
 }

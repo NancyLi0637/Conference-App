@@ -72,13 +72,23 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/duration"
+        android:id="@+id/event_duration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
         android:hint="@string/duration"
+        android:textSize="24sp"/>
+
+    <EditText
+        android:id="@+id/event_capacity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:hint="@string/eventCapacity"
         android:textSize="24sp"/>
 
    <CheckBox

@@ -27,6 +27,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
     private String eventTime;
     private String eventDuration;
     private String eventRestriction = "PUBLIC";
+    private int eventCapacity;
     private String roomID;
     private ArrayList<String> speakerId;
 
@@ -119,20 +120,22 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                     Toast.makeText(this, "TIME entered is invalid!", Toast.LENGTH_LONG).show();
                 } else if(!validDuration()){
                     Toast.makeText(this, "DURATION entered is invalid!", Toast.LENGTH_LONG).show();
+                } else if(!validCapacity()){
+                    Toast.makeText(this, "EVENT CAPACITY entered is invalid!", Toast.LENGTH_LONG).show();
                 } else {
-                    boolean created = getEventManager().createEvent(eventTitle, roomID, speakerId,
-                            eventTime, eventDuration, eventRestriction, eventType);
+                    boolean created = getEventManager().createEvent(eventType, eventTitle, roomID, speakerId,
+                            eventTime, eventDuration, eventRestriction, eventCapacity);
 
                     if(created){
-                        getRoomManager().addEventToRoom(getEventManager().changeEventTitleIntoEventID(eventTitle), roomID);
                         super.writeEvent();
                         speakerId = new ArrayList<>();
                         intent = new Intent();
                         setResult(RESULT_OK, intent);
                         finish();
                     }else{
-                        //Todo: better time suggestion
                         Toast.makeText(this, "There is TIME CONFLICT in your event.", Toast.LENGTH_LONG).show();
+                        roomID = null;
+                        speakerId = new ArrayList<>();
                     }
                 }
                 break;
@@ -147,12 +150,19 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         Spinner type = findViewById(R.id.event_type);
         EditText title = findViewById(R.id.event_title);
         EditText startTime = findViewById(R.id.event_time);
-        EditText duration = findViewById(R.id.duration);
+        EditText duration = findViewById(R.id.event_duration);
+        EditText capacity = findViewById(R.id.event_capacity);
 
         eventType = String.valueOf(type.getSelectedItem());
         eventTitle = title.getText().toString();
         eventTime = startTime.getText().toString();
         eventDuration = duration.getText().toString();
+        String cap = capacity.getText().toString();
+        if(cap.equals("")){
+            eventCapacity = 0;
+        }else{
+            eventCapacity = Integer.parseInt(cap);
+        }
     }
 
     private void loadData(){
@@ -162,7 +172,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
 
     private boolean dataMissing() {
         return eventTitle.equals("") || eventTime.equals("") || eventDuration.equals("") ||
-                roomID == null;
+                eventCapacity == 0 || roomID == null;
     }
 
     private boolean validTitle(){
@@ -175,6 +185,10 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
 
     private boolean validDuration(){
         return getEventManager().checkValidDuration(eventDuration);
+    }
+
+    private boolean validCapacity(){
+        return eventCapacity > 0;
     }
 
     /**

@@ -10,6 +10,7 @@ import com.example.a207_demo.use_cases.OrganizerManager;
 import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
 import com.example.a207_demo.use_cases.UserManager;
+import com.example.a207_demo.use_cases.VIPUserManager;
 
 /**
  * The central Activity: Superclass of child activities
@@ -19,6 +20,7 @@ public class CleanArchActivity extends AppCompatActivity{
     private final EventManager eventManager = new EventManager();
     private final UserManager userManager = new UserManager();
     private final AttendeeManager attendeeManager = new AttendeeManager();
+    private final VIPUserManager vipUserManager = new VIPUserManager();
     private final OrganizerManager organizerManager = new OrganizerManager();
     private final SpeakerManager speakerManager = new SpeakerManager();
     private final RoomManager roomManager = new RoomManager();
@@ -44,6 +46,12 @@ public class CleanArchActivity extends AppCompatActivity{
      * @return AttendeeManager
      */
     public AttendeeManager getAttendeeManager() {return this.attendeeManager; }
+
+    /**
+     * Get VIPUserManager of the whole system
+     * @return VIPUserManager
+     */
+    public VIPUserManager getVipUserManager() {return this.vipUserManager;}
 
     /**
      * Get OrganizerManager of the whole system
@@ -79,12 +87,11 @@ public class CleanArchActivity extends AppCompatActivity{
 
     public void reset(){
         fileReadWriter.reset(eventManager, userManager,
-                attendeeManager, organizerManager,
-                speakerManager, roomManager);
+                attendeeManager, vipUserManager, organizerManager, speakerManager, roomManager);
     }
 
     public void readUser(){
-        fileReadWriter.UserReader(attendeeManager, speakerManager, organizerManager);
+        fileReadWriter.UserReader(attendeeManager, vipUserManager, organizerManager, speakerManager);
     }
 
     public void readEvent(){

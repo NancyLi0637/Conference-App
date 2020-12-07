@@ -136,7 +136,7 @@ public class EventsController {
     public ArrayList<String> getEventInfo(String eventID) {
         ArrayList<String> info = new ArrayList<>();
         Event event = this.eventManager.getEventFromID(eventID);
-        Room room = this.roomManager.getRoomBasedOnItsID(event.getRoomID());
+        Room room = this.roomManager.getRoomFromID(event.getRoomID());
         info.add(event.getTitle());
         info.add(event.getStartTime());
 //        for (String speaker : event.getSpeakers()) {

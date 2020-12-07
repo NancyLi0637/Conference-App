@@ -1,7 +1,6 @@
 package com.example.a207_demo.roomSystem;
 
 
-import com.example.a207_demo.roomSystem.Room;
 import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.eventSystem.EventManager;
 
@@ -37,8 +36,131 @@ public class RoomManager implements Serializable {
         this.rooms = new ArrayList<>();
     }
 
+    /**
+     * Check if there are any rooms
+     * @return true iff there is at least one room
+     */
     public boolean hasRooms() {
         return this.rooms.size() > 0;
+    }
+
+    /**
+     * Input roomID, output its room number
+     *
+     * @param roomID roomID
+     * @return roomNum
+     */
+    public String changeIdTONum(String roomID) {
+        for (Room room : rooms) {
+            if (room.getRoomID().equals(roomID)) {
+                return room.getRoomNum();
+            }
+        }
+        return "NULL";
+    }
+
+    /**
+     * Input a list of roomID, output all of the names
+     *
+     * @param  roomIDs roomIDs
+     * @return roomNums
+     */
+    public ArrayList<String> changeIdsTONums(ArrayList<String> roomIDs){
+        ArrayList<String> roomNums = new ArrayList<>();
+        for (String roomID : roomIDs){
+            roomNums.add(changeIdTONum(roomID));
+        }
+        return roomNums;
+    }
+
+    /**
+     * Input String room number, output its ID
+     *
+     * @param roomNum roomNum
+     * @return roomID
+     */
+    public String changeNumTOID(String roomNum) {
+        for (Room room : rooms) {
+            if (room.getRoomNum().equals(roomNum)) {
+                return room.getRoomID();
+            }
+        }
+        return "NULL";
+    }
+
+    /**
+     * Search through the list of rooms, return room given its ID
+     *
+     * @param roomID roomID
+     * @return a Room object
+     */
+    public Room getRoomFromID(String roomID) {
+        for (Room room : rooms) {
+            if (room.getRoomID().equals(roomID)) {
+                return room;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get an ArrayList<String> of all room numbers
+     *
+     * @return ArrayList<String> of all room numbers
+     */
+    public ArrayList<String> getAllRoomNum() {
+        ArrayList<String> roomNumbers = new ArrayList<>();
+        for (Room room : this.rooms) {
+            roomNumbers.add(room.getRoomNum());
+        }
+        return roomNumbers;
+    }
+
+
+    /**
+     * Get an ArrayList<String> of all room IDs
+     *
+     * @return ArrayList<String> of all room IDs
+     */
+    public ArrayList<String> getAllRoomID() {
+        ArrayList<String> roomIDs = new ArrayList<>();
+        for (Room room : this.rooms) {
+            roomIDs.add(room.getRoomID());
+        }
+        return roomIDs;
+    }
+
+
+    /**
+     * Get an ArrayList<String> of room numbers that are available for the given time
+     *
+     * @param time         the starting time
+     * @param eventManager an EventManager object
+     * @return an ArrayList<String> of room numbers that are available for the given time
+     */
+    public ArrayList<String> getAvailableRoom(String time, String duration, EventManager eventManager) {
+        ArrayList<String> roomList = new ArrayList<>();
+
+        // First step, add all room numbers to the roomList
+        for (Room room : rooms) {
+            roomList.add(room.getRoomID());
+        }
+
+        // Next step, remove unavailable room numbers from the roomList
+        for (String roomID : eventsMap.keySet()) {
+            // Loop though the list of eventIDs of the current room's events:
+            for (String eventID : eventsMap.get(roomID)) {
+                // Find the event object with this event ID
+                Event event = eventManager.getEventFromID(eventID);
+
+                // if the time conflicts, then the room is not available
+                if (!event.timeConflict(time, duration) ||
+                        event.getCapacity() > getRoomFromID(roomID).getCapacity()) {
+                    roomList.remove(roomID);
+                }
+            }
+        }
+        return changeIdsTONums(roomList);
     }
 
     /**
@@ -58,21 +180,6 @@ public class RoomManager implements Serializable {
         return true;
     }
 
-    /**
-     * checkValidNum
-     *
-     * @param roomNum String
-     * @return boolean
-     */
-    public boolean checkValidNum(String roomNum) {
-        try {
-            int num = Integer.parseInt(roomNum);
-            return num > 0;
-        } catch (NumberFormatException ex) {
-            return false;
-        }
-    }
-
 
     /**
      * Creates a new room and add it to rooms list
@@ -86,131 +193,36 @@ public class RoomManager implements Serializable {
     }
 
     /**
-     * Get an ArrayList<String> of all room numbers
-     *
-     * @return ArrayList<String> of all room numbers
-     */
-    public ArrayList<String> getAllRoomNum() {
-        ArrayList<String> roomNumbers = new ArrayList<>();
-        for (Room room : this.rooms) {
-            roomNumbers.add(room.getRoomNum());
-        }
-        return roomNumbers;
-    }
-
-    /**
-     * Get an ArrayList<String> of all room IDs
-     *
-     * @return ArrayList<String> of all room IDs
-     */
-    public ArrayList<String> getAllRoomID() {
-        ArrayList<String> roomIDs = new ArrayList<>();
-        for (Room room : this.rooms) {
-            roomIDs.add(room.getRoomID());
-        }
-        return roomIDs;
-    }
-
-    /**
-     * Check if a room with roomID is full
-     *
-     * @param roomID roomID
-     * @return true iff the room is full
-     */
-    public boolean isFull(String roomID) {
-        Room room = getRoomBasedOnItsID(roomID);
-        return room.getCurrentNum() == room.getCapacity();
-    }
-
-    /**
-     * Input roomID, output its room number
-     *
-     * @param roomID roomID
-     * @return roomNum
-     */
-    public String changeIdTONum(String roomID) {
-        for (Room room : rooms) {
-            if (room.getRoomID().equals(roomID)) {
-                return room.getRoomNum();
-            }
-        }
-        return "NULL";
-    }
-
-    /**
-     * Input String room number, output its ID
-     *
-     * @param roomNum roomNum
-     * @return roomID
-     */
-    public String changeNumTOID(String roomNum) {
-        for (Room room : rooms) {
-            if (room.getRoomNum().equals(roomNum)) {
-                return room.getRoomID();
-            }
-        }
-        return "NULL";
-    }
-
-    /**
      * Adds an event to the specified room and update events list and eventsMap
      *
      * @param roomID the room to create and add
      */
     public void addEventToRoom(String event, String roomID) {
-        if (!eventsMap.containsKey(roomID)) {
-            events = new ArrayList<>();
-        } else {
-            events = eventsMap.get(roomID);
+        if(!events.contains(event)){
+            if (!eventsMap.containsKey(roomID)) {
+                events = new ArrayList<>();
+            } else {
+                events = eventsMap.get(roomID);
+            }
+
+            events.add(event);
+            eventsMap.put(roomID, events);
         }
-        events.add(event);
-        eventsMap.put(roomID, events);
     }
 
     /**
-     * Search through the list of rooms, return room given its ID
+     * checkValidNum
      *
-     * @param roomID roomID
-     * @return a Room object
+     * @param roomNum String
+     * @return boolean
      */
-    public Room getRoomBasedOnItsID(String roomID) {
-        for (Room room : rooms) {
-            if (room.getRoomID().equals(roomID)) {
-                return room;
-            }
+    public boolean checkValidNum(String roomNum) {
+        try {
+            int num = Integer.parseInt(roomNum);
+            return num > 0;
+        } catch (NumberFormatException ex) {
+            return false;
         }
-        return null;
-    }
-
-    /**
-     * Get an ArrayList<String> of room numbers that are available for the given time
-     *
-     * @param time         the starting time
-     * @param eventManager an EventManager object
-     * @return an ArrayList<String> of room numbers that are available for the given time
-     */
-    public ArrayList<String> getAvailableRoom(String time, String duration, EventManager eventManager) {
-        ArrayList<String> roomList = new ArrayList<>();
-
-        // First step, add all room numbers to the roomList
-        for (Room room : rooms) {
-            roomList.add(changeIdTONum(room.getRoomID()));
-        }
-
-        // Next step, remove unavailable room numbers from the roomList
-        for (String roomID : eventsMap.keySet()) {
-            // Loop though the list of eventIDs of the current room's events:
-            for (String eventID : eventsMap.get(roomID)) {
-                // Find the event object with this event ID
-                Event event = eventManager.getEventFromID(eventID);
-
-                // if the time conflicts, then the room is not available
-                if (!event.timeConflict(time, duration)) {
-                    roomList.remove(changeIdTONum(roomID));
-                }
-            }
-        }
-        return roomList;
     }
 
 
@@ -239,12 +251,4 @@ public class RoomManager implements Serializable {
         return result;
     }
 
-
-//    public void freeUpTheRoomBasedOnEvent(Addtendable event){
-//        for (Room room: rooms){
-//            if (room.getRoomID().equals(event.getRoomID())){
-//                room.resetTheCurrentNum();
-//            }
-//        }
-//    }
 }

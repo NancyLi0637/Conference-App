@@ -42,6 +42,7 @@
     <string name="newSpeaker">New Speaker Account</string>
     <string name="newAttendee">New Attendee Account</string>
     <string name="friendName">Friend Name</string>
+    <string name="eventCapacity">Event Capacity</string>
 
 
     <string name="useremail">nancielee@gmail.com</string>

@@ -122,7 +122,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
         userPassword = password.getText().toString();
         userType = String.valueOf(type.getSelectedItem());
 
-        accountCreator.createNewAccount(userName, userEmail, userPassword, userType);
+        accountCreator.createNewAccount(userType, userName, userEmail, userPassword);
         super.writeUser();
     }
 

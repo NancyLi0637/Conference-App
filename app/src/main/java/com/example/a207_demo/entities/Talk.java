@@ -9,8 +9,6 @@ import java.util.ArrayList;
  */
 public class Talk extends Event {
 
-    private final ArrayList<String> speaker;
-
     /**
      * Talk
      * @param title title
@@ -20,20 +18,28 @@ public class Talk extends Event {
      * @param duration duration
      * @param restriction restriction
      */
-    public Talk (String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
-                 String restriction){
-        super(title, roomID, startTime, duration, restriction);
+    public Talk (String title, String roomID, String startTime, String duration, String restriction,
+                 int capacity, ArrayList<String> speakerID){
+        super(title, roomID, startTime, duration, restriction, capacity);
         setType("TALK");
-        this.speaker = speakerID;
+        setSpeakerUserIDs(speakerID);
     }
 
     /**
-     * getSpeakers
-     * @return ArrayList<String>
+     * Talk
+     * @param title title
+     * @paramt eventID eventID
+     * @param roomID roomID
+     * @param speakerID speakerID
+     * @param startTime startTime
+     * @param duration duration
+     * @param restriction restriction
      */
-    @Override
-    public ArrayList<String> getSpeakers() {
-        return this.speaker;
+    public Talk (String title, String eventID, String roomID, String startTime, String duration,
+                 String restriction, int capacity, ArrayList<String> speakerID){
+        super(title, eventID, roomID, startTime, duration, restriction, capacity);
+        setType("TALK");
+        setSpeakerUserIDs(speakerID);
     }
 
     /**

@@ -8,21 +8,35 @@ import java.util.ArrayList;
  * Party is a type of event
  */
 public class Party extends Event {
-    private final ArrayList<String> speaker = new ArrayList<>();
 
-    public Party(String title, String roomID, String startTime, String duration, String restriction) {
-        super(title, roomID, startTime, duration, restriction);
+    /**
+     * Party
+     * @param title title
+     * @param roomID roomID
+     * @param startTime startTime
+     * @param duration duration
+     * @param restriction restriction
+     */
+    public Party(String title, String roomID, String startTime, String duration, String restriction, int capacity) {
+        super(title, roomID, startTime, duration, restriction, capacity);
         setType("PARTY");
+        setSpeakerUserIDs(new ArrayList<String>());
     }
 
     /**
-     * getSpeakers
-     *
-     * @return ArrayList<String>
+     * PARTY
+     * @param title title
+     * @paramt eventID eventID
+     * @param roomID roomID
+     * @param startTime startTime
+     * @param duration duration
+     * @param restriction restriction
      */
-    @Override
-    public ArrayList<String> getSpeakers() {
-        return this.speaker;
+    public Party (String title, String eventID, String roomID, String startTime, String duration,
+                  String restriction, int capacity){
+        super(title, eventID, roomID, startTime, duration, restriction, capacity);
+        setType("PARTY");
+        setSpeakerUserIDs(new ArrayList<String>());
     }
 
     /**

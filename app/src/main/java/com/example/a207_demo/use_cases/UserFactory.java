@@ -9,16 +9,9 @@ import java.io.Serializable;
  * newly created user will be stored in managers.
  */
 public class UserFactory implements Serializable {
-    //    private final AttendeeManager attendeeManager = new AttendeeManager();
     private final AttendeeManager attendeeManager;
-
-
-    //    private final VIPUserManager vipUserManager = new VIPUserManager();
-
-    //    private final OrganizerManager organizerManager = new OrganizerManager();
+    private final VIPUserManager vipUserManager;
     private final OrganizerManager organizerManager;
-
-    //    private final SpeakerManager speakerManager = new SpeakerManager();
     private final SpeakerManager speakerManager;
 
     /**
@@ -28,9 +21,10 @@ public class UserFactory implements Serializable {
      * @param organizerManager OrganizerManager
      * @param speakerManager   SpeakerManager
      */
-    public UserFactory(AttendeeManager attendeeManager, OrganizerManager organizerManager,
-                       SpeakerManager speakerManager) {
+    public UserFactory(AttendeeManager attendeeManager, VIPUserManager vipUserManager,
+                       OrganizerManager organizerManager, SpeakerManager speakerManager) {
         this.attendeeManager = attendeeManager;
+        this.vipUserManager = vipUserManager;
         this.organizerManager = organizerManager;
         this.speakerManager = speakerManager;
     }
@@ -44,14 +38,14 @@ public class UserFactory implements Serializable {
      * @param password password of this new user
      * @param type     type of this new user
      */
-    public void createNewUserAccount(String userName, String email, String password, String type) {
+    public void createNewUserAccount(String type, String userName, String email, String password) {
         switch (type) {
             case "ATTENDEE":
                 attendeeManager.createAttendee(userName, email, password);
                 break;
-//            case "VIPUser":
-//                vipUserManager.createVIPUser(userName, email, password);
-//                break;
+            case "VIPUser":
+                vipUserManager.createVIPUser(userName, email, password);
+                break;
             case "ORGANIZER":
                 organizerManager.createOrganizer(userName, email, password);
                 break;

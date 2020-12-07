@@ -21,6 +21,13 @@ public class OrganizerManager extends UserManager implements Serializable {
         organizers = new ArrayList<>();
     }
 
+    /**
+     * Reset the organizers: no user exists
+     */
+    public void reset() {
+        organizers = new ArrayList<>();
+    }
+
 
     /**
      * Create an organizer account and store it in the organizers and users lists
@@ -32,7 +39,7 @@ public class OrganizerManager extends UserManager implements Serializable {
     public void createOrganizer(String userName, String email, String password) {
         Organizer organizer = new Organizer(userName, email, password);
         this.organizers.add(organizer);
-        UserManager.users.add(organizer);
+        super.addUser(organizer);
     }
 
     /**
@@ -46,13 +53,8 @@ public class OrganizerManager extends UserManager implements Serializable {
     public void loadOrganizer(String userName, String email, String password, String ID) {
         Organizer organizer = new Organizer(userName, email, password, ID);
         this.organizers.add(organizer);
-        UserManager.users.add(organizer);
+        super.addUser(organizer);
     }
 
-    /**
-     * Reset the organizers: no user exists
-     */
-    public void reset() {
-        organizers = new ArrayList<>();
-    }
+
 }

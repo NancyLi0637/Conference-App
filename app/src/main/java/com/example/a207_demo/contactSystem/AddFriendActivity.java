@@ -50,7 +50,13 @@ public class AddFriendActivity extends SetUpActivity implements View.OnClickList
     public void onClick(View v) {
         EditText friend = findViewById(R.id.friendname);
         String friendname = friend.toString();
-        addFriend(friendname);
+        if (!addFriend(friendname)){
+            Toast.makeText(AddFriendActivity.this, "Please check the friend name again",
+                    Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(AddFriendActivity.this, "Add friend successfully",
+                    Toast.LENGTH_LONG).show();
+        }
 
     }
 

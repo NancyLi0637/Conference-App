@@ -43,8 +43,22 @@ public class SetUpActivity extends CleanArchActivity {
      */
     public void init(AppCompatActivity context, int id_nav_view, int id_nav_item) {
         ID = getIntent().getStringExtra("ID");
+        super.setID(ID);
         createActionBar();
         createNavView(context, id_nav_view, id_nav_item);
+    }
+
+    /**
+     * For initializing user ID
+     */
+
+    public void init(){
+        ID = getIntent().getStringExtra("ID");
+        super.setID(ID);
+    }
+
+    public String getID(){
+        return ID;
     }
 
     /**
@@ -59,10 +73,6 @@ public class SetUpActivity extends CleanArchActivity {
                 mDrawerLayout, toolbar, 0, 0);
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-    }
-
-    public String getID(){
-        return ID;
     }
 
     /**

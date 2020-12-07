@@ -67,7 +67,7 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
                 super.reset();
                 //intent = new Intent(MainActivity.this, SignUpActivity.class);
                 intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
-                intent.putExtra("ID", ID);
+                //intent.putExtra("ID", ID);
                 //intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
                 //intent = new Intent(MainActivity.this, AttendeeMyEventActivity.class);
                 startActivity(intent);
@@ -87,7 +87,6 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
                         intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
                         intent.putExtra("ID", ID);
                     }
-                    //Todo: too many lines written in Users.txt (FileReadWriter -> connectWrtier -> UserWriter method)
                     startActivity(intent);
                 } else {
                     Toast.makeText(MainActivity.this, "Your username and password do not match. Please try again.",

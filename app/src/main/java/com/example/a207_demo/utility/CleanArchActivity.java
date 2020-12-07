@@ -27,6 +27,17 @@ public class CleanArchActivity extends AppCompatActivity{
     private final ConversationManager conversationManager = new ConversationManager();
     private FileReadWriter fileReadWriter = new FileReadWriter(this);
 
+    private static String ID;
+
+    public void setID(String ID){
+        System.out.println("ID10 " + ID);
+        this.ID = ID;
+    }
+
+    public String getID(){
+        return this.ID;
+    }
+
     /**
      * Get EventManager of the whole system
      * @return EventManager

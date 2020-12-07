@@ -51,7 +51,7 @@ public class SpeakerManager extends UserManager implements Serializable {
     public void createSpeaker(String userName, String email, String password) {
         Speaker speaker = new Speaker(userName, email, password);
         speakers.add(speaker);
-        super.addUser(speaker);
+        UserManager.users.add(speaker);
     }
 
     /**
@@ -65,7 +65,7 @@ public class SpeakerManager extends UserManager implements Serializable {
     public void loadSpeaker(String userName, String email, String password, String ID) {
         Speaker speaker = new Speaker(userName, email, password, ID);
         speakers.add(speaker);
-        super.addUser(speaker);
+        UserManager.users.add(speaker);
     }
 
     /**

@@ -17,12 +17,6 @@ import java.util.List;
  */
 public abstract class ContactActivity extends SetUpActivity {
 
-    private String ID;
-
-    public void init(){
-        this.ID = getIntent().getStringExtra("ID");
-    }
-
     public void createContactMenu(RecyclerView recyclerView, ContactAdapter contactAdapter) {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -33,6 +27,9 @@ public abstract class ContactActivity extends SetUpActivity {
     /**
      * initContacts
      */
-    protected abstract void initContacts();
+    protected void initContacts(){
+        super.reset();
+        super.readUser();
+    }
 
 }

@@ -39,7 +39,7 @@ public class VIPUserManager extends AttendeeManager implements Serializable {
     public void createVIPUser(String userName, String email, String password) {
         VIPUser vipuser = new VIPUser(userName, email, password);
         this.vipUsers.add(vipuser);
-        super.addUser(vipuser);
+        UserManager.users.add(vipuser);
     }
 
     /**
@@ -53,7 +53,7 @@ public class VIPUserManager extends AttendeeManager implements Serializable {
     public void loadVIPUser(String userName, String email, String password, String ID) {
         VIPUser vipuser = new VIPUser(userName, email, password, ID);
         this.vipUsers.add(vipuser);
-        super.addUser(vipuser);
+        UserManager.users.add(vipuser);
     }
 
 }

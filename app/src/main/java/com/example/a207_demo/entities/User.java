@@ -27,7 +27,7 @@ public abstract class User implements Serializable {
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.friendList = new ArrayList<String>();
+        this.friendList = new ArrayList<>();
     }
 
     /**
@@ -125,7 +125,8 @@ public abstract class User implements Serializable {
      * @return A copy of the friendList of this user
      */
     public ArrayList<String> getFriendList() {
-        return (ArrayList) friendList.clone();
+
+        return friendList;
     }
 
     /**

@@ -42,6 +42,8 @@ public class AddFriendActivity extends SetUpActivity implements View.OnClickList
     }
 
     public void init() {
+        super.reset();
+        super.readUser();
         Button search = findViewById(R.id.btn_search);
 
         search.setOnClickListener(this);
@@ -61,7 +63,8 @@ public class AddFriendActivity extends SetUpActivity implements View.OnClickList
     }
 
     private boolean addFriend(String friendId){
-        UserManager userManager = getUserManager();
-        return userManager.addFriend(getID(), friendId);
+        //Todo: set up ID
+        return getUserManager().addFriend(getID(), friendId);
+
     }
 }

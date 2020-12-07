@@ -13,7 +13,7 @@ import java.util.List;
 
 public class OrganizerContactAttendeeActivity extends ContactActivity {
 
-    private List<Contact> contactList = new ArrayList<>();
+    private List<String> contactList = new ArrayList<>();
 
     /**
      * onCreate
@@ -42,11 +42,14 @@ public class OrganizerContactAttendeeActivity extends ContactActivity {
     public void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.organizer_contact_recycler_view);
-        ContactAdapter contactAdapter = new ContactAdapter(this, contactList);
+        ContactAdapter contactAdapter = new ContactAdapter(this, contactList, getID());
         super.createContactMenu(recyclerView, contactAdapter);
     }
 
     protected void initContacts() {
+        //Todo: access allFriendList to get IDs of friends
+        contactList =
+
         //Todo: access Contact Use case to generate contacts
         Contact contact1 = new Contact("Jenny Su", R.drawable.jenny);
         contactList.add(contact1);

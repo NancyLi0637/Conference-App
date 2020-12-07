@@ -33,7 +33,6 @@ import com.example.a207_demo.entities.*;
 public class MsgActivity extends SetUpActivity implements View.OnClickListener {
     //Todo: access MsgSystem Controller
     private List<Msg> msgList = new ArrayList<>();
-    private DrawerLayout mDrawerLayout;
     private MsgAdapter msgAdapter;
     private RecyclerView msgRecyclerView;
     private Conversation currentConversation;
@@ -46,6 +45,8 @@ public class MsgActivity extends SetUpActivity implements View.OnClickListener {
 
         init();
 
+        System.out.println("IDDDD" + getID());
+
         ActivityCollector.addActivity(this);
 
     }
@@ -54,6 +55,7 @@ public class MsgActivity extends SetUpActivity implements View.OnClickListener {
      * init
      */
     public void init() {
+        super.init();
         createActionBar();
         createRecyclerView();
         initMsg();
@@ -121,8 +123,12 @@ public class MsgActivity extends SetUpActivity implements View.OnClickListener {
 //        msgList.add(msg2);
 //        Msg msg3 = new Msg("Ok fine", Msg.TYPE_RECEIVED);
 //        msgList.add(msg3);
-        // Todo: intent should get the other user id from contact adapter (otherID) hard code rightnow
+         //Todo: intent should get the other user id from contact adapter (otherID) hard code rightnow
+        super.reset();
+        super.readUser();
         String otherID = "abc123456";
+        //Todo: connect conversationmanager in cleanarch to filereadwriter
+        //userID: getID(), friendIG: getIntent().getStringExtra('friendID'), friendName: getIntent().getStringExtra('friendName')
         ConversationManager conversationManager = getConversationManager();
         HashSet<String> talkerList = new HashSet<String>();
         talkerList.add(getID());

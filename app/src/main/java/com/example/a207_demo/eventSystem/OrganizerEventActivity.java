@@ -81,7 +81,7 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         super.initEvents();
 
        //eventList = getEventManager().getAllEvent();
-        eventList = getEventManager().generateAllInfo(getEventManager().getAllIDAndName().get(0));
+        eventList = getEventManager().generateAllInfo(getEventManager().getAllEventID());
 
 //        //Todo: implement image later
 //        for (Event event : eventList) {

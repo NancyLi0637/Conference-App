@@ -42,7 +42,7 @@ public class OrganizerContactSpeakerActivity extends ContactActivity {
     public void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.organizer_contact_recycler_view);
-        ContactAdapter contactAdapter = new ContactAdapter(this, contactList);
+        ContactAdapter contactAdapter = new ContactAdapter(this, contactList, getID());
         super.createContactMenu(recyclerView, contactAdapter);
     }
 

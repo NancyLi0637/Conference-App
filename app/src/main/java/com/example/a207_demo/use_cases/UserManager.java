@@ -1,6 +1,7 @@
 package com.example.a207_demo.use_cases;
 
 import com.example.a207_demo.entities.*;
+import com.example.a207_demo.eventSystem.Event;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,25 +11,13 @@ import java.util.List;
  * The use_cases.UserManager class, this is the use case class to manage the entities.User for this conference.
  */
 public class UserManager implements Serializable {
-    public List<User> users;
-
-    public UserManager(){
-        users = new ArrayList<>();
-    }
+    public static List<User> users = new ArrayList<>();
 
     /**
      * Reset the users: no user exists
      */
     public void reset() {
         users = new ArrayList<>();
-    }
-
-    /**
-     * Add a user to the user list
-     * @param user User to be added
-     */
-    public void addUser(User user){
-        this.users.add(user);
     }
 
     /**
@@ -252,6 +241,9 @@ public class UserManager implements Serializable {
      * @return the String user ID of this user given his account and password, or "NULL"
      */
     public String validLogIn(String account, String password) {
+        System.out.println("ACCOUT" + account);
+        System.out.println("PASSWORD" + password);
+        System.out.println("HELLLO" + users);
         for (User user : users) {
             if (user.getEmail().equals(account) && user.getPassword().equals(password)) {
                 return user.getUserID();
@@ -274,5 +266,24 @@ public class UserManager implements Serializable {
             }
         }
         return "NULL";
+    }
+
+    /**
+     * Generate the formatted user's information.
+     *
+     *
+     * @return a string of formatted event's information.
+     */
+    public  ArrayList<ArrayList<String>> generateFormattedFriendInfo(String userID) {
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+
+        for (String friendID: friendListGetter(userID)){
+            ArrayList<String> info = new ArrayList<>();
+
+            info.add(friendID);
+            info.add(getUserNameFromID(friendID));
+            result.add(info);
+        }
+        return result;
     }
 }

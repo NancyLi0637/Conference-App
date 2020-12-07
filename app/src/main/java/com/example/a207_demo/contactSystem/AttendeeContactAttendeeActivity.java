@@ -15,7 +15,7 @@ import java.util.List;
 
 public class AttendeeContactAttendeeActivity extends ContactActivity {
 
-    private List<Contact> contactList = new ArrayList<>();
+    private ArrayList<ArrayList<String>> contactList = new ArrayList<>();
 
     /**
      * onCreate
@@ -44,7 +44,7 @@ public class AttendeeContactAttendeeActivity extends ContactActivity {
     public void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.attendee_contact_recycler_view);
-        ContactAdapter contactAdapter = new ContactAdapter(this, contactList);
+        ContactAdapter contactAdapter = new ContactAdapter(this, contactList, getID());
         super.createContactMenu(recyclerView, contactAdapter);
     }
 
@@ -78,13 +78,6 @@ public class AttendeeContactAttendeeActivity extends ContactActivity {
 //        contactList.add(contact13);
 //        Contact contact14 = new Contact("Steve Wu", R.drawable.steve);
 //        contactList.add(contact14);
-        UserManager userManager = getUserManager();
-        ArrayList<String> friendList = userManager.friendListGetter(getID());
-        for (String friend: friendList){
-            String username  = userManager.getUserNameFromID(friend);
-            Contact contact = new Contact(username, R.drawable.jenny);
-            contactList.add(contact);
-        }
-
+        contactList = getUserManager().generateFormattedFriendInfo(getID());
     }
 }

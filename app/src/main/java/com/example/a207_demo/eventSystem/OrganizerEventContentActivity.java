@@ -51,40 +51,40 @@ public class OrganizerEventContentActivity extends EventContentActivity{
      */
     public void onClick(View view){
         // Todo: Organizer cancel an event
-        cancelEvent(eventToRemove);
+        //cancelEvent(eventToRemove);
     }
 
-    /**
-     * cancelEvent
-     * @param eventTitle String eventTitle
-     */
-    public void cancelEvent(String eventTitle){
-        Event event = getEventManager().getEventFromTitle(eventTitle);
-        ArrayList<String> attendees = event.getAttendees();
+//    /**
+//     * cancelEvent
+//     * @param eventTitle String eventTitle
+//     */
+//    public void cancelEvent(String eventTitle){
+//        Event event = getEventManager().getEventFromTitle(eventTitle);
+//        ArrayList<String> attendees = event.getAttendees();
+//
+//        for (String attendee: attendees){
+//            removeAttendeeFromEvent(attendee, eventTitle);
+//        }
+//        // remove the event
+//        getEventManager().removeEvent(event);
+//    }
 
-        for (String attendee: attendees){
-            removeAttendeeFromEvent(attendee, eventTitle);
-        }
-        // remove the event
-        getEventManager().removeEvent(event);
-    }
-
-    /**
-     * remove Attendee From Event
-     *
-     * @param userID      userID String object
-     * @param eventTitle  eventTitle String object
-     */
-    public void removeAttendeeFromEvent(String userID, String eventTitle) {
-        Event event = getEventManager().getEventFromTitle(eventTitle);
-        if (event != null) {
-            // decrease number of people in the room
-            Room room = getRoomManager().getRoomFromID(event.getRoomID());
-            room.decreaseCurrentNum();
-
-            // remove the attendee
-            event.removeAttendee(userID);
-        }
-    }
+//    /**
+//     * remove Attendee From Event
+//     *
+//     * @param userID      userID String object
+//     * @param eventTitle  eventTitle String object
+//     */
+//    public void removeAttendeeFromEvent(String userID, String eventTitle) {
+//        Event event = getEventManager().getEventFromTitle(eventTitle);
+//        if (event != null) {
+//            // decrease number of people in the room
+//            Room room = getRoomManager().getRoomFromID(event.getRoomID());
+//            room.decreaseCurrentNum();
+//
+//            // remove the attendee
+//            event.removeAttendee(userID);
+//        }
+//    }
 
 }

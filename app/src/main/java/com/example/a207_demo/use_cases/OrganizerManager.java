@@ -39,7 +39,7 @@ public class OrganizerManager extends UserManager implements Serializable {
     public void createOrganizer(String userName, String email, String password) {
         Organizer organizer = new Organizer(userName, email, password);
         this.organizers.add(organizer);
-        super.addUser(organizer);
+        UserManager.users.add(organizer);
     }
 
     /**
@@ -53,7 +53,7 @@ public class OrganizerManager extends UserManager implements Serializable {
     public void loadOrganizer(String userName, String email, String password, String ID) {
         Organizer organizer = new Organizer(userName, email, password, ID);
         this.organizers.add(organizer);
-        super.addUser(organizer);
+        UserManager.users.add(organizer);
     }
 
 

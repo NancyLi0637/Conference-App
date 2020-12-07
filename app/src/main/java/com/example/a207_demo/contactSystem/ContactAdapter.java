@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
 import com.example.a207_demo.messageSystem.MsgActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +25,10 @@ import java.util.List;
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContact> {
 
     private Context context;
-    private List<Contact> contactsList;
+    private ArrayList<ArrayList<String>> contactsList;
+    private String ID;
+    private String friendName;
+    private String friendID;
 
     /**
      * ContactAdapter
@@ -32,9 +36,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
      * @param context
      * @param contactsList
      */
-    public ContactAdapter(Context context, List<Contact> contactsList) {
+    public ContactAdapter(Context context, ArrayList<ArrayList<String>> contactsList, String ID) {
         this.context = context;
         this.contactsList = contactsList;
+        this.ID = ID;
     }
 
     /**
@@ -63,6 +68,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, MsgActivity.class);
+                intent.putExtra("ID", ID);
+                intent.putExtra("friendID", friendID);
+                intent.putExtra("friendName", friendName);
                 context.startActivity(intent);
             }
         });
@@ -76,10 +84,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
      */
     @Override
     public void onBindViewHolder(@NonNull VHContact holder, final int position) {
-
-        Contact contact = contactsList.get(position);
-        holder.contactName.setText(contact.getName());
-        Glide.with(context).load(contact.getImageId()).into(holder.contactImage);
+        ArrayList<String> friend = contactsList.get(position);
+        friendID = friend.get(0);
+        friendName = friend.get(1);
+        holder.contactName.setText(friendName);
+        Glide.with(context).load(R.drawable.jenny).into(holder.contactImage);
 
     }
 

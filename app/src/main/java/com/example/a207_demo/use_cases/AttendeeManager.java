@@ -44,7 +44,7 @@ public class AttendeeManager extends UserManager implements Serializable {
     public void createAttendee(String userName, String email, String password) {
         Attendee attendee = new Attendee(userName, email, password);
         this.attendees.add(attendee);
-        super.addUser(attendee);
+       UserManager.users.add(attendee);
     }
 
     /**
@@ -58,7 +58,7 @@ public class AttendeeManager extends UserManager implements Serializable {
     public void loadAttendee(String userName, String email, String password, String ID) {
         Attendee attendee = new Attendee(userName, email, password, ID);
         this.attendees.add(attendee);
-        super.addUser(attendee);
+        UserManager.users.add(attendee);
     }
 
     /**

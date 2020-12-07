@@ -11,6 +11,9 @@ import com.example.a207_demo.utility.ActivityCollector;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * OrganizerContactAttendeeActivity
+ */
 public class OrganizerContactAttendeeActivity extends ContactActivity {
 
     private List<String> contactList = new ArrayList<>();
@@ -39,6 +42,9 @@ public class OrganizerContactAttendeeActivity extends ContactActivity {
         createContactMenu();
     }
 
+    /**
+     * createContactMenu
+     */
     public void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.organizer_contact_recycler_view);
@@ -46,6 +52,9 @@ public class OrganizerContactAttendeeActivity extends ContactActivity {
         super.createContactMenu(recyclerView, contactAdapter);
     }
 
+    /**
+     * initContacts
+     */
     protected void initContacts() {
         //Todo: access allFriendList to get IDs of friends
         contactList =

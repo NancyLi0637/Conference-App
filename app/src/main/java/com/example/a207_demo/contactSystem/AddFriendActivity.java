@@ -23,6 +23,9 @@ import com.example.a207_demo.utility.SetUpActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * AddFriendActivity
+ */
 public class AddFriendActivity extends SetUpActivity implements View.OnClickListener{
 
     /**
@@ -41,6 +44,9 @@ public class AddFriendActivity extends SetUpActivity implements View.OnClickList
         ActivityCollector.addActivity(this);
     }
 
+    /**
+     * init
+     */
     public void init() {
         super.reset();
         super.readUser();
@@ -49,6 +55,10 @@ public class AddFriendActivity extends SetUpActivity implements View.OnClickList
         search.setOnClickListener(this);
     }
 
+    /**
+     * onClick
+     * @param v View
+     */
     public void onClick(View v) {
         EditText friend = findViewById(R.id.friendname);
         String friendname = friend.toString();

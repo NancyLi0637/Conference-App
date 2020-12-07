@@ -26,6 +26,7 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
 
     private ArrayList<ArrayList<String>> eventList;
     private OrganizerEventAdapter eventAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * onCreate
@@ -49,6 +50,15 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
 
         Button addEvent = findViewById(R.id.btn_addEvent);
         addEvent.setOnClickListener(this);
+
+        swipeRefreshLayout = findViewById(R.id.event_swipe_refresh);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshEvents();
+            }
+        });
 
         createEventMenu();
     }
@@ -80,7 +90,6 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
     protected void initEvents() {
         super.initEvents();
 
-       //eventList = getEventManager().getAllEvent();
         eventList = getEventManager().generateAllInfo(getEventManager().getAllEventID());
 
 //        //Todo: implement image later
@@ -114,6 +123,7 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
             public void run() {
                 createEventMenu();
                 eventAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

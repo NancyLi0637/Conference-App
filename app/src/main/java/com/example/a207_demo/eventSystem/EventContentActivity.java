@@ -27,7 +27,7 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
     /**
      * Set the activity up
      */
-    public void init(){
+    protected void init(){
         super.reset();
         super.readEvent();
         super.readRoom();
@@ -53,17 +53,18 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
      */
     protected void setUpData(){
         ArrayList<String> event = getIntent().getStringArrayListExtra("event");
-        assert event != null;
-        String eventTitle = event.get(0);
-        String eventRoom = getRoomManager().changeIdTONum(event.get(1));
-        String eventTime = getEventManager().generateFormattedStartTime(event.get(2));
-        String eventDuration = event.get(3);
-        String eventType = event.get(4);
-        String eventRestriction = event.get(5);
-        String eventSpeakers = processSpeakers(event.get(6));
+        String eventTitle = event.get(1);
+        String eventRoom = getRoomManager().changeIdTONum(event.get(2));
+        String eventTime = getEventManager().generateFormattedStartTime(event.get(3));
+        String eventDuration = event.get(4);
+        String eventType = event.get(5);
+        String eventRestriction = event.get(6);
+        String eventSpeakers = processSpeakers(event.get(7));
+        String eventStatus = event.get(8);
         String eventContent = "Room: " + eventRoom + "\n" + "Time: " + eventTime + "\n" +
                 "Duration: " + eventDuration + "\n" + "Type: " + eventType + "\n" +
-                "Restriction: " + eventRestriction + "\n" + "Speakers: " + eventSpeakers;
+                "Restriction: " + eventRestriction + "\n" + "Speakers: " + eventSpeakers + "\n" +
+                "Space remaining: " + eventStatus;
         fillContent(eventTitle, eventContent);
     }
 

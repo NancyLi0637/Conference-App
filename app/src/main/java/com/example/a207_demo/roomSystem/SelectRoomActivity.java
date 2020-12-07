@@ -40,7 +40,6 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
     }
 
     private void init(){
-        //fileReadWriter = getFileReadWriter();
         intent = new Intent();
 
         Button back = findViewById(R.id.room_selected_back);
@@ -102,6 +101,7 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
         Intent lastIntent = getIntent();
         String time = lastIntent.getStringExtra("eventTime");
         String duration = lastIntent.getStringExtra("eventDuration");
-        roomList = getRoomManager().getAvailableRoom(time, duration, getEventManager());
+        int capacity = lastIntent.getIntExtra("eventCapacity", 0);
+        roomList = getRoomManager().getAvailableRoom(time, duration, capacity, getEventManager());
     }
 }

@@ -138,25 +138,28 @@ public class RoomManager implements Serializable {
      * @param eventManager an EventManager object
      * @return an ArrayList<String> of room numbers that are available for the given time
      */
-    public ArrayList<String> getAvailableRoom(String time, String duration, EventManager eventManager) {
+    public ArrayList<String> getAvailableRoom(String time, String duration, int capacity, EventManager eventManager) {
         ArrayList<String> roomList = new ArrayList<>();
 
         // First step, add all room numbers to the roomList
         for (Room room : rooms) {
-            roomList.add(room.getRoomID());
+            if(room.getCapacity() > capacity){
+                roomList.add(room.getRoomID());
+            }
         }
 
         // Next step, remove unavailable room numbers from the roomList
         for (String roomID : eventsMap.keySet()) {
-            // Loop though the list of eventIDs of the current room's events:
-            for (String eventID : eventsMap.get(roomID)) {
-                // Find the event object with this event ID
-                Event event = eventManager.getEventFromID(eventID);
+            if(roomList.contains(roomID)){
+                // Loop though the list of eventIDs of the current room's events:
+                for (String eventID : eventsMap.get(roomID)) {
+                    // Find the event object with this event ID
+                    Event event = eventManager.getEventFromID(eventID);
 
-                // if the time conflicts, then the room is not available
-                if (!event.timeConflict(time, duration) ||
-                        event.getCapacity() > getRoomFromID(roomID).getCapacity()) {
-                    roomList.remove(roomID);
+                    // if the time conflicts, then the room is not available
+                    if (!event.timeConflict(time, duration)) {
+                        roomList.remove(roomID);
+                    }
                 }
             }
         }

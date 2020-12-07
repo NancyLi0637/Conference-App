@@ -1,9 +1,11 @@
 package com.example.a207_demo.eventSystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.roomSystem.Room;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
  */
 public class OrganizerEventContentActivity extends EventContentActivity{
 
-    private String eventToRemove;
+    private String eventID;
 
     /**
      * onCreate
@@ -35,12 +37,11 @@ public class OrganizerEventContentActivity extends EventContentActivity{
 
     /**
      * fillContent
-     * @param eventTitle String eventTitle
-     * @param eventContent String eventContent
      */
-    protected void fillContent(String eventTitle, String eventContent){
-        super.fillContent(eventTitle, eventContent);
-        eventToRemove = eventTitle;
+    protected void init(){
+        super.init();
+        ArrayList<String> event = getIntent().getStringArrayListExtra("event");
+        eventID = event.get(0);
         Button eventCancel = findViewById(R.id.btn_cancel_event);
         eventCancel.setOnClickListener(this);
     }
@@ -50,41 +51,20 @@ public class OrganizerEventContentActivity extends EventContentActivity{
      * @param view View
      */
     public void onClick(View view){
-        // Todo: Organizer cancel an event
-        //cancelEvent(eventToRemove);
+        if(cancelEvent()){
+            Toast.makeText(this, "Event is cancelled!", Toast.LENGTH_LONG).show();
+            super.writeEvent();
+            startActivity(new Intent(OrganizerEventContentActivity.this, OrganizerEventActivity.class));
+        }else{
+            Toast.makeText(this, "Some error occurred!", Toast.LENGTH_LONG).show();
+        }
     }
 
-//    /**
-//     * cancelEvent
-//     * @param eventTitle String eventTitle
-//     */
-//    public void cancelEvent(String eventTitle){
-//        Event event = getEventManager().getEventFromTitle(eventTitle);
-//        ArrayList<String> attendees = event.getAttendees();
-//
-//        for (String attendee: attendees){
-//            removeAttendeeFromEvent(attendee, eventTitle);
-//        }
-//        // remove the event
-//        getEventManager().removeEvent(event);
-//    }
-
-//    /**
-//     * remove Attendee From Event
-//     *
-//     * @param userID      userID String object
-//     * @param eventTitle  eventTitle String object
-//     */
-//    public void removeAttendeeFromEvent(String userID, String eventTitle) {
-//        Event event = getEventManager().getEventFromTitle(eventTitle);
-//        if (event != null) {
-//            // decrease number of people in the room
-//            Room room = getRoomManager().getRoomFromID(event.getRoomID());
-//            room.decreaseCurrentNum();
-//
-//            // remove the attendee
-//            event.removeAttendee(userID);
-//        }
-//    }
+    /**
+     * cancelEvent
+     */
+    public boolean cancelEvent(){
+        return getEventManager().cancelEvent(eventID);
+    }
 
 }

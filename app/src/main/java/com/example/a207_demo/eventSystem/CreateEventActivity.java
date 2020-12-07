@@ -90,6 +90,8 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                     Toast.makeText(this, "No Room available. Go create one first!", Toast.LENGTH_LONG).show();
                 }else if(!validTime()){
                     Toast.makeText(this, "You must enter VALID TIME first!", Toast.LENGTH_LONG).show();
+                }else if(!validCapacity()){
+                    Toast.makeText(this, "You must enter VALID CAPACITY first!", Toast.LENGTH_LONG).show();
                 }else{
                     intent = new Intent(CreateEventActivity.this, SelectRoomActivity.class);
                     loadData();
@@ -168,6 +170,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
     private void loadData(){
         intent.putExtra("eventTime", eventTime);
         intent.putExtra("eventDuration", eventDuration);
+        intent.putExtra("eventCapacity", eventCapacity);
     }
 
     private boolean dataMissing() {

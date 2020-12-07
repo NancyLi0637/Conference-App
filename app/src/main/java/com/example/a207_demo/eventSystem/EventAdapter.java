@@ -71,7 +71,7 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
     @Override
     public void onBindViewHolder(@NonNull VHEvent holder, int position) {
         List<String> event= eventList.get(position);
-        holder.eventTitle.setText(event.get(0));
+        holder.eventTitle.setText(event.get(1));
         //Todo: implement image later
         Glide.with(context).load(R.drawable.default_image).into(holder.eventImage);
     }

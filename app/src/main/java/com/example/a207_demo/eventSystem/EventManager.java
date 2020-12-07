@@ -376,6 +376,15 @@ public class EventManager implements Serializable {
         return event.removeAttendee(attendeeID);
     }
 
+    public boolean cancelEvent(String eventID){
+        for(Event event : events){
+            if(event.getEventID().equals(eventID)){
+                return events.remove(event);
+            }
+        }
+        return false;
+    }
+
     public boolean checkValidTime(String time) {
         return checkValidTimeFormat(time) && checkValidFutureTime(time);
     }
@@ -473,7 +482,7 @@ public class EventManager implements Serializable {
         for (Event event : events) {
             if (event.getEventID().equals(eventID)) {
                 return event.getType() + " " + event.getTitle().replace(" ", "_")
-                        + " " + eventID + " " + event.getRoomID() + event.getStartTime() + " "
+                        + " " + eventID + " " + event.getRoomID() + " "+ event.getStartTime() + " "
                         + event.getDuration() + " " + event.getRestriction() + " " +
                         event.getCapacity() + " " + " {" + event.getSpeakers() + "} ";
             }
@@ -492,6 +501,7 @@ public class EventManager implements Serializable {
             ArrayList<String> info = new ArrayList<>();
 
             Event event = getEventFromID(eventID);
+            info.add(eventID);
             info.add(event.getTitle());
             info.add(event.getRoomID());
             info.add(event.getStartTime());
@@ -499,6 +509,7 @@ public class EventManager implements Serializable {
             info.add(event.getType());
             info.add(event.getRestriction());
             info.add("" + event.getSpeakers());
+            info.add((event.getCapacity()-event.getCurrentNum())+"/"+event.getCapacity());
             result.add(info);
         }
         return result;

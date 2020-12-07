@@ -179,14 +179,14 @@ public class EventsController {
 
 //    public ArrayList<String> getAllVIPEvents() { return eventManager.getAllVIPEvents();}
 
-    public boolean cancelEvent(String eventID) {
-        Event currentEvent = eventManager.getEventFromID(eventID);
-        List<Event> eventList = eventManager.getAllEvent();
-        eventList.remove(currentEvent);
-        ArrayList<String> attendeeList = currentEvent.getAttendees();
-        for (String attendee : attendeeList) {
-            eventManager.removeAttendeeFromEvent(attendee, eventID, roomManager);
-        }
-        return roomManager.getRoomBasedOnItsID(currentEvent.getRoomID()).getCurrentNum() == 0;
-    }
+//    public boolean cancelEvent(String eventID) {
+//        Event currentEvent = eventManager.getEventFromID(eventID);
+//        List<Event> eventList = eventManager.getAllEvent();
+//        eventList.remove(currentEvent);
+//        ArrayList<String> attendeeList = currentEvent.getAttendees();
+//        for (String attendee : attendeeList) {
+//            eventManager.removeAttendeeFromEvent(attendee, eventID, roomManager);
+//        }
+//        return roomManager.getRoomBasedOnItsID(currentEvent.getRoomID()).getCurrentNum() == 0;
+//    }
 }

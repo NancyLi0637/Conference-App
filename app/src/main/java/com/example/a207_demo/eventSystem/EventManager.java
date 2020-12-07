@@ -217,24 +217,7 @@ public class EventManager implements Serializable {
         return true;
     }
 
-    /**
-     * Return true if we remove the attendee from a event.
-     *
-     * @param userID      userID String object
-     * @param eventID     eventID String object
-     * @param roomManager roomManager
-     * @return true  iff the user has been successfully removed from this event
-     */
-    public boolean removeAttendeeFromEvent(String userID, String eventID, RoomManager roomManager) {
-        Event event = getEventFromID(eventID);
-        if (event != null) {
-            //Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
-            //room.decreaseCurrentNum();
-            //Todo: check remove success first
-            return event.removeAttendee(userID);
-        }
-        return false;
-    }
+
 
     /**
      * Try to remove a speaker from a list of events
@@ -351,14 +334,6 @@ public class EventManager implements Serializable {
     }
 
 
-//    public String changeEventIDIntoEventTitle(String eventID) {
-//        for (Event event : events) {
-//            if (event.getEventID().equals(eventID)) {
-//                return event.getTitle();
-//            }
-//        }
-//        return "NULL";
-//    }
 
     /**
      * Given a String representing the title of this event, return the ID of this event, or "NULL"
@@ -486,7 +461,7 @@ public class EventManager implements Serializable {
     /**
      * Generate the event info for laoding into event activity
      *
-     * @return
+     * @return ArrayList<ArrayList<String>>
      */
     public ArrayList<ArrayList<String>> generateAllInfo(ArrayList<String> eventIDs) {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
@@ -506,4 +481,45 @@ public class EventManager implements Serializable {
         return result;
     }
 
+    /**
+     * return an event based on its title
+     *
+     * @param title event title String object
+     * @return event if eventID existed in events otherwise return null
+     */
+    public Event getEventFromTitle(String title) {
+        for (Event event : events) {
+            if (event.getTitle().equals(title)) {
+                return event;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * removeEvent
+     * @param event Event
+     */
+    public void removeEvent(Event event) {
+        events.remove(event);
+    }
+
+    /**
+     * Return true if we remove the attendee from a event.
+     *
+     * @param userID      userID String object
+     * @param eventTitle  eventTitle String object
+     * @param roomManager roomManager
+     * @return true  iff the user has been successfully removed from this event
+     */
+//    public boolean removeAttendeeFromEvent(String userID, String eventTitle, RoomManager roomManager) {
+//        Event event = getEventFromTitle(eventTitle);
+//        if (event != null) {
+//            //Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
+//            //room.decreaseCurrentNum();
+//            //Todo: check remove success first
+//            return event.removeAttendee(userID);
+//        }
+//        return false;
+//    }
 }

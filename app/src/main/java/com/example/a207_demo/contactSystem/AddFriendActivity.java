@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.a207_demo.MainActivity;
@@ -47,7 +48,20 @@ public class AddFriendActivity extends SetUpActivity implements View.OnClickList
     }
 
     public void onClick(View v) {
-        Intent intent;
+        EditText friend = findViewById(R.id.friendname);
+        String friendname = friend.toString();
+        if (!addFriend(friendname)){
+            Toast.makeText(AddFriendActivity.this, "Please check the friend name again",
+                    Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(AddFriendActivity.this, "Add friend successfully",
+                    Toast.LENGTH_LONG).show();
+        }
 
+    }
+
+    private boolean addFriend(String friendId){
+        UserManager userManager = getUserManager();
+        return userManager.addFriend(getID(), friendId);
     }
 }

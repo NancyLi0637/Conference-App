@@ -15,20 +15,26 @@
         android:layout_centerInParent="true"/>
 
     <TextView
-        android:id="@+id/email"
+        android:id="@+id/nav_head_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/useremail"
+        android:layout_above="@id/nav_head_username"
         android:textColor="#FFF"
         android:textSize="14sp"/>
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/nav_head_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/email"
-        android:text="@string/username"
+        android:layout_above="@id/nav_head_email"
+        android:textColor="#FFF"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/nav_head_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:textColor="#FFF"
         android:textSize="14sp"/>
 

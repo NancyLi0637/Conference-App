@@ -9,7 +9,7 @@ import com.example.a207_demo.utility.ActivityCollector;
 /**
  * SpeakerEventContentActivity
  */
-public class SpeakerEventContentActivity extends EventContentActivity{
+public class SpeakerMyEventContentActivity extends EventContentActivity{
 
     /**
      * Required function to initiate an Activity class.

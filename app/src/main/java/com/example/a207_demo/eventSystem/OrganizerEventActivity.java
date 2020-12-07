@@ -1,23 +1,17 @@
 package com.example.a207_demo.eventSystem;
 
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.entities.Party;
-import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.utility.ActivityCollector;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * OrganizerEventActivity
@@ -25,8 +19,7 @@ import java.util.List;
 public class OrganizerEventActivity extends EventActivity implements View.OnClickListener, Serializable {
 
     private ArrayList<ArrayList<String>> eventList;
-    private OrganizerEventAdapter eventAdapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    private OrganizerEventAdapter organizerEventAdapter;
 
     /**
      * onCreate
@@ -51,15 +44,6 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         Button addEvent = findViewById(R.id.btn_addEvent);
         addEvent.setOnClickListener(this);
 
-        swipeRefreshLayout = findViewById(R.id.event_swipe_refresh);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshEvents();
-            }
-        });
-
         createEventMenu();
     }
 
@@ -80,8 +64,8 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         super.createEventMenu(recyclerView);
         initEvents();
-        eventAdapter = new OrganizerEventAdapter(this, eventList);
-        recyclerView.setAdapter(eventAdapter);
+        organizerEventAdapter = new OrganizerEventAdapter(this, eventList);
+        recyclerView.setAdapter(organizerEventAdapter);
     }
 
     /**
@@ -111,21 +95,16 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    refreshEvents();
+                    super.refreshEvents();
                 }
                 break;
         }
     }
 
-    private void refreshEvents(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                createEventMenu();
-                eventAdapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+    protected void refreshEvents(){
+        createEventMenu();
+        organizerEventAdapter.notifyDataSetChanged();
+        super.refreshEvents();
     }
 
 }

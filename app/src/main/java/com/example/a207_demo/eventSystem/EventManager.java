@@ -292,10 +292,11 @@ public class EventManager implements Serializable {
 ////    }
 
     public void loadEvent(String type, String title, String eventID, String roomID, String startTime,
-                          String duration, String restriction, int capacity, ArrayList<String> speakerID) {
+                          String duration, String restriction, int capacity,
+                          ArrayList<String> speakerID, ArrayList<String> attendeeID) {
         // create this new event:
         Event newEvent = eventFactory.createEvent(type, title, eventID, roomID, startTime, duration,
-                restriction, capacity, speakerID);
+                restriction, capacity, speakerID, attendeeID);
         // update the events list:
         events.add(newEvent);
 
@@ -323,32 +324,37 @@ public class EventManager implements Serializable {
      *
      * @param userID      userID
      * @param eventID     eventID
-     * @param roomManager a RoomManager object
      * @return true iff the user has been successfully added to this event
      */
-    public boolean addAttendeeToEvent(String userID, String eventID, RoomManager roomManager, AttendeeManager attendeeManager) {
+    public boolean addAttendeeToEvent(String userID, String eventID) {
+
+        ArrayList<String> inEvents = getEventsFromAttendee(userID);
         Event event = getEventFromID(eventID);
-        if (event != null) {
-            String restriction = event.getRestriction();
-            String userType = attendeeManager.getUserType(userID);
-            if (!(restriction.equals("VIP-ONLY") && !userType.equals("VIPUser"))) {
-//                //Todo: update room in room manager
-//                //Todo: i.e. if (roommanager.updateSuccessful(room id)) then add attendee to list
-//                Room room = roomManager.getRoomBasedOnItsID(event.getRoomID());
-//                if (room.getCurrentNum() < room.getCapacity()) {
-//                    if (event.addAttendee(userID, events)) {
-//                        room.increaseCurrentNum();
-//                        return true;
-//                    }
-//                }
-                if(!(event.getCapacity() == event.getCurrentNum())){
-                    if(event.addAttendee(userID, events)){
-                        return true;
-                    }
-                }
+        for(String signedEvent : inEvents){
+            Event current = getEventFromID(signedEvent);
+            if(event.timeConflict(current.getStartTime(), current.getDuration())){
+                return false;
             }
         }
-        return false;
+
+        getEventFromID(eventID).addAttendee(userID, events);
+        return true;
+    }
+
+    public boolean inEvent(String userID, String eventID){
+        return getEventFromID(eventID).getAttendees().contains(userID);
+    }
+
+    public boolean restricted(String userID, String eventID, UserManager userManager){
+        String restriction = getEventFromID(eventID).getRestriction();
+        String userType = userManager.getUserType(userID);
+
+        return restriction.equals("VIP-ONLY") && !userType.equals("VIPUser");
+    }
+
+    public boolean eventFull(String eventID){
+        Event event = getEventFromID(eventID);
+        return event.getCurrentNum() == event.getCapacity();
     }
 
     /**
@@ -372,8 +378,12 @@ public class EventManager implements Serializable {
     }
 
 
-    public boolean removeAttendeeFromEvent(String attendeeID, Event event){
-        return event.removeAttendee(attendeeID);
+    public boolean removeAttendeeFromEvent(String attendeeID, String eventID){
+        if(getEventFromID(eventID).getAttendees().contains(attendeeID)){
+            getEventFromID(eventID).removeAttendee(attendeeID);
+            return true;
+        }
+        return false;
     }
 
     public boolean cancelEvent(String eventID){
@@ -484,7 +494,7 @@ public class EventManager implements Serializable {
                 return event.getType() + " " + event.getTitle().replace(" ", "_")
                         + " " + eventID + " " + event.getRoomID() + " "+ event.getStartTime() + " "
                         + event.getDuration() + " " + event.getRestriction() + " " +
-                        event.getCapacity() + " " + " {" + event.getSpeakers() + "} ";
+                        event.getCapacity() + " {" + event.getSpeakers() + "} ";
             }
         }
         return "NULL";

@@ -241,9 +241,6 @@ public class UserManager implements Serializable {
      * @return the String user ID of this user given his account and password, or "NULL"
      */
     public String validLogIn(String account, String password) {
-        System.out.println("ACCOUT" + account);
-        System.out.println("PASSWORD" + password);
-        System.out.println("HELLLO" + users);
         for (User user : users) {
             if (user.getEmail().equals(account) && user.getPassword().equals(password)) {
                 return user.getUserID();

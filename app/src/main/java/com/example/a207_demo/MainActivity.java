@@ -21,13 +21,19 @@ import com.example.a207_demo.use_cases.UserManager;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.utility.CleanArchActivity;
 
+import java.util.ArrayList;
+
 /**
  * The top level class for running the app.
  */
 public class MainActivity extends CleanArchActivity implements View.OnClickListener {
 
+    private Intent intent;
+
     private static String ID;
-    private static String type;
+    private static String TYPE;
+    private static String EMAIL;
+    private static String USERNAME;
 
     /**
      * Required function to initiate an Activity class.
@@ -61,7 +67,6 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
      */
     @Override
     public void onClick(View v) {
-        Intent intent;
         switch (v.getId()) {
             case R.id.btn_signUp:
                 super.reset();
@@ -75,18 +80,15 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
             case R.id.btn_login:
                 super.reset();
                 super.readUser();
-                //super.setUserID(ID);
                 if (info_matched()) {
-                    if (type.equals("ATTENDEE")) {
+                    if (TYPE.equals("ATTENDEE")) {
                         intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
-                        intent.putExtra("ID", ID);
-                    } else if (type.equals("ORGANIZER")) {
+                    } else if (TYPE.equals("ORGANIZER")) {
                         intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
-                        intent.putExtra("ID", ID);
                     } else {
                         intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
-                        intent.putExtra("ID", ID);
                     }
+                    loadInfo();
                     startActivity(intent);
                 } else {
                     Toast.makeText(MainActivity.this, "Your username and password do not match. Please try again.",
@@ -109,12 +111,22 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
         String userEM = email.getText().toString();
         String userPW = password.getText().toString();
 
-        if (!getUserManager().validLogIn(userEM, userPW).equals("NULL")) {
-            ID = getUserManager().validLogIn(userEM, userPW);
-            type = getUserManager().getUserType(userEM, userPW);
-            return true;
+        if (getUserManager().validLogIn(userEM, userPW).equals("NULL")) {
+            return false;
         }
-        return false;
+        ID = getUserManager().validLogIn(userEM, userPW);
+        TYPE = getUserManager().getUserType(userEM, userPW);
+        EMAIL = userEM;
+        USERNAME = getUserManager().getUserNameFromID(ID);
+        return true;
     }
 
+    private void loadInfo(){
+        ArrayList<String> info = new ArrayList<>();
+        info.add(ID);
+        info.add(TYPE);
+        info.add(EMAIL);
+        info.add(USERNAME);
+        intent.putExtra("info", info);
+    }
 }

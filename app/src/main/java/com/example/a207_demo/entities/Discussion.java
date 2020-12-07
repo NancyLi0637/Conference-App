@@ -38,10 +38,12 @@ public class Discussion extends Event {
      * @param restriction restriction
      */
     public Discussion (String title, String eventID, String roomID, String startTime,
-                       String duration, String restriction, int capacity, ArrayList<String> speakerID){
+                       String duration, String restriction, int capacity,
+                       ArrayList<String> speakerID, ArrayList<String> attendeeID){
         super(title, eventID, roomID, startTime, duration, restriction, capacity);
         setType("DISCUSSION");
         setSpeakerUserIDs(speakerID);
+        setAttendeeUserIDs(attendeeID);
     }
 
 

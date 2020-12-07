@@ -10,12 +10,11 @@ import androidx.annotation.NonNull;
 import com.example.a207_demo.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * SpeakerEventAdapter
  */
-public class SpeakerEventAdapter extends EventAdapter {
+public class SpeakerMyEventAdapter extends EventAdapter {
     private Context context;
 
     /**
@@ -23,7 +22,7 @@ public class SpeakerEventAdapter extends EventAdapter {
      * @param context Context
      * @param eventList List<Event>
      */
-    public SpeakerEventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
+    public SpeakerMyEventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
         super(context, eventList);
         this.context = context;
     }
@@ -39,7 +38,7 @@ public class SpeakerEventAdapter extends EventAdapter {
     public VHEvent onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.item_event, parent, false);
         VHEvent holder = new VHEvent(v);
-        setClickEventListener(holder, SpeakerEventContentActivity.class);
+        setClickEventListener(holder, SpeakerMyEventContentActivity.class);
         return holder;
     }
 }

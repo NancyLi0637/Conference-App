@@ -77,4 +77,10 @@ public class AttendeeEventActivity extends EventActivity {
 //            event.setImageId(R.drawable.default_image);
 //        }
     }
+
+    protected void refreshEvents(){
+        createEventMenu();
+        attendeeEventAdapter.notifyDataSetChanged();
+        super.refreshEvents();
+    }
 }

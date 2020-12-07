@@ -222,18 +222,8 @@ public abstract class Event implements Serializable {
      * @param events     a list of events
      * @return boolean true if we add attendee to the list
      */
-    public boolean addAttendee(String attendeeID, List<Event> events) {
-        if (this.attendeeUserIDs.contains(attendeeID)) {
-            return false;
-        }
-        for (Event event : events) {
-            if (event.getAttendees().contains(attendeeID) &&
-                    (timeConflict(event.getStartTime(), event.getDuration()))){
-                return false;
-            }
-        }
+    public void addAttendee(String attendeeID, List<Event> events) {
         this.attendeeUserIDs.add(attendeeID);
-        return true;
     }
 
     /**
@@ -280,11 +270,8 @@ public abstract class Event implements Serializable {
      * @param attendeeID attendeeID String
      * @return boolean true if person existed in attendee list
      */
-    public boolean removeAttendee(String attendeeID) {
-        if (attendeeUserIDs.contains(attendeeID)) {
-            return attendeeUserIDs.remove(attendeeID);
-        }
-        return false;
+    public void removeAttendee(String attendeeID) {
+        attendeeUserIDs.remove(attendeeID);
     }
 
     /**

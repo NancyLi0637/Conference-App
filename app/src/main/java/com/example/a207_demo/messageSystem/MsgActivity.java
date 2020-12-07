@@ -45,8 +45,6 @@ public class MsgActivity extends SetUpActivity implements View.OnClickListener {
 
         init();
 
-        System.out.println("IDDDD" + getID());
-
         ActivityCollector.addActivity(this);
 
     }

@@ -143,14 +143,23 @@ public class FileReadWriter implements Serializable {
         for (String line : lines) {
             ArrayList<String> speakerId = new ArrayList<>();
             //find speakerId list
+            int separate = -1;
             if (line.contains("{")) {
-                //Todo: attendee also in list later
                 int start = line.indexOf("{");
                 int end = line.indexOf("}");
+                separate = start;
                 String speakers = line.substring(start + 1, end);
                 speakerId = processSpeakers(speakers);
-                line = line.substring(0, start-1);
             }
+            ArrayList<String> attendeeId = new ArrayList<>();
+            if (line.contains(";")){
+                int start = line.indexOf(";");
+                int end = line.lastIndexOf(";");
+                String attendees = line.substring(start+1, end);
+                attendeeId = processAttendees(attendees);
+            }
+            line = line.substring(0, separate-1);
+
             String[] wordList = line.split(" ");
             String type = wordList[0];
             String title = wordList[1].replace("_", " ");
@@ -161,26 +170,36 @@ public class FileReadWriter implements Serializable {
             String restriction = wordList[6];
             int capacity = Integer.parseInt(wordList[7]);
 
-
-//            ArrayList<String> Attendees = new ArrayList<>();
-//            if (wordList.size() > 5){
-//                for (int index = 5; index < wordList.size(); index++){
-//                    Attendees.add(wordList.get(index));
-//                }
-//            }
             eventManager.loadEvent(type, title, eventID, roomID, startTime, duration,
-                    restriction, capacity, speakerId);
+                    restriction, capacity, speakerId, attendeeId);
             roomManager.addEventToRoom(eventID, roomID);
         }
     }
 
+    //necessary to separate in case attendee is empty while spaeker has values
     private ArrayList<String> processSpeakers(String speakerId) {
-        ArrayList<String> arrayList = new ArrayList<>();
 
         if (speakerId.equals("[]") || speakerId.equals("null")) {
-            return arrayList;
+            return new ArrayList<>();
         }
-        String content = speakerId.substring(1, speakerId.length()-1);
+
+        return processUsers(speakerId);
+
+    }
+
+    private ArrayList<String> processAttendees(String attendeeId) {
+
+        if (attendeeId.equals("[]") || attendeeId.equals("null")) {
+            return new ArrayList<>();
+        }
+
+        return processUsers(attendeeId);
+
+    }
+
+    private ArrayList<String> processUsers(String userId){
+        ArrayList<String> arrayList = new ArrayList<>();
+        String content = userId.substring(1, userId.length()-1);
 
         if (content.contains(", ")) {
             String[] wordList = content.split(", ");
@@ -205,8 +224,9 @@ public class FileReadWriter implements Serializable {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String eventId : eventIds) {
                 String line = eventManager.generateFormattedEventInfo(eventId);
-//                for (String attendee : eventsController.getEventManager().getAttendeesFromEvent(ID)) {
-//                    line += " " + attendee;
+                line += " ;" + eventManager.getAttendeesFromEvent(eventId) + ";";
+//                for (String attendee : eventManager.getAttendeesFromEvent(eventId)) {
+//                    line += " ;" + attendee + ";";
 //                }
                 line += "\n";
                 writer.write(line);

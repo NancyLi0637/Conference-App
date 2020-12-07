@@ -53,7 +53,7 @@
             android:name=".eventSystem.AttendeeMyEventContentActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".eventSystem.SpeakerEventContentActivity"
+            android:name=".eventSystem.SpeakerMyEventContentActivity"
             android:launchMode="singleTask" />
         <activity android:name=".eventSystem.EventActivity" />
         <activity android:name=".eventSystem.EventContentActivity" />

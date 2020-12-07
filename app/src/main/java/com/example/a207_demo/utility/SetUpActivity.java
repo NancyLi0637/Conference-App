@@ -3,6 +3,7 @@ package com.example.a207_demo.utility;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -27,13 +28,20 @@ import com.example.a207_demo.messageSystem.SpeakerAnnouncementActivity;
 import com.example.a207_demo.roomSystem.RoomActivity;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 /**
  * SetUpActivity class
  */
 public class SetUpActivity extends CleanArchActivity {
     private DrawerLayout mDrawerLayout;
-    private String ID;
     private Intent intent;
+
+    private ArrayList<String> info;
+    private String ID;
+    private String TYPE;
+    private String EMAIL;
+    private String USERNAME;
 
     /**
      * initialize action bar and navigation view
@@ -42,18 +50,24 @@ public class SetUpActivity extends CleanArchActivity {
      * @param id_nav_item int
      */
     public void init(AppCompatActivity context, int id_nav_view, int id_nav_item) {
-        ID = getIntent().getStringExtra("ID");
+        info = getIntent().getStringArrayListExtra("info");
+        System.out.println("INFOOO" + info);
+        ID = info.get(0);
+        TYPE = info.get(1);
+        EMAIL = info.get(2);
+        USERNAME = info.get(3);
         super.setID(ID);
         createActionBar();
         createNavView(context, id_nav_view, id_nav_item);
     }
 
     /**
-     * For initializing user ID
+     * For initializing user ID in Msg
      */
 
     public void init(){
         ID = getIntent().getStringExtra("ID");
+
         super.setID(ID);
     }
 
@@ -83,7 +97,8 @@ public class SetUpActivity extends CleanArchActivity {
      */
     protected void createNavView(final AppCompatActivity context, int id_nav_view, int id_nav_item) {
         NavigationView navigationView = findViewById(id_nav_view);
-        //navigationView.setCheckedItem(id_nav_item);
+        navigationView.setCheckedItem(id_nav_item);
+        loadInfo();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -137,11 +152,21 @@ public class SetUpActivity extends CleanArchActivity {
                         intent = new Intent(context, RoomActivity.class);
                         break;
                 }
-                intent.putExtra("ID", ID);
+                intent.putExtra("info", info);
                 startActivity(intent);
                 return true;
             }
         });
+    }
+
+    private void loadInfo(){
+        TextView userType = findViewById(R.id.nav_head_type);
+        TextView userName = findViewById(R.id.nav_head_username);
+        TextView userEmail = findViewById(R.id.nav_head_email);
+
+        userType.setText(TYPE);
+        userName.setText(USERNAME);
+        userEmail.setText(EMAIL);
     }
 
     /**
@@ -166,7 +191,7 @@ public class SetUpActivity extends CleanArchActivity {
                 break;
             case R.id.settings:
                 intent = new Intent(SetUpActivity.this, Settings.class);
-                intent.putExtra("ID", ID);
+                intent.putExtra("info", info);
                 startActivity(intent);
                 break;
             case R.id.signOut:

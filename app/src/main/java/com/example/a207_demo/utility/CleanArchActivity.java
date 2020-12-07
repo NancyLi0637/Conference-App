@@ -95,7 +95,7 @@ public class CleanArchActivity extends AppCompatActivity{
     }
 
     public void readEvent(){
-        fileReadWriter.EventReader(eventManager);
+        fileReadWriter.EventReader(eventManager, roomManager);
     }
     public void readRoom(){
         fileReadWriter.RoomReader(roomManager);

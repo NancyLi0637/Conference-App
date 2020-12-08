@@ -4,6 +4,7 @@ import com.example.a207_demo.entities.*;
 import com.example.a207_demo.eventSystem.Event;
 
 import java.io.Serializable;
+import java.net.IDN;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,10 +59,11 @@ public class UserManager implements Serializable {
 
     protected boolean setAnnouncement(ArrayList<String> userIDs, String eventTitle, String announcement){
         for(String userID : userIDs){
+            System.out.println("ID" + userID);
             boolean hasUser = false;
             for(User user : users){
                 if(user.getUserID().equals(userID)){
-                    user.addAnnouncement("From event '" + eventTitle + "': " + announcement);
+                    user.addAnnouncement("From '" + eventTitle + "': " + announcement);
                     hasUser = true;
                     break;
                 }
@@ -326,6 +328,17 @@ public class UserManager implements Serializable {
             info.add(friendID);
             info.add(getUserNameFromID(friendID));
             result.add(info);
+        }
+        return result;
+    }
+
+    public ArrayList<ArrayList<String>> generateIDNameInfo(ArrayList<String> userIDs){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for(String userID : userIDs){
+            ArrayList<String> IDNamePair = new ArrayList<>();
+            IDNamePair.add(userID);
+            IDNamePair.add(getUserNameFromID(userID));
+            result.add(IDNamePair);
         }
         return result;
     }

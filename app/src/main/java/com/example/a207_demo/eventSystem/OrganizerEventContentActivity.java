@@ -22,7 +22,6 @@ public class OrganizerEventContentActivity extends EventContentActivity{
 
     private String eventID;
     private String eventTitle;
-    private String announcement;
 
 
     /**
@@ -44,9 +43,8 @@ public class OrganizerEventContentActivity extends EventContentActivity{
      */
     protected void init(){
         super.init();
-        ArrayList<String> event = getIntent().getStringArrayListExtra("event");
-        eventID = event.get(0);
-        eventTitle = event.get(1);
+        eventID = getEventID();
+        eventTitle = getEventTitle();
 
         Button eventCancel = findViewById(R.id.btn_cancel_event);
         Button announceSpeaker = findViewById(R.id.btn_event_announce_speaker);
@@ -61,14 +59,17 @@ public class OrganizerEventContentActivity extends EventContentActivity{
      * @param view View
      */
     public void onClick(View view){
+        intent = new Intent(OrganizerEventContentActivity.this, SendAnnouncementActivity.class);
+        intent.putExtra("class", "eventContent");
+        intent.putExtra("eventTitle", eventTitle);
         switch (view.getId()){
             case R.id.btn_event_announce_speaker:
-                    intent = new Intent(OrganizerEventContentActivity.this, SendAnnouncementActivity.class);
-                    startActivityForResult(intent, 1);
+                intent.putExtra("userIDs", getEventManager().getSpeakersFromEvent(eventID));
+                startActivity(intent);
                 break;
             case R.id.btn_event_announce_attendee:
-                intent = new Intent(OrganizerEventContentActivity.this, SendAnnouncementActivity.class);
-                startActivityForResult(intent, 2);
+                intent.putExtra("userIDs", getEventManager().getAttendeesFromEvent(eventID));
+                startActivity(intent);
                 break;
             case R.id.btn_cancel_event:
                 if(cancelEvent()){
@@ -88,35 +89,5 @@ public class OrganizerEventContentActivity extends EventContentActivity{
     private boolean cancelEvent(){
         return getEventManager().cancelEvent(eventID);
     }
-
-    /**
-     * onActivityResult
-     * @param requestCode requestCode
-     * @param resultCode resultCode
-     * @param data Intent
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
-            announcement = data.getStringExtra("announcement");
-            ArrayList<String> userIDs = new ArrayList<>();
-            switch(requestCode) {
-                case 1:
-                    userIDs = getEventManager().getSpeakersFromEvent(eventID);
-                    break;
-                case 2:
-                    userIDs = getEventManager().getAttendeesFromEvent(eventID);
-                    break;
-            }
-            boolean sent = getOrganizerManager().sendAnnouncement(userIDs, eventTitle, announcement);
-            if(sent){
-                super.writeUser();
-                Toast.makeText(this, "Announcement SENT!", Toast.LENGTH_LONG).show();
-            }
-        }
-
-    }
-
 
 }

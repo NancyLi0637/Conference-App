@@ -23,6 +23,8 @@ import java.util.ArrayList;
  * EventContentActivity
  */
 public abstract class EventContentActivity extends CleanArchActivity implements View.OnClickListener{
+    private String eventTitle;
+    private String eventID;
 
     /**
      * Set the activity up
@@ -53,7 +55,8 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
      */
     protected void setUpData(){
         ArrayList<String> event = getIntent().getStringArrayListExtra("event");
-        String eventTitle = event.get(1);
+        eventID = event.get(0);
+        eventTitle = event.get(1);
         String eventRoom = getRoomManager().changeIdTONum(event.get(2));
         String eventTime = getEventManager().generateFormattedStartTime(event.get(3));
         String eventDuration = event.get(4);
@@ -122,5 +125,13 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public String getEventTitle(){
+        return eventTitle;
+    }
+
+    public String getEventID(){
+        return eventID;
     }
 }

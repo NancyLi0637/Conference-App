@@ -8,11 +8,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.a207_demo.R;
+import com.example.a207_demo.contactSystem.OrganizerContactAttendeeActivity;
+import com.example.a207_demo.contactSystem.OrganizerContactSpeakerActivity;
+import com.example.a207_demo.entities.Organizer;
+import com.example.a207_demo.eventSystem.OrganizerEventContentActivity;
 import com.example.a207_demo.utility.CleanArchActivity;
 
+import java.util.ArrayList;
+
 public class SendAnnouncementActivity extends CleanArchActivity implements View.OnClickListener{
-    private String announcement;
     private Intent intent;
+
+    private String announcement;
+    private String type;
+    private ArrayList<String> userIDs;
+    private String eventTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +35,8 @@ public class SendAnnouncementActivity extends CleanArchActivity implements View.
     private void init(){
         super.reset();
         super.readUser();
-        intent = new Intent();
+        setUpInfo();
+//        type = getIntent().getStringExtra("type");
 
         Button back = findViewById(R.id.announcement_back_event);
         Button send = findViewById(R.id.send_announcement);
@@ -40,10 +51,12 @@ public class SendAnnouncementActivity extends CleanArchActivity implements View.
                 loadData();
                 if(announcement.equals("")){
                     Toast.makeText(this, "Announcement can't be empty!", Toast.LENGTH_LONG).show();
-                }else {
-                    intent.putExtra("announcement", announcement);
-                    setResult(RESULT_OK, intent);
-                    finish();
+                }else if(sendAnnouncement()){
+                    super.writeUser();
+                    Toast.makeText(this, "Announcement SENT!", Toast.LENGTH_LONG).show();
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(this, "Some errors have occurred!", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.announcement_back_event:
@@ -56,6 +69,23 @@ public class SendAnnouncementActivity extends CleanArchActivity implements View.
     private void loadData(){
         EditText announce = findViewById(R.id.announcement_to_send);
         announcement = announce.getText().toString();
-        System.out.println("ANNOUNCEMENT" + announcement);
+    }
+
+    private void setUpInfo(){
+        String from = getIntent().getStringExtra("class");
+        eventTitle = getIntent().getStringExtra("eventTitle");
+        userIDs = getIntent().getStringArrayListExtra("userIDs");
+
+        if(from.equals("eventContent")){
+            intent = new Intent(SendAnnouncementActivity.this, OrganizerEventContentActivity.class);
+        }else if(from.equals("attendeeContact")){
+            intent = new Intent(SendAnnouncementActivity.this, OrganizerContactAttendeeActivity.class);
+        }else if(from.equals("speakerContact")){
+            intent = new Intent(SendAnnouncementActivity.this, OrganizerContactSpeakerActivity.class);
+        }
+    }
+
+    private boolean sendAnnouncement(){
+        return getOrganizerManager().sendAnnouncement(userIDs, eventTitle, announcement);
     }
 }

@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
+import com.example.a207_demo.eventSystem.EventAdapter;
 import com.example.a207_demo.messageSystem.MsgActivity;
+import com.example.a207_demo.messageSystem.SendAnnouncementActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +24,13 @@ import java.util.List;
 /**
  * ContactAdapter
  */
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContact> {
+public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContact> {
 
     private Context context;
     private ArrayList<ArrayList<String>> contactsList;
-    private String ID;
-    private String friendName;
-    private String friendID;
+    private String myID;
+    private String userName;
+    private String userID;
 
     /**
      * ContactAdapter
@@ -36,45 +38,31 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
      * @param context
      * @param contactsList
      */
-    public ContactAdapter(Context context, ArrayList<ArrayList<String>> contactsList, String ID) {
+    public ContactAdapter(Context context, ArrayList<ArrayList<String>> contactsList, String myID) {
         this.context = context;
         this.contactsList = contactsList;
-        this.ID = ID;
+        this.myID = myID;
     }
 
     /**
-     * onCreateViewHolder
+     * ContactAdapter
      *
-     * @param parent   @NonNull ViewGroup parent
-     * @param viewType int viewType
-     * @return VHContact
+     * @param context
+     * @param contactsList
      */
-    @NonNull
+    public ContactAdapter(Context context, ArrayList<ArrayList<String>> contactsList) {
+        this.context = context;
+        this.contactsList = contactsList;
+    }
+
+    /**
+     * on Create View Holder
+     * @param parent parent ViewGroup
+     * @param viewType viewType
+     * @return VHEvent
+     */
     @Override
-    public VHContact onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_contact, parent, false);
-        VHContact holder = new ContactAdapter.VHContact(v);
-        setClickContactListener(holder);
-        return holder;
-    }
-
-    /**
-     * setClickContactListener
-     *
-     * @param holder ContactAdapter.VHContact holder
-     */
-    public void setClickContactListener(final ContactAdapter.VHContact holder) {
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, MsgActivity.class);
-                intent.putExtra("ID", ID);
-                intent.putExtra("friendID", friendID);
-                intent.putExtra("friendName", friendName);
-                context.startActivity(intent);
-            }
-        });
-    }
+    abstract public VHContact onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
 
     /**
      * onBindViewHolder
@@ -84,10 +72,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
      */
     @Override
     public void onBindViewHolder(@NonNull VHContact holder, final int position) {
-        ArrayList<String> friend = contactsList.get(position);
-        friendID = friend.get(0);
-        friendName = friend.get(1);
-        holder.contactName.setText(friendName);
+        ArrayList<String> user = contactsList.get(position);
+        userID = user.get(0);
+        userName = user.get(1);
+        holder.contactName.setText(userName);
         Glide.with(context).load(R.drawable.jenny).into(holder.contactImage);
 
     }
@@ -100,6 +88,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.VHContac
     @Override
     public int getItemCount() {
         return contactsList.isEmpty() ? 0 : contactsList.size();
+    }
+
+    public String getUserID(){
+        return userID;
     }
 
     /**

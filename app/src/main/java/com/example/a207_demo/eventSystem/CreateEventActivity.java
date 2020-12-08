@@ -27,7 +27,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
     private String eventTime;
     private String eventDuration;
     private String eventRestriction = "PUBLIC";
-    private int eventCapacity;
+    private String eventCapacity;
     private String roomID;
     private ArrayList<String> speakerId;
 
@@ -90,7 +90,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                     Toast.makeText(this, "No Room available. Go create one first!", Toast.LENGTH_LONG).show();
                 }else if(!validTime()){
                     Toast.makeText(this, "You must enter VALID TIME first!", Toast.LENGTH_LONG).show();
-                }else if(!validCapacity()){
+                }else if(!validInteger(eventCapacity)){
                     Toast.makeText(this, "You must enter VALID CAPACITY first!", Toast.LENGTH_LONG).show();
                 }else{
                     intent = new Intent(CreateEventActivity.this, SelectRoomActivity.class);
@@ -120,13 +120,13 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                 } else if (!validTime()) {
                     //Todo: between 0 and 12
                     Toast.makeText(this, "TIME entered is invalid!", Toast.LENGTH_LONG).show();
-                } else if(!validDuration()){
+                } else if(!validInteger(eventDuration)){
                     Toast.makeText(this, "DURATION entered is invalid!", Toast.LENGTH_LONG).show();
-                } else if(!validCapacity()){
+                } else if(!validInteger(eventCapacity)){
                     Toast.makeText(this, "EVENT CAPACITY entered is invalid!", Toast.LENGTH_LONG).show();
                 } else {
                     boolean created = getEventManager().createEvent(eventType, eventTitle, roomID, speakerId,
-                            eventTime, eventDuration, eventRestriction, eventCapacity);
+                            eventTime, eventDuration, eventRestriction, Integer.parseInt(eventCapacity));
 
                     if(created){
                         Toast.makeText(this, "You have SUCCESSFULLY created event!", Toast.LENGTH_LONG).show();
@@ -159,13 +159,9 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         eventType = String.valueOf(type.getSelectedItem());
         eventTitle = title.getText().toString();
         eventTime = startTime.getText().toString();
+        //TODO: integer duration later?
         eventDuration = duration.getText().toString();
-        String cap = capacity.getText().toString();
-        if(cap.equals("")){
-            eventCapacity = 0;
-        }else{
-            eventCapacity = Integer.parseInt(cap);
-        }
+        eventCapacity = capacity.getText().toString();
     }
 
     private void loadData(){
@@ -176,7 +172,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
 
     private boolean dataMissing() {
         return eventTitle.equals("") || eventTime.equals("") || eventDuration.equals("") ||
-                eventCapacity == 0 || roomID == null;
+                eventCapacity.equals("") || roomID == null;
     }
 
     private boolean validTitle(){
@@ -187,13 +183,10 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         return getEventManager().checkValidTime(eventTime);
     }
 
-    private boolean validDuration(){
-        return getEventManager().checkValidDuration(eventDuration);
+    private boolean validInteger(String num){
+        return getEventManager().checkValidInteger(num);
     }
 
-    private boolean validCapacity(){
-        return eventCapacity > 0;
-    }
 
     /**
      * onActivityResult

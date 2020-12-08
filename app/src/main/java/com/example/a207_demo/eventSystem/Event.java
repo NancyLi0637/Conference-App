@@ -72,6 +72,10 @@ public abstract class Event implements Serializable {
         this.type = type;
     }
 
+    public void setCapacity(int capacity){
+        this.capacity = capacity;
+    }
+
     /**
      * setImageId
      * @param imageId imageId

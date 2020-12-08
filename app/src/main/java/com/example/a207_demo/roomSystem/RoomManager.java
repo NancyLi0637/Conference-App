@@ -130,6 +130,17 @@ public class RoomManager implements Serializable {
         return roomIDs;
     }
 
+    public int getRoomCapFromEvent(String eventID){
+        for(String roomID : eventsMap.keySet()){
+            for(String event : eventsMap.get(roomID)){
+                if(event.equals(eventID)){
+                   return getRoomFromID(roomID).getCapacity();
+                }
+            }
+        }
+        return -1;
+    }
+
 
     /**
      * Get an ArrayList<String> of room numbers that are available for the given time

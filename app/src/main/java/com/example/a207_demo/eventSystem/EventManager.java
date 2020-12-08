@@ -55,10 +55,20 @@ public class EventManager implements Serializable {
      */
     public void setEventType(String type){this.allEventType.add(type);}
 
+    public void setEventCapacity(String eventID, int capacity){
+        for(Event event : events){
+            if(event.getEventID().equals(eventID)){
+                event.setCapacity(capacity);
+                break;
+            }
+        }
+    }
+
     public String getEventRestrictionWithID(String eventID) {
         Event event = getEventFromID(eventID);
         return event.getRestriction();
     }
+
 
     /**
      * Given a String representing the title of this event, return the ID of this event, or "NULL"
@@ -101,6 +111,15 @@ public class EventManager implements Serializable {
 
     public ArrayList<String> getAllEventType() {
         return this.allEventType;
+    }
+
+    public int getEventNumAttended(String eventID){
+        for(Event event : events){
+            if(event.getEventID().equals(eventID)){
+                return event.getCurrentNum();
+            }
+        }
+        return -1;
     }
 
     /**
@@ -457,12 +476,12 @@ public class EventManager implements Serializable {
     /**
      * checkValidDuration duration is integer and larger than 0
      *
-     * @param duration String
+     * @param num String
      * @return boolean
      */
-    public boolean checkValidDuration(String duration) {
+    public boolean checkValidInteger(String num) {
         try {
-            int dur = Integer.parseInt(duration);
+            int dur = Integer.parseInt(num);
             return dur > 0;
         } catch (NumberFormatException ex) {
             return false;

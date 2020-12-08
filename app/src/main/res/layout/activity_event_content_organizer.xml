@@ -35,64 +35,91 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/event_content_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="35dp"
-                app:cardCornerRadius="4dp">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/event_info"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="35dp"
+                    app:cardCornerRadius="4dp">
+
+                    <TextView
+                        android:id="@+id/event_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textSize="20sp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btn_event_announce_speaker"
+                    android:layout_width="213dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/announceSpeaker"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btn_event_announce_attendee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textSize="20sp"/>
+                    android:text="@string/announceAttendee"
+                    android:textSize="20sp"
+                    android:textAllCaps="false"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"/>
 
-            </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp">
 
-            <Button
-                android:id="@+id/btn_event_announce_speaker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/announceSpeaker"
-                android:textSize="24sp"
-                android:textAllCaps="false"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"/>
+                    <Button
+                        android:id="@+id/btn_change_cap"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/changeCapacity"
+                        android:layout_weight="1"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="10dp"/>
 
-            <Button
-                android:id="@+id/btn_event_announce_attendee"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/announceAttendee"
-                android:textSize="24sp"
-                android:textAllCaps="false"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"/>
+                    <Button
+                        android:id="@+id/btn_cancel_event"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cancelEvent"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="24dp"/>
 
-            <Button
-                android:id="@+id/btn_cancel_event"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cancelEvent"
-                android:textSize="24sp"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center_horizontal"/>
+                </LinearLayout>
 
-        </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

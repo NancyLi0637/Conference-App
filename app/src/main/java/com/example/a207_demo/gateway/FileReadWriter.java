@@ -238,6 +238,7 @@ public class FileReadWriter implements Serializable {
 //                for (String attendee : eventManager.getAttendeesFromEvent(eventId)) {
 //                    line += " ;" + attendee + ";";
 //                }
+                System.out.println("LINEE" + line);
                 line += "\n";
                 writer.write(line);
             }

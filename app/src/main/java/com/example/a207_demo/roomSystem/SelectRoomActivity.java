@@ -101,7 +101,8 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
         Intent lastIntent = getIntent();
         String time = lastIntent.getStringExtra("eventTime");
         String duration = lastIntent.getStringExtra("eventDuration");
-        int capacity = lastIntent.getIntExtra("eventCapacity", 0);
-        roomList = getRoomManager().getAvailableRoom(time, duration, capacity, getEventManager());
+        String capacity = lastIntent.getStringExtra("eventCapacity");
+        int cap = Integer.parseInt(capacity);
+        roomList = getRoomManager().getAvailableRoom(time, duration, cap, getEventManager());
     }
 }

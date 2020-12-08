@@ -341,4 +341,17 @@ public class UserManager implements Serializable {
         }
         return result;
     }
+
+    public ArrayList<ArrayList<String>> generateAccountInfo(){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for(User user : users){
+            ArrayList<String> info = new ArrayList<>();
+            info.add(user.getUserName());
+            info.add(user.getType());
+            info.add(user.getEmail());
+            info.add(user.getUserID());
+            result.add(info);
+        }
+        return result;
+    }
 }

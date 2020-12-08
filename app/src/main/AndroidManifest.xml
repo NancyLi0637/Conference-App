@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".signupSystem.CreateAccountByOrganizer"
+            android:label="Accounts"
+            android:launchMode="singleTask"/>
+        <activity
             android:name=".messageSystem.AttendeeAnnouncementActivity"
             android:label="@string/announcements"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity android:name=".messageSystem.SendAnnouncementActivity" />
         <activity
             android:name=".contactSystem.OrganizerContactSpeakerActivity"

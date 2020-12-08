@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.eventSystem.CreateEventActivity;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
  * RoomActivity
  */
 public class RoomActivity extends SetUpActivity implements View.OnClickListener {
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private ArrayList<ArrayList<String>> roomList;
     private RoomAdapter roomAdapter;
@@ -48,6 +50,14 @@ public class RoomActivity extends SetUpActivity implements View.OnClickListener 
 
         Button addEvent = findViewById(R.id.btn_addRoom);
         addEvent.setOnClickListener(this);
+        swipeRefreshLayout = findViewById(R.id.room_swipe_refresh);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshRooms();
+            }
+        });
 
         createRoomMenu();
     }
@@ -117,6 +127,7 @@ public class RoomActivity extends SetUpActivity implements View.OnClickListener 
             public void run() {
                 createRoomMenu();
                 roomAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

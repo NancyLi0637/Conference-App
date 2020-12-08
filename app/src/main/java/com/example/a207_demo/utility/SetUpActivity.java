@@ -27,6 +27,8 @@ import com.example.a207_demo.messageSystem.AnnouncementActivity;
 import com.example.a207_demo.messageSystem.AttendeeAnnouncementActivity;
 import com.example.a207_demo.messageSystem.SpeakerAnnouncementActivity;
 import com.example.a207_demo.roomSystem.RoomActivity;
+import com.example.a207_demo.signupSystem.CreateAccountByOrganizer;
+import com.example.a207_demo.signupSystem.SignUpActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -144,6 +146,10 @@ public class SetUpActivity extends CleanArchActivity {
                     case R.id.nav_room:
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, RoomActivity.class);
+                        break;
+                    case R.id.nav_account:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, CreateAccountByOrganizer.class);
                         break;
                     //SPEAKER MENU
                     case R.id.nav_myEvents_speaker:

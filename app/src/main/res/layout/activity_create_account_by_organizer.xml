@@ -31,20 +31,20 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btn_addRoom"
+                android:id="@+id/btn_addAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
-                android:text="@string/addRoom" />
+                android:text="@string/createAccount" />
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/room_swipe_refresh"
+                android:id="@+id/account_swipe_refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/room_recycler_view"
+                    android:id="@+id/account_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     />

@@ -46,6 +46,7 @@
     <string name="announceSpeaker">Announce Speakers</string>
     <string name="announceAttendee">Announce Attendees</string>
     <string name="typeHere">Type here</string>
+    <string name="createAccount">Create Account</string>
 
     <string name="useremail">nancielee@gmail.com</string>
     <string-array name="event_types">

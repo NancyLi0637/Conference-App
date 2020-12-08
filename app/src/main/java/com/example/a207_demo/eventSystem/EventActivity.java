@@ -46,8 +46,7 @@ public class EventActivity extends SetUpActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-//                createEventMenu();
-//                eventAdapter.notifyDataSetChanged();
+
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

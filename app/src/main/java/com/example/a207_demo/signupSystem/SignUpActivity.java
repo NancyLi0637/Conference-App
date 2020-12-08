@@ -21,6 +21,7 @@ import com.example.a207_demo.utility.CleanArchActivity;
 public class SignUpActivity extends CleanArchActivity implements View.OnClickListener {
 
     private final CreateAccount accountCreator = new CreateAccount();
+    private Intent intent;
 
     private String userName;
     private String userEmail;
@@ -48,7 +49,9 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
      * Set up activity.
      */
     public void init() {
+        super.reset();
         super.readUser();
+        intent = new Intent();
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
 
@@ -63,7 +66,6 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
      */
     @Override
     public void onClick(View v) {
-        Intent intent;
 
         switch (v.getId()) {
             case R.id.btn_signUp:
@@ -74,10 +76,10 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
                     Toast.makeText(SignUpActivity.this, "Your name is invalid, please try again",
                             Toast.LENGTH_LONG).show();
                 } else {
+                    setUpData();
+                    loadInfo();
                     Toast.makeText(SignUpActivity.this, "You have signed up SUCCESSFULLY!",
                             Toast.LENGTH_LONG).show();
-                    setUpData();
-                    intent = new Intent(SignUpActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
                 break;
@@ -125,6 +127,15 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
 
         accountCreator.createNewAccount(userType, userName, userEmail, userPassword);
         super.writeUser();
+    }
+
+    private void loadInfo(){
+        String from = getIntent().getStringExtra("class");
+        if(from.equals("MAIN")){
+            intent = new Intent(SignUpActivity.this, MainActivity.class);
+        }else if(from.equals("ORGANIZER")){
+            intent = new Intent(SignUpActivity.this, CreateAccountByOrganizer.class);
+        }
     }
 
 }

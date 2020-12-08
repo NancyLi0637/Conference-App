@@ -12,6 +12,9 @@ import com.example.a207_demo.utility.SetUpActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SpeakerContactAttendeeActivity
+ */
 public class SpeakerContactAttendeeActivity extends ContactActivity {
 
     //Todo: access Contact Controller
@@ -41,6 +44,9 @@ public class SpeakerContactAttendeeActivity extends ContactActivity {
         createContactMenu();
     }
 
+    /**
+     * createContactMenu
+     */
     public void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.speaker_contact_recycler_view);

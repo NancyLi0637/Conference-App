@@ -13,6 +13,9 @@ import com.example.a207_demo.utility.ActivityCollector;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * AttendeeContactAttendeeActivity
+ */
 public class AttendeeContactAttendeeActivity extends ContactActivity {
 
     private ArrayList<ArrayList<String>> contactList = new ArrayList<>();
@@ -41,6 +44,9 @@ public class AttendeeContactAttendeeActivity extends ContactActivity {
         createContactMenu();
     }
 
+    /**
+     * createContactMenu
+     */
     public void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.attendee_contact_recycler_view);

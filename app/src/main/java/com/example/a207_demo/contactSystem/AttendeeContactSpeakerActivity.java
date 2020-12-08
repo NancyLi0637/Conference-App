@@ -39,6 +39,9 @@ public class AttendeeContactSpeakerActivity extends ContactActivity{
         createContactMenu();
     }
 
+    /**
+     * createContactMenu
+     */
     public void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.attendee_contact_recycler_view);
@@ -46,6 +49,9 @@ public class AttendeeContactSpeakerActivity extends ContactActivity{
         //super.createContactMenu(recyclerView, contactAdapter);
     }
 
+    /**
+     * initContacts
+     */
     protected void initContacts() {
         //Todo: access Contact Use case to generate contacts
 //        Contact contact1 = new Contact("Jenny Su", R.drawable.jenny);

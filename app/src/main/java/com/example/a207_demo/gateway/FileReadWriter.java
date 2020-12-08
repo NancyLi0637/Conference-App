@@ -67,6 +67,19 @@ public class FileReadWriter implements Serializable {
 
         ArrayList<String[]> LineList = new ArrayList();
         for (String line : lines) {
+            ArrayList<String> announcements = new ArrayList<>();
+            int separate = -1;
+            //find inbox of announcements
+            if (line.contains("&")) {
+                int start = line.indexOf("&");
+                int end = line.lastIndexOf("&");
+                separate = start;
+                String announcement = line.substring(start + 1, end);
+                //same method as if processAnnouncements
+                announcements = processAttendees(announcement);
+                line = line.substring(0, separate-1);
+            }
+
             String[] wordList = line.split(" ");
             String type = wordList[0];
             String username = wordList[1] + " " + wordList[2];
@@ -75,13 +88,13 @@ public class FileReadWriter implements Serializable {
             String userId = wordList[5];
 
             if(type.equals("ATTENDEE")) {
-                attendeeManager.loadAttendee(username, email, password, userId);
+                attendeeManager.loadAttendee(username, email, password, userId, announcements);
             }else if(type.equals("VIPUser")) {
-                vipUserManager.loadVIPUser(username, email, password, userId);
+                vipUserManager.loadVIPUser(username, email, password, userId, announcements);
             }else if (type.equals("ORGANIZER")) {
                 organizerManager.loadOrganizer(username, email, password, userId);
             }else{
-                speakerManager.loadSpeaker(username, email, password, userId);
+                speakerManager.loadSpeaker(username, email, password, userId, announcements);
             }
             LineList.add(wordList);
         }
@@ -102,7 +115,7 @@ public class FileReadWriter implements Serializable {
     public void UserWriter(UserManager userManager) {
         List<String> userIDs = userManager.getUserIDs();
         try {
-            FileOutputStream out = context.openFileOutput("Users", Context.MODE_APPEND);
+            FileOutputStream out = context.openFileOutput("Users", Context.MODE_PRIVATE);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String userID : userIDs) {
                 String line = userManager.generateFormattedUserInfo(userID);
@@ -176,7 +189,7 @@ public class FileReadWriter implements Serializable {
         }
     }
 
-    //necessary to separate in case attendee is empty while spaeker has values
+    //necessary to separate in case attendee is empty while speaker has values
     private ArrayList<String> processSpeakers(String speakerId) {
 
         if (speakerId.equals("[]") || speakerId.equals("null")) {
@@ -189,7 +202,7 @@ public class FileReadWriter implements Serializable {
 
     private ArrayList<String> processAttendees(String attendeeId) {
 
-        if (attendeeId.equals("[]") || attendeeId.equals("null")) {
+        if (attendeeId.equals("[]") || attendeeId.equals("null") || attendeeId.equals("[null]")) {
             return new ArrayList<>();
         }
 

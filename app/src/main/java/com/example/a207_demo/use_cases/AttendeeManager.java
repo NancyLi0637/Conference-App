@@ -3,6 +3,7 @@ package com.example.a207_demo.use_cases;
 import com.example.a207_demo.entities.*;
 import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.roomSystem.RoomManager;
+import com.example.a207_demo.speakerSystem.Speaker;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,13 +39,14 @@ public class AttendeeManager extends UserManager implements Serializable {
         return attendees;
     }
 
+
     /**
      * Creates An attendee and adds it to the map and lists
      */
     public void createAttendee(String userName, String email, String password) {
         Attendee attendee = new Attendee(userName, email, password);
         this.attendees.add(attendee);
-       UserManager.users.add(attendee);
+        UserManager.users.add(attendee);
     }
 
     /**
@@ -55,10 +57,19 @@ public class AttendeeManager extends UserManager implements Serializable {
      * @param password The password of the attendee
      * @param ID       The unique id of the attendee
      */
-    public void loadAttendee(String userName, String email, String password, String ID) {
-        Attendee attendee = new Attendee(userName, email, password, ID);
+    public void loadAttendee(String userName, String email, String password, String ID,
+                             ArrayList<String> announcements) {
+        Attendee attendee = new Attendee(userName, email, password, ID, announcements);
         this.attendees.add(attendee);
         UserManager.users.add(attendee);
+    }
+
+    public ArrayList<String> getAttendeeIDs(){
+        ArrayList<String> attendeeIDs = new ArrayList<>();
+        for(Attendee attendee : attendees){
+            attendeeIDs.add(attendee.getUserID());
+        }
+        return attendeeIDs;
     }
 
     /**

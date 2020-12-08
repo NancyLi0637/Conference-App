@@ -1,12 +1,15 @@
 package com.example.a207_demo.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
  * The entities.Attendee class, this creates instances of entities.Attendee to attend a conference.
  */
 public class Attendee extends User implements Serializable {
+
+    private ArrayList<String> announcements;
 
     /**
      * Constructor No.1 for the Attendee
@@ -28,11 +31,24 @@ public class Attendee extends User implements Serializable {
      * @param email    the email of this Attendee
      * @param password the password of this Attendee
      * @param ID       the user ID of this Attendee
+     * @param announcements inbox of annoucements of this speaker
      */
-    public Attendee(String userName, String email, String password, String ID) {
+    public Attendee(String userName, String email, String password, String ID,
+                    ArrayList<String> announcements) {
         super(userName, email, password);
         setType("ATTENDEE");
         setUserID(ID);
+        this.announcements = announcements;
     }
+
+    public void setAnnouncements(ArrayList<String> announcements){
+        this.announcements = announcements;
+    }
+
+    public void addAnnouncement(String announcement){
+        this.announcements.add(announcement);
+    }
+
+    public ArrayList<String> getAnnouncements(){return this.announcements;}
 
 }

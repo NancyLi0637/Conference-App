@@ -78,6 +78,7 @@ public class AttendeeContactAttendeeActivity extends ContactActivity {
 //        contactList.add(contact13);
 //        Contact contact14 = new Contact("Steve Wu", R.drawable.steve);
 //        contactList.add(contact14);
+        super.initContacts();
         contactList = getUserManager().generateFormattedFriendInfo(getID());
     }
 }

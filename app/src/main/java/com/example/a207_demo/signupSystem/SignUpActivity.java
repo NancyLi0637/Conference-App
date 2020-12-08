@@ -48,6 +48,7 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
      * Set up activity.
      */
     public void init() {
+        super.readUser();
         Button signUp = findViewById(R.id.btn_signUp);
         Button login = findViewById(R.id.btn_login);
 

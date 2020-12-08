@@ -25,6 +25,26 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/announcements"
+                android:layout_gravity="center_horizontal"
+                android:textSize="35sp"
+                android:layout_marginTop="60dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/announcement_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView

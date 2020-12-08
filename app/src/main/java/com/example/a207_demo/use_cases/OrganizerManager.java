@@ -56,5 +56,13 @@ public class OrganizerManager extends UserManager implements Serializable {
         UserManager.users.add(organizer);
     }
 
+    public boolean sendAnnouncement(String userID, String eventTitle, String announcement){
+        return super.setAnnouncement(userID, eventTitle, announcement);
+    }
+
+    public boolean sendAnnouncement(ArrayList<String> userIDs, String eventTitle, String announcement){
+        return super.setAnnouncement(userIDs, eventTitle, announcement);
+    }
+
 
 }

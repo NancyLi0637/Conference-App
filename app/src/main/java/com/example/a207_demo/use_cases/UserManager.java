@@ -46,6 +46,34 @@ public class UserManager implements Serializable {
         return false;
     }
 
+    protected boolean setAnnouncement(String userID, String eventTitle, String announcement){
+        for(User user : users){
+            if(user.getUserID().equals(userID)){
+                user.addAnnouncement("From event '" + eventTitle + "': " + announcement);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected boolean setAnnouncement(ArrayList<String> userIDs, String eventTitle, String announcement){
+        for(String userID : userIDs){
+            boolean hasUser = false;
+            for(User user : users){
+                if(user.getUserID().equals(userID)){
+                    user.addAnnouncement("From event '" + eventTitle + "': " + announcement);
+                    hasUser = true;
+                    break;
+                }
+            }
+            if(!hasUser){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Return the String user email of a user given his userID, or "NULL" if not found
      *
@@ -189,6 +217,20 @@ public class UserManager implements Serializable {
     }
 
     /**
+     * Get the announcement list of a user
+     * @param userID ID of the user
+     * @return a list of announcements
+     */
+    public ArrayList<String> getAnnouncements(String userID){
+        for (User user : users){
+            if(user.getUserID().equals(userID)){
+                return user.getAnnouncements();
+            }
+        }
+        return null;
+    }
+
+    /**
      * Check if the given String is a valid new email
      *
      * @param email String email to be checked
@@ -258,8 +300,12 @@ public class UserManager implements Serializable {
     public String generateFormattedUserInfo(String userID) {
         for (User user : users) {
             if (user.getUserID().equals(userID)) {
-                return user.getType() + " " + user.getUserName() + " " + user.getEmail() + " "
-                        + user.getPassword() + " " + userID;
+                String info = user.getType() + " " + user.getUserName() + " " + user.getEmail()
+                        + " " + user.getPassword() + " " + userID;
+                if(user.getAnnouncements() != null){
+                    info += " &" + user.getAnnouncements() +"&";
+                }
+                return info;
             }
         }
         return "NULL";

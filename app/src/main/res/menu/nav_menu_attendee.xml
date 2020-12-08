@@ -37,7 +37,7 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_announcements"
+            android:id="@+id/nav_announcements_attendee"
             android:title="@string/announcements"
             android:icon="@drawable/announcement"/>
     </group>

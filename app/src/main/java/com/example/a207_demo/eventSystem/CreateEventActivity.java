@@ -129,6 +129,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                             eventTime, eventDuration, eventRestriction, eventCapacity);
 
                     if(created){
+                        Toast.makeText(this, "You have SUCCESSFULLY created event!", Toast.LENGTH_LONG).show();
                         super.writeEvent();
                         speakerId = new ArrayList<>();
                         intent = new Intent();

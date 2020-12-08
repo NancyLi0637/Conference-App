@@ -63,12 +63,32 @@
             </androidx.cardview.widget.CardView>
 
             <Button
+                android:id="@+id/btn_event_announce_speaker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/announceSpeaker"
+                android:textSize="24sp"
+                android:textAllCaps="false"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <Button
+                android:id="@+id/btn_event_announce_attendee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/announceAttendee"
+                android:textSize="24sp"
+                android:textAllCaps="false"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <Button
                 android:id="@+id/btn_cancel_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancelEvent"
                 android:textSize="24sp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>

@@ -1,6 +1,5 @@
 package com.example.a207_demo.use_cases;
 
-import com.example.a207_demo.entities.Attendee;
 import com.example.a207_demo.speakerSystem.Speaker;
 import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.eventSystem.EventManager;
@@ -39,6 +38,14 @@ public class SpeakerManager extends UserManager implements Serializable {
         return speakers;
     }
 
+    public ArrayList<String> getSpeakerIDs(){
+        ArrayList<String> speakerIDs = new ArrayList<>();
+        for(Speaker speaker : speakers){
+            speakerIDs.add(speaker.getUserID());
+        }
+        return speakerIDs;
+    }
+
     public boolean hasSpeakers(){return this.speakers.size() > 0;}
 
     /**
@@ -61,9 +68,11 @@ public class SpeakerManager extends UserManager implements Serializable {
      * @param email email of this speaker
      * @param password password of this speaker
      * @param ID user ID of this speaker
+     * @param announcements inbox of annoucements of this speaker
      */
-    public void loadSpeaker(String userName, String email, String password, String ID) {
-        Speaker speaker = new Speaker(userName, email, password, ID);
+    public void loadSpeaker(String userName, String email, String password, String ID,
+                            ArrayList<String> announcements) {
+        Speaker speaker = new Speaker(userName, email, password, ID, announcements);
         speakers.add(speaker);
         UserManager.users.add(speaker);
     }

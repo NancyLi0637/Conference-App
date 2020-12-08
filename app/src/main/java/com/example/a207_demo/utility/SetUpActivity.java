@@ -24,6 +24,7 @@ import com.example.a207_demo.eventSystem.AttendeeMyEventActivity;
 import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
 import com.example.a207_demo.messageSystem.AnnouncementActivity;
+import com.example.a207_demo.messageSystem.AttendeeAnnouncementActivity;
 import com.example.a207_demo.messageSystem.SpeakerAnnouncementActivity;
 import com.example.a207_demo.roomSystem.RoomActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -50,12 +51,13 @@ public class SetUpActivity extends CleanArchActivity {
      * @param id_nav_item int
      */
     public void init(AppCompatActivity context, int id_nav_view, int id_nav_item) {
-        info = getIntent().getStringArrayListExtra("info");
-        System.out.println("INFOOO" + info);
-        ID = info.get(0);
-        TYPE = info.get(1);
-        EMAIL = info.get(2);
-        USERNAME = info.get(3);
+//        info = getIntent().getStringArrayListExtra("info");
+//        System.out.println("INFOOO" + info);
+//        ID = info.get(0);
+//        TYPE = info.get(1);
+//        EMAIL = info.get(2);
+//        USERNAME = info.get(3);
+        ID = getIntent().getStringExtra("ID");
         super.setID(ID);
         createActionBar();
         createNavView(context, id_nav_view, id_nav_item);
@@ -98,11 +100,12 @@ public class SetUpActivity extends CleanArchActivity {
     protected void createNavView(final AppCompatActivity context, int id_nav_view, int id_nav_item) {
         NavigationView navigationView = findViewById(id_nav_view);
         navigationView.setCheckedItem(id_nav_item);
-        loadInfo();
+        //loadInfo();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
+                    //ATTENDEEMENU
                     case R.id.nav_allevents:
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, AttendeeEventActivity.class);
@@ -119,9 +122,14 @@ public class SetUpActivity extends CleanArchActivity {
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, AttendeeContactSpeakerActivity.class);
                         break;
-                    case R.id.nav_announcements:
+                    case R.id.nav_announcements_attendee:
                         mDrawerLayout.closeDrawers();
-                        intent = new Intent(context, AnnouncementActivity.class);
+                        intent = new Intent(context, AttendeeAnnouncementActivity.class);
+                        break;
+                    //ORGANIZER MENU
+                    case R.id.nav_allevents_organizer:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, OrganizerEventActivity.class);
                         break;
                     case R.id.nav_contacts_attendee_for_organizer:
                         mDrawerLayout.closeDrawers();
@@ -131,6 +139,11 @@ public class SetUpActivity extends CleanArchActivity {
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, OrganizerContactSpeakerActivity.class);
                         break;
+                    case R.id.nav_room:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, RoomActivity.class);
+                        break;
+                    //SPEAKER MENU
                     case R.id.nav_myEvents_speaker:
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, SpeakerMyEventActivity.class);
@@ -143,16 +156,9 @@ public class SetUpActivity extends CleanArchActivity {
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, SpeakerAnnouncementActivity.class);
                         break;
-                    case R.id.nav_allevents_organizer:
-                        mDrawerLayout.closeDrawers();
-                        intent = new Intent(context, OrganizerEventActivity.class);
-                        break;
-                    case R.id.nav_room:
-                        mDrawerLayout.closeDrawers();
-                        intent = new Intent(context, RoomActivity.class);
-                        break;
                 }
-                intent.putExtra("info", info);
+                //intent.putExtra("info", info);
+                intent.putExtra("ID", ID);
                 startActivity(intent);
                 return true;
             }

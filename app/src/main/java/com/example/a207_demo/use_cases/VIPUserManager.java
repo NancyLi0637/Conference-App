@@ -50,8 +50,9 @@ public class VIPUserManager extends AttendeeManager implements Serializable {
      * @param password The password of the VIPUser
      * @param ID       The unique id of the VIPUser
      */
-    public void loadVIPUser(String userName, String email, String password, String ID) {
-        VIPUser vipuser = new VIPUser(userName, email, password, ID);
+    public void loadVIPUser(String userName, String email, String password, String ID,
+                            ArrayList<String> announcements) {
+        VIPUser vipuser = new VIPUser(userName, email, password, ID, announcements);
         this.vipUsers.add(vipuser);
         UserManager.users.add(vipuser);
     }

@@ -1,6 +1,7 @@
 package com.example.a207_demo.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -34,5 +35,19 @@ public class Organizer extends User implements Serializable {
         setType("ORGANIZER");
         setUserID(ID);
     }
+
+    /**
+     * Not to be implemented yet
+     * @param announcement
+     */
+    public void addAnnouncement(String announcement){
+        getAnnouncements();
+    }
+
+    /**
+     * Not to be implemented yet
+     * @return null
+     */
+    public ArrayList<String> getAnnouncements(){return null;}
 
 }

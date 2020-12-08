@@ -70,8 +70,8 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn_signUp:
                 super.reset();
-                //intent = new Intent(MainActivity.this, SignUpActivity.class);
-                intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
+                intent = new Intent(MainActivity.this, SignUpActivity.class);
+                //intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
                 //intent.putExtra("ID", ID);
                 //intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
                 //intent = new Intent(MainActivity.this, AttendeeMyEventActivity.class);
@@ -116,17 +116,18 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
         }
         ID = getUserManager().validLogIn(userEM, userPW);
         TYPE = getUserManager().getUserType(userEM, userPW);
-        EMAIL = userEM;
-        USERNAME = getUserManager().getUserNameFromID(ID);
+//        EMAIL = userEM;
+//        USERNAME = getUserManager().getUserNameFromID(ID);
         return true;
     }
 
     private void loadInfo(){
-        ArrayList<String> info = new ArrayList<>();
-        info.add(ID);
-        info.add(TYPE);
-        info.add(EMAIL);
-        info.add(USERNAME);
-        intent.putExtra("info", info);
+        //TODO: intent for setting
+//        ArrayList<String> info = new ArrayList<>();
+//        info.add(ID);
+//        info.add(TYPE);
+//        info.add(EMAIL);
+//        info.add(USERNAME);
+        intent.putExtra("ID", ID);
     }
 }

@@ -76,6 +76,12 @@ public abstract class User implements Serializable {
     }
 
     /**
+     * Add an annoucement to this user's announcement list
+     * @param announcement
+     */
+    public abstract void addAnnouncement(String announcement);
+
+    /**
      * Get the value of userName
      *
      * @return the value of lastName
@@ -128,6 +134,12 @@ public abstract class User implements Serializable {
 
         return friendList;
     }
+
+    /**
+     * Get inbox of announcements of this user
+     * @return a list of announcements
+     */
+    public abstract ArrayList<String> getAnnouncements();
 
     /**
      * Override the toString method

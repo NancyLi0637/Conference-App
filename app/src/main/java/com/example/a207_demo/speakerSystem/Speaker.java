@@ -3,13 +3,15 @@ package com.example.a207_demo.speakerSystem;
 import com.example.a207_demo.entities.User;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * The entities.Speaker class, this creates instances of an entities.Speaker for a conference.
  */
 public class Speaker extends User implements Serializable {
-    private final String userID;
+    private ArrayList<String> announcements;
 
     /**
      * Constructor No.1 for the speaker
@@ -21,7 +23,7 @@ public class Speaker extends User implements Serializable {
     public Speaker(String userName, String email, String password) {
         super(userName, email, password);
         setType("SPEAKER");
-        this.userID = UUID.randomUUID().toString().split("-")[0];
+       setUserID(UUID.randomUUID().toString().split("-")[0]);
     }
 
     /**
@@ -32,18 +34,24 @@ public class Speaker extends User implements Serializable {
      * @param password the password of this speaker
      * @param ID       the user ID of this speaker
      */
-    public Speaker(String userName, String email, String password, String ID) {
+    public Speaker(String userName, String email, String password, String ID,
+                   ArrayList<String> announcements) {
         super(userName, email, password);
         setType("SPEAKER");
-        this.userID = ID;
+        setUserID(ID);
+        this.announcements = announcements;
+    }
+
+    public void addAnnouncement(String announcement){
+        this.announcements.add(announcement);
     }
 
     /**
-     * Getter method to access this speaker's userID
+     * Get inbox of announcements of this speaker
      *
-     * @return userID of this speaker
+     * @return a list of announcements
      */
-    public String getUserID() {
-        return this.userID;
+    public ArrayList<String> getAnnouncements(){
+        return this.announcements;
     }
 }

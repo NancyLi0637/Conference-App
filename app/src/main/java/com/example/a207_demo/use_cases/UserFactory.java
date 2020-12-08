@@ -10,7 +10,6 @@ import java.io.Serializable;
  */
 public class UserFactory implements Serializable {
     private final AttendeeManager attendeeManager;
-    private final VIPUserManager vipUserManager;
     private final OrganizerManager organizerManager;
     private final SpeakerManager speakerManager;
 
@@ -21,10 +20,9 @@ public class UserFactory implements Serializable {
      * @param organizerManager OrganizerManager
      * @param speakerManager   SpeakerManager
      */
-    public UserFactory(AttendeeManager attendeeManager, VIPUserManager vipUserManager,
-                       OrganizerManager organizerManager, SpeakerManager speakerManager) {
+    public UserFactory(AttendeeManager attendeeManager, OrganizerManager organizerManager,
+                       SpeakerManager speakerManager) {
         this.attendeeManager = attendeeManager;
-        this.vipUserManager = vipUserManager;
         this.organizerManager = organizerManager;
         this.speakerManager = speakerManager;
     }
@@ -44,7 +42,7 @@ public class UserFactory implements Serializable {
                 attendeeManager.createAttendee(userName, email, password);
                 break;
             case "VIPUser":
-                vipUserManager.createVIPUser(userName, email, password);
+                attendeeManager.createVIPUser(userName, email, password);
                 break;
             case "ORGANIZER":
                 organizerManager.createOrganizer(userName, email, password);

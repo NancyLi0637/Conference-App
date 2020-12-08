@@ -59,7 +59,6 @@ public class UserManager implements Serializable {
 
     protected boolean setAnnouncement(ArrayList<String> userIDs, String eventTitle, String announcement){
         for(String userID : userIDs){
-            System.out.println("ID" + userID);
             boolean hasUser = false;
             for(User user : users){
                 if(user.getUserID().equals(userID)){

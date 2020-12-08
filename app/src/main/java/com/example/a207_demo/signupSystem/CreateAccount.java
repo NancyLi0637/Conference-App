@@ -10,7 +10,7 @@ import com.example.a207_demo.utility.CleanArchActivity;
 public class CreateAccount extends CleanArchActivity {
 
     private final UserManager userManager = getUserManager();
-    private final UserFactory userFactory = new UserFactory(getAttendeeManager(), getVipUserManager(),
+    private final UserFactory userFactory = new UserFactory(getAttendeeManager(),
             getOrganizerManager(), getSpeakerManager());
 
 

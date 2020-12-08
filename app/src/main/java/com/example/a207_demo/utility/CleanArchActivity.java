@@ -10,7 +10,6 @@ import com.example.a207_demo.use_cases.OrganizerManager;
 import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
 import com.example.a207_demo.use_cases.UserManager;
-import com.example.a207_demo.use_cases.VIPUserManager;
 
 /**
  * The central Activity: Superclass of child activities
@@ -20,7 +19,6 @@ public class CleanArchActivity extends AppCompatActivity{
     private final EventManager eventManager = new EventManager();
     private final UserManager userManager = new UserManager();
     private final AttendeeManager attendeeManager = new AttendeeManager();
-    private final VIPUserManager vipUserManager = new VIPUserManager();
     private final OrganizerManager organizerManager = new OrganizerManager();
     private final SpeakerManager speakerManager = new SpeakerManager();
     private final RoomManager roomManager = new RoomManager();
@@ -28,15 +26,18 @@ public class CleanArchActivity extends AppCompatActivity{
     private FileReadWriter fileReadWriter = new FileReadWriter(this);
 
     private static String ID;
+    private static String TYPE;
 
-    public void setID(String ID){
-        System.out.println("ID10 " + ID);
+    public void setInfo(String ID, String TYPE){
         this.ID = ID;
+        this.TYPE = TYPE;
     }
 
     public String getID(){
         return this.ID;
     }
+
+    public String getTYPE() { return this.TYPE;}
 
     /**
      * Get EventManager of the whole system
@@ -57,12 +58,6 @@ public class CleanArchActivity extends AppCompatActivity{
      * @return AttendeeManager
      */
     public AttendeeManager getAttendeeManager() {return this.attendeeManager; }
-
-    /**
-     * Get VIPUserManager of the whole system
-     * @return VIPUserManager
-     */
-    public VIPUserManager getVipUserManager() {return this.vipUserManager;}
 
     /**
      * Get OrganizerManager of the whole system
@@ -98,11 +93,11 @@ public class CleanArchActivity extends AppCompatActivity{
 
     public void reset(){
         fileReadWriter.reset(eventManager, userManager,
-                attendeeManager, vipUserManager, organizerManager, speakerManager, roomManager);
+                attendeeManager, organizerManager, speakerManager, roomManager);
     }
 
     public void readUser(){
-        fileReadWriter.UserReader(attendeeManager, vipUserManager, organizerManager, speakerManager);
+        fileReadWriter.UserReader(attendeeManager, organizerManager, speakerManager);
     }
 
     public void readEvent(){
@@ -123,13 +118,5 @@ public class CleanArchActivity extends AppCompatActivity{
     public void writeRoom(){
         fileReadWriter.RoomWriter(roomManager);
     }
-
-//    public void setUserID(String userID){
-//        this.userID = userID;
-//    }
-//
-//    public String getUserID(){
-//        return this.userID;
-//    }
 
 }

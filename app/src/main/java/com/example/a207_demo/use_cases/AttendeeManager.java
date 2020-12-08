@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class AttendeeManager extends UserManager implements Serializable {
 
-    private List<Attendee> attendees;
+    public List<Attendee> attendees;
 
     /**
      * Creates an use_cases.AttendeeManager with lists of Events for an attendee that is empty
@@ -37,6 +37,14 @@ public class AttendeeManager extends UserManager implements Serializable {
      */
     public List<Attendee> getAttendees() {
         return attendees;
+    }
+
+    public ArrayList<String> getAttendeeIDs(){
+        ArrayList<String> attendeeIDs = new ArrayList<>();
+        for(Attendee attendee : attendees){
+            attendeeIDs.add(attendee.getUserID());
+        }
+        return attendeeIDs;
     }
 
 
@@ -64,13 +72,30 @@ public class AttendeeManager extends UserManager implements Serializable {
         UserManager.users.add(attendee);
     }
 
-    public ArrayList<String> getAttendeeIDs(){
-        ArrayList<String> attendeeIDs = new ArrayList<>();
-        for(Attendee attendee : attendees){
-            attendeeIDs.add(attendee.getUserID());
-        }
-        return attendeeIDs;
+    /**
+     * Creates A vipuser and adds it to the map and lists
+     */
+    public void createVIPUser(String userName, String email, String password) {
+        VIPUser vipUser = new VIPUser(userName, email, password);
+        this.attendees.add(vipUser);
+        UserManager.users.add(vipUser);
     }
+
+    /**
+     * Creates a vipuser and adds it to the map and list. But this is for loading the file.
+     *
+     * @param userName The user name of the attendee
+     * @param email    The email of the attendee
+     * @param password The password of the attendee
+     * @param ID       The unique id of the attendee
+     */
+    public void loadVIPUser(String userName, String email, String password, String ID,
+                             ArrayList<String> announcements) {
+        VIPUser vipUser = new VIPUser(userName, email, password, ID, announcements);
+        this.attendees.add(vipUser);
+        UserManager.users.add(vipUser);
+    }
+
 
     /**
      * Try to sign an entities.Attendee up for an event.

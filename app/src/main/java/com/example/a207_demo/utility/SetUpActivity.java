@@ -58,7 +58,8 @@ public class SetUpActivity extends CleanArchActivity {
 //        EMAIL = info.get(2);
 //        USERNAME = info.get(3);
         ID = getIntent().getStringExtra("ID");
-        super.setID(ID);
+        TYPE = getIntent().getStringExtra("TYPE");
+        super.setInfo(ID, TYPE);
         createActionBar();
         createNavView(context, id_nav_view, id_nav_item);
     }
@@ -69,8 +70,9 @@ public class SetUpActivity extends CleanArchActivity {
 
     public void init(){
         ID = getIntent().getStringExtra("ID");
+        TYPE = getIntent().getStringExtra("TYPE");
 
-        super.setID(ID);
+        super.setInfo(ID, TYPE);
     }
 
     public String getID(){

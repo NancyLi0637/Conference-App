@@ -5,14 +5,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.a207_demo.entities.VIPUser;
 import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.use_cases.OrganizerManager;
 import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
 import com.example.a207_demo.use_cases.UserManager;
-import com.example.a207_demo.use_cases.VIPUserManager;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -33,13 +31,12 @@ public class FileReadWriter implements Serializable {
     /**
      * Reset the managers so that the list of objects are empty
      */
-    public void reset(EventManager eventManager, UserManager userManager, AttendeeManager attendeeManager,
-                      VIPUserManager vipUserManager, OrganizerManager organizerManager,
+    public void reset(EventManager eventManager, UserManager userManager,
+                      AttendeeManager attendeeManager, OrganizerManager organizerManager,
                       SpeakerManager speakerManager, RoomManager roomManager) {
         userManager.reset();
         eventManager.reset();
         attendeeManager.reset();
-        vipUserManager.reset();
         organizerManager.reset();
         speakerManager.reset();
         roomManager.reset();
@@ -49,8 +46,8 @@ public class FileReadWriter implements Serializable {
      * Method reads User.txt file and loads in any Users stored in said file. Each line in the file represent one user
      * and the type of user is identified with a title of "SPEAKER", "ATTENDEE", or "ORGANIZER".
      */
-    public void UserReader(AttendeeManager attendeeManager, VIPUserManager vipUserManager,
-                           OrganizerManager organizerManager, SpeakerManager speakerManager) {
+    public void UserReader(AttendeeManager attendeeManager, OrganizerManager organizerManager,
+                           SpeakerManager speakerManager) {
         ArrayList<String> lines = new ArrayList();
         try {
             FileInputStream in = context.openFileInput("Users");
@@ -90,7 +87,7 @@ public class FileReadWriter implements Serializable {
             if(type.equals("ATTENDEE")) {
                 attendeeManager.loadAttendee(username, email, password, userId, announcements);
             }else if(type.equals("VIPUser")) {
-                vipUserManager.loadVIPUser(username, email, password, userId, announcements);
+                attendeeManager.loadVIPUser(username, email, password, userId, announcements);
             }else if (type.equals("ORGANIZER")) {
                 organizerManager.loadOrganizer(username, email, password, userId);
             }else{

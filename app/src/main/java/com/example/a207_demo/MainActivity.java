@@ -81,7 +81,7 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
                 super.reset();
                 super.readUser();
                 if (info_matched()) {
-                    if (TYPE.equals("ATTENDEE")) {
+                    if (TYPE.equals("ATTENDEE") || TYPE.equals("VIPUser")) {
                         intent = new Intent(MainActivity.this, AttendeeEventActivity.class);
                     } else if (TYPE.equals("ORGANIZER")) {
                         intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
@@ -129,5 +129,6 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
 //        info.add(EMAIL);
 //        info.add(USERNAME);
         intent.putExtra("ID", ID);
+        intent.putExtra("TYPE", TYPE);
     }
 }

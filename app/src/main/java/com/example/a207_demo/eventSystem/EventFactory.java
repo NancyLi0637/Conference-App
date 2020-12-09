@@ -49,7 +49,7 @@ public class EventFactory implements Serializable {
      * @param attendeeID ArrayList<String attendeeID
      * @return Event that is just created
      */
-    public Event createEvent(String type, String title, String eventID, String roomID,
+    public Event loadEvent(String type, String title, String eventID, String roomID,
                              String startTime, String duration, String restriction, int capacity,
                              ArrayList<String> speakerID, ArrayList<String> attendeeID) {
         switch (type) {

@@ -290,21 +290,15 @@ public class EventManager implements Serializable {
      */
     public boolean createEvent(String type, String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
                                String restriction, int capacity) {
-//        for (Event event : this.events) {
-//            for (String speaker: event.getSpeakers()) {
-//                if ((event.getSpeakers().contains(speaker) || roomID.equals(event.getRoomID())) &&
-//                        (!((Integer.parseInt(event.getStartTime()) + Integer.parseInt(event.getDuration())<= Integer.parseInt(startTime)) ||
-//                                (Integer.parseInt(startTime) + Integer.parseInt(duration)<= Integer.parseInt(event.getStartTime()))))) {
-//                    return false;
-//                }
-//            }
-//        }
-
         for (Event event : this.events) {
-            if (event.timeConflict(startTime, duration)) {
-                return false;
+            for (String speaker: speakerID) {
+                if ((event.getSpeakers().contains(speaker) || event.getRoomID().equals(roomID)) &&
+                        event.timeConflict(startTime, duration)) {
+                    return false;
+                }
             }
         }
+
         Event newEvent = eventFactory.createEvent(type, title, roomID, startTime, duration,
                 restriction, capacity,  speakerID);
         events.add(newEvent);
@@ -312,47 +306,14 @@ public class EventManager implements Serializable {
         return true;
     }
 
-
-//    /**
-//     * Create a new event (full version)
-//     *
-//     * @param title       title
-//     * @param roomName    roomID
-//     * @param speakerID   speakerID
-//     * @param startTime   startTime
-//     * @param eventID     eventID
-//     * @param attendeeID  attendeeID
-//     * @param roomManager roomManager
-//     * @return the newly created event
-//     */
-////    public Event loadEvent(String title, String roomName, ArrayList<String> speakerID, String startTime, String eventID,
-////                           String duration, String restriction, String type, ArrayList<String> attendeeID,
-////                           RoomManager roomManager, AttendeeManager attendeeManager) {
-////        // create this new event:
-////        Event newEvent = eventFactory.createEvent(type, title, roomName, speakerID, startTime, duration, restriction, type);
-////        // update the events list:
-////        events.add(newEvent);
-////
-////        // add attendee's IDs to this event
-////        for (String ID : attendeeID) {
-////            addAttendeeToEvent(ID, eventID, roomManager, attendeeManager);
-////        }
-////        return newEvent;
-////    }
-
     public void loadEvent(String type, String title, String eventID, String roomID, String startTime,
                           String duration, String restriction, int capacity,
                           ArrayList<String> speakerID, ArrayList<String> attendeeID) {
         // create this new event:
-        Event newEvent = eventFactory.createEvent(type, title, eventID, roomID, startTime, duration,
+        Event newEvent = eventFactory.loadEvent(type, title, eventID, roomID, startTime, duration,
                 restriction, capacity, speakerID, attendeeID);
         // update the events list:
         events.add(newEvent);
-
-        // add attendee's IDs to this event
-//        for (String ID : attendeeID) {
-//            addAttendeeToEvent(ID, eventID, roomManager);
-//        }
 
     }
 

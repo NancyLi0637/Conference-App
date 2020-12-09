@@ -2,21 +2,26 @@ package com.example.a207_demo.contactSystem;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.a207_demo.R;
+import com.example.a207_demo.messageSystem.SendAnnouncementActivity;
 import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * SpeakerContactAttendeeActivity
  */
-public class SpeakerContactAttendeeActivity extends ContactActivity {
+public class SpeakerContactAttendeeActivity extends ContactActivity implements View.OnClickListener{
 
-    //Todo: access Contact Controller
-    private List<Contact> contactList = new ArrayList<>();
+    private ArrayList<ArrayList<String>> contactList;
+    private ArrayList<String> IDs;
 
     /**
      * onCreate
@@ -28,10 +33,9 @@ public class SpeakerContactAttendeeActivity extends ContactActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_speaker);
+        ActivityCollector.addActivity(this);
 
         init();
-
-        ActivityCollector.addActivity(this);
     }
 
     /**
@@ -40,6 +44,17 @@ public class SpeakerContactAttendeeActivity extends ContactActivity {
     public void init() {
         super.init(this, R.id.nav_view_speaker, R.id.nav_contacts_attendee_for_speaker);
         createContactMenu();
+
+        Button msgAll = findViewById(R.id.btn_speaker_msg_all);
+        msgAll.setOnClickListener(this);
+    }
+
+    public void onClick(View view){
+        Intent intent = new Intent(SpeakerContactAttendeeActivity.this, SendAnnouncementActivity.class);
+        intent.putExtra("class", "speakerContactAttendee");
+        intent.putExtra("eventTitle", "");
+        intent.putExtra("userIDs", IDs);
+        startActivity(intent);
     }
 
     /**
@@ -53,6 +68,14 @@ public class SpeakerContactAttendeeActivity extends ContactActivity {
     }
 
     protected void initContacts() {
+        super.initContacts();
+        IDs = new ArrayList<>();
+        ArrayList<String> events = getEventManager().getEventsFromSpeaker(getID());
+        for(String event : events){
+            ArrayList<String> attendees = getEventManager().getAttendeesFromEvent(event);
+            IDs.addAll(attendees);
+        }
+        contactList = getUserManager().generateIDNameInfo(IDs);
 //        //Todo: access Contact Use case to generate contacts
 //        Contact contact1 = new Contact("Jenny Su", R.drawable.jenny);
 //        contactList.add(contact1);

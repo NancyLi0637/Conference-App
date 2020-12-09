@@ -1,6 +1,7 @@
 package com.example.a207_demo.eventSystem;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,10 +27,9 @@ public class SpeakerMyEventActivity extends EventActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myevent_speaker);
+        ActivityCollector.addActivity(this);
 
         init();
-
-        ActivityCollector.addActivity(this);
     }
 
     /**
@@ -49,7 +49,6 @@ public class SpeakerMyEventActivity extends EventActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         speakerMyEventAdapter = new SpeakerMyEventAdapter(this, eventList);
         super.createEventMenu(recyclerView, layoutManager, speakerMyEventAdapter);
-        //recyclerView.setAdapter(speakerMyEventAdapter);
     }
 
     /**

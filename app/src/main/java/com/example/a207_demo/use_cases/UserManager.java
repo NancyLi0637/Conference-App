@@ -47,31 +47,19 @@ public class UserManager implements Serializable {
         return false;
     }
 
-    protected boolean setAnnouncement(String userID, String eventTitle, String announcement){
-        for(User user : users){
-            if(user.getUserID().equals(userID)){
-                user.addAnnouncement("From event '" + eventTitle + "': " + announcement);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    protected boolean setAnnouncement(ArrayList<String> userIDs, String eventTitle, String announcement){
+    public boolean sendAnnouncement(ArrayList<String> userIDs, String eventTitle, String announcement){
         for(String userID : userIDs){
             boolean hasUser = false;
             for(User user : users){
                 if(user.getUserID().equals(userID)){
-                    user.addAnnouncement("From '" + eventTitle + "': " + announcement);
+                    user.addAnnouncement("From '" + eventTitle +"': " + announcement);
                     hasUser = true;
                     break;
                 }
-            }
-            if(!hasUser){
+            }if(!hasUser){
                 return false;
             }
         }
-
         return true;
     }
 

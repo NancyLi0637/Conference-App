@@ -109,7 +109,6 @@
             android:name=".eventSystem.SpeakerMyEventActivity"
             android:label="My Events"
             android:launchMode="singleTask" />
-        <activity android:name=".TempActivity" />
         <activity
             android:name=".accountSystem.SignUpActivity"
             android:launchMode="singleTask" />

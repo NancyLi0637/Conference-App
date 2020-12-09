@@ -62,6 +62,16 @@
 
             </androidx.cardview.widget.CardView>
 
+            <Button
+                android:id="@+id/btn_speaker_announce_attendee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/announceAttendee"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"/>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

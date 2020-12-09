@@ -26,10 +26,9 @@ public class AttendeeContactAttendeeActivity extends ContactActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_attendee);
+        ActivityCollector.addActivity(this);
 
         init();
-
-        ActivityCollector.addActivity(this);
     }
 
     /**
@@ -51,6 +50,8 @@ public class AttendeeContactAttendeeActivity extends ContactActivity {
     }
 
     protected void initContacts() {
+        super.initContacts();
+        contactList = getUserManager().generateFormattedFriendInfo(getID());
         //Todo: access Contact Use case to generate contacts
 //        Contact contact1 = new Contact("Jenny Su", R.drawable.jenny);
 //        contactList.add(contact1);
@@ -80,7 +81,6 @@ public class AttendeeContactAttendeeActivity extends ContactActivity {
 //        contactList.add(contact13);
 //        Contact contact14 = new Contact("Steve Wu", R.drawable.steve);
 //        contactList.add(contact14);
-        super.initContacts();
-        contactList = getUserManager().generateFormattedFriendInfo(getID());
+
     }
 }

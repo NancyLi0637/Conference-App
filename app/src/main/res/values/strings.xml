@@ -8,6 +8,8 @@
     <string name="vipUser">VIP User</string>
     <string name="allAccounts">All Users</string>
     <string name="accounts">Users</string>
+    <string name="msgAllAttendees">Message All Attendees</string>
+    <string name="msgAllSpeakers">Message All Speakers</string>
 
     <string name="signUp">Sign up</string>
     <string name="search">Search</string>

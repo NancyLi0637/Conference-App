@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class OrganizerContactAttendeeActivity extends ContactActivity implements View.OnClickListener{
 
     private ArrayList<ArrayList<String>> contactList;
+    private ArrayList<String> IDs;
     private OrganizerContactAdapter organizerContactAdapter;
 
     /**
@@ -42,13 +43,11 @@ public class OrganizerContactAttendeeActivity extends ContactActivity implements
      */
     public void init() {
         super.init(this, R.id.nav_view_organizer, R.id.nav_contacts_attendee_for_organizer);
-
-        Button msgAll = findViewById(R.id.btn_msg_all);
-        String msg = "Message All Attendees";
-        msgAll.setText(msg);
-        msgAll.setOnClickListener(this);
-
         createContactMenu();
+
+        Button msgAll = findViewById(R.id.btn_organizer_msg_all);
+        msgAll.setText(R.string.msgAllAttendees);
+        msgAll.setOnClickListener(this);
     }
 
     /**
@@ -57,9 +56,9 @@ public class OrganizerContactAttendeeActivity extends ContactActivity implements
      */
     public void onClick(View view){
         Intent intent = new Intent(OrganizerContactAttendeeActivity.this, SendAnnouncementActivity.class);
-        intent.putExtra("class", "attendeeContact");
+        intent.putExtra("class", "organizerContactAttendee");
         intent.putExtra("eventTitle", "");
-        intent.putExtra("userIDs", getAttendeeManager().getAttendeeIDs());
+        intent.putExtra("userIDs", IDs);
         startActivity(intent);
     }
 
@@ -72,7 +71,7 @@ public class OrganizerContactAttendeeActivity extends ContactActivity implements
 
     protected void initContacts() {
         super.initContacts();
-        ArrayList<String> IDs = getAttendeeManager().getAttendeeIDs();
+        IDs = getAttendeeManager().getAttendeeIDs();
         contactList = getUserManager().generateIDNameInfo(IDs);
     }
 

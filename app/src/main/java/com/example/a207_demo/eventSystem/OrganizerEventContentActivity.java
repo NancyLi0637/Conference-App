@@ -41,10 +41,9 @@ public class OrganizerEventContentActivity extends EventContentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_content_organizer);
+        ActivityCollector.addActivity(this);
 
         init();
-
-        ActivityCollector.addActivity(this);
     }
 
     /**
@@ -85,6 +84,7 @@ public class OrganizerEventContentActivity extends EventContentActivity{
                 break;
             case R.id.btn_event_announce_attendee:
                 intent.putExtra("userIDs", getEventManager().getAttendeesFromEvent(eventID));
+                System.out.println("USERRS" + getEventManager().getAttendeesFromEvent(eventID));
                 startActivity(intent);
                 break;
             case R.id.btn_change_cap:
@@ -187,10 +187,6 @@ public class OrganizerEventContentActivity extends EventContentActivity{
 
     private boolean validInteger(String num){
         return getEventManager().checkValidInteger(num);
-    }
-
-    private void write(){
-        super.writeEvent();
     }
 
 }

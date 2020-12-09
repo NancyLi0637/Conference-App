@@ -16,7 +16,7 @@ import java.util.List;
 public class AttendeeContactSpeakerActivity extends ContactActivity {
 
     //Todo: access Contact Controller
-    private List<Contact> contactList = new ArrayList<>();
+    private ArrayList<ArrayList<String>> contactList;
 
     /**
      * onCreate
@@ -56,6 +56,14 @@ public class AttendeeContactSpeakerActivity extends ContactActivity {
      * initContacts
      */
     protected void initContacts() {
+        super.initContacts();
+        ArrayList<String> IDs = new ArrayList<>();
+        ArrayList<String> events = getEventManager().getEventsFromAttendee(getID());
+        for(String event : events){
+            ArrayList<String> speakers = getEventManager().getSpeakersFromEvent(event);
+            IDs.addAll(speakers);
+        }
+        contactList = getUserManager().generateIDNameInfo(IDs);
         //Todo: access Contact Use case to generate contacts
 //        Contact contact1 = new Contact("Jenny Su", R.drawable.jenny);
 //        contactList.add(contact1);

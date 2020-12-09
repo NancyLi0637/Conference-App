@@ -1,5 +1,6 @@
 package com.example.a207_demo.use_cases;
 
+import com.example.a207_demo.entities.Attendee;
 import com.example.a207_demo.entities.User;
 import com.example.a207_demo.speakerSystem.Speaker;
 import com.example.a207_demo.eventSystem.Event;
@@ -48,6 +49,7 @@ public class SpeakerManager extends UserManager implements Serializable {
     }
 
     public boolean hasSpeakers(){return this.speakers.size() > 0;}
+
 
     /**
      * Creates a Speaker and adds it to the lists

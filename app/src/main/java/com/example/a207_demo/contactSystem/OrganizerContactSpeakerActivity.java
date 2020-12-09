@@ -40,9 +40,8 @@ public class OrganizerContactSpeakerActivity extends ContactActivity implements 
     public void init() {
         super.init(this, R.id.nav_view_organizer, R.id.nav_contacts_speaker_for_organizer);
 
-        Button msgAll = findViewById(R.id.btn_msg_all);
-        String msg = "Message All Speakers";
-        msgAll.setText(msg);
+        Button msgAll = findViewById(R.id.btn_organizer_msg_all);
+        msgAll.setText(R.string.msgAllSpeakers);
         msgAll.setOnClickListener(this);
 
         createContactMenu();
@@ -50,7 +49,7 @@ public class OrganizerContactSpeakerActivity extends ContactActivity implements 
 
     public void onClick(View view) {
         Intent intent = new Intent(OrganizerContactSpeakerActivity.this, SendAnnouncementActivity.class);
-        intent.putExtra("class", "speakerContact");
+        intent.putExtra("class", "organizerContactSpeaker");
         intent.putExtra("eventTitle", "");
         intent.putExtra("userIDs", getSpeakerManager().getSpeakerIDs());
         startActivity(intent);

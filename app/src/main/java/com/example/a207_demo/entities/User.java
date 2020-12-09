@@ -75,10 +75,6 @@ public abstract class User implements Serializable {
         friendList.add(userId);
     }
 
-    /**
-     * Add an annoucement to this user's announcement list
-     * @param announcement
-     */
     public abstract void addAnnouncement(String announcement);
 
     /**
@@ -135,10 +131,6 @@ public abstract class User implements Serializable {
         return friendList;
     }
 
-    /**
-     * Get inbox of announcements of this user
-     * @return a list of announcements
-     */
     public abstract ArrayList<String> getAnnouncements();
 
     /**

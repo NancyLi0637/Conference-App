@@ -9,7 +9,6 @@ import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Event activity of events attendee signed up for.
@@ -37,7 +36,6 @@ public class AttendeeMyEventActivity extends EventActivity {
     /**
      * Set up the activity.
      */
-    @Override
     public void init() {
         super.init(this, R.id.nav_view_attendee, R.id.nav_myEvents);
         createEventMenu();

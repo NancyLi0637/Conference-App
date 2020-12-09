@@ -10,18 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.eventSystem.CreateEventActivity;
-import com.example.a207_demo.eventSystem.OrganizerEventActivity;
-import com.example.a207_demo.eventSystem.OrganizerEventAdapter;
 import com.example.a207_demo.utility.ActivityCollector;
-import com.example.a207_demo.utility.SetUpActivity;
+import com.example.a207_demo.utility.BaseActivity;
 
 import java.util.ArrayList;
 
 /**
  * RoomActivity
  */
-public class RoomActivity extends SetUpActivity implements View.OnClickListener {
+public class RoomActivity extends BaseActivity implements View.OnClickListener {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private ArrayList<ArrayList<String>> roomList;

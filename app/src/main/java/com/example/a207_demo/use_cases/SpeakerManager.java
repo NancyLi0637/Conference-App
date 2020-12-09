@@ -1,5 +1,6 @@
 package com.example.a207_demo.use_cases;
 
+import com.example.a207_demo.entities.User;
 import com.example.a207_demo.speakerSystem.Speaker;
 import com.example.a207_demo.eventSystem.Event;
 import com.example.a207_demo.eventSystem.EventManager;
@@ -102,6 +103,19 @@ public class SpeakerManager extends UserManager implements Serializable {
         }
 
         return getUserNamesFromID(availableSpeaker);
+    }
+
+    public ArrayList<ArrayList<String>> generateAccountInfo(){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for(Speaker speaker : speakers){
+            ArrayList<String> info = new ArrayList<>();
+            info.add(speaker.getUserName());
+            info.add(speaker.getType());
+            info.add(speaker.getEmail());
+            info.add(speaker.getUserID());
+            result.add(info);
+        }
+        return result;
     }
 
 }

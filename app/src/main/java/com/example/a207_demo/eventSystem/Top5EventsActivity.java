@@ -1,12 +1,9 @@
 package com.example.a207_demo.eventSystem;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
@@ -35,7 +32,6 @@ public class Top5EventsActivity extends EventActivity {
     /**
      * init
      */
-    @Override
     public void init() {
         super.init(this, R.id.nav_view_organizer, R.id.nav_top_5_events);
         createEventMenu();

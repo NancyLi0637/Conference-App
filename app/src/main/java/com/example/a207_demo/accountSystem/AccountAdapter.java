@@ -1,4 +1,4 @@
-package com.example.a207_demo.signupSystem;
+package com.example.a207_demo.accountSystem;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,9 +16,8 @@ import com.example.a207_demo.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-public class CreateAccountByOrgAdapter extends RecyclerView.Adapter<CreateAccountByOrgAdapter.VHAccount> implements Serializable {
+public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.VHAccount> implements Serializable {
     private Context context;
     private ArrayList<ArrayList<String>> accountList;
 
@@ -27,7 +26,7 @@ public class CreateAccountByOrgAdapter extends RecyclerView.Adapter<CreateAccoun
      * @param context
      * @param accountList
      */
-    public CreateAccountByOrgAdapter(Context context, ArrayList<ArrayList<String>> accountList) {
+    public AccountAdapter(Context context, ArrayList<ArrayList<String>> accountList) {
         this.context = context;
         this.accountList = accountList;
     }

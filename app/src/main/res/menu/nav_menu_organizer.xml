@@ -39,6 +39,48 @@
         </menu>
     </item>
 
+<!--    <item-->
+<!--        android:title="Manage">-->
+<!--        <menu>-->
+<!--            <group android:checkableBehavior="single">-->
+<!--                <item-->
+<!--                    android:id="@+id/nav_room"-->
+<!--                    android:title="Room"-->
+<!--                    android:icon="@drawable/announcement"/>-->
+<!--                <item-->
+<!--                    android:id="@+id/nav_account"-->
+<!--                    android:title="Account"-->
+<!--                    android:icon="@drawable/icon_contact_gray">-->
+
+<!--                    <menu>-->
+
+<!--                        <group android:checkableBehavior="single">-->
+
+<!--                            <item-->
+<!--                                android:id="@+id/nav_account_organizer"-->
+<!--                                android:title="@string/organizer"-->
+<!--                                android:icon="@drawable/icon_contact_gray"/>-->
+<!--                            <item-->
+<!--                                android:id="@+id/nav_account_speaker"-->
+<!--                                android:title="@string/speaker"-->
+<!--                                android:icon="@drawable/icon_contact_gray"/>-->
+<!--                            <item-->
+<!--                                android:id="@+id/nav_account_attendee"-->
+<!--                                android:title="@string/attendee"-->
+<!--                                android:icon="@drawable/icon_contact_gray"/>-->
+<!--                            <item-->
+<!--                                android:id="@+id/nav_account_vipUser"-->
+<!--                                android:title="@string/vipUser"-->
+<!--                                android:icon="@drawable/icon_contact_gray"/>-->
+
+<!--                        </group>-->
+
+<!--                    </menu>-->
+
+<!--                </item>-->
+<!--            </group>-->
+<!--        </menu>-->
+<!--    </item>-->
     <item
         android:title="Manage">
         <menu>
@@ -47,12 +89,44 @@
                     android:id="@+id/nav_room"
                     android:title="Room"
                     android:icon="@drawable/announcement"/>
-                <item
-                    android:id="@+id/nav_account"
-                    android:title="Account"
-                    android:icon="@drawable/icon_contact_gray"/>
             </group>
         </menu>
+    </item>
+
+    <item
+        android:title="Account"
+        android:icon="@drawable/icon_contact_gray">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_account_all"
+                    android:title="@string/allAccounts"
+                    android:icon="@drawable/icon_contact_gray"/>
+
+                <item
+                    android:id="@+id/nav_account_organizer"
+                    android:title="@string/organizer"
+                    android:icon="@drawable/icon_contact_gray"/>
+                <item
+                    android:id="@+id/nav_account_speaker"
+                    android:title="@string/speaker"
+                    android:icon="@drawable/icon_contact_gray"/>
+                <item
+                    android:id="@+id/nav_account_attendee"
+                    android:title="@string/attendee"
+                    android:icon="@drawable/icon_contact_gray"/>
+                <item
+                    android:id="@+id/nav_account_vipUser"
+                    android:title="@string/vipUser"
+                    android:icon="@drawable/icon_contact_gray"/>
+
+            </group>
+
+        </menu>
+
     </item>
 
 </menu>

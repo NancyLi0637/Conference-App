@@ -1,21 +1,14 @@
 package com.example.a207_demo.contactSystem;
 
-import android.os.Bundle;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a207_demo.utility.ActivityCollector;
-import com.example.a207_demo.utility.SetUpActivity;
-import com.example.a207_demo.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.a207_demo.utility.BaseActivity;
 
 /**
  * ContactActivity
  */
-public abstract class ContactActivity extends SetUpActivity {
+public abstract class ContactActivity extends BaseActivity {
 
     /**
      * createContactMenu

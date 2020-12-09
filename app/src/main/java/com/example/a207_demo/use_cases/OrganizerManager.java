@@ -64,5 +64,19 @@ public class OrganizerManager extends UserManager implements Serializable {
         return super.setAnnouncement(userIDs, eventTitle, announcement);
     }
 
+    @Override
+    public ArrayList<ArrayList<String>> generateAccountInfo(){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for(Organizer organizer : organizers){
+            ArrayList<String> info = new ArrayList<>();
+            info.add(organizer.getUserName());
+            info.add(organizer.getType());
+            info.add(organizer.getEmail());
+            info.add(organizer.getUserID());
+            result.add(info);
+        }
+        return result;
+    }
+
 
 }

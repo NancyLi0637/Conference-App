@@ -1,20 +1,17 @@
 package com.example.a207_demo.messageSystem;
 
-import android.os.Bundle;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
-import com.example.a207_demo.utility.SetUpActivity;
+import com.example.a207_demo.utility.BaseActivity;
 
 import java.util.ArrayList;
 
 /**
  * AnnouncementActivity
  */
-public class AnnouncementActivity extends SetUpActivity {
+public class AnnouncementActivity extends BaseActivity {
 
     private ArrayList<String> announcementList;
 

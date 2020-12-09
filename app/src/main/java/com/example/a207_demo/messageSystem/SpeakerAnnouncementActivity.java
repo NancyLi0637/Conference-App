@@ -1,12 +1,9 @@
 package com.example.a207_demo.messageSystem;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.os.Bundle;
 
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
-import com.example.a207_demo.utility.SetUpActivity;
 
 /**
  * SpeakerAnnouncementActivity

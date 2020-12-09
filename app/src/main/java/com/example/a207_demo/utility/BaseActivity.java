@@ -13,25 +13,26 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.a207_demo.R;
+import com.example.a207_demo.accountSystem.AllAccountActivity;
+import com.example.a207_demo.accountSystem.AttendeeAccountActivity;
+import com.example.a207_demo.accountSystem.OrganizerAccountActivity;
+import com.example.a207_demo.accountSystem.SpeakerAccountActivity;
+import com.example.a207_demo.accountSystem.VIPUserAccountActivity;
 import com.example.a207_demo.contactSystem.AttendeeContactAttendeeActivity;
 import com.example.a207_demo.contactSystem.AttendeeContactSpeakerActivity;
-import com.example.a207_demo.contactSystem.ContactActivity;
 import com.example.a207_demo.contactSystem.OrganizerContactAttendeeActivity;
 import com.example.a207_demo.contactSystem.OrganizerContactSpeakerActivity;
-import com.example.a207_demo.contactSystem.SpeakerContactAttendeeActivity;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
 import com.example.a207_demo.eventSystem.AttendeeMyEventActivity;
 import com.example.a207_demo.eventSystem.EventEnrollmentActivity;
-import com.example.a207_demo.eventSystem.EventEnrollmentAdapter;
 import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
 import com.example.a207_demo.eventSystem.Top5EventsActivity;
-import com.example.a207_demo.messageSystem.AnnouncementActivity;
 import com.example.a207_demo.messageSystem.AttendeeAnnouncementActivity;
 import com.example.a207_demo.messageSystem.SpeakerAnnouncementActivity;
 import com.example.a207_demo.roomSystem.RoomActivity;
-import com.example.a207_demo.signupSystem.CreateAccountByOrganizer;
-import com.example.a207_demo.signupSystem.SignUpActivity;
+import com.example.a207_demo.accountSystem.AccountActivity;
+import com.example.a207_demo.speakerSystem.Speaker;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ import java.util.ArrayList;
 /**
  * SetUpActivity class
  */
-public class SetUpActivity extends CleanArchActivity {
+public class BaseActivity extends CleanArchActivity {
     private DrawerLayout mDrawerLayout;
     private Intent intent;
 
@@ -158,9 +159,25 @@ public class SetUpActivity extends CleanArchActivity {
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, RoomActivity.class);
                         break;
-                    case R.id.nav_account:
+                    case R.id.nav_account_all:
                         mDrawerLayout.closeDrawers();
-                        intent = new Intent(context, CreateAccountByOrganizer.class);
+                        intent = new Intent(context, AllAccountActivity.class);
+                        break;
+                    case R.id.nav_account_organizer:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, OrganizerAccountActivity.class);
+                        break;
+                    case R.id.nav_account_speaker:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, SpeakerAccountActivity.class);
+                        break;
+                    case R.id.nav_account_attendee:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, AttendeeAccountActivity.class);
+                        break;
+                    case R.id.nav_account_vipUser:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, VIPUserAccountActivity.class);
                         break;
                     //SPEAKER MENU
                     case R.id.nav_myEvents_speaker:
@@ -215,7 +232,7 @@ public class SetUpActivity extends CleanArchActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.settings:
-                intent = new Intent(SetUpActivity.this, Settings.class);
+                intent = new Intent(BaseActivity.this, Settings.class);
                 intent.putExtra("info", info);
                 startActivity(intent);
                 break;

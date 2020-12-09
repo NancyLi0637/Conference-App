@@ -1,7 +1,5 @@
 package com.example.a207_demo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,19 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.a207_demo.entities.Attendee;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
-import com.example.a207_demo.eventSystem.AttendeeMyEventActivity;
-import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
-import com.example.a207_demo.gateway.FileReadWriter;
-import com.example.a207_demo.signupSystem.SignUpActivity;
-import com.example.a207_demo.use_cases.UserManager;
-import com.example.a207_demo.utility.ActivityCollector;
+import com.example.a207_demo.accountSystem.SignUpActivity;
 import com.example.a207_demo.utility.CleanArchActivity;
-
-import java.util.ArrayList;
 
 /**
  * The top level class for running the app.

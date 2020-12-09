@@ -1,28 +1,20 @@
 package com.example.a207_demo.messageSystem;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a207_demo.use_cases.ConversationManager;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
-import com.example.a207_demo.utility.SetUpActivity;
-import com.example.a207_demo.utility.Settings;
+import com.example.a207_demo.utility.BaseActivity;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -30,7 +22,7 @@ import com.example.a207_demo.entities.*;
 /**
  *
  */
-public class MsgActivity extends SetUpActivity implements View.OnClickListener {
+public class MsgActivity extends BaseActivity implements View.OnClickListener {
     //Todo: access MsgSystem Controller
     private List<Msg> msgList = new ArrayList<>();
     private MsgAdapter msgAdapter;

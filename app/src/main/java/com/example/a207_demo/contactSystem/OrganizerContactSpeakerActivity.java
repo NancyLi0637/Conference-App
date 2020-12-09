@@ -1,21 +1,17 @@
 package com.example.a207_demo.contactSystem;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.nfc.tech.NfcA;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.entities.Organizer;
 import com.example.a207_demo.messageSystem.SendAnnouncementActivity;
 import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrganizerContactSpeakerActivity extends ContactActivity implements View.OnClickListener {
 

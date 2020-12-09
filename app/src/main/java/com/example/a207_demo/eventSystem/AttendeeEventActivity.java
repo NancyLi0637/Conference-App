@@ -5,18 +5,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.a207_demo.entities.Discussion;
-import com.example.a207_demo.entities.Party;
-import com.example.a207_demo.entities.Talk;
-import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Event activity to show attendee.

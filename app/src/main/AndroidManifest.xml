@@ -10,15 +10,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".accountSystem.AllAccountActivity"
+            android:label="@string/allAccounts"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".accountSystem.VIPUserAccountActivity"
+            android:label="@string/vipUser"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".accountSystem.AttendeeAccountActivity"
+            android:label="@string/attendee"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".accountSystem.SpeakerAccountActivity"
+            android:label="@string/speaker"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".accountSystem.OrganizerAccountActivity"
+            android:label="@string/organizer"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".eventSystem.EventEnrollmentActivity"
             android:label="@string/eventEnrollment"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".eventSystem.Top5EventsActivity"
             android:label="Top 5 Events"
             android:launchMode="singleTask" />
         <activity
-            android:name=".signupSystem.CreateAccountByOrganizer"
+            android:name=".accountSystem.AccountActivity"
             android:label="Accounts"
             android:launchMode="singleTask" />
         <activity
@@ -91,7 +111,7 @@
             android:launchMode="singleTask" />
         <activity android:name=".TempActivity" />
         <activity
-            android:name=".signupSystem.SignUpActivity"
+            android:name=".accountSystem.SignUpActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".messageSystem.AnnouncementActivity"

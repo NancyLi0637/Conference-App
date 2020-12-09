@@ -1,4 +1,4 @@
-package com.example.a207_demo.signupSystem;
+package com.example.a207_demo.accountSystem;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.a207_demo.gateway.FileReadWriter;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.MainActivity;
 import com.example.a207_demo.R;
@@ -133,8 +132,8 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
         String from = getIntent().getStringExtra("class");
         if(from.equals("MAIN")){
             intent = new Intent(SignUpActivity.this, MainActivity.class);
-        }else if(from.equals("ORGANIZER")){
-            intent = new Intent(SignUpActivity.this, CreateAccountByOrganizer.class);
+        }else if(from.equals("ACCOUNT")){
+            intent = new Intent(SignUpActivity.this, AllAccountActivity.class);
         }
     }
 

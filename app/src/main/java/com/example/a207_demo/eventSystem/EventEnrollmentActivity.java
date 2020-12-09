@@ -1,14 +1,11 @@
 package com.example.a207_demo.eventSystem;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.roomSystem.RoomAdapter;
 import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;

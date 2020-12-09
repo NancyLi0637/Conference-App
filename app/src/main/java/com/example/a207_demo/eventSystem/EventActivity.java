@@ -1,16 +1,15 @@
 package com.example.a207_demo.eventSystem;
 
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.utility.SetUpActivity;
+import com.example.a207_demo.utility.BaseActivity;
 
 /**
  * EventActivity
  */
-public class EventActivity extends SetUpActivity {
+public class EventActivity extends BaseActivity {
 
     private SwipeRefreshLayout swipeRefreshLayout;
 

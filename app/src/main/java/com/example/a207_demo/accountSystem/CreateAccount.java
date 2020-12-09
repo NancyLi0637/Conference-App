@@ -1,4 +1,4 @@
-package com.example.a207_demo.signupSystem;
+package com.example.a207_demo.accountSystem;
 
 import com.example.a207_demo.use_cases.UserFactory;
 import com.example.a207_demo.use_cases.UserManager;

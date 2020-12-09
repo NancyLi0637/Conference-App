@@ -15,8 +15,14 @@ import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;
 
+/**
+ * OrganizerAccountActivity
+ */
 public class OrganizerAccountActivity extends AccountActivity {
 
+    /**
+     * init
+     */
     @Override
     public void init() {
         super.init(this, R.id.nav_view_organizer, R.id.nav_account_organizer);
@@ -24,7 +30,7 @@ public class OrganizerAccountActivity extends AccountActivity {
         createAccountMenu();
     }
 
-    protected void createAccountMenu(){
+    protected void createAccountMenu() {
         super.createAccountMenu(getOrganizerManager().generateAccountInfo());
     }
 }

@@ -128,11 +128,11 @@ public class SignUpActivity extends CleanArchActivity implements View.OnClickLis
         super.writeUser();
     }
 
-    private void loadInfo(){
+    private void loadInfo() {
         String from = getIntent().getStringExtra("class");
-        if(from.equals("MAIN")){
+        if (from.equals("MAIN")) {
             intent = new Intent(SignUpActivity.this, MainActivity.class);
-        }else if(from.equals("ACCOUNT")){
+        } else if (from.equals("ACCOUNT")) {
             intent = new Intent(SignUpActivity.this, AllAccountActivity.class);
         }
     }

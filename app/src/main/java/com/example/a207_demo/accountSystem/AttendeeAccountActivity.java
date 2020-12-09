@@ -9,6 +9,9 @@ import android.view.View;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
+/**
+ * AttendeeAccountActivity
+ */
 public class AttendeeAccountActivity extends AccountActivity {
 
     @Override
@@ -21,5 +24,6 @@ public class AttendeeAccountActivity extends AccountActivity {
     protected void createAccountMenu(){
         super.createAccountMenu(getAttendeeManager().generateAccountInfo());
     }
+
 
 }

@@ -31,10 +31,11 @@ public class VIPUser extends Attendee implements Serializable {
      * @param ID the user ID of this VIPUser
      */
     public VIPUser(String userName, String email, String password, String ID,
-                   ArrayList<String> announcements) {
+                   ArrayList<String> friendsID, ArrayList<String> announcements) {
         super(userName, email, password);
         setType("VIPUser");
         setUserID(ID);
+        setFriendList(friendsID);
         setAnnouncements(announcements);
     }
 

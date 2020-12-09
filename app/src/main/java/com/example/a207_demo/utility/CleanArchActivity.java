@@ -93,7 +93,7 @@ public class CleanArchActivity extends AppCompatActivity{
 
     public void reset(){
         fileReadWriter.reset(eventManager, userManager,
-                attendeeManager, organizerManager, speakerManager, roomManager);
+                attendeeManager, organizerManager, speakerManager, roomManager, conversationManager);
     }
 
     public void readUser(){
@@ -107,6 +107,10 @@ public class CleanArchActivity extends AppCompatActivity{
         fileReadWriter.RoomReader(roomManager);
     }
 
+    public void readConversation() {
+        fileReadWriter.ConversationReader(conversationManager);
+    }
+
     public void writeUser(){
         fileReadWriter.UserWriter(userManager);
     }
@@ -117,6 +121,10 @@ public class CleanArchActivity extends AppCompatActivity{
 
     public void writeRoom(){
         fileReadWriter.RoomWriter(roomManager);
+    }
+
+    public void writeConversation() {
+        fileReadWriter.ConversationWriter(conversationManager);
     }
 
 }

@@ -9,8 +9,6 @@ import java.util.UUID;
  */
 public class Attendee extends User implements Serializable {
 
-    private ArrayList<String> announcements;
-
     /**
      * Constructor No.1 for the Attendee
      *
@@ -34,21 +32,12 @@ public class Attendee extends User implements Serializable {
      * @param announcements inbox of annoucements of this speaker
      */
     public Attendee(String userName, String email, String password, String ID,
-                    ArrayList<String> announcements) {
+                    ArrayList<String> friendsID, ArrayList<String> announcements) {
         super(userName, email, password);
         setType("ATTENDEE");
         setUserID(ID);
-        this.announcements = announcements;
+        setFriendList(friendsID);
+        setAnnouncements(announcements);
     }
-
-    public void setAnnouncements(ArrayList<String> announcements){
-        this.announcements = announcements;
-    }
-
-    public void addAnnouncement(String announcement){
-        this.announcements.add(announcement);
-    }
-
-    public ArrayList<String> getAnnouncements(){return this.announcements;}
 
 }

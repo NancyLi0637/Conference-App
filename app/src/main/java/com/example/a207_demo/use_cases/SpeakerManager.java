@@ -74,8 +74,8 @@ public class SpeakerManager extends UserManager implements Serializable {
      * @param announcements inbox of annoucements of this speaker
      */
     public void loadSpeaker(String userName, String email, String password, String ID,
-                            ArrayList<String> announcements) {
-        Speaker speaker = new Speaker(userName, email, password, ID, announcements);
+                            ArrayList<String> friendsID, ArrayList<String> announcements) {
+        Speaker speaker = new Speaker(userName, email, password, ID, friendsID, announcements);
         speakers.add(speaker);
         UserManager.users.add(speaker);
     }

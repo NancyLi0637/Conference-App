@@ -5,8 +5,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.a207_demo.entities.Conversation;
 import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.eventSystem.EventManager;
+import com.example.a207_demo.use_cases.ConversationManager;
 import com.example.a207_demo.use_cases.OrganizerManager;
 import com.example.a207_demo.roomSystem.RoomManager;
 import com.example.a207_demo.use_cases.SpeakerManager;
@@ -15,6 +17,7 @@ import com.example.a207_demo.use_cases.UserManager;
 import java.io.*;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,13 +36,15 @@ public class FileReadWriter implements Serializable {
      */
     public void reset(EventManager eventManager, UserManager userManager,
                       AttendeeManager attendeeManager, OrganizerManager organizerManager,
-                      SpeakerManager speakerManager, RoomManager roomManager) {
+                      SpeakerManager speakerManager, RoomManager roomManager,
+                      ConversationManager conversationManager) {
         userManager.reset();
         eventManager.reset();
         attendeeManager.reset();
         organizerManager.reset();
         speakerManager.reset();
         roomManager.reset();
+        conversationManager.reset();
     }
 
     /**
@@ -50,7 +55,7 @@ public class FileReadWriter implements Serializable {
                            SpeakerManager speakerManager) {
         ArrayList<String> lines = new ArrayList();
         try {
-            FileInputStream in = context.openFileInput("Users");
+            FileInputStream in = context.openFileInput("Users.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -64,8 +69,17 @@ public class FileReadWriter implements Serializable {
 
         ArrayList<String[]> LineList = new ArrayList();
         for (String line : lines) {
-            ArrayList<String> announcements = new ArrayList<>();
             int separate = -1;
+            ArrayList<String> friendsId = new ArrayList<>();
+            if (line.contains(";")){
+                int start = line.indexOf(";");
+                int end = line.lastIndexOf(";");
+                separate = start;
+                String friends = line.substring(start+1, end);
+                friendsId = processAttendees(friends);
+            }
+
+            ArrayList<String> announcements = new ArrayList<>();
             //find inbox of announcements
             if (line.contains("&")) {
                 int start = line.indexOf("&");
@@ -74,8 +88,8 @@ public class FileReadWriter implements Serializable {
                 String announcement = line.substring(start + 1, end);
                 //same method as if processAnnouncements
                 announcements = processAttendees(announcement);
-                line = line.substring(0, separate-1);
             }
+            line = line.substring(0, separate-1);
 
             String[] wordList = line.split(" ");
             String type = wordList[0];
@@ -85,24 +99,16 @@ public class FileReadWriter implements Serializable {
             String userId = wordList[5];
 
             if(type.equals("ATTENDEE")) {
-                attendeeManager.loadAttendee(username, email, password, userId, announcements);
+                attendeeManager.loadAttendee(username, email, password, userId, friendsId, announcements);
             }else if(type.equals("VIPUser")) {
-                attendeeManager.loadVIPUser(username, email, password, userId, announcements);
+                attendeeManager.loadVIPUser(username, email, password, userId, friendsId, announcements);
             }else if (type.equals("ORGANIZER")) {
-                organizerManager.loadOrganizer(username, email, password, userId);
+                organizerManager.loadOrganizer(username, email, password, userId, friendsId, announcements);
             }else{
-                speakerManager.loadSpeaker(username, email, password, userId, announcements);
+                speakerManager.loadSpeaker(username, email, password, userId, friendsId, announcements);
             }
             LineList.add(wordList);
         }
-
-//        for (ArrayList<String> wordList : LineList){
-//            if (wordList.size() > 5){
-//                for (int index = 5; index < wordList.size(); index++){
-//                    userManager.addFriend(wordList.get(4), wordList.get(index));
-//                }
-//            }
-//        }
     }
 
     /**
@@ -112,13 +118,10 @@ public class FileReadWriter implements Serializable {
     public void UserWriter(UserManager userManager) {
         List<String> userIDs = userManager.getUserIDs();
         try {
-            FileOutputStream out = context.openFileOutput("Users", Context.MODE_PRIVATE);
+            FileOutputStream out = context.openFileOutput("Users.txt", Context.MODE_PRIVATE);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String userID : userIDs) {
                 String line = userManager.generateFormattedUserInfo(userID);
-//                for (String friendID : userManager.friendListGetter(userID)){
-//                    line += " " + friendID;
-//                }
                 line += "\n";
                 writer.write(line);
             }
@@ -151,9 +154,9 @@ public class FileReadWriter implements Serializable {
         }
 
         for (String line : lines) {
-            ArrayList<String> speakerId = new ArrayList<>();
-            //find speakerId list
             int separate = -1;
+            //find speakerId list
+            ArrayList<String> speakerId = new ArrayList<>();
             if (line.contains("{")) {
                 int start = line.indexOf("{");
                 int end = line.indexOf("}");
@@ -161,6 +164,7 @@ public class FileReadWriter implements Serializable {
                 String speakers = line.substring(start + 1, end);
                 speakerId = processSpeakers(speakers);
             }
+            //find attendeeID list
             ArrayList<String> attendeeId = new ArrayList<>();
             if (line.contains(";")){
                 int start = line.indexOf(";");
@@ -257,7 +261,7 @@ public class FileReadWriter implements Serializable {
     public void RoomReader(RoomManager roomManager) {
         ArrayList<String> lines = new ArrayList<>();
         try {
-            FileInputStream in = context.openFileInput("Rooms");
+            FileInputStream in = context.openFileInput("Rooms.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -285,7 +289,7 @@ public class FileReadWriter implements Serializable {
     public void RoomWriter(RoomManager roomManager) {
         ArrayList<String> IDList = roomManager.getAllRoomID();
         try {
-            FileOutputStream out = context.openFileOutput("Rooms", Context.MODE_PRIVATE);
+            FileOutputStream out = context.openFileOutput("Rooms.txt", Context.MODE_PRIVATE);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String id : IDList) {
                 String line = roomManager.generateFormattedRoomInfo(id);
@@ -300,6 +304,83 @@ public class FileReadWriter implements Serializable {
         }
     }
 
+    public void ConversationReader(ConversationManager conversationManager){
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            FileInputStream in = context.openFileInput("Conversations.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (FileNotFoundException e) {
+            printMessage(context, "Conversations.txt File Not Found");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (String line : lines) {
+            ArrayList<String> userIds = new ArrayList<>();
+            //find userIDs
+            int start = line.indexOf("[");
+            int end = line.indexOf("]");
+            String[] IDs = line.substring(start+1, end).split(", ");
+            userIds = new ArrayList<>(Arrays.asList(IDs));
+
+
+            //find messages
+            int marker = line.indexOf("MESSAGES") + 9;
+            int msgEnd = line.indexOf("&", marker);
+            ArrayList<ArrayList<String>> messages = processMessages(line.substring(marker, msgEnd));
+
+            conversationManager.loadConversation(userIds, messages);
+
+        }
+    }
+
+    private ArrayList<ArrayList<String>> processMessages(String conversation){
+        ArrayList<ArrayList<String>> messages = new ArrayList<>();
+        if(conversation.equals("[]") || conversation.equals("[null]") || conversation.equals("null")){
+            return messages;
+        }
+        String content = conversation.substring(1, conversation.length()-1);
+        while(content.indexOf("]") < content.length()-1){
+            String message = content.substring(content.indexOf("[")+1, content.indexOf("]"));
+            messages.add(individualMsg(message));
+            content = content.substring(content.indexOf("]")+3);
+        }
+        messages.add(individualMsg(content.substring(1, content.length()-1)));
+
+        return messages;
+    }
+
+    private ArrayList<String> individualMsg(String content){
+        //String message = content.substring(content.indexOf("[")+1, content.indexOf("]"));
+        String id = content.substring(0, content.indexOf(","));
+        String msg = content.substring(content.indexOf(",")+2);
+        ArrayList<String> eachMsg = new ArrayList<>();
+        eachMsg.add(id);
+        eachMsg.add(msg);
+        return eachMsg;
+    }
+
+    public void ConversationWriter(ConversationManager conversationManager){
+        ArrayList<ArrayList<String>> conversationIds = conversationManager.getAllUserIds();
+        try{
+            FileOutputStream out = context.openFileOutput("Conversations.txt", Context.MODE_PRIVATE);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+            for (ArrayList<String> conversationId : conversationIds){
+                String line = conversationManager.generateFormattedConversationInfo(conversationId);
+                line += "\n";
+                writer.write(line);
+            }
+            writer.close();
+        }catch (FileNotFoundException e) {
+            System.out.println("Conversations.txt File Not Found.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * print Message as a toast
@@ -327,84 +408,3 @@ public class FileReadWriter implements Serializable {
 //        //EventWriter();
 //    }
 //}
-//    public EventManager readFromEventFile(String path) throws ClassNotFoundException {
-//        try {
-//            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
-//            InputStream buffer = new BufferedInputStream(file);
-//            ObjectInput input = new ObjectInputStream(buffer);
-//
-//            // deserialize the use_cases.EventManager
-//            EventManager sm = (EventManager) input.readObject();
-//            input.close();
-//            return sm;
-//        } catch (IOException ex) {
-//            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-//                    "a new use_cases.EventManager.", ex);
-//            return new EventManager();
-//        }
-//    }
-//
-//    public SpeakerManager readFromSpeakerFile(String path) throws ClassNotFoundException {
-//        try {
-//            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
-//            InputStream buffer = new BufferedInputStream(file);
-//            ObjectInput input = new ObjectInputStream(buffer);
-//
-//            // deserialize the use_cases.SpeakerManager
-//            SpeakerManager sm = (SpeakerManager) input.readObject();
-//            input.close();
-//            return sm;
-//        } catch (IOException ex) {
-//            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-//                    "a new use_cases.SpeakerManager.", ex);
-//            return new SpeakerManager();
-//        }
-//    }
-//
-//    public RoomManager readFromRoomFile(String path) throws ClassNotFoundException {
-//        try {
-//            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
-//            InputStream buffer = new BufferedInputStream(file);
-//            ObjectInput input = new ObjectInputStream(buffer);
-//
-//            // deserialize the use_cases.RoomManager
-//            RoomManager sm = (RoomManager) input.readObject();
-//            input.close();
-//            return sm;
-//        } catch (IOException ex) {
-//            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-//                    "a new use_cases.RoomManager.", ex);
-//            return new RoomManager();
-//        }
-//    }
-//
-//    public ArrayList<User> readFromUserFile(String path) throws ClassNotFoundException {
-//        try {
-//            InputStream file = new FileInputStream(path); // String path should be "fileName.ser"
-//            InputStream buffer = new BufferedInputStream(file);
-//
-//            ArrayList<User> objList = new ArrayList<>();
-//            boolean load = true;
-//            while (load)
-//            {
-//                try (ObjectInput input = new ObjectInputStream(buffer))
-//                {
-//                    User sm = (User) input.readObject();
-//                    if (sm != null) {
-//                        objList.add(sm);
-//                    } else {
-//                        load = false;
-//                    }
-//                }
-//                catch (Exception e)
-//                {
-//                }
-//            }
-//            input.close(); //can't close input TODO
-//            return objList;
-//        } catch (IOException ex) {
-//            logger.log(Level.SEVERE, "Cannot read from input file, returning" +
-//                    "a new entities.User.", ex);
-//            return new ArrayList<>();
-//        }
-//    }

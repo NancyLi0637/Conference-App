@@ -13,6 +13,8 @@ import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
 import com.example.a207_demo.accountSystem.SignUpActivity;
 import com.example.a207_demo.utility.CleanArchActivity;
 
+import java.util.ArrayList;
+
 /**
  * The top level class for running the app.
  */
@@ -59,12 +61,11 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_signUp:
-                super.reset();
-                //intent = new Intent(MainActivity.this, SignUpActivity.class);
+                intent = new Intent(MainActivity.this, SignUpActivity.class);
 
                 //intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
                 //intent.putExtra("ID", ID);
-                intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
+                //intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
                 //intent = new Intent(MainActivity.this, AttendeeMyEventActivity.class);
                 intent.putExtra("class", "MAIN");
                 startActivity(intent);

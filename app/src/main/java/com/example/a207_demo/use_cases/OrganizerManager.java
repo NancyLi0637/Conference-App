@@ -50,8 +50,9 @@ public class OrganizerManager extends UserManager implements Serializable {
      * @param password password of this organizer
      * @param ID       user ID of this organizer
      */
-    public void loadOrganizer(String userName, String email, String password, String ID) {
-        Organizer organizer = new Organizer(userName, email, password, ID);
+    public void loadOrganizer(String userName, String email, String password, String ID,
+                              ArrayList<String> friendsID, ArrayList<String> announcements) {
+        Organizer organizer = new Organizer(userName, email, password, ID, friendsID, announcements);
         this.organizers.add(organizer);
         UserManager.users.add(organizer);
     }

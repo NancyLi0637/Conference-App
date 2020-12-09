@@ -521,7 +521,8 @@ public class EventManager implements Serializable {
                 return event.getType() + " " + event.getTitle().replace(" ", "_")
                         + " " + eventID + " " + event.getRoomID() + " "+ event.getStartTime() + " "
                         + event.getDuration() + " " + event.getRestriction() + " " +
-                        event.getCapacity() + " {" + event.getSpeakers() + "} ";
+                        event.getCapacity() + " {" + event.getSpeakers() + "}" +
+                        " ;" + event.getAttendees() + ";";
             }
         }
         return "NULL";

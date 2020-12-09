@@ -69,8 +69,8 @@ public class AttendeeManager extends UserManager implements Serializable {
      * @param ID       The unique id of the attendee
      */
     public void loadAttendee(String userName, String email, String password, String ID,
-                             ArrayList<String> announcements) {
-        Attendee attendee = new Attendee(userName, email, password, ID, announcements);
+                             ArrayList<String> friendsID, ArrayList<String> announcements) {
+        Attendee attendee = new Attendee(userName, email, password, ID, friendsID, announcements);
         this.attendees.add(attendee);
         UserManager.users.add(attendee);
     }
@@ -94,38 +94,12 @@ public class AttendeeManager extends UserManager implements Serializable {
      * @param ID       The unique id of the attendee
      */
     public void loadVIPUser(String userName, String email, String password, String ID,
-                             ArrayList<String> announcements) {
-        VIPUser vipUser = new VIPUser(userName, email, password, ID, announcements);
+                            ArrayList<String> friendsID, ArrayList<String> announcements) {
+        VIPUser vipUser = new VIPUser(userName, email, password, ID, friendsID, announcements);
         this.attendees.add(vipUser);
         this.vipUsers.add(vipUser);
         UserManager.users.add(vipUser);
     }
-
-
-//    /**
-//     * Try to sign an entities.Attendee up for an event.
-//     * @param eventManager an eventManager
-//     * @param userID String userID
-//     * @param eventID String eventID
-//     * @param roomManager a roomManager
-//     * @return boolean value, return true iff signed up successfully
-//     */
-//    public boolean signUp(EventManager eventManager, String userID, String eventID) {
-//        return eventManager.addAttendeeToEvent(userID, eventID, roomManager);
-//    }
-
-//    /**
-//     * Try to cancel an entities.Attendee from an event.
-//     *
-//     * @param eventManager an eventManager
-//     * @param userID       String userIDv
-//     * @param eventID      String eventID
-//     * @param roomManager  a roomManager
-//     * @return boolean value, return true iff canceled successfully
-//     */
-//    public boolean cancel(EventManager eventManager, String userID, String eventID, RoomManager roomManager) {
-//        return eventManager.removeAttendeeFromEvent(userID, eventID, roomManager);
-//    }
 
     @Override
     public ArrayList<ArrayList<String>> generateAccountInfo(){

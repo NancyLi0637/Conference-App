@@ -1,10 +1,8 @@
 package com.example.a207_demo.use_cases;
 
 import com.example.a207_demo.entities.*;
-import com.example.a207_demo.eventSystem.Event;
 
 import java.io.Serializable;
-import java.net.IDN;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +32,11 @@ public class UserManager implements Serializable {
             for (User user : users) {
                 if (user.getUserID().equals(currId1)) {
                     if (!user.getFriendList().contains(userId2)) {
-                        user.setFriendList(userId2);
+                        user.addFriend(userId2);
                     }
                 }if (user.getUserID().equals(userId2)) {
                     if (!user.getFriendList().contains(currId1)) {
-                        user.setFriendList(currId1);
+                        user.addFriend(currId1);
                     }
                 }
             }
@@ -289,19 +287,17 @@ public class UserManager implements Serializable {
     public String generateFormattedUserInfo(String userID) {
         for (User user : users) {
             if (user.getUserID().equals(userID)) {
-                String info = user.getType() + " " + user.getUserName() + " " + user.getEmail()
-                        + " " + user.getPassword() + " " + userID;
-                if(user.getAnnouncements() != null){
-                    info += " &" + user.getAnnouncements() +"&";
-                }
-                return info;
+                return user.getType() + " " + user.getUserName() + " " + user.getEmail()
+                        + " " + user.getPassword() + " " + userID +
+                        " ;" + user.getFriendList() + ";" +
+                        " &" + user.getAnnouncements() + "&";
             }
         }
         return "NULL";
     }
 
     /**
-     * Generate the formatted user's information.
+     * Generate the formatted user's information for loading into activity.
      *
      *
      * @return a string of formatted event's information.

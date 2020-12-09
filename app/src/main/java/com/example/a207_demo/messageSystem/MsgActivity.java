@@ -123,17 +123,17 @@ public class MsgActivity extends BaseActivity implements View.OnClickListener {
         HashSet<String> talkerList = new HashSet<String>();
         talkerList.add(getID());
         talkerList.add(otherID);
-        conversationManager.currentConversationSetter(talkerList);
-        ArrayList<String[]> messages = conversationManager.getMessagesOfCurrentConversation();
-        for (String[] message: messages){
-            Msg msg;
-            if (message[0].equals(getID())){
-                msg = new Msg(message[1], Msg.TYPE_SENT);
-            }else{
-                msg = new Msg(message[1], Msg.TYPE_RECEIVED);
-            }
-            msgList.add(msg);
-        }
+        //conversationManager.currentConversationSetter(talkerList);
+        //ArrayList<String[]> messages = conversationManager.getMessagesOfCurrentConversation();
+//        for (String[] message: messages){
+//            Msg msg;
+//            if (message[0].equals(getID())){
+//                msg = new Msg(message[1], Msg.TYPE_SENT);
+//            }else{
+//                msg = new Msg(message[1], Msg.TYPE_RECEIVED);
+//            }
+//            msgList.add(msg);
+//        }
     }
 
 }

@@ -26,12 +26,15 @@ import java.util.ArrayList;
  * OrganizerEventContentActivity
  */
 public class OrganizerEventContentActivity extends EventContentActivity{
+
     private Intent intent;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private int roomCapacity;
     private int currentSize;
     private ArrayList<String> speakerIds;
+    private ArrayList<String> eventSpeakerIDs;
+    private ArrayList<String> eventAttendeeIDs;
 
 
 
@@ -53,8 +56,7 @@ public class OrganizerEventContentActivity extends EventContentActivity{
      */
     protected void init(){
         super.init();
-        roomCapacity = getRoomManager().getRoomCapFromEvent(getEventID());
-        currentSize = getEventManager().getEventNumAttended(getEventID());
+        loadEventInfo();
         loadSwipeRefreshLayout();
         loadButtons();
     }
@@ -67,12 +69,12 @@ public class OrganizerEventContentActivity extends EventContentActivity{
         switch (view.getId()){
             case R.id.btn_event_announce_speaker:
                 loadAnnounceData();
-                intent.putExtra("userIDs", getEventManager().getSpeakersFromEvent(getEventID()));
+                intent.putExtra("userIDs", eventSpeakerIDs);
                 startActivity(intent);
                 break;
             case R.id.btn_event_announce_attendee:
                 loadAnnounceData();
-                intent.putExtra("userIDs", getEventManager().getAttendeesFromEvent(getEventID()));
+                intent.putExtra("userIDs", eventAttendeeIDs);
                 startActivity(intent);
                 break;
             case R.id.btn_change_cap:
@@ -92,14 +94,26 @@ public class OrganizerEventContentActivity extends EventContentActivity{
                 break;
             case R.id.btn_cancel_event:
                 if(cancelEvent()){
+                    getUserManager().sendAnnouncement(eventSpeakerIDs, getEventTitle(),
+                            getEventTitle() + " is CANCELLED!");
+                    getUserManager().sendAnnouncement(eventAttendeeIDs, getEventTitle(),
+                            getEventTitle() + " is CANCELLED!");
                     Toast.makeText(this, "Event is cancelled!", Toast.LENGTH_LONG).show();
                     super.writeEvent();
+                    super.writeUser();
                     startActivity(new Intent(OrganizerEventContentActivity.this, OrganizerEventActivity.class));
                 }else{
                     Toast.makeText(this, "Some error occurred!", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
+    }
+
+    private void loadEventInfo() {
+        roomCapacity = getRoomManager().getRoomCapFromEvent(getEventID());
+        currentSize = getEventManager().getEventNumAttended(getEventID());
+        eventSpeakerIDs = getEventManager().getSpeakersFromEvent(getEventID());
+        eventAttendeeIDs = getEventManager().getAttendeesFromEvent(getEventID());
     }
 
     private void loadButtons(){

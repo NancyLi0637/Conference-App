@@ -24,12 +24,15 @@ import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
-public class OrganizerContactAdapter extends ContactAdapter{
+/**
+ * Organizer Contact Adapter
+ */
+public class OrganizerContactAdapter extends ContactAdapter {
 
     private Context context;
     private String type;
 
-    public OrganizerContactAdapter(Context context, ArrayList<ArrayList<String>> contactList, String type){
+    public OrganizerContactAdapter(Context context, ArrayList<ArrayList<String>> contactList, String type) {
         super(context, contactList);
         this.context = context;
         this.type = type;
@@ -37,7 +40,8 @@ public class OrganizerContactAdapter extends ContactAdapter{
 
     /**
      * onCreateViewHolder for OrganizerEventAdapter
-     * @param parent parent ViewGroup
+     *
+     * @param parent   parent ViewGroup
      * @param viewType viewType
      * @return VHEvent
      */

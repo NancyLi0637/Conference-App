@@ -10,7 +10,10 @@ import com.example.a207_demo.utility.ActivityCollector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttendeeContactSpeakerActivity extends ContactActivity{
+/**
+ * AttendeeContactSpeakerActivity
+ */
+public class AttendeeContactSpeakerActivity extends ContactActivity {
 
     //Todo: access Contact Controller
     private List<Contact> contactList = new ArrayList<>();

@@ -57,7 +57,8 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
 
     /**
      * on Create View Holder
-     * @param parent parent ViewGroup
+     *
+     * @param parent   parent ViewGroup
      * @param viewType viewType
      * @return VHEvent
      */
@@ -90,7 +91,7 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
         return contactsList.isEmpty() ? 0 : contactsList.size();
     }
 
-    public String getUserID(){
+    public String getUserID() {
         return userID;
     }
 

@@ -16,6 +16,9 @@ import com.example.a207_demo.utility.ActivityCollector;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * OrganizerContactAttendeeActivity
+ */
 public class OrganizerContactAttendeeActivity extends ContactActivity implements View.OnClickListener{
 
     private ArrayList<ArrayList<String>> contactList;
@@ -51,6 +54,10 @@ public class OrganizerContactAttendeeActivity extends ContactActivity implements
         createContactMenu();
     }
 
+    /**
+     * onClick
+     * @param view View
+     */
     public void onClick(View view){
         Intent intent = new Intent(OrganizerContactAttendeeActivity.this, SendAnnouncementActivity.class);
         intent.putExtra("class", "attendeeContact");

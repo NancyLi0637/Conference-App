@@ -238,11 +238,6 @@ public class FileReadWriter implements Serializable {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             for (String eventId : eventIds) {
                 String line = eventManager.generateFormattedEventInfo(eventId);
-                line += " ;" + eventManager.getAttendeesFromEvent(eventId) + ";";
-//                for (String attendee : eventManager.getAttendeesFromEvent(eventId)) {
-//                    line += " ;" + attendee + ";";
-//                }
-                System.out.println("LINEE" + line);
                 line += "\n";
                 writer.write(line);
             }

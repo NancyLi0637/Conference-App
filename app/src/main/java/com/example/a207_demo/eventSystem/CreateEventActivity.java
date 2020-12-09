@@ -29,7 +29,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
     private String eventRestriction = "PUBLIC";
     private String eventCapacity;
     private String roomID;
-    private ArrayList<String> speakerId;
+    private ArrayList<String> speakerId = new ArrayList<>();
 
     private Intent intent;
 
@@ -124,6 +124,8 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                     Toast.makeText(this, "DURATION entered is invalid!", Toast.LENGTH_LONG).show();
                 } else if(!validInteger(eventCapacity)){
                     Toast.makeText(this, "EVENT CAPACITY entered is invalid!", Toast.LENGTH_LONG).show();
+                } else if(eventType.equals("TALK") && speakerId.size() > 1){
+                    Toast.makeText(this, "Only ONE SPEAKER allowed for Talk Events!", Toast.LENGTH_LONG).show();
                 } else {
                     boolean created = getEventManager().createEvent(eventType, eventTitle, roomID, speakerId,
                             eventTime, eventDuration, eventRestriction, Integer.parseInt(eventCapacity));
@@ -206,10 +208,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
             case 2:
                 if (resultCode == RESULT_OK) {
                    ArrayList<String> speakerNames = data.getStringArrayListExtra("speakerNames");
-                   if(speakerNames == null){
-                       speakerId = new ArrayList<>();
-                   }else{
-                       //Todo: fix multi speakerId saving
+                   if(speakerNames != null){
                        speakerId = getUserManager().getUserIdsFromName(speakerNames);
                    }
                 }

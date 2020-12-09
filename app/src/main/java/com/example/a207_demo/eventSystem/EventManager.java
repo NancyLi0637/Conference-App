@@ -120,7 +120,8 @@ public class EventManager implements Serializable {
     public ArrayList<String> getTop5Events(){
         Map<String, Integer> copy = new HashMap<>(getEventToAttended());
         ArrayList<String> result = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
+        int bound = Math.min(5, events.size());
+        for(int i = 0; i < bound; i++){
             String key = maxUsingCollectionsMaxAndLambda(copy);
             result.add(key);
             copy.remove(key);

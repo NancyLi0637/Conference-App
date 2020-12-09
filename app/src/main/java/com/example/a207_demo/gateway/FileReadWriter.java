@@ -18,6 +18,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -315,13 +316,13 @@ public class FileReadWriter implements Serializable {
         }
 
         for (String line : lines) {
-            ArrayList<String> userIds = new ArrayList<>();
+            ArrayList<String> tempIds;
             //find userIDs
             int start = line.indexOf("[");
             int end = line.indexOf("]");
             String[] IDs = line.substring(start+1, end).split(", ");
-            userIds = new ArrayList<>(Arrays.asList(IDs));
-
+            tempIds = new ArrayList<>(Arrays.asList(IDs));
+            HashSet<String> userIds = new HashSet<>(tempIds);
 
             //find messages
             int marker = line.indexOf("MESSAGES") + 9;
@@ -360,11 +361,11 @@ public class FileReadWriter implements Serializable {
     }
 
     public void ConversationWriter(ConversationManager conversationManager){
-        ArrayList<ArrayList<String>> conversationIds = conversationManager.getAllUserIds();
+        ArrayList<HashSet<String>> conversationIds = conversationManager.getAllUserIds();
         try{
             FileOutputStream out = context.openFileOutput("Conversations.txt", Context.MODE_PRIVATE);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-            for (ArrayList<String> conversationId : conversationIds){
+            for (HashSet<String> conversationId : conversationIds){
                 String line = conversationManager.generateFormattedConversationInfo(conversationId);
                 line += "\n";
                 writer.write(line);

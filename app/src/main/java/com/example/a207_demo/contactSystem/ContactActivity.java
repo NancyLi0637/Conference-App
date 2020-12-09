@@ -29,6 +29,8 @@ public abstract class ContactActivity extends BaseActivity {
     protected void initContacts() {
         super.reset();
         super.readUser();
+        super.readEvent();
+        super.readConversation();
     }
 
 }

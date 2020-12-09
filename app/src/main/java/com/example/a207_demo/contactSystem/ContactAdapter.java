@@ -19,6 +19,7 @@ import com.example.a207_demo.messageSystem.MsgActivity;
 import com.example.a207_demo.messageSystem.SendAnnouncementActivity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -81,6 +82,7 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
 
     }
 
+
     /**
      * getItemCount
      *
@@ -91,8 +93,12 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
         return contactsList.isEmpty() ? 0 : contactsList.size();
     }
 
-    public String getUserID() {
-        return userID;
+    public String getMyID() {
+        return myID;
+    }
+
+    public ArrayList<ArrayList<String>> getContactsList(){
+        return contactsList;
     }
 
     /**

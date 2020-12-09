@@ -22,6 +22,7 @@ import com.example.a207_demo.contactSystem.AttendeeContactAttendeeActivity;
 import com.example.a207_demo.contactSystem.AttendeeContactSpeakerActivity;
 import com.example.a207_demo.contactSystem.OrganizerContactAttendeeActivity;
 import com.example.a207_demo.contactSystem.OrganizerContactSpeakerActivity;
+import com.example.a207_demo.contactSystem.SpeakerContactAttendeeActivity;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
 import com.example.a207_demo.eventSystem.AttendeeMyEventActivity;
 import com.example.a207_demo.eventSystem.EventEnrollmentActivity;
@@ -186,7 +187,7 @@ public class BaseActivity extends CleanArchActivity {
                         break;
                     case R.id.nav_contacts_attendee_for_speaker:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(context, AttendeeContactSpeakerActivity.class));
+                        intent = new Intent(context, SpeakerContactAttendeeActivity.class);
                         break;
                     case R.id.nav_announcements_speaker:
                         mDrawerLayout.closeDrawers();

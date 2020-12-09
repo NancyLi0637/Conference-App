@@ -14,6 +14,7 @@ import com.example.a207_demo.accountSystem.SignUpActivity;
 import com.example.a207_demo.utility.CleanArchActivity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * The top level class for running the app.
@@ -61,14 +62,26 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_signUp:
-                intent = new Intent(MainActivity.this, SignUpActivity.class);
+                HashSet<String> users = new HashSet<>();
+                users.add("3a4d6847");
+                users.add("f2248972");
+                super.reset();
+                super.readConversation();
+                getConversationManager().createConversation(users);
+                getConversationManager().currentConversationSetter(users);
+                getConversationManager().sendMessage("3a4d6847", "hello");
+                getConversationManager().sendMessage("f2248972", "hello");
+                getConversationManager().sendMessage("3a4d6847", "this is our first conversation");
+                getConversationManager().sendMessage("3a4d6847", "do you like it");
+                super.writeConversation();
+                //intent = new Intent(MainActivity.this, SignUpActivity.class);
 
                 //intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
                 //intent.putExtra("ID", ID);
                 //intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
                 //intent = new Intent(MainActivity.this, AttendeeMyEventActivity.class);
-                intent.putExtra("class", "MAIN");
-                startActivity(intent);
+                //intent.putExtra("class", "MAIN");
+                //startActivity(intent);
                 break;
             case R.id.btn_login:
                 super.reset();

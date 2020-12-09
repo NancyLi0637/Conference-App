@@ -13,15 +13,15 @@ public class Conversation implements Serializable {
 
     /**
      * The constructor of the conversation class
-     * @param userId1 first user id
-     * @param userId2 second user id.
-     */
+//     * @param userId1 first user id
+//     * @param userId2 second user id.
+//     */
 //    public Conversation(String userId1, String userId2){
 //        userIds.add(userId1);
 //        userIds.add(userId2);
 //    }
-    public Conversation(ArrayList<String> userIDs){
-        userIds.addAll(userIDs);
+    public Conversation(HashSet<String> userIDs){
+        this.userIds = userIDs;
     }
 
     public void setMessages(ArrayList<ArrayList<String>> messages){
@@ -141,4 +141,9 @@ public class Conversation implements Serializable {
 //        HashSet<String> cloneSet = (HashSet<String>)userIds.clone();
         return userIds;
     }
+
+    public String toString() {
+        return this.userIds + " saying: " + this.getMessages();
+    }
+
 }

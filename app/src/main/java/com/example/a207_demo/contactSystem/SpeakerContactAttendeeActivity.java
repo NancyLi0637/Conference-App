@@ -21,7 +21,7 @@ import java.util.List;
 public class SpeakerContactAttendeeActivity extends ContactActivity implements View.OnClickListener{
 
     private ArrayList<ArrayList<String>> contactList;
-    private ArrayList<String> IDs;
+    private ArrayList<String> userIDs;
 
     /**
      * onCreate
@@ -53,7 +53,7 @@ public class SpeakerContactAttendeeActivity extends ContactActivity implements V
         Intent intent = new Intent(SpeakerContactAttendeeActivity.this, SendAnnouncementActivity.class);
         intent.putExtra("class", "speakerContactAttendee");
         intent.putExtra("eventTitle", "");
-        intent.putExtra("userIDs", IDs);
+        intent.putExtra("userIDs", userIDs);
         startActivity(intent);
     }
 
@@ -63,19 +63,20 @@ public class SpeakerContactAttendeeActivity extends ContactActivity implements V
     public void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.speaker_contact_recycler_view);
-        //ContactAdapter contactAdapter = new ContactAdapter(this, contactList, getID());
-        //super.createContactMenu(recyclerView, contactAdapter);
+        ContactMsgAdapter contactMsgAdapter = new ContactMsgAdapter(this, contactList, getID());
+        super.createContactMenu(recyclerView, contactMsgAdapter);
     }
 
     protected void initContacts() {
         super.initContacts();
-        IDs = new ArrayList<>();
+        userIDs = new ArrayList<>();
         ArrayList<String> events = getEventManager().getEventsFromSpeaker(getID());
         for(String event : events){
             ArrayList<String> attendees = getEventManager().getAttendeesFromEvent(event);
-            IDs.addAll(attendees);
+            userIDs.addAll(attendees);
         }
-        contactList = getUserManager().generateIDNameInfo(IDs);
+
+        contactList = getUserManager().generateIDNameInfo(userIDs);
 //        //Todo: access Contact Use case to generate contacts
 //        Contact contact1 = new Contact("Jenny Su", R.drawable.jenny);
 //        contactList.add(contact1);

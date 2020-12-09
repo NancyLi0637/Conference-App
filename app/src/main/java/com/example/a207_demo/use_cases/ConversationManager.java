@@ -34,18 +34,17 @@ public class ConversationManager implements Serializable {
 //        HashSet<String> newConversationId = newConversation.getUserIds();
 //        conversations.put(newConversationId, newConversation);
 //    }
-    public void createConversation(ArrayList<String> userIDs) {
+    public void createConversation(HashSet<String> userIDs) {
         Conversation newConversation = new Conversation(userIDs);
         HashSet<String> newConversationId = newConversation.getUserIds();
         conversations.put(newConversationId, newConversation);
     }
 
-    public void loadConversation(ArrayList<String> userIDs,
+    public void loadConversation(HashSet<String> userIDs,
                                  ArrayList<ArrayList<String>> messages){
         Conversation newConversation = new Conversation(userIDs);
-        HashSet<String> newConversationId = newConversation.getUserIds();
         newConversation.setMessages(messages);
-        conversations.put(newConversationId, newConversation);
+        conversations.put(newConversation.getUserIds(), newConversation);
     }
 
     /**
@@ -66,9 +65,9 @@ public class ConversationManager implements Serializable {
 //    public void currentConversationSetter(HashSet<String> talkersList) {
 //        this.currentConversation = conversations.get(talkersList);
 //    }
-    public void currentConversationSetter(ArrayList<String> userIDs) {
-        HashSet<String> talkersList = new HashSet<>(userIDs);
-        this.currentConversation = conversations.get(talkersList);
+    public void currentConversationSetter(HashSet<String> userIDs) {
+        //HashSet<String> talkersList = new HashSet<>(userIDs);
+        this.currentConversation = conversations.get(userIDs);
     }
 
     /**
@@ -149,11 +148,10 @@ public class ConversationManager implements Serializable {
         return conversation.getUserIds();
     }
 
-    public ArrayList<ArrayList<String>> getAllUserIds(){
-        ArrayList<ArrayList<String>> IDList = new ArrayList<>();
+    public ArrayList<HashSet<String>> getAllUserIds(){
+       ArrayList<HashSet<String>> IDList = new ArrayList<>();
         for(HashSet<String> IDs : conversations.keySet()){
-            ArrayList<String> ids = new ArrayList<>(IDs);
-            IDList.add(ids);
+            IDList.add(IDs);
         }
         return IDList;
     }
@@ -168,11 +166,10 @@ public class ConversationManager implements Serializable {
         conversations.put(key, conversation);
     }
 
-    public String generateFormattedConversationInfo(ArrayList<String> userIDs){
-        HashSet<String> ids = new HashSet<>(userIDs);
-        for(HashSet<String> userID : conversations.keySet()){
-            if(userID.equals(ids)) {
-               return userIDs + " &MESSAGES:" + conversations.get(userID).getMessages() + "&";
+    public String generateFormattedConversationInfo(HashSet<String> userID){
+        for(HashSet<String> ID : conversations.keySet()){
+            if(ID.equals(userID)) {
+               return userID + " &MESSAGES:" + conversations.get(userID).getMessages() + "&";
             }
         }
         return "NULL";

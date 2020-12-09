@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a207_demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,18 +22,20 @@ import java.util.List;
 public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.VHMsg> {
 
     private Context context;
-    private List<Msg> mMsgList;
+    private ArrayList<ArrayList<String>> conversationList;
+    private String myID;
 
 
     /**
      * MsgAdapter constructor
      *
      * @param context
-     * @param mMsgList
+     * @param conversationList
      */
-    public MsgAdapter(Context context, List<Msg> mMsgList) {
+    public MsgAdapter(Context context, ArrayList<ArrayList<String>> conversationList, String myID) {
         this.context = context;
-        this.mMsgList = mMsgList;
+        this.conversationList = conversationList;
+        this.myID = myID;
     }
 
     /**
@@ -58,16 +61,29 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.VHMsg> {
      */
     @Override
     public void onBindViewHolder(@NonNull VHMsg holder, int position) {
-        Msg msg = mMsgList.get(position);
-
-        if (msg.getType() == Msg.TYPE_RECEIVED) {
-            holder.leftLayout.setVisibility(View.VISIBLE);
-            holder.rightLayout.setVisibility(View.GONE);
-            holder.leftMsg.setText(msg.getContent());
-        } else {
+        ArrayList<String> conversation = conversationList.get(position);
+        System.out.println("listt" + conversation);
+        String ID = conversation.get(0);
+        String msg = conversation.get(1);
+        System.out.println("iddd"+ID);
+        System.out.println("msgg"+msg);
+//        if (msg.getType() == Msg.TYPE_RECEIVED) {
+//            holder.leftLayout.setVisibility(View.VISIBLE);
+//            holder.rightLayout.setVisibility(View.GONE);
+//            holder.leftMsg.setText(msg.getContent());
+//        } else {
+//            holder.rightLayout.setVisibility(View.VISIBLE);
+//            holder.leftLayout.setVisibility(View.GONE);
+//            holder.rightMsg.setText(msg.getContent());
+//        }
+        if(ID.equals(myID)){
             holder.rightLayout.setVisibility(View.VISIBLE);
             holder.leftLayout.setVisibility(View.GONE);
-            holder.rightMsg.setText(msg.getContent());
+            holder.rightMsg.setText(msg);
+        }else {
+            holder.leftLayout.setVisibility(View.VISIBLE);
+            holder.rightLayout.setVisibility(View.GONE);
+            holder.leftMsg.setText(msg);
         }
     }
 
@@ -78,17 +94,21 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.VHMsg> {
      */
     @Override
     public int getItemCount() {
-        return mMsgList.isEmpty() ? 0 : mMsgList.size();
+        return conversationList.isEmpty() ? 0 : conversationList.size();
     }
 
     /**
      * VHMsg
      */
     static class VHMsg extends RecyclerView.ViewHolder {
-        private RelativeLayout leftLayout;
-        private RelativeLayout rightLayout;
-        private TextView leftMsg;
-        private TextView rightMsg;
+//        private RelativeLayout leftLayout;
+//        private RelativeLayout rightLayout;
+//        private TextView leftMsg;
+//        private TextView rightMsg;
+        LinearLayout leftLayout;
+        LinearLayout rightLayout;
+        TextView leftMsg;
+        TextView rightMsg;
         View mView;
 
         /**

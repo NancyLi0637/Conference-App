@@ -49,6 +49,7 @@
     <string name="createAccount">Create Account</string>
     <string name="changeCapacity">Change Capacity</string>
     <string name="top5Events">Top 5 Events</string>
+    <string name="eventEnrollment">Event Enrollment</string>
 
     <string name="useremail">nancielee@gmail.com</string>
     <string-array name="event_types">

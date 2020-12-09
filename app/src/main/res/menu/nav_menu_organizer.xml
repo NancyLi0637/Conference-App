@@ -13,6 +13,11 @@
                     android:id="@+id/nav_top_5_events"
                     android:title="@string/top5Events"
                     android:icon="@drawable/event"/>
+
+                <item
+                    android:id="@+id/nav_event_enrollment"
+                    android:title="@string/eventEnrollment"
+                    android:icon="@drawable/event"/>
             </group>
         </menu>
 

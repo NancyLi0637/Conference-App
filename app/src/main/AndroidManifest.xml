@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".eventSystem.EventEnrollmentActivity"
+            android:label="@string/eventEnrollment"
+            android:launchMode="singleTask"/>
+        <activity
             android:name=".eventSystem.Top5EventsActivity"
             android:label="Top 5 Events"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".signupSystem.CreateAccountByOrganizer"
             android:label="Accounts"

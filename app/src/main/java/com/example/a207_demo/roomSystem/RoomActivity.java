@@ -77,11 +77,11 @@ public class RoomActivity extends SetUpActivity implements View.OnClickListener 
      * createEventMenu
      */
     protected void createRoomMenu() {
+        initRooms();
         RecyclerView recyclerView = findViewById(R.id.room_recycler_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(layoutManager);
-        initRooms();
         roomAdapter = new RoomAdapter(this, roomList);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(roomAdapter);
     }
 

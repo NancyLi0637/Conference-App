@@ -21,6 +21,8 @@ import com.example.a207_demo.contactSystem.OrganizerContactSpeakerActivity;
 import com.example.a207_demo.contactSystem.SpeakerContactAttendeeActivity;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
 import com.example.a207_demo.eventSystem.AttendeeMyEventActivity;
+import com.example.a207_demo.eventSystem.EventEnrollmentActivity;
+import com.example.a207_demo.eventSystem.EventEnrollmentAdapter;
 import com.example.a207_demo.eventSystem.OrganizerEventActivity;
 import com.example.a207_demo.eventSystem.SpeakerMyEventActivity;
 import com.example.a207_demo.eventSystem.Top5EventsActivity;
@@ -139,6 +141,10 @@ public class SetUpActivity extends CleanArchActivity {
                     case R.id.nav_top_5_events:
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, Top5EventsActivity.class);
+                        break;
+                    case R.id.nav_event_enrollment:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, EventEnrollmentActivity.class);
                         break;
                     case R.id.nav_contacts_attendee_for_organizer:
                         mDrawerLayout.closeDrawers();

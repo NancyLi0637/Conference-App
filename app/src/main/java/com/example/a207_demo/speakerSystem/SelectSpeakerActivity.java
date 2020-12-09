@@ -25,6 +25,7 @@ public class SelectSpeakerActivity extends CleanArchActivity implements View.OnC
 
     private Intent intent;
 
+
     /**
      * onCreate
      * @param savedInstanceState Bundle

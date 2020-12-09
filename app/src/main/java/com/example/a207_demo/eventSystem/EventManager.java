@@ -351,7 +351,7 @@ public class EventManager implements Serializable {
         return true;
     }
 
-    public boolean inEvent(String userID, String eventID){
+    public boolean attendeeInEvent(String userID, String eventID){
         return getEventFromID(eventID).getAttendees().contains(userID);
     }
 
@@ -370,23 +370,40 @@ public class EventManager implements Serializable {
     /**
      * Try to add a speaker to a list of events
      *
-     * @param speakerID speakerID String
-     * @param events    a list of events
+     * @param speakerIDs speakerID String
+     * @param eventID    ID of event to be added speaker
+     * @param time       time of event
+     * @param duration   duration of event
      */
-    public boolean addSpeakerToEvent(String speakerID, List<Event> events, Event event) {
-        for (Event currentEvent : events) {
-            //Todo: implement has Speaker in Event
-            for (String speaker : currentEvent.getSpeakers()) {
-                if (speaker.equals(speakerID) && event.getStartTime().equals(currentEvent.getStartTime())) {
-                    return false;
-                }
+    public boolean addSpeakerToEvent(ArrayList<String> speakerIDs, String eventID, String time,
+                                     String duration) {
+        for(String speakerID : speakerIDs){
+            if(speakerInEvent(speakerID, eventID) || conflictedSpeaker(speakerID,
+                    eventID, time, duration)){
+                return false;
             }
         }
-        //Todo: implement addSpeaker for Event (do not directly change list from getSpeakers())
-        event.getSpeakers().add(speakerID);
+
+        getEventFromID(eventID).getSpeakers().addAll(speakerIDs);
         return true;
     }
 
+    private boolean speakerInEvent(String speakerID, String eventID){
+        return getEventFromID(eventID).getSpeakers().contains(speakerID);
+    }
+
+    private boolean conflictedSpeaker(String speakerID, String eventID, String time, String duration){
+        for(Event event : events){
+            if(!event.getEventID().equals(eventID)) {
+                for (String speaker : event.getSpeakers()) {
+                    if (speaker.equals(speakerID) && event.timeConflict(time, duration)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     public boolean removeAttendeeFromEvent(String attendeeID, String eventID){
         if(getEventFromID(eventID).getAttendees().contains(attendeeID)){

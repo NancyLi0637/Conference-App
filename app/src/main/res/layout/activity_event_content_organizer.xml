@@ -103,14 +103,22 @@
                         android:layout_marginEnd="10dp"/>
 
                     <Button
-                        android:id="@+id/btn_cancel_event"
+                        android:id="@+id/btn_add_speaker"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/cancelEvent"
+                        android:text="@string/addSpeaker"
                         android:layout_weight="1"
                         android:layout_marginEnd="24dp"/>
 
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_cancel_event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancelEvent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp" />
 
 
             </LinearLayout>

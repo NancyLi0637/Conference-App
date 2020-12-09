@@ -91,7 +91,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp">
+                    android:layout_marginTop="20dp">
 
                     <Button
                         android:id="@+id/btn_change_cap"
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/cancelEvent"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp" />
+                    android:layout_marginTop="20dp" />
 
 
             </LinearLayout>

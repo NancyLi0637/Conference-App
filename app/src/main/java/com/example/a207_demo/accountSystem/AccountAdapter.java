@@ -17,12 +17,16 @@ import com.example.a207_demo.R;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * AccountAdapter
+ */
 public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.VHAccount> implements Serializable {
     private Context context;
     private ArrayList<ArrayList<String>> accountList;
 
     /**
      * Event Adapter for this Event Activity
+     *
      * @param context
      * @param accountList
      */
@@ -33,11 +37,12 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.VHAccoun
 
     /**
      * on Create View Holder
-     * @param parent parent ViewGroup
+     *
+     * @param parent   parent ViewGroup
      * @param viewType viewType
      * @return VHEvent
      */
-    public VHAccount onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+    public VHAccount onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.item_account, parent, false);
         VHAccount holder = new VHAccount(v);
         return holder;
@@ -45,7 +50,8 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.VHAccoun
 
     /**
      * on Bind View Holder
-     * @param holder VHEvent
+     *
+     * @param holder   VHEvent
      * @param position int
      */
     @Override
@@ -65,6 +71,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.VHAccoun
 
     /**
      * getItemCount
+     *
      * @return int
      */
     @Override

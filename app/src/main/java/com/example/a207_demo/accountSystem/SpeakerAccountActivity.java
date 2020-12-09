@@ -9,8 +9,14 @@ import android.view.View;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
+/**
+ * SpeakerAccountActivity
+ */
 public class SpeakerAccountActivity extends AccountActivity {
 
+    /**
+     * init
+     */
     @Override
     public void init() {
         super.init(this, R.id.nav_view_organizer, R.id.nav_account_speaker);
@@ -18,7 +24,7 @@ public class SpeakerAccountActivity extends AccountActivity {
         createAccountMenu();
     }
 
-    protected void createAccountMenu(){
+    protected void createAccountMenu() {
         super.createAccountMenu(getSpeakerManager().generateAccountInfo());
     }
 }

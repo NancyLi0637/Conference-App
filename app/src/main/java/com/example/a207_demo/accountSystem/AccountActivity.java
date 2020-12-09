@@ -15,7 +15,10 @@ import com.example.a207_demo.utility.BaseActivity;
 
 import java.util.ArrayList;
 
-public class AccountActivity extends BaseActivity{
+/**
+ * AccountActivity
+ */
+public class AccountActivity extends BaseActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private AccountAdapter accountAdapter;
@@ -41,7 +44,7 @@ public class AccountActivity extends BaseActivity{
         setSwipeRefreshLayout();
     }
 
-    protected void setSwipeRefreshLayout(){
+    protected void setSwipeRefreshLayout() {
         swipeRefreshLayout = findViewById(R.id.account_swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -83,7 +86,7 @@ public class AccountActivity extends BaseActivity{
         }
     }
 
-    protected void refreshAccounts(){
+    protected void refreshAccounts() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

@@ -10,15 +10,21 @@ import android.widget.Button;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
-public class AllAccountActivity extends AccountActivity implements View.OnClickListener{
+/**
+ * AllAccountActivity
+ */
+public class AllAccountActivity extends AccountActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * init
+     */
     @Override
-    public void init(){
+    public void init() {
         setContentView(R.layout.activity_account_all);
         super.init(this, R.id.nav_view_organizer, R.id.nav_account_all);
         super.init();
@@ -29,12 +35,17 @@ public class AllAccountActivity extends AccountActivity implements View.OnClickL
         createAccountMenu();
     }
 
-    protected void createAccountMenu(){
+    protected void createAccountMenu() {
         super.createAccountMenu(getUserManager().generateAccountInfo());
     }
 
+    /**
+     * onClick
+     *
+     * @param view view
+     */
     @Override
-    public void onClick(View view){
+    public void onClick(View view) {
         Intent intent = new Intent(AllAccountActivity.this, SignUpActivity.class);
         intent.putExtra("class", "ACCOUNT");
         startActivity(intent);

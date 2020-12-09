@@ -2,6 +2,7 @@ package com.example.a207_demo.eventSystem;
 
 import android.os.Bundle;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a207_demo.R;
@@ -43,11 +44,12 @@ public class AttendeeMyEventActivity extends EventActivity {
     }
 
     protected void createEventMenu() {
-        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
-        super.createEventMenu(recyclerView);
         initEvents();
+        RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         attendeeMyEventAdapter = new AttendeeMyEventAdapter(this, eventList);
-        recyclerView.setAdapter(attendeeMyEventAdapter);
+        super.createEventMenu(recyclerView, layoutManager, attendeeMyEventAdapter);
+        //recyclerView.setAdapter(attendeeMyEventAdapter);
     }
 
     /**

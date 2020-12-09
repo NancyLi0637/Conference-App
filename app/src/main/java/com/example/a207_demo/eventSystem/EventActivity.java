@@ -18,9 +18,12 @@ public class EventActivity extends SetUpActivity {
      * createEventMenu
      * @param recyclerView RecyclerView recyclerView
      */
-    protected void createEventMenu(RecyclerView recyclerView) {
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+    protected void createEventMenu(RecyclerView recyclerView,
+                                   RecyclerView.LayoutManager layoutManager,
+                                   EventAdapter eventAdapter) {
+        //GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(eventAdapter);
 
         swipeRefreshLayout = findViewById(R.id.event_swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);

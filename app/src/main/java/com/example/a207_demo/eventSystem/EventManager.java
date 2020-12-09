@@ -9,8 +9,12 @@ import com.example.a207_demo.use_cases.UserManager;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * The use_cases.EventManager class, this is the use case class to manage all events.
@@ -111,6 +115,32 @@ public class EventManager implements Serializable {
 
     public ArrayList<String> getAllEventType() {
         return this.allEventType;
+    }
+
+    public ArrayList<String> getTop5Events(){
+        Map<String, Integer> copy = new HashMap<>(getEventToAttended());
+        ArrayList<String> result = new ArrayList<>();
+        for(int i = 0; i < 5; i++){
+            String key = maxUsingCollectionsMaxAndLambda(copy);
+            result.add(key);
+            copy.remove(key);
+        }
+        return result;
+    }
+
+    private <K, V extends Comparable<V>> K maxUsingCollectionsMaxAndLambda(Map<K, V> map) {
+        Map.Entry<K, V> maxEntry = Collections.max(map.entrySet(), (Map.Entry<K, V> e1, Map.Entry<K, V> e2) -> e1.getValue()
+                .compareTo(e2.getValue()));
+        return maxEntry.getKey();
+    }
+
+
+    private Map<String, Integer> getEventToAttended(){
+        Map<String, Integer> eventToAttend = new HashMap<>();
+        for(Event event : events){
+            eventToAttend.put(event.getEventID(), event.getCurrentNum());
+        }
+        return eventToAttend;
     }
 
     public int getEventNumAttended(String eventID){

@@ -6,4 +6,9 @@
     <color name="colorChatBackground">#eaeaea</color>
     <color name="colorReceived">#ffffff</color>
     <color name="colorSent">#7cfc00</color>
+    <color name="red">#cd2626</color>
+    <color name="blue">#009acd</color>
+    <color name="yellow">#eec900</color>
+    <color name="pink">#f08080</color>
+    <color name="green">#6a8455</color>
 </resources>

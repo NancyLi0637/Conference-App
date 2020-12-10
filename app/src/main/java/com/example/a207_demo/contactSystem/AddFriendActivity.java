@@ -1,7 +1,5 @@
 package com.example.a207_demo.contactSystem;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +13,6 @@ import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.utility.BaseActivity;
 
-import java.util.ArrayList;
-
 public class AddFriendActivity extends BaseActivity implements View.OnClickListener{
 
     private String myID;
@@ -26,7 +22,7 @@ public class AddFriendActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_friend);
+        setContentView(R.layout.activity_friend_add);
         ActivityCollector.addActivity(this);
 
         init();

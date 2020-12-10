@@ -11,8 +11,6 @@ import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.utility.BaseActivity;
 
-import java.util.ArrayList;
-
 /**
  * AddFriendActivity
  */
@@ -30,7 +28,7 @@ public class SearchFriendActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_friend);
+        setContentView(R.layout.activity_friend_search);
         ActivityCollector.addActivity(this);
         init();
     }

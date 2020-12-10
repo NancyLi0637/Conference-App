@@ -75,17 +75,21 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/announceSpeaker"
                     android:textAllCaps="false"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/colorReceived"
+                    android:background="@color/yellow"/>
 
                 <Button
                     android:id="@+id/btn_event_announce_attendee"
-                    android:layout_width="wrap_content"
+                    android:layout_width="211dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/announceAttendee"
-                    android:textSize="20sp"
-                    android:textAllCaps="false"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:layout_gravity="center_horizontal"/>
+                    android:background="@color/yellow"
+                    android:text="@string/announceAttendee"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorReceived"
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -100,7 +104,9 @@
                         android:text="@string/changeCapacity"
                         android:layout_weight="1"
                         android:layout_marginStart="24dp"
-                        android:layout_marginEnd="10dp"/>
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/colorReceived"
+                        android:background="@color/blue"/>
 
                     <Button
                         android:id="@+id/btn_add_speaker"
@@ -114,11 +120,13 @@
 
                 <Button
                     android:id="@+id/btn_cancel_event"
-                    android:layout_width="wrap_content"
+                    android:layout_width="114dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/cancelEvent"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginTop="20dp"
+                    android:background="@color/red"
+                    android:text="@string/cancelEvent"
+                    android:textColor="@color/colorReceived" />
 
 
             </LinearLayout>

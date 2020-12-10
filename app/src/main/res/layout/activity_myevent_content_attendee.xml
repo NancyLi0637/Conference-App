@@ -64,12 +64,14 @@
 
             <Button
                 android:id="@+id/btn_cancel_enrolment"
-                android:layout_width="wrap_content"
+                android:layout_width="251dp"
                 android:layout_height="wrap_content"
-                android:text="@string/cancelEnrolment"
-                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"/>
+                android:background="@color/red"
+                android:text="@string/cancelEnrolment"
+                android:textColor="@color/colorReceived"
+                android:textSize="24sp" />
 
         </LinearLayout>
 

@@ -18,8 +18,9 @@ public class SpeakerAccountActivity extends AccountActivity {
      * init
      */
     @Override
-    public void init() {
+    protected void init() {
         super.init(this, R.id.nav_view_organizer, R.id.nav_account_speaker);
+        super.init();
         createAccountMenu();
     }
 

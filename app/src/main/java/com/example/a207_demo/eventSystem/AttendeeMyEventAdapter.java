@@ -23,8 +23,8 @@ public class AttendeeMyEventAdapter extends EventAdapter {
      * @param context Context
      * @param eventList List<Event>
      */
-    public AttendeeMyEventAdapter(Context context, ArrayList<ArrayList<String>> eventList){
-        super(context, eventList);
+    public AttendeeMyEventAdapter(Context context, ArrayList<ArrayList<String>> eventList, String ID){
+        super(context, eventList, ID);
         this.context = context;
     }
 

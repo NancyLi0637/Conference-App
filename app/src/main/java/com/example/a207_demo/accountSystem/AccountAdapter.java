@@ -23,6 +23,7 @@ import java.util.ArrayList;
 public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.VHAccount> implements Serializable {
     private Context context;
     private ArrayList<ArrayList<String>> accountList;
+    private int imageID;
 
     /**
      * Event Adapter for this Event Activity
@@ -64,8 +65,20 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.VHAccoun
         String content = name + "\n" + type + "\n" + email + "\n" + "ID: " + id;
 
         holder.accountInfo.setText(content);
-        //Todo: implement image later
-        Glide.with(context).load(R.drawable.jenny).into(holder.accountImage);
+        loadImage(type);
+        Glide.with(context).load(imageID).into(holder.accountImage);
+    }
+
+    private void loadImage(String accountType){
+        if(accountType.equals("ORGANIZER")){
+            imageID = R.drawable.organizer2;
+        }else if(accountType.equals("SPEAKER")){
+            imageID = R.drawable.speaker;
+        }else if(accountType.equals("ATTENDEE")){
+            imageID = R.drawable.icon_contact_gray;
+        }else{
+            imageID = R.drawable.vip;
+        }
     }
 
 

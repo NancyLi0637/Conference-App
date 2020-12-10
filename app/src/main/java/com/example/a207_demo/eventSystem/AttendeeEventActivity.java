@@ -49,7 +49,7 @@ public class AttendeeEventActivity extends EventActivity {
         // Firstly, setLayoutManager for this recyclerView
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        attendeeEventAdapter = new AttendeeEventAdapter(this, eventList);
+        attendeeEventAdapter = new AttendeeEventAdapter(this, eventList, getID());
         super.createEventMenu(recyclerView, layoutManager, attendeeEventAdapter);
 
         // Secondly, prepare data: list of events to show
@@ -67,10 +67,6 @@ public class AttendeeEventActivity extends EventActivity {
         super.initEvents();
         eventList = getEventManager().generateAllInfo(getEventManager().getAllEventID());
 
-//        //Todo: implement image later
-//        for (Event event : eventList) {
-//            event.setImageId(R.drawable.default_image);
-//        }
     }
 
     protected void refreshEvents(){

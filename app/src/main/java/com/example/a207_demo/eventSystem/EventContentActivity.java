@@ -3,9 +3,12 @@ package com.example.a207_demo.eventSystem;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
+import androidx.core.view.GravityCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +17,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
+import com.example.a207_demo.utility.ActivityCollector;
+import com.example.a207_demo.utility.BaseActivity;
 import com.example.a207_demo.utility.CleanArchActivity;
+import com.example.a207_demo.utility.Settings;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.ArrayList;
@@ -22,13 +28,14 @@ import java.util.ArrayList;
 /**
  * EventContentActivity
  */
-public abstract class EventContentActivity extends CleanArchActivity implements View.OnClickListener{
+public abstract class EventContentActivity extends BaseActivity implements View.OnClickListener{
     private String eventTitle;
     private String eventID;
     private String eventTime;
     private String eventDuration;
     private String eventType;
     private int eventImageID;
+    private String myID;
 
 
     /**
@@ -47,12 +54,36 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
      * Create action bar
      */
     public void createActionBar(){
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.content_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    /**
+     * on Create Options Menu
+     * @param menu Menu
+     * @return boolean
+     */
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar2, menu);
+        return true;
+    }
+
+    /**
+     * Return to last menu
+     * @param item Item clicked
+     * @return true if quit this menu successfully
+     */
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -74,6 +105,7 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
                 "Restriction: " + eventRestriction + "\n" + "Speakers: " + eventSpeakers + "\n" +
                 "Space remaining: " + eventStatus;
         eventImageID = getIntent().getIntExtra("imageID", R.drawable.default_image);
+        myID = getIntent().getStringExtra("ID");
         fillContent(eventTitle, eventContent);
     }
 
@@ -118,20 +150,6 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
     @Override
     abstract public void onClick(View v);
 
-    /**
-     * Return to last menu
-     * @param item Item clicked
-     * @return true if quit this menu successfully
-     */
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public String getEventTitle(){
         return eventTitle;
     }
@@ -145,4 +163,6 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
     public String getEventDuration() {return eventDuration;}
 
     public String getEventType() { return eventType;}
+
+    public String getMyID(){return myID;}
 }

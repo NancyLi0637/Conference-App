@@ -45,7 +45,7 @@ public class AttendeeMyEventActivity extends EventActivity {
         initEvents();
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        attendeeMyEventAdapter = new AttendeeMyEventAdapter(this, eventList);
+        attendeeMyEventAdapter = new AttendeeMyEventAdapter(this, eventList, getID());
         super.createEventMenu(recyclerView, layoutManager, attendeeMyEventAdapter);
         //recyclerView.setAdapter(attendeeMyEventAdapter);
     }

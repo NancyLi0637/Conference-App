@@ -37,9 +37,6 @@ public class EventEnrollmentActivity extends EventActivity {
         eventEnrollmentAdapter = new EventEnrollmentAdapter(this, eventList);
 
         super.createEventMenu(recyclerView, layoutManager, eventEnrollmentAdapter);
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setAdapter(eventEnrollmentAdapter);
-        //recyclerView.setAdapter(organizerEventAdapter);
     }
 
     /**
@@ -50,12 +47,6 @@ public class EventEnrollmentActivity extends EventActivity {
         super.initEvents();
 
         eventList = getEventManager().generateAllInfo(getEventManager().getAllEventID());
-
-//        //Todo: implement image later
-//        for (Event event : eventList) {
-//            event.setImageId(R.drawable.default_image);
-//        }
-
     }
 
     protected void refreshEvents(){

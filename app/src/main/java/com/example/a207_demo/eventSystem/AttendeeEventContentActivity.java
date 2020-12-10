@@ -16,8 +16,6 @@ import java.util.ArrayList;
  */
 public class AttendeeEventContentActivity extends EventContentActivity implements View.OnClickListener{
 
-    private String eventID;
-
     /**
      * Required function to initiate an Activity class.
      * @param savedInstanceState saved data for unexpected crush
@@ -37,8 +35,6 @@ public class AttendeeEventContentActivity extends EventContentActivity implement
      */
     protected void init(){
         super.init();
-        ArrayList<String> event = getIntent().getStringArrayListExtra("event");
-        eventID = event.get(0);
         Button eventSignUp = findViewById(R.id.btn_signUp_event);
         eventSignUp.setOnClickListener(this);
     }
@@ -55,7 +51,7 @@ public class AttendeeEventContentActivity extends EventContentActivity implement
         }else if(noSpace()){
             Toast.makeText(this, "The event is full!", Toast.LENGTH_LONG).show();
         }else{
-            boolean signedUp = getEventManager().addAttendeeToEvent(getID(), eventID);
+            boolean signedUp = getEventManager().addAttendeeToEvent(getMyID(), getEventID());
 
             if(signedUp){
                 super.writeEvent();
@@ -68,18 +64,18 @@ public class AttendeeEventContentActivity extends EventContentActivity implement
     }
 
     private boolean isInEvent(){
-        return getEventManager().attendeeInEvent(getID(), eventID);
+        return getEventManager().attendeeInEvent(getMyID(), getEventID());
     }
 
     /**
      * cancelEvent
      */
     private boolean hasRestriction(){
-        return getEventManager().restricted(getID(), eventID, getUserManager());
+        return getEventManager().restricted(getMyID(), getEventID(), getUserManager());
     }
 
     private boolean noSpace(){
-        return getEventManager().eventFull(eventID);
+        return getEventManager().eventFull(getEventID());
     }
 
 }

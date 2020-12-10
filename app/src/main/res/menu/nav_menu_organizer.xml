@@ -67,7 +67,7 @@
                 <item
                     android:id="@+id/nav_account_organizer"
                     android:title="@string/organizer"
-                    android:icon="@drawable/organizer"/>
+                    android:icon="@drawable/organizer2"/>
                 <item
                     android:id="@+id/nav_account_speaker"
                     android:title="@string/speaker"

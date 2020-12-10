@@ -1,6 +1,7 @@
 package com.example.a207_demo.messageSystem;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,6 +65,20 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    /**
+     * Return to last menu
+     * @param item Item clicked
+     * @return true if quit this menu successfully
+     */
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**

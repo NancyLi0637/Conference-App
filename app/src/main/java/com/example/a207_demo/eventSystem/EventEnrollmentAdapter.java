@@ -55,8 +55,6 @@ public class EventEnrollmentAdapter extends EventAdapter implements Serializable
         ArrayList<String> event= eventList.get(position);
         String content = event.get(1) + "\nSpace remaining: " + event.get(8);
         newHolder.eventInfo.setText(content);
-        //Todo: implement image later
-        //Glide.with(context).load(R.drawable.default_image).into(holder.eventImage);
     }
 
     /**

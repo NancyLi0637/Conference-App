@@ -26,12 +26,19 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
     private ArrayList<ArrayList<String>> eventList;
     private int imageID;
     private ArrayList<Integer> imageIDs = new ArrayList<>();
+    private String ID;
 
     /**
      * Event Adapter for this Event Activity
      * @param context Context
      * @param eventList ArrayList<ArrayList<String>>
      */
+    public EventAdapter(Context context, ArrayList<ArrayList<String>> eventList, String ID) {
+        this.context = context;
+        this.eventList = eventList;
+        this.ID = ID;
+    }
+
     public EventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
         this.context = context;
         this.eventList = eventList;
@@ -61,6 +68,7 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
                 // Pass the list of events to the next activity
                 intent.putStringArrayListExtra("event", event);
                 intent.putExtra("imageID", imageIDs.get(position));
+                intent.putExtra("ID", ID);
                 context.startActivity(intent);
             }
         });
@@ -75,6 +83,7 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
     public void onBindViewHolder(@NonNull VHEvent holder, int position) {
         List<String> event= eventList.get(position);
         holder.eventTitle.setText(event.get(1));
+
         String eventType = event.get(5);
         loadImage(eventType);
         Glide.with(context).load(imageID).into(holder.eventImage);
@@ -84,11 +93,11 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
     //loading presenter image choices
     private void loadImage(String eventType){
         if(eventType.equals("TALK")){
-            imageID = R.drawable.talk;
+            imageID = R.drawable.talks;
         }else if(eventType.equals("DISCUSSION")){
-            imageID = R.drawable.discussion;
+            imageID = R.drawable.discuss;
         }else{
-            imageID = R.drawable.party;
+            imageID = R.drawable.party2;
         }
     }
 

@@ -53,7 +53,10 @@
             android:name=".messageSystem.AttendeeAnnouncementActivity"
             android:label="@string/announcements"
             android:launchMode="singleTask" />
-        <activity android:name=".messageSystem.SendAnnouncementActivity" />
+        <activity
+            android:name=".messageSystem.SendAnnouncementActivity"
+            android:label="Send Announcement"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".contactSystem.OrganizerContactSpeakerActivity"
             android:label="Speaker Contacts"
@@ -96,9 +99,11 @@
         <activity android:name=".utility.CleanArchActivity" />
         <activity
             android:name=".eventSystem.AttendeeMyEventContentActivity"
+            android:label="My Events"
             android:launchMode="singleTask" />
         <activity
             android:name=".eventSystem.SpeakerMyEventContentActivity"
+            android:label="My Events"
             android:launchMode="singleTask" />
         <activity android:name=".eventSystem.EventActivity" />
         <activity android:name=".eventSystem.EventContentActivity" />
@@ -146,8 +151,7 @@
         <activity
             android:name=".messageSystem.ConversationActivity"
             android:label="Chat"
-            android:launchMode="singleTask"
-            android:parentActivityName=".contactSystem.ContactActivity" />
+            android:launchMode="singleTask"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask">

@@ -15,8 +15,6 @@ import com.example.a207_demo.utility.ActivityCollector;
  */
 public class SpeakerMyEventContentActivity extends EventContentActivity{
 
-    private String eventTitle;
-    private String eventID;
     private Intent intent;
 
     /**
@@ -34,8 +32,6 @@ public class SpeakerMyEventContentActivity extends EventContentActivity{
 
     protected void init(){
         super.init();
-        eventTitle = getEventTitle();
-        eventID = getEventID();
 
         Button announceAttendee = findViewById(R.id.btn_speaker_announce_attendee);
         announceAttendee.setOnClickListener(this);
@@ -44,8 +40,8 @@ public class SpeakerMyEventContentActivity extends EventContentActivity{
     public void onClick(View view){
         intent = new Intent(SpeakerMyEventContentActivity.this, SendAnnouncementActivity.class);
         intent.putExtra("class", "speakerEventContent");
-        intent.putExtra("eventTitle", eventTitle);
-        intent.putExtra("userIDs", getEventManager().getAttendeesFromEvent(eventID));
+        intent.putExtra("eventTitle", getEventTitle());
+        intent.putExtra("userIDs", getEventManager().getAttendeesFromEvent(getEventID()));
         startActivity(intent);
     }
 

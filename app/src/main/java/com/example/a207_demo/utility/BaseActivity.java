@@ -4,16 +4,17 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NavUtils;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
 import com.example.a207_demo.accountSystem.AllAccountActivity;
 import com.example.a207_demo.accountSystem.AttendeeAccountActivity;
@@ -34,11 +35,7 @@ import com.example.a207_demo.eventSystem.Top5EventsActivity;
 import com.example.a207_demo.messageSystem.AttendeeAnnouncementActivity;
 import com.example.a207_demo.messageSystem.SpeakerAnnouncementActivity;
 import com.example.a207_demo.roomSystem.RoomActivity;
-import com.example.a207_demo.accountSystem.AccountActivity;
-import com.example.a207_demo.speakerSystem.Speaker;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
 
 /**
  * SetUpActivity class
@@ -59,7 +56,7 @@ public class BaseActivity extends CleanArchActivity {
      * @param id_nav_view int
      * @param id_nav_item int
      */
-    public void init(AppCompatActivity context, int id_nav_view, int id_nav_item) {
+    protected void init(AppCompatActivity context, int id_nav_view, int id_nav_item) {
         ID = getIntent().getStringExtra("ID");
         TYPE = getIntent().getStringExtra("TYPE");
         EMAIL = getIntent().getStringExtra("EMAIL");
@@ -68,6 +65,14 @@ public class BaseActivity extends CleanArchActivity {
         createActionBar();
         createNavView(context, id_nav_view, id_nav_item);
     }
+
+//    protected void init(){
+//        ID = getIntent().getStringExtra("ID");
+//        TYPE = getIntent().getStringExtra("TYPE");
+//        EMAIL = getIntent().getStringExtra("EMAIL");
+//        USERNAME = getIntent().getStringExtra("USERNAME");
+//        super.setInfo(ID, TYPE, EMAIL, USERNAME);
+//    }
 
     public String getID(){
         return ID;
@@ -201,6 +206,7 @@ public class BaseActivity extends CleanArchActivity {
 
     private void loadInfo(){
         View view = navigationView.getHeaderView(0);
+        ImageView userPic = view.findViewById(R.id.profile_image);
         TextView userType = view.findViewById(R.id.nav_head_type);
         TextView userName = view.findViewById(R.id.nav_head_username);
         TextView userEmail = view.findViewById(R.id.nav_head_email);
@@ -208,6 +214,22 @@ public class BaseActivity extends CleanArchActivity {
         userType.setText(TYPE);
         userName.setText(USERNAME);
         userEmail.setText(EMAIL);
+
+        loadImage(userPic);
+    }
+
+    private void loadImage(ImageView userPic){
+        if(TYPE.equals("ORGANIZER")){
+            Glide.with(this).load(R.drawable.organizer2).into(userPic);
+            //userPic.setImageResource(R.drawable.organizer);
+        }else if(TYPE.equals("SPEAKER")){
+            userPic.setImageResource(R.drawable.speaker);
+        }else if(TYPE.equals("ATTENDEE")){
+            Glide.with(this).load(R.drawable.icon_contact_blue).into(userPic);
+            //userPic.setImageResource(R.drawable.icon_contact_gray);
+        }else{
+            userPic.setImageResource(R.drawable.vip);
+        }
     }
 
     /**
@@ -228,7 +250,8 @@ public class BaseActivity extends CleanArchActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                //NavUtils.navigateUpFromSameTask(this);
+                mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.settings:
                 intent = new Intent(BaseActivity.this, Settings.class);

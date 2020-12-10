@@ -22,8 +22,8 @@ public class SpeakerMyEventAdapter extends EventAdapter {
      * @param context Context
      * @param eventList List<Event>
      */
-    public SpeakerMyEventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
-        super(context, eventList);
+    public SpeakerMyEventAdapter(Context context, ArrayList<ArrayList<String>> eventList, String ID) {
+        super(context, eventList, ID);
         this.context = context;
     }
 

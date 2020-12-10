@@ -65,7 +65,7 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         initEvents();
         RecyclerView recyclerView = findViewById(R.id.event_recycler_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        organizerEventAdapter = new OrganizerEventAdapter(this, eventList);
+        organizerEventAdapter = new OrganizerEventAdapter(this, eventList, getID());
         super.createEventMenu(recyclerView, layoutManager, organizerEventAdapter);
 
 
@@ -79,12 +79,6 @@ public class OrganizerEventActivity extends EventActivity implements View.OnClic
         super.initEvents();
 
         eventList = getEventManager().generateAllInfo(getEventManager().getAllEventID());
-
-//        //Todo: implement image later
-//        for (Event event : eventList) {
-//            event.setImageId(R.drawable.default_image);
-//        }
-
     }
 
     /**

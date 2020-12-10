@@ -47,9 +47,6 @@ public class Top5EventsActivity extends EventActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         organizerEventAdapter = new OrganizerEventAdapter(this, eventList);
         super.createEventMenu(recyclerView, layoutManager, organizerEventAdapter);
-
-
-        //recyclerView.setAdapter(organizerEventAdapter);
     }
 
     /**
@@ -60,11 +57,6 @@ public class Top5EventsActivity extends EventActivity {
         super.initEvents();
 
         eventList = getEventManager().generateAllInfo(getEventManager().getTop5Events());
-
-//        //Todo: implement image later
-//        for (Event event : eventList) {
-//            event.setImageId(R.drawable.default_image);
-//        }
 
     }
 

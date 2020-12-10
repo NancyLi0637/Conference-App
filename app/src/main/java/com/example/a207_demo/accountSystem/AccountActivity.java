@@ -37,7 +37,7 @@ public class AccountActivity extends BaseActivity {
     /**
      * initEvents
      */
-    public void init() {
+    protected void init() {
         super.reset();
         super.readUser();
 

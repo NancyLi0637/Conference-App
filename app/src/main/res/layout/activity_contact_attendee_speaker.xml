@@ -39,7 +39,7 @@
                 android:textSize="30sp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/attendee_contact_recycler_view"
+                android:id="@+id/attendee_contact_speaker_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />

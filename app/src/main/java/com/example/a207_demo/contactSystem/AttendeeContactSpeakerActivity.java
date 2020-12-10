@@ -8,7 +8,6 @@ import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * AttendeeContactSpeakerActivity
@@ -27,7 +26,7 @@ public class AttendeeContactSpeakerActivity extends ContactActivity{
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact_attendee);
+        setContentView(R.layout.activity_contact_attendee_speaker);
         ActivityCollector.addActivity(this);
 
         init();
@@ -46,7 +45,7 @@ public class AttendeeContactSpeakerActivity extends ContactActivity{
      */
     public void createContactMenu() {
         initContacts();
-        RecyclerView recyclerView = findViewById(R.id.attendee_contact_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.attendee_contact_speaker_recycler_view);
         ContactMsgAdapter contactMsgAdapter = new ContactMsgAdapter(this, contactList, getID());
         super.createContactMenu(recyclerView, contactMsgAdapter);
     }

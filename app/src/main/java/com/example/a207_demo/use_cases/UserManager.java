@@ -19,31 +19,48 @@ public class UserManager implements Serializable {
         users = new ArrayList<>();
     }
 
+
+    public boolean checkUser(String userID){
+        return getUserIDs().contains(userID);
+    }
+
+    public boolean areFriends(String userID1, String userID2){
+        for (User user : users) {
+            if ((user.getUserID().equals(userID1) && user.getFriendList().contains(userID2)) ||
+                    (user.getUserID().equals(userID2) && user.getFriendList().contains(userID1))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Add another user's userID to the current user's friend list.
      *
-     * @param currId1 current user ID
-     * @param userId2 another user ID
+     * @param myID current user ID
+     * @param friendID another user ID
      * @return true iff another user is successfully added to the current user's friendList
      */
-    public boolean addFriend(String currId1, String userId2) {
-        List<String> idList = getUserIDs();
-        if (idList.contains(currId1) && idList.contains(userId2)) {
-            for (User user : users) {
-                if (user.getUserID().equals(currId1)) {
-                    if (!user.getFriendList().contains(userId2)) {
-                        user.addFriend(userId2);
-                    }
-                }if (user.getUserID().equals(userId2)) {
-                    if (!user.getFriendList().contains(currId1)) {
-                        user.addFriend(currId1);
-                    }
-                }
+    public boolean addFriend(String myID, String friendID) {
+        boolean selfAdded = false;
+        boolean friendAdded = false;
+        for(User user : users){
+            if(user.getUserID().equals(myID)){
+                user.addFriend(friendID);
+                selfAdded = true;
             }
-            return true;
+            if(user.getUserID().equals(friendID)){
+                user.addFriend(myID);
+                friendAdded = true;
+            }
+            if(selfAdded && friendAdded){
+                return true;
+            }
         }
         return false;
     }
+
 
     public boolean sendAnnouncement(ArrayList<String> userIDs, String eventTitle, String announcement){
         for(String userID : userIDs){
@@ -194,7 +211,7 @@ public class UserManager implements Serializable {
      * @param userID String user ID
      * @return the friend list of the user with user ID or null if this user does not exist
      */
-    public ArrayList<String> friendListGetter(String userID) {
+    public ArrayList<String> getFriendList(String userID) {
         for (User user : users) {
             if (user.getUserID().equals(userID)) {
                 return user.getFriendList();
@@ -216,6 +233,7 @@ public class UserManager implements Serializable {
         }
         return null;
     }
+
 
     /**
      * Check if the given String is a valid new email
@@ -302,10 +320,10 @@ public class UserManager implements Serializable {
      *
      * @return a string of formatted event's information.
      */
-    public  ArrayList<ArrayList<String>> generateFormattedFriendInfo(String userID) {
+    public ArrayList<ArrayList<String>> generateFormattedFriendInfo(String userID) {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
 
-        for (String friendID: friendListGetter(userID)){
+        for (String friendID: getFriendList(userID)){
             ArrayList<String> info = new ArrayList<>();
 
             info.add(friendID);

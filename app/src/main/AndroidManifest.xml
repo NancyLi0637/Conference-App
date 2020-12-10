@@ -10,9 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".contactSystem.AddFriendActivity"
+            android:label="@string/addAttendee"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".contactSystem.SearchFriendActivity"
+            android:label="@string/search"
+            android:launchMode="singleTask"/>
+        <activity
             android:name=".accountSystem.AllAccountActivity"
             android:label="@string/allAccounts"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".accountSystem.VIPUserAccountActivity"
             android:label="@string/vipUser"
@@ -139,7 +147,7 @@
             android:name=".messageSystem.ConversationActivity"
             android:label="Chat"
             android:launchMode="singleTask"
-            android:parentActivityName=".contactSystem.ContactActivity"/>
+            android:parentActivityName=".contactSystem.ContactActivity" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask">

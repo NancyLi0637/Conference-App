@@ -62,7 +62,7 @@ public class FileReadWriter implements Serializable {
                 lines.add(line);
             }
         } catch (FileNotFoundException e) {
-            printMessage(context, "Users File Not Found");
+            printMessage(context, "The USER list is empty!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -128,7 +128,7 @@ public class FileReadWriter implements Serializable {
             writer.close();
         } catch (FileNotFoundException e) {
 //            System.out.println("Users.txt File Not Found.");
-            printMessage(context, "Users.txt File Not Found.");
+            printMessage(context, "The USER list is empty!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -148,7 +148,7 @@ public class FileReadWriter implements Serializable {
                 lines.add(line);
             }
         } catch (FileNotFoundException e) {
-            printMessage(context, "Events File Not Found");
+            printMessage(context, "The EVENT list is empty!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -243,7 +243,7 @@ public class FileReadWriter implements Serializable {
             }
             writer.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Events.txt File Not Found.");
+            System.out.println("The EVENT list is empty!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -263,7 +263,7 @@ public class FileReadWriter implements Serializable {
                 lines.add(line);
             }
         } catch (FileNotFoundException e) {
-            printMessage(context, "Rooms File Not Found");
+            printMessage(context, "The ROOM list is empty!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -293,7 +293,7 @@ public class FileReadWriter implements Serializable {
             }
             writer.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Rooms File Not Found.");
+            System.out.println("The ROOM list is empty!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -309,7 +309,7 @@ public class FileReadWriter implements Serializable {
                 lines.add(line);
             }
         } catch (FileNotFoundException e) {
-            printMessage(context, "Conversations.txt File Not Found");
+            printMessage(context, "The CONVERSATION list is empty!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -371,7 +371,7 @@ public class FileReadWriter implements Serializable {
             }
             writer.close();
         }catch (FileNotFoundException e) {
-            System.out.println("Conversations.txt File Not Found.");
+            System.out.println("The CONVERSATION list is empty!");
         } catch (IOException e) {
             e.printStackTrace();
         }

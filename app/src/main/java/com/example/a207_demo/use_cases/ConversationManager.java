@@ -1,7 +1,6 @@
 package com.example.a207_demo.use_cases;
 
-import com.example.a207_demo.entities.*;
-import com.example.a207_demo.eventSystem.Event;
+import com.example.a207_demo.messageSystem.Conversation;
 
 import java.io.Serializable;
 import java.util.*;
@@ -35,9 +34,11 @@ public class ConversationManager implements Serializable {
 //        conversations.put(newConversationId, newConversation);
 //    }
     public void createConversation(HashSet<String> userIDs) {
-        Conversation newConversation = new Conversation(userIDs);
-        HashSet<String> newConversationId = newConversation.getUserIds();
-        conversations.put(newConversationId, newConversation);
+        if(!conversations.containsKey(userIDs)){
+            Conversation newConversation = new Conversation(userIDs);
+            HashSet<String> newConversationId = newConversation.getUserIds();
+            conversations.put(newConversationId, newConversation);
+        }
     }
 
     public void loadConversation(HashSet<String> userIDs,
@@ -68,6 +69,7 @@ public class ConversationManager implements Serializable {
     public void currentConversationSetter(HashSet<String> userIDs) {
         //HashSet<String> talkersList = new HashSet<>(userIDs);
         this.currentConversation = conversations.get(userIDs);
+
     }
 
     /**

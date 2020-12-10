@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.a207_demo.entities.Conversation;
 import com.example.a207_demo.use_cases.AttendeeManager;
 import com.example.a207_demo.eventSystem.EventManager;
 import com.example.a207_demo.use_cases.ConversationManager;

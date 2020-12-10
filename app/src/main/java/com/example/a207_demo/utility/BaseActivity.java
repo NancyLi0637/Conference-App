@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -230,7 +231,8 @@ public class BaseActivity extends CleanArchActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
+                //mDrawerLayout.openDrawer(GravityCompat.START);
+                NavUtils.navigateUpFromSameTask(this);
                 break;
             case R.id.settings:
                 intent = new Intent(BaseActivity.this, Settings.class);

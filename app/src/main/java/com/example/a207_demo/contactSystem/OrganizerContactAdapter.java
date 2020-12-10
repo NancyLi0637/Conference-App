@@ -1,28 +1,17 @@
 package com.example.a207_demo.contactSystem;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
-import com.example.a207_demo.eventSystem.EventAdapter;
-import com.example.a207_demo.eventSystem.OrganizerEventContentActivity;
-import com.example.a207_demo.messageSystem.MsgActivity;
 import com.example.a207_demo.messageSystem.SendAnnouncementActivity;
 
 import java.util.ArrayList;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * Organizer Contact Adapter

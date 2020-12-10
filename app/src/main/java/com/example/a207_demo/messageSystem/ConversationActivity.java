@@ -11,24 +11,21 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a207_demo.use_cases.ConversationManager;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.R;
 import com.example.a207_demo.utility.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import com.example.a207_demo.entities.*;
+
 /**
  *
  */
-public class MsgActivity extends BaseActivity implements View.OnClickListener {
-    //Todo: access MsgSystem Controller
+public class ConversationActivity extends BaseActivity implements View.OnClickListener {
+
     private ArrayList<ArrayList<String>> conversationList = new ArrayList<>();
-    private MsgAdapter msgAdapter;
-    private RecyclerView msgRecyclerView;
-    //private Conversation currentConversation;
+    private ConversationAdapter conversationAdapter;
+    private RecyclerView conversationRecyclerView;
 
     private String myID;
     private String userID;
@@ -75,11 +72,12 @@ public class MsgActivity extends BaseActivity implements View.OnClickListener {
      */
     private void createConversationMenu() {
         initMsg();
-        msgRecyclerView = findViewById(R.id.msg_recycler_view);
+        conversationRecyclerView = findViewById(R.id.conversation_recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        msgRecyclerView.setLayoutManager(linearLayoutManager);
-        msgAdapter = new MsgAdapter(this, conversationList, myID);
-        msgRecyclerView.setAdapter(msgAdapter);
+        conversationRecyclerView.setLayoutManager(linearLayoutManager);
+        conversationAdapter = new ConversationAdapter(this, conversationList, myID);
+        conversationRecyclerView.setAdapter(conversationAdapter);
+        conversationRecyclerView.scrollToPosition(conversationList.size()-1);
     }
 
     private void loadData(){
@@ -110,17 +108,10 @@ public class MsgActivity extends BaseActivity implements View.OnClickListener {
         String content = inputText.getText().toString();
 
         if (!"".equals(content)) {
-            //Todo: write to database
             getConversationManager().sendMessage(myID, content);
             super.writeConversation();
-            //Msg msg = new Msg(content, Msg.TYPE_SENT);
-            //msgList.add(msg);
-            ArrayList<String> newMsg = new ArrayList<>();
-            newMsg.add(myID);
-            newMsg.add(content);
-            conversationList.add(newMsg);
-            msgAdapter.notifyItemInserted(conversationList.size() - 1);
-            msgRecyclerView.scrollToPosition(conversationList.size() - 1);
+            conversationAdapter.notifyDataSetChanged();
+            conversationRecyclerView.scrollToPosition(conversationList.size() - 1);
             inputText.setText("");
         }else{
             Toast.makeText(this, "Message cannot be EMPTY!", Toast.LENGTH_LONG).show();
@@ -131,37 +122,13 @@ public class MsgActivity extends BaseActivity implements View.OnClickListener {
      * initMsg
      */
     public void initMsg() {
-//        Msg msg1 = new Msg("Hello guys.", Msg.TYPE_RECEIVED);
-//        msgList.add(msg1);
-//        Msg msg2 = new Msg("No hello.", Msg.TYPE_SENT);
-//        msgList.add(msg2);
-//        Msg msg3 = new Msg("Ok fine", Msg.TYPE_RECEIVED);
-//        msgList.add(msg3);
-         //Todo: intent should get the other user id from contact adapter (otherID) hard code rightnow
         super.reset();
         //super.readUser();
         super.readConversation();
 
+        getConversationManager().createConversation(userIDs);
         getConversationManager().currentConversationSetter(userIDs);
         conversationList = getConversationManager().getMessagesOfCurrentConversation();
-
-        //String otherID = "abc123456";
-        //userID: getID(), friendIG: getIntent().getStringExtra('friendID'), friendName: getIntent().getStringExtra('friendName')
-        //ConversationManager conversationManager = getConversationManager();
-        //HashSet<String> talkerList = new HashSet<String>();
-        //talkerList.add(getID());
-        //talkerList.add(otherID);
-        //conversationManager.currentConversationSetter(talkerList);
-        //ArrayList<String[]> messages = conversationManager.getMessagesOfCurrentConversation();
-//        for (String[] message: messages){
-//            Msg msg;
-//            if (message[0].equals(getID())){
-//                msg = new Msg(message[1], Msg.TYPE_SENT);
-//            }else{
-//                msg = new Msg(message[1], Msg.TYPE_RECEIVED);
-//            }
-//            msgList.add(msg);
-//        }
     }
 
 }

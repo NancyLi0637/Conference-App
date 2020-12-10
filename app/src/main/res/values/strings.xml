@@ -4,6 +4,7 @@
     <string name="password">Password</string>
     <string name="organizer">Organizer</string>
     <string name="speaker">Speaker</string>
+    <string name="speakers">Speakers</string>
     <string name="attendee">Attendee</string>
     <string name="vipUser">VIP User</string>
     <string name="allAccounts">All Users</string>

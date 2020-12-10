@@ -1,4 +1,4 @@
-package com.example.a207_demo.entities;
+package com.example.a207_demo.messageSystem;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -62,18 +62,6 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_signUp:
-                HashSet<String> users = new HashSet<>();
-                users.add("3a4d6847");
-                users.add("f2248972");
-                super.reset();
-                super.readConversation();
-                getConversationManager().createConversation(users);
-                getConversationManager().currentConversationSetter(users);
-                getConversationManager().sendMessage("3a4d6847", "hello");
-                getConversationManager().sendMessage("f2248972", "hello");
-                getConversationManager().sendMessage("3a4d6847", "this is our first conversation");
-                getConversationManager().sendMessage("3a4d6847", "do you like it");
-                super.writeConversation();
                 //intent = new Intent(MainActivity.this, SignUpActivity.class);
 
                 //intent = new Intent(MainActivity.this, OrganizerEventActivity.class);

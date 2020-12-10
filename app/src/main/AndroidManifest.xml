@@ -48,23 +48,23 @@
         <activity android:name=".messageSystem.SendAnnouncementActivity" />
         <activity
             android:name=".contactSystem.OrganizerContactSpeakerActivity"
-            android:label="Speakers"
+            android:label="Speaker Contacts"
             android:launchMode="singleTask" />
         <activity
             android:name=".contactSystem.OrganizerContactAttendeeActivity"
-            android:label="Attendees"
+            android:label="Attendee Contacts"
             android:launchMode="singleTask" />
         <activity
             android:name=".contactSystem.AttendeeContactAttendeeActivity"
-            android:label="Attendees"
+            android:label="Attendee Contacts"
             android:launchMode="singleTask" />
         <activity
             android:name=".contactSystem.AttendeeContactSpeakerActivity"
-            android:label="Speakers"
+            android:label="Speaker Contacts"
             android:launchMode="singleTask" />
         <activity
             android:name=".contactSystem.SpeakerContactAttendeeActivity"
-            android:label="Attendees"
+            android:label="Attendee Contacts"
             android:launchMode="singleTask" />
         <activity
             android:name=".roomSystem.CreateRoomActivity"
@@ -136,9 +136,10 @@
             android:label="Contact"
             android:launchMode="singleTask" />
         <activity
-            android:name=".messageSystem.MsgActivity"
+            android:name=".messageSystem.ConversationActivity"
             android:label="Chat"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:parentActivityName=".contactSystem.ContactActivity"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask">

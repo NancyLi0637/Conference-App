@@ -13,10 +13,10 @@ import java.util.List;
 /**
  * AttendeeContactSpeakerActivity
  */
-public class AttendeeContactSpeakerActivity extends ContactActivity {
+public class AttendeeContactSpeakerActivity extends ContactActivity{
 
-    //Todo: access Contact Controller
     private ArrayList<ArrayList<String>> contactList;
+    private ArrayList<String> userIDs;
 
     /**
      * onCreate
@@ -28,10 +28,9 @@ public class AttendeeContactSpeakerActivity extends ContactActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_attendee);
+        ActivityCollector.addActivity(this);
 
         init();
-
-        ActivityCollector.addActivity(this);
     }
 
     /**
@@ -48,8 +47,8 @@ public class AttendeeContactSpeakerActivity extends ContactActivity {
     public void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.attendee_contact_recycler_view);
-        //ContactAdapter contactAdapter = new ContactAdapter(this, contactList, getID());
-        //super.createContactMenu(recyclerView, contactAdapter);
+        ContactMsgAdapter contactMsgAdapter = new ContactMsgAdapter(this, contactList, getID());
+        super.createContactMenu(recyclerView, contactMsgAdapter);
     }
 
     /**
@@ -57,13 +56,15 @@ public class AttendeeContactSpeakerActivity extends ContactActivity {
      */
     protected void initContacts() {
         super.initContacts();
-        ArrayList<String> IDs = new ArrayList<>();
-        ArrayList<String> events = getEventManager().getEventsFromAttendee(getID());
-        for(String event : events){
-            ArrayList<String> speakers = getEventManager().getSpeakersFromEvent(event);
-            IDs.addAll(speakers);
+
+        //find all events of this attendee
+        userIDs = new ArrayList<>();
+        ArrayList<String> eventIDs = getEventManager().getEventsFromAttendee(getID());
+        for(String eventID : eventIDs){
+            ArrayList<String> speakers = getEventManager().getSpeakersFromEvent(eventID);
+            userIDs.addAll(speakers);
         }
-        contactList = getUserManager().generateIDNameInfo(IDs);
+        contactList = getUserManager().generateIDNameInfo(userIDs);
         //Todo: access Contact Use case to generate contacts
 //        Contact contact1 = new Contact("Jenny Su", R.drawable.jenny);
 //        contactList.add(contact1);

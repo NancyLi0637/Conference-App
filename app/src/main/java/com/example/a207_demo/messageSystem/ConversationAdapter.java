@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,12 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a207_demo.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * MsgAdapter
  */
-public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.VHMsg> {
+public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.VHMsg> {
 
     private Context context;
     private ArrayList<ArrayList<String>> conversationList;
@@ -32,7 +30,7 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.VHMsg> {
      * @param context
      * @param conversationList
      */
-    public MsgAdapter(Context context, ArrayList<ArrayList<String>> conversationList, String myID) {
+    public ConversationAdapter(Context context, ArrayList<ArrayList<String>> conversationList, String myID) {
         this.context = context;
         this.conversationList = conversationList;
         this.myID = myID;
@@ -62,20 +60,9 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.VHMsg> {
     @Override
     public void onBindViewHolder(@NonNull VHMsg holder, int position) {
         ArrayList<String> conversation = conversationList.get(position);
-        System.out.println("listt" + conversation);
         String ID = conversation.get(0);
         String msg = conversation.get(1);
-        System.out.println("iddd"+ID);
-        System.out.println("msgg"+msg);
-//        if (msg.getType() == Msg.TYPE_RECEIVED) {
-//            holder.leftLayout.setVisibility(View.VISIBLE);
-//            holder.rightLayout.setVisibility(View.GONE);
-//            holder.leftMsg.setText(msg.getContent());
-//        } else {
-//            holder.rightLayout.setVisibility(View.VISIBLE);
-//            holder.leftLayout.setVisibility(View.GONE);
-//            holder.rightMsg.setText(msg.getContent());
-//        }
+
         if(ID.equals(myID)){
             holder.rightLayout.setVisibility(View.VISIBLE);
             holder.leftLayout.setVisibility(View.GONE);
@@ -101,14 +88,10 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.VHMsg> {
      * VHMsg
      */
     static class VHMsg extends RecyclerView.ViewHolder {
-//        private RelativeLayout leftLayout;
-//        private RelativeLayout rightLayout;
-//        private TextView leftMsg;
-//        private TextView rightMsg;
-        LinearLayout leftLayout;
-        LinearLayout rightLayout;
-        TextView leftMsg;
-        TextView rightMsg;
+        private RelativeLayout leftLayout;
+        private RelativeLayout rightLayout;
+        private TextView leftMsg;
+        private TextView rightMsg;
         View mView;
 
         /**

@@ -9,11 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.example.a207_demo.R;
-import com.example.a207_demo.messageSystem.MsgActivity;
-import com.example.a207_demo.messageSystem.SendAnnouncementActivity;
+import com.example.a207_demo.messageSystem.ConversationActivity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class ContactMsgAdapter extends ContactAdapter{
 
@@ -36,7 +34,7 @@ public class ContactMsgAdapter extends ContactAdapter{
     public VHContact onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.item_contact, parent, false);
         VHContact holder = new VHContact(v);
-        setClickContactListener(holder, MsgActivity.class);
+        setClickContactListener(holder, ConversationActivity.class);
         return holder;
     }
 

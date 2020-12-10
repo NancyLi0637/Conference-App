@@ -58,8 +58,8 @@ public class AttendeeEventContentActivity extends EventContentActivity implement
             boolean signedUp = getEventManager().addAttendeeToEvent(getID(), eventID);
 
             if(signedUp){
-                Toast.makeText(this, "You have SUCCESSFULLY signed up!", Toast.LENGTH_LONG).show();
                 super.writeEvent();
+                Toast.makeText(this, "You have SUCCESSFULLY signed up!", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(AttendeeEventContentActivity.this, AttendeeEventActivity.class));
             }else{
                 Toast.makeText(this, "There is TIME CONFLICT in your events!", Toast.LENGTH_LONG).show();

@@ -64,7 +64,10 @@ public class AddFriendActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn_add:
-                if(areFriends()){
+                if(myID.equals(userID)){
+                    Toast.makeText(this, "You cannot add yourself!",
+                            Toast.LENGTH_LONG).show();
+                }else if(areFriends()){
                     Toast.makeText(this, "This user is ALREADY in your friend list!",
                             Toast.LENGTH_LONG).show();
                 }else if(addFriend()){

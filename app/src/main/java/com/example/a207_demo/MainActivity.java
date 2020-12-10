@@ -64,12 +64,12 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
             case R.id.btn_signUp:
                 //intent = new Intent(MainActivity.this, SignUpActivity.class);
 
-                //intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
+                intent = new Intent(MainActivity.this, OrganizerEventActivity.class);
                 //intent.putExtra("ID", ID);
                 //intent = new Intent(MainActivity.this, SpeakerMyEventActivity.class);
                 //intent = new Intent(MainActivity.this, AttendeeMyEventActivity.class);
                 //intent.putExtra("class", "MAIN");
-                //startActivity(intent);
+                startActivity(intent);
                 break;
             case R.id.btn_login:
                 super.reset();

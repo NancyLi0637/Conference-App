@@ -162,7 +162,6 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         eventType = String.valueOf(type.getSelectedItem());
         eventTitle = title.getText().toString();
         eventTime = startTime.getText().toString();
-        //TODO: integer duration later?
         eventDuration = duration.getText().toString();
         eventCapacity = capacity.getText().toString();
     }

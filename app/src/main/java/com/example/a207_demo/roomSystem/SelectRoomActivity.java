@@ -94,7 +94,6 @@ public class SelectRoomActivity extends CleanArchActivity implements View.OnClic
     }
 
     private void initRooms(){
-        //Todo: clean up after implementing Room System
         super.reset();
         super.readRoom();
 

@@ -243,7 +243,6 @@ public class OrganizerEventContentActivity extends EventContentActivity{
                     if(speakerNames == null){
                         speakerIds = new ArrayList<>();
                     }else{
-                        //Todo: fix multi speakerId saving
                         speakerIds = getUserManager().getUserIdsFromName(speakerNames);
                     }
 

@@ -137,7 +137,6 @@ public class FileReadWriter implements Serializable {
     /**
      * Reads Events.txt and loads saved events.
      */
-    //Todo: accessing Event?
     public void EventReader(EventManager eventManager, RoomManager roomManager) {
         ArrayList<String> lines = new ArrayList<>();
         try {

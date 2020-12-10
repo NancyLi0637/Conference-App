@@ -92,11 +92,6 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
         //eventList = getEventManager().getAllEvent();
         roomList = getRoomManager().generateAllInfo();
 
-//        //Todo: implement image later
-//        for (Event event : eventList) {
-//            event.setImageId(R.drawable.default_image);
-//        }
-
     }
 
     /**

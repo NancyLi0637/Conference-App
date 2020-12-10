@@ -497,6 +497,12 @@ public class EventManager implements Serializable {
         }
     }
 
+    public boolean checkValidLength(String time, String duration){
+        int hourTime = Integer.parseInt(time.substring(11, 13));
+        int dur = Integer.parseInt(duration);
+        return hourTime + dur <= 16;
+    }
+
     /**
      * Generate a formatted string representation of the start time String.
      *

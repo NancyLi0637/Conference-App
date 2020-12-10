@@ -118,10 +118,11 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                 } else if (!validTitle()) {
                     Toast.makeText(this, "EVENT TITLE needs to be at least length 3 and unique", Toast.LENGTH_LONG).show();
                 } else if (!validTime()) {
-                    //Todo: between 0 and 12
-                    Toast.makeText(this, "TIME entered is invalid!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "TIME must be between 9am and 4pm and is valid!", Toast.LENGTH_LONG).show();
                 } else if(!validInteger(eventDuration)){
                     Toast.makeText(this, "DURATION entered is invalid!", Toast.LENGTH_LONG).show();
+                } else if(!validLength()) {
+                    Toast.makeText(this, "Event cannot last after 4pm!", Toast.LENGTH_LONG).show();
                 } else if(!validInteger(eventCapacity)){
                     Toast.makeText(this, "EVENT CAPACITY entered is invalid!", Toast.LENGTH_LONG).show();
                 } else if(eventType.equals("TALK") && speakerId.size() > 1){
@@ -187,6 +188,10 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
 
     private boolean validInteger(String num){
         return getEventManager().checkValidInteger(num);
+    }
+
+    private boolean validLength() {
+        return getEventManager().checkValidLength(eventTime, eventDuration);
     }
 
 

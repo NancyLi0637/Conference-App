@@ -1,5 +1,6 @@
 package com.example.a207_demo.entities;
 
+import com.example.a207_demo.R;
 import com.example.a207_demo.eventSystem.Event;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
  * Talk is a type of event
  */
 public class Talk extends Event {
+
 
     /**
      * Talk

@@ -24,6 +24,7 @@ import java.util.List;
 public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHEvent> implements Serializable {
     private Context context;
     private ArrayList<ArrayList<String>> eventList;
+    private int imageID;
 
     /**
      * Event Adapter for this Event Activity
@@ -58,6 +59,7 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
                 Intent intent = new Intent(context, nextClass);
                 // Pass the list of events to the next activity
                 intent.putStringArrayListExtra("event", event);
+                intent.putExtra("imageID", imageID);
                 context.startActivity(intent);
             }
         });
@@ -72,8 +74,20 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
     public void onBindViewHolder(@NonNull VHEvent holder, int position) {
         List<String> event= eventList.get(position);
         holder.eventTitle.setText(event.get(1));
-        //Todo: implement image later
-        Glide.with(context).load(R.drawable.default_image).into(holder.eventImage);
+        String eventType = event.get(5);
+        loadImage(eventType);
+        Glide.with(context).load(imageID).into(holder.eventImage);
+    }
+
+    //loading presenter image choices
+    private void loadImage(String eventType){
+        if(eventType.equals("TALK")){
+            imageID = R.drawable.talk;
+        }else if(eventType.equals("DISCUSSION")){
+            imageID = R.drawable.discussion;
+        }else{
+            imageID = R.drawable.party;
+        }
     }
 
     /**

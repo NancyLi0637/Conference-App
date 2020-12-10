@@ -18,7 +18,6 @@ public abstract class Event implements Serializable {
     private String restriction;
     private String type;
     private int capacity;
-    private int imageId;
 
     private ArrayList<String> attendeeUserIDs;
     private ArrayList<String> speakerUserIDs;
@@ -76,13 +75,6 @@ public abstract class Event implements Serializable {
         this.capacity = capacity;
     }
 
-    /**
-     * setImageId
-     * @param imageId imageId
-     */
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
-    }
 
     /**
      * set ids of attendees attending this event
@@ -179,14 +171,6 @@ public abstract class Event implements Serializable {
         return this.attendeeUserIDs.size();
     }
 
-
-    /**
-     * getImageId
-     * @return imageId
-     */
-    public int getImageId() {
-        return this.imageId;
-    }
 
     /**
      * Returns all attendees for this event

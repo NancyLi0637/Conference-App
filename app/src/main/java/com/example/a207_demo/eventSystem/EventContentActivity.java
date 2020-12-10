@@ -28,6 +28,7 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
     private String eventTime;
     private String eventDuration;
     private String eventType;
+    private int eventImageID;
 
 
     /**
@@ -72,6 +73,7 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
                 "Duration: " + eventDuration + "\n" + "Type: " + eventType + "\n" +
                 "Restriction: " + eventRestriction + "\n" + "Speakers: " + eventSpeakers + "\n" +
                 "Space remaining: " + eventStatus;
+        eventImageID = getIntent().getIntExtra("imageID", R.drawable.default_image);
         fillContent(eventTitle, eventContent);
     }
 
@@ -105,8 +107,7 @@ public abstract class EventContentActivity extends CleanArchActivity implements 
 
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle(eventTitle);
-        //Todo: implement image later
-        Glide.with(this).load(R.drawable.default_image).into(eventImageView);
+        Glide.with(this).load(eventImageID).into(eventImageView);
         eventInfo.setText(eventContent);
     }
 

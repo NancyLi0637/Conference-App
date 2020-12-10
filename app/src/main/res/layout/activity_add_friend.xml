@@ -9,19 +9,20 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="200dp"
         app:cardCornerRadius="4dp">
 
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/add_friend_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"/>
 
@@ -29,9 +30,8 @@
                 android:id="@+id/add_friend_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HELLO"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="5dp"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="30dp" />
 
         </LinearLayout>
 

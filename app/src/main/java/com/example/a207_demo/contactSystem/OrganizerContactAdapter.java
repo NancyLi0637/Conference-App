@@ -55,7 +55,6 @@ public class OrganizerContactAdapter extends ContactAdapter {
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
                 ArrayList<String> userInfo = getContactsList().get(position);
-
                 Intent intent = new Intent(context, nextClass);
                 intent.putExtra("class", type);
                 intent.putExtra("eventTitle", "");

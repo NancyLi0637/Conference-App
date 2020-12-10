@@ -23,10 +23,10 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
 
     private Intent intent;
 
-    private static String ID;
-    private static String TYPE;
-    private static String EMAIL;
-    private static String USERNAME;
+    private String ID;
+    private String TYPE;
+    private String EMAIL;
+    private String USERNAME;
 
     /**
      * Required function to initiate an Activity class.
@@ -110,19 +110,15 @@ public class MainActivity extends CleanArchActivity implements View.OnClickListe
         }
         ID = getUserManager().validLogIn(userEM, userPW);
         TYPE = getUserManager().getUserType(userEM, userPW);
-//        EMAIL = userEM;
-//        USERNAME = getUserManager().getUserNameFromID(ID);
+        EMAIL = userEM;
+        USERNAME = getUserManager().getUserNameFromID(ID);
         return true;
     }
 
     private void loadInfo(){
-        //TODO: intent for setting
-//        ArrayList<String> info = new ArrayList<>();
-//        info.add(ID);
-//        info.add(TYPE);
-//        info.add(EMAIL);
-//        info.add(USERNAME);
         intent.putExtra("ID", ID);
         intent.putExtra("TYPE", TYPE);
+        intent.putExtra("EMAIL", EMAIL);
+        intent.putExtra("USERNAME", USERNAME);
     }
 }

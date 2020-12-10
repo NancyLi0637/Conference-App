@@ -25,7 +25,6 @@ public class AnnouncementActivity extends BaseActivity {
     }
 
     private void initAnnouncements(){
-        super.init();
         announcementList = getUserManager().getAnnouncements(getID());
     }
 

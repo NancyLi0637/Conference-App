@@ -9,7 +9,6 @@ import com.example.a207_demo.utility.BaseActivity;
  * ContactActivity
  */
 public abstract class ContactActivity extends BaseActivity {
-
     /**
      * createContactMenu
      *

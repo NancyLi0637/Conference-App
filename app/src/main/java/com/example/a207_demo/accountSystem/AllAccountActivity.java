@@ -27,7 +27,6 @@ public class AllAccountActivity extends AccountActivity implements View.OnClickL
     public void init() {
         setContentView(R.layout.activity_account_all);
         super.init(this, R.id.nav_view_organizer, R.id.nav_account_all);
-        super.init();
 
         Button addAccount = findViewById(R.id.btn_addAccount);
         addAccount.setOnClickListener(this);

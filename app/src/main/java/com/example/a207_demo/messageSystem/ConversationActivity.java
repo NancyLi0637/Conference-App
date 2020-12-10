@@ -46,7 +46,6 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
      * init
      */
     public void init() {
-        super.init();
         loadData();
 
         createActionBar();

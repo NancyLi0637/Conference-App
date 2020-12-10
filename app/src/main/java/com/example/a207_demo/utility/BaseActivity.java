@@ -3,6 +3,7 @@ package com.example.a207_demo.utility;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,9 +45,9 @@ import java.util.ArrayList;
  */
 public class BaseActivity extends CleanArchActivity {
     private DrawerLayout mDrawerLayout;
+    private NavigationView navigationView;
     private Intent intent;
 
-    private ArrayList<String> info;
     private String ID;
     private String TYPE;
     private String EMAIL;
@@ -59,32 +60,25 @@ public class BaseActivity extends CleanArchActivity {
      * @param id_nav_item int
      */
     public void init(AppCompatActivity context, int id_nav_view, int id_nav_item) {
-//        info = getIntent().getStringArrayListExtra("info");
-//        System.out.println("INFOOO" + info);
-//        ID = info.get(0);
-//        TYPE = info.get(1);
-//        EMAIL = info.get(2);
-//        USERNAME = info.get(3);
         ID = getIntent().getStringExtra("ID");
         TYPE = getIntent().getStringExtra("TYPE");
-        super.setInfo(ID, TYPE);
+        EMAIL = getIntent().getStringExtra("EMAIL");
+        USERNAME = getIntent().getStringExtra("USERNAME");
+        super.setInfo(ID, TYPE, EMAIL, USERNAME);
         createActionBar();
         createNavView(context, id_nav_view, id_nav_item);
     }
 
-    /**
-     * For initializing user ID in Msg
-     */
-
-    public void init(){
-        ID = getIntent().getStringExtra("ID");
-        TYPE = getIntent().getStringExtra("TYPE");
-
-        super.setInfo(ID, TYPE);
-    }
-
     public String getID(){
         return ID;
+    }
+
+    public String getTYPE() { return this.TYPE;}
+
+    public String getEMAIL() { return this.EMAIL;}
+
+    public String getUSERNAME() {
+        return this.USERNAME;
     }
 
     /**
@@ -108,14 +102,14 @@ public class BaseActivity extends CleanArchActivity {
      * @param id_nav_item int
      */
     protected void createNavView(final AppCompatActivity context, int id_nav_view, int id_nav_item) {
-        NavigationView navigationView = findViewById(id_nav_view);
+        navigationView = findViewById(id_nav_view);
         navigationView.setCheckedItem(id_nav_item);
-        //loadInfo();
+        loadInfo();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    //ATTENDEEMENU
+                    //ATTENDEE MENU
                     case R.id.nav_allevents:
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, AttendeeEventActivity.class);
@@ -195,8 +189,10 @@ public class BaseActivity extends CleanArchActivity {
                         intent = new Intent(context, SpeakerAnnouncementActivity.class);
                         break;
                 }
-                //intent.putExtra("info", info);
                 intent.putExtra("ID", ID);
+                intent.putExtra("TYPE", TYPE);
+                intent.putExtra("EMAIL", EMAIL);
+                intent.putExtra("USERNAME", USERNAME);
                 startActivity(intent);
                 return true;
             }
@@ -204,9 +200,10 @@ public class BaseActivity extends CleanArchActivity {
     }
 
     private void loadInfo(){
-        TextView userType = findViewById(R.id.nav_head_type);
-        TextView userName = findViewById(R.id.nav_head_username);
-        TextView userEmail = findViewById(R.id.nav_head_email);
+        View view = navigationView.getHeaderView(0);
+        TextView userType = view.findViewById(R.id.nav_head_type);
+        TextView userName = view.findViewById(R.id.nav_head_username);
+        TextView userEmail = view.findViewById(R.id.nav_head_email);
 
         userType.setText(TYPE);
         userName.setText(USERNAME);
@@ -231,12 +228,14 @@ public class BaseActivity extends CleanArchActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //mDrawerLayout.openDrawer(GravityCompat.START);
                 NavUtils.navigateUpFromSameTask(this);
                 break;
             case R.id.settings:
                 intent = new Intent(BaseActivity.this, Settings.class);
-                intent.putExtra("info", info);
+                intent.putExtra("ID", ID);
+                intent.putExtra("TYPE", TYPE);
+                intent.putExtra("EMAIL", EMAIL);
+                intent.putExtra("USERNAME", USERNAME);
                 startActivity(intent);
                 break;
             case R.id.signOut:

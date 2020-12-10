@@ -20,7 +20,6 @@ public class SpeakerAccountActivity extends AccountActivity {
     @Override
     public void init() {
         super.init(this, R.id.nav_view_organizer, R.id.nav_account_speaker);
-        super.init();
         createAccountMenu();
     }
 

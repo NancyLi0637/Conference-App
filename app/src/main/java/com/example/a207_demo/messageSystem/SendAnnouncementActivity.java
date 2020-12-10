@@ -22,7 +22,6 @@ public class SendAnnouncementActivity extends CleanArchActivity implements View.
     private Intent intent;
 
     private String announcement;
-    private String type;
     private ArrayList<String> userIDs;
     private String eventTitle;
 

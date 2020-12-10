@@ -17,7 +17,6 @@ public class AttendeeAccountActivity extends AccountActivity {
     @Override
     public void init() {
         super.init(this, R.id.nav_view_organizer, R.id.nav_account_attendee);
-        super.init();
         createAccountMenu();
     }
 

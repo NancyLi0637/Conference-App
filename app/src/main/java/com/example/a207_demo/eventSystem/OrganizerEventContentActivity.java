@@ -93,18 +93,7 @@ public class OrganizerEventContentActivity extends EventContentActivity{
                 }
                 break;
             case R.id.btn_cancel_event:
-                if(cancelEvent()){
-                    getUserManager().sendAnnouncement(eventSpeakerIDs, getEventTitle(),
-                            getEventTitle() + " is CANCELLED!");
-                    getUserManager().sendAnnouncement(eventAttendeeIDs, getEventTitle(),
-                            getEventTitle() + " is CANCELLED!");
-                    Toast.makeText(this, "Event is cancelled!", Toast.LENGTH_LONG).show();
-                    super.writeEvent();
-                    super.writeUser();
-                    startActivity(new Intent(OrganizerEventContentActivity.this, OrganizerEventActivity.class));
-                }else{
-                    Toast.makeText(this, "Some error occurred!", Toast.LENGTH_LONG).show();
-                }
+                loadCancelDialog();
                 break;
         }
     }
@@ -166,19 +155,12 @@ public class OrganizerEventContentActivity extends EventContentActivity{
         return getEventManager().checkValidInteger(num);
     }
 
-    /**
-     * cancelEvent
-     */
-    private boolean cancelEvent(){
-        return getEventManager().cancelEvent(getEventID());
-    }
-
     private void changeCapacity(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final EditText newCap = new EditText(OrganizerEventContentActivity.this);
 
         loadCapDialog(builder, newCap);
-        setOnPositiveButtonListener(builder, newCap);
+        setOnPositiveButtonListenerCapacity(builder, newCap);
     }
 
     private void loadCapDialog(AlertDialog.Builder builder, EditText newCap){
@@ -196,7 +178,7 @@ public class OrganizerEventContentActivity extends EventContentActivity{
         newCap.setFocusable(true);
     }
 
-    private void setOnPositiveButtonListener(AlertDialog.Builder builder, final EditText newCap){
+    private void setOnPositiveButtonListenerCapacity(AlertDialog.Builder builder, final EditText newCap){
         //set button for confirming input
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
@@ -225,6 +207,41 @@ public class OrganizerEventContentActivity extends EventContentActivity{
         });
 
         builder.show();
+    }
+
+    private void loadCancelDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to cancel this event?");
+        builder.setNegativeButton("No", null);
+        builder.setCancelable(true);
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(cancelEvent()){
+                    getUserManager().sendAnnouncement(eventSpeakerIDs, getEventTitle(),
+                            getEventTitle() + " is CANCELLED!");
+                    getUserManager().sendAnnouncement(eventAttendeeIDs, getEventTitle(),
+                            getEventTitle() + " is CANCELLED!");
+                    Toast.makeText(OrganizerEventContentActivity.this,
+                            "Event is cancelled!", Toast.LENGTH_LONG).show();
+                    writeEvent();
+                    writeUser();
+                    startActivity(new Intent(OrganizerEventContentActivity.this, OrganizerEventActivity.class));
+                }else{
+                    Toast.makeText(OrganizerEventContentActivity.this,
+                            "Some errors have occurred!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        builder.show();
+
+    }
+
+    /**
+     * cancelEvent
+     */
+    private boolean cancelEvent(){
+       return getEventManager().cancelEvent(getEventID());
     }
 
     private boolean addSpeaker(){

@@ -25,6 +25,7 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
     private Context context;
     private ArrayList<ArrayList<String>> eventList;
     private int imageID;
+    private ArrayList<Integer> imageIDs = new ArrayList<>();
 
     /**
      * Event Adapter for this Event Activity
@@ -59,7 +60,7 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
                 Intent intent = new Intent(context, nextClass);
                 // Pass the list of events to the next activity
                 intent.putStringArrayListExtra("event", event);
-                intent.putExtra("imageID", imageID);
+                intent.putExtra("imageID", imageIDs.get(position));
                 context.startActivity(intent);
             }
         });
@@ -77,6 +78,7 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
         String eventType = event.get(5);
         loadImage(eventType);
         Glide.with(context).load(imageID).into(holder.eventImage);
+        imageIDs.add(imageID);
     }
 
     //loading presenter image choices

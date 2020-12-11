@@ -29,6 +29,7 @@
                 android:id="@+id/content_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:background="@color/green"
                 app:layout_collapseMode="pin"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -70,7 +71,9 @@
                 android:textSize="20sp"
                 android:textAllCaps="false"
                 android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorReceived"
+                android:background="@color/yellow"/>
 
         </LinearLayout>
 

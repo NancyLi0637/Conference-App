@@ -58,7 +58,8 @@ public class OrganizerContactSpeakerActivity extends ContactActivity implements 
     protected void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.organizer_contact_recycler_view);
-        organizerContactAdapter = new OrganizerContactAdapter(this, contactList, "organizerContactSpeaker");
+        organizerContactAdapter = new OrganizerContactAdapter(this, contactList, getID(),
+                "organizerContactSpeaker", R.drawable.speaker);
         super.createContactMenu(recyclerView, organizerContactAdapter);
     }
 

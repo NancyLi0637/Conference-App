@@ -63,7 +63,8 @@ public class SpeakerContactAttendeeActivity extends ContactActivity implements V
     public void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.speaker_contact_recycler_view);
-        ContactMsgAdapter contactMsgAdapter = new ContactMsgAdapter(this, contactList, getID());
+        ContactMsgAdapter contactMsgAdapter = new ContactMsgAdapter(this, contactList,
+                getID(), R.drawable.icon_contact_gray);
         super.createContactMenu(recyclerView, contactMsgAdapter);
     }
 

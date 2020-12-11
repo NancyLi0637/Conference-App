@@ -74,7 +74,8 @@ public class AttendeeContactAttendeeActivity extends ContactActivity implements 
     public void createContactMenu() {
         initContacts();
         RecyclerView recyclerView = findViewById(R.id.attendee_contact_attendee_recycler_view);
-        contactMsgAdapter = new ContactMsgAdapter(this, contactList, getID());
+        contactMsgAdapter = new ContactMsgAdapter(this, contactList, getID(),
+                R.drawable.icon_contact_gray);
         super.createContactMenu(recyclerView, contactMsgAdapter);
     }
 

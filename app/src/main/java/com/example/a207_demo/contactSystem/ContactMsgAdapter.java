@@ -17,8 +17,8 @@ public class ContactMsgAdapter extends ContactAdapter{
 
     private Context context;
 
-    public ContactMsgAdapter(Context context, ArrayList<ArrayList<String>> contactList, String myID) {
-        super(context, contactList, myID);
+    public ContactMsgAdapter(Context context, ArrayList<ArrayList<String>> contactList, String myID, int imageID) {
+        super(context, contactList, myID, imageID);
         this.context = context;
     }
 

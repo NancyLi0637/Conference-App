@@ -24,6 +24,7 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
     private String myID;
     private String userName;
     private String userID;
+    private int imageID;
 
     /**
      * ContactAdapter
@@ -31,10 +32,11 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
      * @param context
      * @param contactsList
      */
-    public ContactAdapter(Context context, ArrayList<ArrayList<String>> contactsList, String myID) {
+    public ContactAdapter(Context context, ArrayList<ArrayList<String>> contactsList, String myID, int imageID) {
         this.context = context;
         this.contactsList = contactsList;
         this.myID = myID;
+        this.imageID = imageID;
     }
 
     /**
@@ -70,8 +72,7 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
         userID = user.get(0);
         userName = user.get(1);
         holder.contactName.setText(userName);
-        Glide.with(context).load(R.drawable.jenny).into(holder.contactImage);
-
+        Glide.with(context).load(imageID).into(holder.contactImage);
     }
 
 

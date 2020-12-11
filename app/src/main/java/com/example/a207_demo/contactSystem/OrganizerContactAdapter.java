@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.example.a207_demo.R;
 import com.example.a207_demo.messageSystem.SendAnnouncementActivity;
 
@@ -20,9 +21,11 @@ public class OrganizerContactAdapter extends ContactAdapter {
 
     private Context context;
     private String type;
+    private String myID;
 
-    public OrganizerContactAdapter(Context context, ArrayList<ArrayList<String>> contactList, String type) {
-        super(context, contactList);
+    public OrganizerContactAdapter(Context context, ArrayList<ArrayList<String>> contactList,
+                                   String myID, String type, int imageID) {
+        super(context, contactList, myID, imageID);
         this.context = context;
         this.type = type;
     }

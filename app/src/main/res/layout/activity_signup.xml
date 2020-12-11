@@ -78,7 +78,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:textColor="@color/colorReceived"
+            android:background="@color/green"/>
 
     </LinearLayout>
 
@@ -88,6 +90,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="@string/signUp" />
+        android:text="@string/signUp"
+        android:textColor="@color/colorReceived"
+        android:background="@color/blue"/>
 
 </LinearLayout>

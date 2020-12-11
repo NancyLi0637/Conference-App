@@ -1,6 +1,7 @@
 package com.example.a207_demo.messageSystem;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -59,12 +60,22 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
      * createActionBar
      */
     public void createActionBar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.chat_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    /**
+     * on Create Options Menu
+     * @param menu Menu
+     * @return boolean
+     */
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar2, menu);
+        return true;
     }
 
     /**
@@ -137,7 +148,6 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
      */
     public void initMsg() {
         super.reset();
-        //super.readUser();
         super.readConversation();
 
         getConversationManager().createConversation(userIDs);

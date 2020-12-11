@@ -147,7 +147,9 @@
             android:text="@string/finish"
             android:layout_weight="1"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"/>
+            android:layout_marginEnd="24dp"
+            android:textColor="@color/colorReceived"
+            android:background="@color/green"/>
 
     </LinearLayout>
 

@@ -45,7 +45,7 @@ public class AddFriendActivity extends BaseActivity implements View.OnClickListe
 
         ImageView imageUser = findViewById(R.id.add_friend_image);
         TextView textUser = findViewById(R.id.add_friend_name);
-        Glide.with(this).load(R.drawable.jenny).into(imageUser);
+        Glide.with(this).load(R.drawable.icon_contact_gray).into(imageUser);
         textUser.setText(content);
     }
 

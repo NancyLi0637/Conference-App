@@ -154,7 +154,7 @@ public class RoomManager implements Serializable {
 
         // First step, add all room numbers to the roomList
         for (Room room : rooms) {
-            if(room.getCapacity() > capacity){
+            if(room.getCapacity() >= capacity){
                 roomList.add(room.getRoomID());
             }
         }

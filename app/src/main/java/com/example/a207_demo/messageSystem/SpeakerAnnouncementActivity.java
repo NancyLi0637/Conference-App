@@ -16,10 +16,8 @@ public class SpeakerAnnouncementActivity extends AnnouncementActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_announcement_speaker);
-
-        init();
-
         ActivityCollector.addActivity(this);
+        init();
     }
 
     /**

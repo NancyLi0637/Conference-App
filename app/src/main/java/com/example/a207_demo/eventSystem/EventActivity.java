@@ -15,6 +15,7 @@ public class EventActivity extends BaseActivity {
 
     /**
      * createEventMenu
+     *
      * @param recyclerView RecyclerView recyclerView
      */
     protected void createEventMenu(RecyclerView recyclerView,
@@ -44,7 +45,7 @@ public class EventActivity extends BaseActivity {
         super.readUser();
     }
 
-    protected void refreshEvents(){
+    protected void refreshEvents() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

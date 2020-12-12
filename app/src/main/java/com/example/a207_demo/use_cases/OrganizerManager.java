@@ -71,6 +71,10 @@ public class OrganizerManager extends UserManager implements Serializable {
     }
 
 
+    /**
+     * generateAccountInfo
+     * @return ArrayList<ArrayList<String>>
+     */
     @Override
     public ArrayList<ArrayList<String>> generateAccountInfo(){
         ArrayList<ArrayList<String>> result = new ArrayList<>();

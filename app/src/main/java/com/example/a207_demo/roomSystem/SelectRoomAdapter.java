@@ -99,7 +99,12 @@ public class SelectRoomAdapter extends RecyclerView.Adapter<SelectRoomAdapter.VH
 
     }
 
-    public int getPosition(){
+    /**
+     * getPosition
+     *
+     * @return int
+     */
+    public int getPosition() {
         return lastSelectedRoom;
     }
 }

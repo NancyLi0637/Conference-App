@@ -47,6 +47,10 @@ public class OrganizerContactSpeakerActivity extends ContactActivity implements 
         createContactMenu();
     }
 
+    /**
+     * onClick
+     * @param view View
+     */
     public void onClick(View view) {
         Intent intent = new Intent(OrganizerContactSpeakerActivity.this, SendAnnouncementActivity.class);
         intent.putExtra("class", "organizerContactSpeaker");

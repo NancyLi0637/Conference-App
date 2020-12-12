@@ -10,6 +10,9 @@ import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;
 
+/**
+ * Top5EventsActivity
+ */
 public class Top5EventsActivity extends EventActivity {
 
     private ArrayList<ArrayList<String>> eventList;

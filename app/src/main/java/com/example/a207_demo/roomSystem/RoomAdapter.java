@@ -79,6 +79,10 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.VHRoom> implem
         CardView cardView;
         TextView roomInfo;
 
+        /**
+         * VHRoom
+         * @param v View
+         */
         public VHRoom(View v) {
             super(v);
             cardView = (CardView) v;

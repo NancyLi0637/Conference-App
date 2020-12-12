@@ -28,7 +28,7 @@ import java.util.ArrayList;
 /**
  * EventContentActivity
  */
-public abstract class EventContentActivity extends BaseActivity implements View.OnClickListener{
+public abstract class EventContentActivity extends BaseActivity implements View.OnClickListener {
     private String eventTitle;
     private String eventID;
     private String eventTime;
@@ -41,7 +41,7 @@ public abstract class EventContentActivity extends BaseActivity implements View.
     /**
      * Set the activity up
      */
-    protected void init(){
+    protected void init() {
         super.reset();
         super.readEvent();
         super.readRoom();
@@ -53,17 +53,18 @@ public abstract class EventContentActivity extends BaseActivity implements View.
     /**
      * Create action bar
      */
-    public void createActionBar(){
+    public void createActionBar() {
         Toolbar toolbar = findViewById(R.id.content_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 
     /**
      * on Create Options Menu
+     *
      * @param menu Menu
      * @return boolean
      */
@@ -74,11 +75,12 @@ public abstract class EventContentActivity extends BaseActivity implements View.
 
     /**
      * Return to last menu
+     *
      * @param item Item clicked
      * @return true if quit this menu successfully
      */
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
@@ -89,7 +91,7 @@ public abstract class EventContentActivity extends BaseActivity implements View.
     /**
      * setUpData
      */
-    protected void setUpData(){
+    protected void setUpData() {
         ArrayList<String> event = getIntent().getStringArrayListExtra("event");
         eventID = event.get(0);
         eventTitle = event.get(1);
@@ -109,20 +111,20 @@ public abstract class EventContentActivity extends BaseActivity implements View.
         fillContent(eventTitle, eventContent);
     }
 
-    private String processSpeakers(String speakerIDs){
+    private String processSpeakers(String speakerIDs) {
         String result = "";
         if (speakerIDs.equals("[]") || speakerIDs.equals("null")) {
             return result;
         }
         //remove bracket
-        String content = speakerIDs.substring(1, speakerIDs.length()-1);
+        String content = speakerIDs.substring(1, speakerIDs.length() - 1);
         if (content.contains(", ")) {
             String[] idList = content.split(", ");
             for (String id : idList) {
                 String speakerName = getUserManager().getUserNameFromID(id);
                 result += speakerName + "/";
             }
-        }else {
+        } else {
             result = getUserManager().getUserNameFromID(content);
         }
         return result;
@@ -130,10 +132,11 @@ public abstract class EventContentActivity extends BaseActivity implements View.
 
     /**
      * fillContent
-     * @param eventTitle eventTitle
+     *
+     * @param eventTitle   eventTitle
      * @param eventContent eventContent
      */
-    protected void fillContent(String eventTitle, String eventContent){
+    protected void fillContent(String eventTitle, String eventContent) {
         ImageView eventImageView = findViewById(R.id.event_image_view);
         TextView eventInfo = findViewById(R.id.event_info);
 
@@ -145,24 +148,63 @@ public abstract class EventContentActivity extends BaseActivity implements View.
 
     /**
      * Button listener for event sign up button
+     *
      * @param v Button Sign up
      */
     @Override
     abstract public void onClick(View v);
 
-    public String getEventTitle(){
+    /**
+     * getEventTitle
+     *
+     * @return String
+     */
+    public String getEventTitle() {
         return eventTitle;
     }
 
-    public String getEventID(){
+    /**
+     * getEventID
+     *
+     * @return String
+     */
+    public String getEventID() {
         return eventID;
     }
 
-    public String getEventTime() { return eventTime;}
+    /**
+     * getEventTime
+     *
+     * @return String
+     */
+    public String getEventTime() {
+        return eventTime;
+    }
 
-    public String getEventDuration() {return eventDuration;}
+    /**
+     * getEventDuration
+     *
+     * @return String
+     */
+    public String getEventDuration() {
+        return eventDuration;
+    }
 
-    public String getEventType() { return eventType;}
+    /**
+     * getEventType
+     *
+     * @return String
+     */
+    public String getEventType() {
+        return eventType;
+    }
 
-    public String getMyID(){return myID;}
+    /**
+     * getMyID
+     *
+     * @return String
+     */
+    public String getMyID() {
+        return myID;
+    }
 }

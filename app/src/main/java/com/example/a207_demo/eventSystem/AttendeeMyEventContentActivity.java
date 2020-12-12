@@ -15,10 +15,11 @@ import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;
 
-public class AttendeeMyEventContentActivity extends EventContentActivity implements View.OnClickListener{
+public class AttendeeMyEventContentActivity extends EventContentActivity implements View.OnClickListener {
 
     /**
      * Required function to initiate an Activity class.
+     *
      * @param savedInstanceState saved data for unexpected crush
      */
     @Override
@@ -34,7 +35,7 @@ public class AttendeeMyEventContentActivity extends EventContentActivity impleme
     /**
      * fillContent
      */
-    protected void init(){
+    protected void init() {
         super.init();
         Button eventCancelEnrol = findViewById(R.id.btn_cancel_enrolment);
         eventCancelEnrol.setOnClickListener(this);
@@ -42,9 +43,10 @@ public class AttendeeMyEventContentActivity extends EventContentActivity impleme
 
     /**
      * onClick
+     *
      * @param view View
      */
-    public void onClick(View view){
+    public void onClick(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to cancel your enrollment?");
         builder.setNegativeButton("No", null);
@@ -52,12 +54,12 @@ public class AttendeeMyEventContentActivity extends EventContentActivity impleme
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(cancelled()){
+                if (cancelled()) {
                     Toast.makeText(AttendeeMyEventContentActivity.this,
                             "You have SUCCESSFULLY cancelled your enrolment!!", Toast.LENGTH_LONG).show();
                     writeEvent();
                     startActivity(new Intent(AttendeeMyEventContentActivity.this, AttendeeMyEventActivity.class));
-                }else{
+                } else {
                     Toast.makeText(AttendeeMyEventContentActivity.this,
                             "Some errors have occurred!", Toast.LENGTH_LONG).show();
                 }
@@ -73,7 +75,7 @@ public class AttendeeMyEventContentActivity extends EventContentActivity impleme
 //        }
     }
 
-    private boolean cancelled(){
+    private boolean cancelled() {
         return getEventManager().removeAttendeeFromEvent(getMyID(), getEventID());
     }
 

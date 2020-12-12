@@ -69,7 +69,7 @@ public class AttendeeEventActivity extends EventActivity {
 
     }
 
-    protected void refreshEvents(){
+    protected void refreshEvents() {
         createEventMenu();
         attendeeEventAdapter.notifyDataSetChanged();
         super.refreshEvents();

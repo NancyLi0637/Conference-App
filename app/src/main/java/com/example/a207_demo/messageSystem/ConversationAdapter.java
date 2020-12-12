@@ -27,8 +27,8 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     /**
      * MsgAdapter constructor
      *
-     * @param context
-     * @param conversationList
+     * @param context Context
+     * @param conversationList ArrayList<ArrayList<String>>
      */
     public ConversationAdapter(Context context, ArrayList<ArrayList<String>> conversationList, String myID) {
         this.context = context;
@@ -63,11 +63,11 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         String ID = conversation.get(0);
         String msg = conversation.get(1);
 
-        if(ID.equals(myID)){
+        if (ID.equals(myID)) {
             holder.rightLayout.setVisibility(View.VISIBLE);
             holder.leftLayout.setVisibility(View.GONE);
             holder.rightMsg.setText(msg);
-        }else {
+        } else {
             holder.leftLayout.setVisibility(View.VISIBLE);
             holder.rightLayout.setVisibility(View.GONE);
             holder.leftMsg.setText(msg);

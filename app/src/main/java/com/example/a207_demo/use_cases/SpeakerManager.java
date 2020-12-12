@@ -40,6 +40,10 @@ public class SpeakerManager extends UserManager implements Serializable {
         return speakers;
     }
 
+    /**
+     * getSpeakerIDs
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getSpeakerIDs(){
         ArrayList<String> speakerIDs = new ArrayList<>();
         for(Speaker speaker : speakers){

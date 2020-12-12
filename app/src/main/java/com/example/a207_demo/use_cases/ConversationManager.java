@@ -13,20 +13,26 @@ public class ConversationManager implements Serializable {
     private HashMap<HashSet<String>, Conversation> conversations;
     private Conversation currentConversation;
 
+    /**
+     * ConversationManager
+     */
     public ConversationManager() {
         conversations = new HashMap<>();
     }
 
-    public void reset(){
+    /**
+     * reset
+     */
+    public void reset() {
         conversations = new HashMap<>();
     }
 
     /**
      * The method to create a new conversation between different users.
      * Precondition: these doesn't already exist a conversation with the same two users
-     *
-//     * @param userId1 the user id of the first user
-//     * @param userId2 the user id of the second user
+     * <p>
+     * //     * @param userId1 the user id of the first user
+     * //     * @param userId2 the user id of the second user
      */
 //    public void createConversation(String userId1, String userId2) {
 //        Conversation newConversation = new Conversation(userId1, userId2);
@@ -34,15 +40,21 @@ public class ConversationManager implements Serializable {
 //        conversations.put(newConversationId, newConversation);
 //    }
     public void createConversation(HashSet<String> userIDs) {
-        if(!conversations.containsKey(userIDs)){
+        if (!conversations.containsKey(userIDs)) {
             Conversation newConversation = new Conversation(userIDs);
             HashSet<String> newConversationId = newConversation.getUserIds();
             conversations.put(newConversationId, newConversation);
         }
     }
 
+    /**
+     * loadConversation
+     *
+     * @param userIDs  HashSet<String> userIDs
+     * @param messages ArrayList<ArrayList<String>> messages
+     */
     public void loadConversation(HashSet<String> userIDs,
-                                 ArrayList<ArrayList<String>> messages){
+                                 ArrayList<ArrayList<String>> messages) {
         Conversation newConversation = new Conversation(userIDs);
         newConversation.setMessages(messages);
         conversations.put(newConversation.getUserIds(), newConversation);
@@ -60,8 +72,8 @@ public class ConversationManager implements Serializable {
 
     /**
      * Set the current conversation to be the conversation between the two users of talkersList.
-     *
-//     * @param talkersList the Hashset of two users.
+     * <p>
+     * //     * @param talkersList the Hashset of two users.
      */
 //    public void currentConversationSetter(HashSet<String> talkersList) {
 //        this.currentConversation = conversations.get(talkersList);
@@ -83,6 +95,13 @@ public class ConversationManager implements Serializable {
 //        conversations.replace(getUserIds(currentConversation), currentConversation);
     }
 
+    /**
+     * sendMessage
+     *
+     * @param senderId   String
+     * @param receiverId String
+     * @param text       String
+     */
     public void sendMessage(String senderId, String receiverId, String text) {
         HashSet<String> ids = new HashSet<>();
         ids.add(senderId);
@@ -99,6 +118,11 @@ public class ConversationManager implements Serializable {
 //        return currentConversation.getMessages();
 //    }
 
+    /**
+     * getMessagesOfCurrentConversation
+     *
+     * @return ArrayList<ArrayList < String>>
+     */
     public ArrayList<ArrayList<String>> getMessagesOfCurrentConversation() {
         //HashSet<String> talkersList = new HashSet<>(userIDs);
         //return conversations.get(talkersList).getMessages();
@@ -150,9 +174,14 @@ public class ConversationManager implements Serializable {
         return conversation.getUserIds();
     }
 
-    public ArrayList<HashSet<String>> getAllUserIds(){
-       ArrayList<HashSet<String>> IDList = new ArrayList<>();
-        for(HashSet<String> IDs : conversations.keySet()){
+    /**
+     * getAllUserIds
+     *
+     * @return ArrayList<HashSet < String>>
+     */
+    public ArrayList<HashSet<String>> getAllUserIds() {
+        ArrayList<HashSet<String>> IDList = new ArrayList<>();
+        for (HashSet<String> IDs : conversations.keySet()) {
             IDList.add(IDs);
         }
         return IDList;
@@ -168,10 +197,16 @@ public class ConversationManager implements Serializable {
         conversations.put(key, conversation);
     }
 
-    public String generateFormattedConversationInfo(HashSet<String> userID){
-        for(HashSet<String> ID : conversations.keySet()){
-            if(ID.equals(userID)) {
-               return userID + " &MESSAGES:" + conversations.get(userID).getMessages() + "&";
+    /**
+     * generateFormattedConversationInfo
+     *
+     * @param userID HashSet<String>
+     * @return String
+     */
+    public String generateFormattedConversationInfo(HashSet<String> userID) {
+        for (HashSet<String> ID : conversations.keySet()) {
+            if (ID.equals(userID)) {
+                return userID + " &MESSAGES:" + conversations.get(userID).getMessages() + "&";
             }
         }
         return "NULL";

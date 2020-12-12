@@ -49,6 +49,10 @@ public class SpeakerContactAttendeeActivity extends ContactActivity implements V
         msgAll.setOnClickListener(this);
     }
 
+    /**
+     * onClick
+     * @param view View
+     */
     public void onClick(View view){
         Intent intent = new Intent(SpeakerContactAttendeeActivity.this, SendAnnouncementActivity.class);
         intent.putExtra("class", "speakerContactAttendee");

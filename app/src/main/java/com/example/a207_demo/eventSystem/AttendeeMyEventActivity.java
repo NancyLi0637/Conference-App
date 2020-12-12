@@ -51,7 +51,7 @@ public class AttendeeMyEventActivity extends EventActivity {
     }
 
     /**
-     *  initialise Events
+     * initialise Events
      */
     @Override
     protected void initEvents() {
@@ -59,7 +59,7 @@ public class AttendeeMyEventActivity extends EventActivity {
         eventList = getEventManager().generateAllInfo(getEventManager().getEventsFromAttendee(getID()));
     }
 
-    protected void refreshEvents(){
+    protected void refreshEvents() {
         createEventMenu();
         attendeeMyEventAdapter.notifyDataSetChanged();
         super.refreshEvents();

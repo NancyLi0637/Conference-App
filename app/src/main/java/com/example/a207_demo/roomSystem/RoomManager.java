@@ -240,6 +240,11 @@ public class RoomManager implements Serializable {
     }
 
 
+    /**
+     * generateFormattedRoomInfo
+     * @param roomId String
+     * @return String
+     */
     public String generateFormattedRoomInfo(String roomId) {
         for (Room room : rooms) {
             if (room.getRoomID().equals(roomId)) {
@@ -252,7 +257,7 @@ public class RoomManager implements Serializable {
     /**
      * Generate the event info for loading into event activity
      *
-     * @return
+     * @return ArrayList<ArrayList<String>>
      */
     public ArrayList<ArrayList<String>> generateAllInfo() {
         ArrayList<ArrayList<String>> result = new ArrayList<>();

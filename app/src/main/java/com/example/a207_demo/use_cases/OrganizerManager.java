@@ -28,6 +28,19 @@ public class OrganizerManager extends UserManager implements Serializable {
         organizers = new ArrayList<>();
     }
 
+    public boolean checkOrganizer(String userID){
+        return getOrganizerIDs().contains(userID);
+    }
+
+    public ArrayList<String> getOrganizerIDs(){
+        ArrayList<String> organizerIDs = new ArrayList<>();
+        for(Organizer organizer : organizers){
+           organizerIDs.add(organizer.getUserID());
+        }
+        return organizerIDs;
+    }
+
+
 
     /**
      * Create an organizer account and store it in the organizers and users lists

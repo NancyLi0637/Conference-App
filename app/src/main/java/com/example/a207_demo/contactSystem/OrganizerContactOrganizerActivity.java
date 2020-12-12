@@ -1,5 +1,6 @@
 package com.example.a207_demo.contactSystem;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -13,10 +14,7 @@ import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;
 
-/**
- * AttendeeContactAttendeeActivity
- */
-public class AttendeeContactAttendeeActivity extends ContactActivity implements View.OnClickListener{
+public class OrganizerContactOrganizerActivity extends ContactActivity implements View.OnClickListener {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private ContactMsgAdapter contactMsgAdapter;
@@ -31,7 +29,7 @@ public class AttendeeContactAttendeeActivity extends ContactActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact_attendee_attendee);
+        setContentView(R.layout.activity_contact_organizer_organizer);
         ActivityCollector.addActivity(this);
 
         init();
@@ -41,10 +39,10 @@ public class AttendeeContactAttendeeActivity extends ContactActivity implements 
      * init
      */
     public void init() {
-        super.init(this, R.id.nav_view_attendee, R.id.nav_contacts_attendee_for_attendee);
+        super.init(this, R.id.nav_view_organizer, R.id.nav_contacts_organizer_for_organizer);
         setSwipeRefreshLayout();
 
-        Button addAttendee = findViewById(R.id.btn_add_friend);
+        Button addAttendee = findViewById(R.id.btn_add_organizer);
         addAttendee.setOnClickListener(this);
 
         createContactMenu();
@@ -62,9 +60,9 @@ public class AttendeeContactAttendeeActivity extends ContactActivity implements 
     }
 
     public void onClick(View view){
-        Intent intent = new Intent(AttendeeContactAttendeeActivity.this, SearchFriendActivity.class);
+        Intent intent = new Intent(OrganizerContactOrganizerActivity.this, SearchFriendActivity.class);
         intent.putExtra("myID", getID());
-        intent.putExtra("from", "attendeeContact");
+        intent.putExtra("from", "organizerContact");
         startActivityForResult(intent, 1);
     }
 
@@ -73,9 +71,9 @@ public class AttendeeContactAttendeeActivity extends ContactActivity implements 
      */
     public void createContactMenu() {
         initContacts();
-        RecyclerView recyclerView = findViewById(R.id.attendee_contact_attendee_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.organizer_contact_organizer_recycler_view);
         contactMsgAdapter = new ContactMsgAdapter(this, contactList, getID(),
-                R.drawable.icon_contact_gray);
+                R.drawable.organizer2);
         super.createContactMenu(recyclerView, contactMsgAdapter);
     }
 

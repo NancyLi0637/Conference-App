@@ -10,13 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".contactSystem.OrganizerContactOrganizerActivity"
+            android:label="Organizers"
+            android:launchMode="singleTask"/>
+        <activity
             android:name=".contactSystem.AddFriendActivity"
             android:label="@string/addAttendee"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".contactSystem.SearchFriendActivity"
             android:label="@string/search"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".accountSystem.AllAccountActivity"
             android:label="@string/allAccounts"
@@ -56,7 +60,7 @@
         <activity
             android:name=".messageSystem.SendAnnouncementActivity"
             android:label="Send Announcement"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".contactSystem.OrganizerContactSpeakerActivity"
             android:label="Speaker Contacts"
@@ -151,7 +155,7 @@
         <activity
             android:name=".messageSystem.ConversationActivity"
             android:label="Chat"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask">

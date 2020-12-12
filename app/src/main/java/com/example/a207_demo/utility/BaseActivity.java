@@ -24,6 +24,7 @@ import com.example.a207_demo.accountSystem.VIPUserAccountActivity;
 import com.example.a207_demo.contactSystem.AttendeeContactAttendeeActivity;
 import com.example.a207_demo.contactSystem.AttendeeContactSpeakerActivity;
 import com.example.a207_demo.contactSystem.OrganizerContactAttendeeActivity;
+import com.example.a207_demo.contactSystem.OrganizerContactOrganizerActivity;
 import com.example.a207_demo.contactSystem.OrganizerContactSpeakerActivity;
 import com.example.a207_demo.contactSystem.SpeakerContactAttendeeActivity;
 import com.example.a207_demo.eventSystem.AttendeeEventActivity;
@@ -65,14 +66,6 @@ public class BaseActivity extends CleanArchActivity {
         createActionBar();
         createNavView(context, id_nav_view, id_nav_item);
     }
-
-//    protected void init(){
-//        ID = getIntent().getStringExtra("ID");
-//        TYPE = getIntent().getStringExtra("TYPE");
-//        EMAIL = getIntent().getStringExtra("EMAIL");
-//        USERNAME = getIntent().getStringExtra("USERNAME");
-//        super.setInfo(ID, TYPE, EMAIL, USERNAME);
-//    }
 
     public String getID(){
         return ID;
@@ -147,6 +140,10 @@ public class BaseActivity extends CleanArchActivity {
                     case R.id.nav_event_enrollment:
                         mDrawerLayout.closeDrawers();
                         intent = new Intent(context, EventEnrollmentActivity.class);
+                        break;
+                    case R.id.nav_contacts_organizer_for_organizer:
+                        mDrawerLayout.closeDrawers();
+                        intent = new Intent(context, OrganizerContactOrganizerActivity.class);
                         break;
                     case R.id.nav_contacts_attendee_for_organizer:
                         mDrawerLayout.closeDrawers();

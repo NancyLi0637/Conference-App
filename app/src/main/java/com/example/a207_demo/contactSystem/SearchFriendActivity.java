@@ -61,7 +61,7 @@ public class SearchFriendActivity extends BaseActivity implements View.OnClickLi
                     Toast.makeText(SearchFriendActivity.this, "Please enter a VALID NAME!",
                             Toast.LENGTH_LONG).show();
                 }else if(!searchFriend(friendName)){
-                    Toast.makeText(SearchFriendActivity.this, "Please check the attendee " +
+                    Toast.makeText(SearchFriendActivity.this, "Please check the friend" +
                                     "name again",
                             Toast.LENGTH_LONG).show();
                 }else{
@@ -83,7 +83,15 @@ public class SearchFriendActivity extends BaseActivity implements View.OnClickLi
     }
 
     private boolean searchFriend(String friendName){
-        return getAttendeeManager().checkAttendee(getUserManager().getUserIdFromName(friendName));
+        String from = getIntent().getStringExtra("from");
+
+        if(from.equals("attendeeContact")){
+            return getAttendeeManager().checkAttendee(getUserManager().getUserIdFromName(friendName));
+        }else if(from.equals("organizerContact")){
+            return getOrganizerManager().checkOrganizer(getUserManager().getUserIdFromName(friendName));
+        }
+
+        return false;
     }
 
 

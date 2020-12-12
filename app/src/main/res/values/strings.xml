@@ -13,6 +13,7 @@
     <string name="msgAllSpeakers">Message All Speakers</string>
     <string name="addSpeaker">Add Speaker</string>
     <string name="addAttendee">Add Attendee</string>
+    <string name="addOrganizer">Add Organizer</string>
     <string name="enterFriendName">Enter Friend Name</string>
     <string name="add">Add</string>
 

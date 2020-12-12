@@ -30,6 +30,11 @@ public class OrganizerEventAdapter extends EventAdapter implements Serializable 
         this.context = context;
     }
 
+    /**
+     * OrganizerEventAdapter
+     * @param context Context
+     * @param eventList ArrayList
+     */
     public OrganizerEventAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
         super(context, eventList);
         this.context = context;

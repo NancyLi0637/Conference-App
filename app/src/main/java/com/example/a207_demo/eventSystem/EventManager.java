@@ -55,19 +55,32 @@ public class EventManager implements Serializable {
 
     /**
      * Add the event type to allEventType
+     *
      * @param type
      */
-    public void setEventType(String type){this.allEventType.add(type);}
+    public void setEventType(String type) {
+        this.allEventType.add(type);
+    }
 
-    public void setEventCapacity(String eventID, int capacity){
-        for(Event event : events){
-            if(event.getEventID().equals(eventID)){
+    /**
+     * setEventCapacity
+     * @param eventID String
+     * @param capacity int
+     */
+    public void setEventCapacity(String eventID, int capacity) {
+        for (Event event : events) {
+            if (event.getEventID().equals(eventID)) {
                 event.setCapacity(capacity);
                 break;
             }
         }
     }
 
+    /**
+     * getEventRestrictionWithID
+     * @param eventID String
+     * @return String
+     */
     public String getEventRestrictionWithID(String eventID) {
         Event event = getEventFromID(eventID);
         return event.getRestriction();
@@ -113,15 +126,20 @@ public class EventManager implements Serializable {
         return events;
     }
 
+    /**
+     * getAllEventType
+     *
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getAllEventType() {
         return this.allEventType;
     }
 
-    public ArrayList<String> getTop5Events(){
+    public ArrayList<String> getTop5Events() {
         Map<String, Integer> copy = new HashMap<>(getEventToAttended());
         ArrayList<String> result = new ArrayList<>();
         int bound = Math.min(5, events.size());
-        for(int i = 0; i < bound; i++){
+        for (int i = 0; i < bound; i++) {
             String key = maxUsingCollectionsMaxAndLambda(copy);
             result.add(key);
             copy.remove(key);
@@ -136,17 +154,17 @@ public class EventManager implements Serializable {
     }
 
 
-    private Map<String, Integer> getEventToAttended(){
+    private Map<String, Integer> getEventToAttended() {
         Map<String, Integer> eventToAttend = new HashMap<>();
-        for(Event event : events){
+        for (Event event : events) {
             eventToAttend.put(event.getEventID(), event.getCurrentNum());
         }
         return eventToAttend;
     }
 
-    public int getEventNumAttended(String eventID){
-        for(Event event : events){
-            if(event.getEventID().equals(eventID)){
+    public int getEventNumAttended(String eventID) {
+        for (Event event : events) {
+            if (event.getEventID().equals(eventID)) {
                 return event.getCurrentNum();
             }
         }
@@ -273,6 +291,7 @@ public class EventManager implements Serializable {
 
     /**
      * removeEvent
+     *
      * @param event Event
      */
     public void removeEvent(Event event) {
@@ -292,7 +311,7 @@ public class EventManager implements Serializable {
     public boolean createEvent(String type, String title, String roomID, ArrayList<String> speakerID, String startTime, String duration,
                                String restriction, int capacity) {
         for (Event event : this.events) {
-            for (String speaker: speakerID) {
+            for (String speaker : speakerID) {
                 if ((event.getSpeakers().contains(speaker) || event.getRoomID().equals(roomID)) &&
                         event.timeConflict(startTime, duration)) {
                     return false;
@@ -301,7 +320,7 @@ public class EventManager implements Serializable {
         }
 
         Event newEvent = eventFactory.createEvent(type, title, roomID, startTime, duration,
-                restriction, capacity,  speakerID);
+                restriction, capacity, speakerID);
         events.add(newEvent);
 
         return true;
@@ -333,17 +352,17 @@ public class EventManager implements Serializable {
      * If you want to add the Even to the entities.User, the Controller would send only the String eventName to the
      * UserManager, to store the entities.Event's name in a list of Strings inside the entities.User object."
      *
-     * @param userID      userID
-     * @param eventID     eventID
+     * @param userID  userID
+     * @param eventID eventID
      * @return true iff the user has been successfully added to this event
      */
     public boolean addAttendeeToEvent(String userID, String eventID) {
 
         ArrayList<String> inEvents = getEventsFromAttendee(userID);
         Event event = getEventFromID(eventID);
-        for(String signedEvent : inEvents){
+        for (String signedEvent : inEvents) {
             Event current = getEventFromID(signedEvent);
-            if(event.timeConflict(current.getStartTime(), current.getDuration())){
+            if (event.timeConflict(current.getStartTime(), current.getDuration())) {
                 return false;
             }
         }
@@ -352,18 +371,18 @@ public class EventManager implements Serializable {
         return true;
     }
 
-    public boolean attendeeInEvent(String userID, String eventID){
+    public boolean attendeeInEvent(String userID, String eventID) {
         return getEventFromID(eventID).getAttendees().contains(userID);
     }
 
-    public boolean restricted(String userID, String eventID, UserManager userManager){
+    public boolean restricted(String userID, String eventID, UserManager userManager) {
         String restriction = getEventFromID(eventID).getRestriction();
         String userType = userManager.getUserType(userID);
 
         return restriction.equals("VIP-ONLY") && !userType.equals("VIPUser");
     }
 
-    public boolean eventFull(String eventID){
+    public boolean eventFull(String eventID) {
         Event event = getEventFromID(eventID);
         return event.getCurrentNum() == event.getCapacity();
     }
@@ -378,9 +397,9 @@ public class EventManager implements Serializable {
      */
     public boolean addSpeakerToEvent(ArrayList<String> speakerIDs, String eventID, String time,
                                      String duration) {
-        for(String speakerID : speakerIDs){
-            if(speakerInEvent(speakerID, eventID) || conflictedSpeaker(speakerID,
-                    eventID, time, duration)){
+        for (String speakerID : speakerIDs) {
+            if (speakerInEvent(speakerID, eventID) || conflictedSpeaker(speakerID,
+                    eventID, time, duration)) {
                 return false;
             }
         }
@@ -389,13 +408,13 @@ public class EventManager implements Serializable {
         return true;
     }
 
-    private boolean speakerInEvent(String speakerID, String eventID){
+    private boolean speakerInEvent(String speakerID, String eventID) {
         return getEventFromID(eventID).getSpeakers().contains(speakerID);
     }
 
-    private boolean conflictedSpeaker(String speakerID, String eventID, String time, String duration){
-        for(Event event : events){
-            if(!event.getEventID().equals(eventID)) {
+    private boolean conflictedSpeaker(String speakerID, String eventID, String time, String duration) {
+        for (Event event : events) {
+            if (!event.getEventID().equals(eventID)) {
                 for (String speaker : event.getSpeakers()) {
                     if (speaker.equals(speakerID) && event.timeConflict(time, duration)) {
                         return true;
@@ -406,17 +425,17 @@ public class EventManager implements Serializable {
         return false;
     }
 
-    public boolean removeAttendeeFromEvent(String attendeeID, String eventID){
-        if(getEventFromID(eventID).getAttendees().contains(attendeeID)){
+    public boolean removeAttendeeFromEvent(String attendeeID, String eventID) {
+        if (getEventFromID(eventID).getAttendees().contains(attendeeID)) {
             getEventFromID(eventID).removeAttendee(attendeeID);
             return true;
         }
         return false;
     }
 
-    public boolean cancelEvent(String eventID){
-        for(Event event : events){
-            if(event.getEventID().equals(eventID)){
+    public boolean cancelEvent(String eventID) {
+        for (Event event : events) {
+            if (event.getEventID().equals(eventID)) {
                 return events.remove(event);
             }
         }
@@ -497,7 +516,7 @@ public class EventManager implements Serializable {
         }
     }
 
-    public boolean checkValidLength(String time, String duration){
+    public boolean checkValidLength(String time, String duration) {
         int hourTime = Integer.parseInt(time.substring(11, 13));
         int dur = Integer.parseInt(duration);
         return hourTime + dur <= 16;
@@ -526,7 +545,7 @@ public class EventManager implements Serializable {
         for (Event event : events) {
             if (event.getEventID().equals(eventID)) {
                 return event.getType() + " " + event.getTitle().replace(" ", "_")
-                        + " " + eventID + " " + event.getRoomID() + " "+ event.getStartTime() + " "
+                        + " " + eventID + " " + event.getRoomID() + " " + event.getStartTime() + " "
                         + event.getDuration() + " " + event.getRestriction() + " " +
                         event.getCapacity() + " {" + event.getSpeakers() + "}" +
                         " ;" + event.getAttendees() + ";";
@@ -538,7 +557,7 @@ public class EventManager implements Serializable {
     /**
      * Generate the event info for laoding into event activity
      *
-     * @return ArrayList<ArrayList<String>>
+     * @return ArrayList<ArrayList < String>>
      */
     public ArrayList<ArrayList<String>> generateAllInfo(ArrayList<String> eventIDs) {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
@@ -554,7 +573,7 @@ public class EventManager implements Serializable {
             info.add(event.getType());
             info.add(event.getRestriction());
             info.add("" + event.getSpeakers());
-            info.add((event.getCapacity()-event.getCurrentNum())+"/"+event.getCapacity());
+            info.add((event.getCapacity() - event.getCurrentNum()) + "/" + event.getCapacity());
             result.add(info);
         }
         return result;

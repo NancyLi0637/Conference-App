@@ -23,6 +23,15 @@ public class OrganizerContactAdapter extends ContactAdapter {
     private String type;
     private String myID;
 
+    /**
+     * Organizer Contact Adapter
+     *
+     * @param context     Context
+     * @param contactList ArrayList
+     * @param myID        String
+     * @param type        String
+     * @param imageID     int
+     */
     public OrganizerContactAdapter(Context context, ArrayList<ArrayList<String>> contactList,
                                    String myID, String type, int imageID) {
         super(context, contactList, myID, imageID);

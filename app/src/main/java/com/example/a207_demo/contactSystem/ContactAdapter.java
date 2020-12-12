@@ -29,8 +29,10 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
     /**
      * ContactAdapter
      *
-     * @param context
-     * @param contactsList
+     * @param context      Context
+     * @param contactsList ArrayList<ArrayList<String>>
+     * @param myID         String
+     * @param imageID      int
      */
     public ContactAdapter(Context context, ArrayList<ArrayList<String>> contactsList, String myID, int imageID) {
         this.context = context;
@@ -42,8 +44,8 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
     /**
      * ContactAdapter
      *
-     * @param context
-     * @param contactsList
+     * @param context      Context
+     * @param contactsList ArrayList<ArrayList<String>>
      */
     public ContactAdapter(Context context, ArrayList<ArrayList<String>> contactsList) {
         this.context = context;
@@ -86,11 +88,21 @@ public abstract class ContactAdapter extends RecyclerView.Adapter<ContactAdapter
         return contactsList.isEmpty() ? 0 : contactsList.size();
     }
 
+    /**
+     * getMyID
+     *
+     * @return String
+     */
     public String getMyID() {
         return myID;
     }
 
-    public ArrayList<ArrayList<String>> getContactsList(){
+    /**
+     * getContactsList
+     *
+     * @return ArrayList<ArrayList < String>>
+     */
+    public ArrayList<ArrayList<String>> getContactsList() {
         return contactsList;
     }
 

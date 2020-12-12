@@ -22,8 +22,9 @@ public class EventEnrollmentAdapter extends EventAdapter implements Serializable
 
     /**
      * Event Adapter for this Event Activity
-     * @param context
-     * @param eventList
+     *
+     * @param context   Context
+     * @param eventList ArrayList<ArrayList<String>>
      */
     public EventEnrollmentAdapter(Context context, ArrayList<ArrayList<String>> eventList) {
         super(context, eventList);
@@ -33,12 +34,13 @@ public class EventEnrollmentAdapter extends EventAdapter implements Serializable
 
     /**
      * on Create View Holder
-     * @param parent parent ViewGroup
+     *
+     * @param parent   parent ViewGroup
      * @param viewType viewType
      * @return VHEvent
      */
     @Override
-    public VHEventEnrollment onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+    public VHEventEnrollment onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.item_room, parent, false);
         VHEventEnrollment holder = new VHEventEnrollment(v);
         return holder;
@@ -46,19 +48,21 @@ public class EventEnrollmentAdapter extends EventAdapter implements Serializable
 
     /**
      * on Bind View Holder
-     * @param holder VHEvent
+     *
+     * @param holder   VHEvent
      * @param position int
      */
     @Override
     public void onBindViewHolder(@NonNull VHEvent holder, int position) {
         VHEventEnrollment newHolder = ((VHEventEnrollment) holder);
-        ArrayList<String> event= eventList.get(position);
+        ArrayList<String> event = eventList.get(position);
         String content = event.get(1) + "\nSpace remaining: " + event.get(8);
         newHolder.eventInfo.setText(content);
     }
 
     /**
      * getItemCount
+     *
      * @return int
      */
     @Override

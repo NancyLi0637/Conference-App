@@ -35,6 +35,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
 
     /**
      * onCreate
+     *
      * @param savedInstanceState Bundle
      */
     @Override
@@ -72,6 +73,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
 
     /**
      * onClick
+     *
      * @param v View
      */
     public void onClick(View v) {
@@ -86,26 +88,26 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                 }
                 break;
             case R.id.select_room:
-                if(!getRoomManager().hasRooms()){
+                if (!getRoomManager().hasRooms()) {
                     Toast.makeText(this, "No Room available. Go create one first!", Toast.LENGTH_LONG).show();
-                }else if(!validTime()){
+                } else if (!validTime()) {
                     Toast.makeText(this, "You must enter VALID TIME first!", Toast.LENGTH_LONG).show();
-                }else if(!validInteger(eventCapacity)){
+                } else if (!validInteger(eventCapacity)) {
                     Toast.makeText(this, "You must enter VALID CAPACITY first!", Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     intent = new Intent(CreateEventActivity.this, SelectRoomActivity.class);
                     loadData();
                     startActivityForResult(intent, 1);
                 }
                 break;
             case R.id.select_speaker:
-                if(eventType.equals("PARTY")){
+                if (eventType.equals("PARTY")) {
                     Toast.makeText(this, "NO SPEAKER needed for PARTY", Toast.LENGTH_LONG).show();
-                }else if(!getSpeakerManager().hasSpeakers()){
+                } else if (!getSpeakerManager().hasSpeakers()) {
                     Toast.makeText(this, "No Speaker available. Go create one first!", Toast.LENGTH_LONG).show();
-                }else if(!validTime()){
+                } else if (!validTime()) {
                     Toast.makeText(this, "You must enter VALID TIME first!", Toast.LENGTH_LONG).show();
-                }else {
+                } else {
                     intent = new Intent(CreateEventActivity.this, SelectSpeakerActivity.class);
                     loadData();
                     startActivityForResult(intent, 2);
@@ -119,26 +121,26 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                     Toast.makeText(this, "EVENT TITLE needs to be at least length 3 and unique", Toast.LENGTH_LONG).show();
                 } else if (!validTime()) {
                     Toast.makeText(this, "TIME must be between 9am and 4pm and is valid!", Toast.LENGTH_LONG).show();
-                } else if(!validInteger(eventDuration)){
+                } else if (!validInteger(eventDuration)) {
                     Toast.makeText(this, "DURATION entered is invalid!", Toast.LENGTH_LONG).show();
-                } else if(!validLength()) {
+                } else if (!validLength()) {
                     Toast.makeText(this, "Event cannot last after 4pm!", Toast.LENGTH_LONG).show();
-                } else if(!validInteger(eventCapacity)){
+                } else if (!validInteger(eventCapacity)) {
                     Toast.makeText(this, "EVENT CAPACITY entered is invalid!", Toast.LENGTH_LONG).show();
-                } else if(eventType.equals("TALK") && speakerId.size() > 1){
+                } else if (eventType.equals("TALK") && speakerId.size() > 1) {
                     Toast.makeText(this, "Only ONE SPEAKER allowed for Talk Events!", Toast.LENGTH_LONG).show();
                 } else {
                     boolean created = getEventManager().createEvent(eventType, eventTitle, roomID, speakerId,
                             eventTime, eventDuration, eventRestriction, Integer.parseInt(eventCapacity));
 
-                    if(created){
+                    if (created) {
                         Toast.makeText(this, "You have SUCCESSFULLY created event!", Toast.LENGTH_LONG).show();
                         super.writeEvent();
                         speakerId = new ArrayList<>();
                         intent = new Intent();
                         setResult(RESULT_OK, intent);
                         finish();
-                    }else{
+                    } else {
                         Toast.makeText(this, "There is TIME CONFLICT in your event.", Toast.LENGTH_LONG).show();
                         roomID = null;
                         speakerId = new ArrayList<>();
@@ -166,7 +168,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         eventCapacity = capacity.getText().toString();
     }
 
-    private void loadData(){
+    private void loadData() {
         intent.putExtra("eventTime", eventTime);
         intent.putExtra("eventDuration", eventDuration);
         intent.putExtra("eventCapacity", eventCapacity);
@@ -177,7 +179,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
                 eventCapacity.equals("") || roomID == null;
     }
 
-    private boolean validTitle(){
+    private boolean validTitle() {
         return getEventManager().checkValidTitle(eventTitle);
     }
 
@@ -185,7 +187,7 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         return getEventManager().checkValidTime(eventTime);
     }
 
-    private boolean validInteger(String num){
+    private boolean validInteger(String num) {
         return getEventManager().checkValidInteger(num);
     }
 
@@ -196,9 +198,10 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
 
     /**
      * onActivityResult
+     *
      * @param requestCode requestCode
-     * @param resultCode resultCode
-     * @param data Intent
+     * @param resultCode  resultCode
+     * @param data        Intent
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -206,15 +209,15 @@ public class CreateEventActivity extends CleanArchActivity implements View.OnCli
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                   roomID = data.getStringExtra("roomID");
+                    roomID = data.getStringExtra("roomID");
                 }
                 break;
             case 2:
                 if (resultCode == RESULT_OK) {
-                   ArrayList<String> speakerNames = data.getStringArrayListExtra("speakerNames");
-                   if(speakerNames != null){
-                       speakerId = getUserManager().getUserIdsFromName(speakerNames);
-                   }
+                    ArrayList<String> speakerNames = data.getStringArrayListExtra("speakerNames");
+                    if (speakerNames != null) {
+                        speakerId = getUserManager().getUserIdsFromName(speakerNames);
+                    }
                 }
         }
     }

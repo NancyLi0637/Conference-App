@@ -62,6 +62,10 @@ public class AttendeeContactAttendeeActivity extends ContactActivity implements 
         });
     }
 
+    /**
+     * onClick
+     * @param view View
+     */
     public void onClick(View view){
         Intent intent = new Intent(AttendeeContactAttendeeActivity.this, SearchFriendActivity.class);
         intent.putExtra("myID", getID());

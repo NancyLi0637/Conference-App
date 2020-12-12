@@ -118,6 +118,10 @@ public abstract class EventAdapter extends RecyclerView.Adapter<EventAdapter.VHE
         ImageView eventImage;
         TextView eventTitle;
 
+        /**
+         * VHEvent
+         * @param v View
+         */
         public VHEvent(View v) {
             super(v);
             cardView = (CardView) v;

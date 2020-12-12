@@ -13,7 +13,10 @@ import com.example.a207_demo.R;
 import com.example.a207_demo.utility.ActivityCollector;
 import com.example.a207_demo.utility.BaseActivity;
 
-public class AddFriendActivity extends BaseActivity implements View.OnClickListener{
+/**
+ * AddFriendActivity
+ */
+public class AddFriendActivity extends BaseActivity implements View.OnClickListener {
 
     private String myID;
     private String userID;
@@ -28,7 +31,7 @@ public class AddFriendActivity extends BaseActivity implements View.OnClickListe
         init();
     }
 
-    public void init(){
+    public void init() {
         intent = new Intent();
         super.reset();
         super.readUser();
@@ -36,7 +39,7 @@ public class AddFriendActivity extends BaseActivity implements View.OnClickListe
         loadButton();
     }
 
-    private void loadView(){
+    private void loadView() {
         myID = getIntent().getStringExtra("myID");
         userID = getIntent().getStringExtra("userID");
         String userName = getIntent().getStringExtra("userName");
@@ -49,7 +52,7 @@ public class AddFriendActivity extends BaseActivity implements View.OnClickListe
         textUser.setText(content);
     }
 
-    private void loadButton(){
+    private void loadButton() {
         Button back = findViewById(R.id.friend_back_search);
         Button add = findViewById(R.id.btn_add);
 
@@ -57,22 +60,27 @@ public class AddFriendActivity extends BaseActivity implements View.OnClickListe
         add.setOnClickListener(this);
     }
 
-    public void onClick(View view){
-        switch (view.getId()){
+    /**
+     * onClick
+     *
+     * @param view View
+     */
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btn_add:
-                if(myID.equals(userID)){
+                if (myID.equals(userID)) {
                     Toast.makeText(this, "You cannot add yourself!",
                             Toast.LENGTH_LONG).show();
-                }else if(areFriends()){
+                } else if (areFriends()) {
                     Toast.makeText(this, "This user is ALREADY in your friend list!",
                             Toast.LENGTH_LONG).show();
-                }else if(addFriend()){
+                } else if (addFriend()) {
                     super.writeUser();
                     Toast.makeText(this, "You have successfully added this user!!",
                             Toast.LENGTH_LONG).show();
                     setResult(RESULT_OK, intent);
                     finish();
-                }else{
+                } else {
                     Toast.makeText(this, "Some errors have occurred!",
                             Toast.LENGTH_LONG).show();
                 }
@@ -84,11 +92,12 @@ public class AddFriendActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    private boolean areFriends(){
+
+    private boolean areFriends() {
         return getUserManager().areFriends(myID, userID);
     }
 
-    private boolean addFriend(){
+    private boolean addFriend() {
         return getUserManager().addFriend(myID, userID);
     }
 

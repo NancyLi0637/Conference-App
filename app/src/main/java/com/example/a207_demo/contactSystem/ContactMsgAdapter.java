@@ -13,10 +13,21 @@ import com.example.a207_demo.messageSystem.ConversationActivity;
 
 import java.util.ArrayList;
 
-public class ContactMsgAdapter extends ContactAdapter{
+/**
+ * ContactMsgAdapter
+ */
+public class ContactMsgAdapter extends ContactAdapter {
 
     private Context context;
 
+    /**
+     * ContactMsgAdapter
+     *
+     * @param context     Context
+     * @param contactList ArrayList
+     * @param myID        String
+     * @param imageID     int
+     */
     public ContactMsgAdapter(Context context, ArrayList<ArrayList<String>> contactList, String myID, int imageID) {
         super(context, contactList, myID, imageID);
         this.context = context;

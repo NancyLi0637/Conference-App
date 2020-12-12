@@ -10,6 +10,9 @@ import com.example.a207_demo.utility.ActivityCollector;
 
 import java.util.ArrayList;
 
+/**
+ * EventEnrollmentActivity
+ */
 public class EventEnrollmentActivity extends EventActivity {
 
     private EventEnrollmentAdapter eventEnrollmentAdapter;
@@ -25,6 +28,9 @@ public class EventEnrollmentActivity extends EventActivity {
         ActivityCollector.addActivity(this);
     }
 
+    /**
+     * init
+     */
     public void init(){
         super.init(this, R.id.nav_view_organizer, R.id.event_enrollment_info);
         createEventMenu();

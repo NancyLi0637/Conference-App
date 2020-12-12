@@ -20,17 +20,19 @@ public class AttendeeEventAdapter extends EventAdapter {
 
     /**
      * AttendeeEventAdapter
-     * @param context Context
+     *
+     * @param context   Context
      * @param eventList List<Event> eventList
      */
-    public AttendeeEventAdapter(Context context, ArrayList<ArrayList<String>> eventList, String ID){
+    public AttendeeEventAdapter(Context context, ArrayList<ArrayList<String>> eventList, String ID) {
         super(context, eventList, ID);
         this.context = context;
     }
 
     /**
      * onCreateViewHolder
-     * @param parent parent ViewGroup @NonNull ViewGroup parent
+     *
+     * @param parent   parent ViewGroup @NonNull ViewGroup parent
      * @param viewType viewType
      * @return VHEvent
      */

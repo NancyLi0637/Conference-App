@@ -33,6 +33,10 @@ public class AttendeeManager extends UserManager implements Serializable {
         vipUsers = new ArrayList<>();
     }
 
+    public boolean checkAttendee(String userID){
+        return getAttendeeIDs().contains(userID);
+    }
+
     /**
      * Getter method for all attendees
      *

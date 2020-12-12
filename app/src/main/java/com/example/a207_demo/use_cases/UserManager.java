@@ -19,11 +19,6 @@ public class UserManager implements Serializable {
         users = new ArrayList<>();
     }
 
-
-    public boolean checkUser(String userID){
-        return getUserIDs().contains(userID);
-    }
-
     public boolean areFriends(String userID1, String userID2){
         for (User user : users) {
             if ((user.getUserID().equals(userID1) && user.getFriendList().contains(userID2)) ||

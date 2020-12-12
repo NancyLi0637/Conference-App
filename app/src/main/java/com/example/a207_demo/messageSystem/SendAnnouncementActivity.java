@@ -18,6 +18,9 @@ import com.example.a207_demo.utility.CleanArchActivity;
 
 import java.util.ArrayList;
 
+/**
+ * SendAnnouncementActivity
+ */
 public class SendAnnouncementActivity extends CleanArchActivity implements View.OnClickListener{
     private Intent intent;
 
@@ -45,6 +48,10 @@ public class SendAnnouncementActivity extends CleanArchActivity implements View.
         send.setOnClickListener(this);
     }
 
+    /**
+     * onClick
+     * @param view View
+     */
     public void onClick(View view){
         switch (view.getId()){
             case R.id.send_announcement:

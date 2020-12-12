@@ -71,11 +71,11 @@ public class FileReadWriter implements Serializable {
         for (String line : lines) {
             int separate = -1;
             ArrayList<String> friendsId = new ArrayList<>();
-            if (line.contains(";")){
+            if (line.contains(";")) {
                 int start = line.indexOf(";");
                 int end = line.lastIndexOf(";");
                 separate = start;
-                String friends = line.substring(start+1, end);
+                String friends = line.substring(start + 1, end);
                 friendsId = processAttendees(friends);
             }
 
@@ -89,7 +89,7 @@ public class FileReadWriter implements Serializable {
                 //same method as if processAnnouncements
                 announcements = processAttendees(announcement);
             }
-            line = line.substring(0, separate-1);
+            line = line.substring(0, separate - 1);
 
             String[] wordList = line.split(" ");
             String type = wordList[0];
@@ -98,13 +98,13 @@ public class FileReadWriter implements Serializable {
             String password = wordList[4];
             String userId = wordList[5];
 
-            if(type.equals("ATTENDEE")) {
+            if (type.equals("ATTENDEE")) {
                 attendeeManager.loadAttendee(username, email, password, userId, friendsId, announcements);
-            }else if(type.equals("VIPUser")) {
+            } else if (type.equals("VIPUser")) {
                 attendeeManager.loadVIPUser(username, email, password, userId, friendsId, announcements);
-            }else if (type.equals("ORGANIZER")) {
+            } else if (type.equals("ORGANIZER")) {
                 organizerManager.loadOrganizer(username, email, password, userId, friendsId, announcements);
-            }else{
+            } else {
                 speakerManager.loadSpeaker(username, email, password, userId, friendsId, announcements);
             }
             LineList.add(wordList);
@@ -165,13 +165,13 @@ public class FileReadWriter implements Serializable {
             }
             //find attendeeID list
             ArrayList<String> attendeeId = new ArrayList<>();
-            if (line.contains(";")){
+            if (line.contains(";")) {
                 int start = line.indexOf(";");
                 int end = line.lastIndexOf(";");
-                String attendees = line.substring(start+1, end);
+                String attendees = line.substring(start + 1, end);
                 attendeeId = processAttendees(attendees);
             }
-            line = line.substring(0, separate-1);
+            line = line.substring(0, separate - 1);
 
             String[] wordList = line.split(" ");
             String type = wordList[0];
@@ -210,16 +210,16 @@ public class FileReadWriter implements Serializable {
 
     }
 
-    private ArrayList<String> processUsers(String userId){
+    private ArrayList<String> processUsers(String userId) {
         ArrayList<String> arrayList = new ArrayList<>();
-        String content = userId.substring(1, userId.length()-1);
+        String content = userId.substring(1, userId.length() - 1);
 
         if (content.contains(", ")) {
             String[] wordList = content.split(", ");
             for (String word : wordList) {
                 arrayList.add(word);
             }
-        }else {
+        } else {
             arrayList.add(content);
         }
 
@@ -269,7 +269,7 @@ public class FileReadWriter implements Serializable {
 
         for (String line : lines) {
             String[] wordList = line.split(" ");
-            String roomNum = wordList[0].substring(wordList[0].indexOf("m")+1);
+            String roomNum = wordList[0].substring(wordList[0].indexOf("m") + 1);
             String roomId = wordList[1];
             int capacity = Integer.parseInt(wordList[2]);
 
@@ -298,7 +298,7 @@ public class FileReadWriter implements Serializable {
         }
     }
 
-    public void ConversationReader(ConversationManager conversationManager){
+    public void ConversationReader(ConversationManager conversationManager) {
         ArrayList<String> lines = new ArrayList<>();
         try {
             FileInputStream in = context.openFileInput("Conversations.txt");
@@ -318,7 +318,7 @@ public class FileReadWriter implements Serializable {
             //find userIDs
             int start = line.indexOf("[");
             int end = line.indexOf("]");
-            String[] IDs = line.substring(start+1, end).split(", ");
+            String[] IDs = line.substring(start + 1, end).split(", ");
             tempIds = new ArrayList<>(Arrays.asList(IDs));
             HashSet<String> userIds = new HashSet<>(tempIds);
 
@@ -332,44 +332,44 @@ public class FileReadWriter implements Serializable {
         }
     }
 
-    private ArrayList<ArrayList<String>> processMessages(String conversation){
+    private ArrayList<ArrayList<String>> processMessages(String conversation) {
         ArrayList<ArrayList<String>> messages = new ArrayList<>();
-        if(conversation.equals("[]") || conversation.equals("[null]") || conversation.equals("null")){
+        if (conversation.equals("[]") || conversation.equals("[null]") || conversation.equals("null")) {
             return messages;
         }
-        String content = conversation.substring(1, conversation.length()-1);
-        while(content.indexOf("]") < content.length()-1){
-            String message = content.substring(content.indexOf("[")+1, content.indexOf("]"));
+        String content = conversation.substring(1, conversation.length() - 1);
+        while (content.indexOf("]") < content.length() - 1) {
+            String message = content.substring(content.indexOf("[") + 1, content.indexOf("]"));
             messages.add(individualMsg(message));
-            content = content.substring(content.indexOf("]")+3);
+            content = content.substring(content.indexOf("]") + 3);
         }
-        messages.add(individualMsg(content.substring(1, content.length()-1)));
+        messages.add(individualMsg(content.substring(1, content.length() - 1)));
 
         return messages;
     }
 
-    private ArrayList<String> individualMsg(String content){
+    private ArrayList<String> individualMsg(String content) {
         //String message = content.substring(content.indexOf("[")+1, content.indexOf("]"));
         String id = content.substring(0, content.indexOf(","));
-        String msg = content.substring(content.indexOf(",")+2);
+        String msg = content.substring(content.indexOf(",") + 2);
         ArrayList<String> eachMsg = new ArrayList<>();
         eachMsg.add(id);
         eachMsg.add(msg);
         return eachMsg;
     }
 
-    public void ConversationWriter(ConversationManager conversationManager){
+    public void ConversationWriter(ConversationManager conversationManager) {
         ArrayList<HashSet<String>> conversationIds = conversationManager.getAllUserIds();
-        try{
+        try {
             FileOutputStream out = context.openFileOutput("Conversations.txt", Context.MODE_PRIVATE);
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-            for (HashSet<String> conversationId : conversationIds){
+            for (HashSet<String> conversationId : conversationIds) {
                 String line = conversationManager.generateFormattedConversationInfo(conversationId);
                 line += "\n";
                 writer.write(line);
             }
             writer.close();
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("The CONVERSATION list is empty!");
         } catch (IOException e) {
             e.printStackTrace();

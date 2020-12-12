@@ -16,6 +16,9 @@ import com.example.a207_demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * AnnouncementAdapter
+ */
 public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.VHAnnouncement> {
 
     private Context context;
@@ -25,8 +28,8 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
     /**
      * MsgAdapter constructor
      *
-     * @param context
-     * @param announcementList
+     * @param context          Context
+     * @param announcementList ArrayList<String>
      */
     public AnnouncementAdapter(Context context, ArrayList<String> announcementList) {
         this.context = context;

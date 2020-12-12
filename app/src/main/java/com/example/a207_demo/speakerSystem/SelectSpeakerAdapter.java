@@ -24,6 +24,11 @@ public class SelectSpeakerAdapter extends RecyclerView.Adapter<SelectSpeakerAdap
     private List<String> speakerList;
     private ArrayList<String> speakerNames;
 
+    /**
+     * SelectSpeakerAdapter
+     * @param context Context
+     * @param speakerList List<String>
+     */
     public SelectSpeakerAdapter(Context context, List<String> speakerList) {
         this.context = context;
         this.speakerList = speakerList;
@@ -94,6 +99,10 @@ public class SelectSpeakerAdapter extends RecyclerView.Adapter<SelectSpeakerAdap
         private TextView speakerNum;
         private CheckBox selectedSpeaker;
 
+        /**
+         * VHSelectSpeaker
+         * @param v View
+         */
         public VHSelectSpeaker(View v) {
             super(v);
             speakerNum = v.findViewById(R.id.speaker_name);

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
- *
+ * ConversationActivity
  */
 public class ConversationActivity extends BaseActivity implements View.OnClickListener {
 
@@ -70,6 +70,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
 
     /**
      * on Create Options Menu
+     *
      * @param menu Menu
      * @return boolean
      */
@@ -80,11 +81,12 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
 
     /**
      * Return to last menu
+     *
      * @param item Item clicked
      * @return true if quit this menu successfully
      */
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
@@ -102,10 +104,10 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
         conversationRecyclerView.setLayoutManager(linearLayoutManager);
         conversationAdapter = new ConversationAdapter(this, conversationList, myID);
         conversationRecyclerView.setAdapter(conversationAdapter);
-        conversationRecyclerView.scrollToPosition(conversationList.size()-1);
+        conversationRecyclerView.scrollToPosition(conversationList.size() - 1);
     }
 
-    private void loadData(){
+    private void loadData() {
         myID = getIntent().getStringExtra("myID");
         userID = getIntent().getStringExtra("userID");
         userName = getIntent().getStringExtra("userName");
@@ -138,7 +140,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
             conversationAdapter.notifyDataSetChanged();
             conversationRecyclerView.scrollToPosition(conversationList.size() - 1);
             inputText.setText("");
-        }else{
+        } else {
             Toast.makeText(this, "Message cannot be EMPTY!", Toast.LENGTH_LONG).show();
         }
     }

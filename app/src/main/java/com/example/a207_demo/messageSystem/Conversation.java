@@ -13,18 +13,19 @@ public class Conversation implements Serializable {
 
     /**
      * The constructor of the conversation class
-//     * @param userId1 first user id
-//     * @param userId2 second user id.
-//     */
+     * //     * @param userId1 first user id
+     * //     * @param userId2 second user id.
+     * //
+     */
 //    public Conversation(String userId1, String userId2){
 //        userIds.add(userId1);
 //        userIds.add(userId2);
 //    }
-    public Conversation(HashSet<String> userIDs){
+    public Conversation(HashSet<String> userIDs) {
         this.userIds = userIDs;
     }
 
-    public void setMessages(ArrayList<ArrayList<String>> messages){
+    public void setMessages(ArrayList<ArrayList<String>> messages) {
         this.messages = messages;
     }
 
@@ -32,13 +33,13 @@ public class Conversation implements Serializable {
      * Add the sender's message to the list of messages.
      *
      * @param userId the user id of the sender of the message.
-     * @param text the String of text the sender sends.
+     * @param text   the String of text the sender sends.
      */
 //    public void addMessage(String userId, String text){
 //        String[] message = {userId, text};
 //        messages.add(message);
 //    }
-    public void addMessage(String userId, String text){
+    public void addMessage(String userId, String text) {
         ArrayList<String> message = new ArrayList<>();
         message.add(userId);
         message.add(text);
@@ -78,15 +79,16 @@ public class Conversation implements Serializable {
 //    public ArrayList<String[]> getMessages(){
 //        return messages;
 //    }
-    public ArrayList<ArrayList<String>> getMessages(){
+    public ArrayList<ArrayList<String>> getMessages() {
         return messages;
     }
 
     /**
      * Delete a message of a given index
+     *
      * @param index the index of the message in the messages list the user want to delete.
      */
-    public void deleteMessage(int index){
+    public void deleteMessage(int index) {
         messages.remove(index);
     }
 
@@ -137,7 +139,7 @@ public class Conversation implements Serializable {
      *
      * @return the cloned Hashset of userIds.
      */
-    public HashSet<String> getUserIds(){
+    public HashSet<String> getUserIds() {
 //        HashSet<String> cloneSet = (HashSet<String>)userIds.clone();
         return userIds;
     }

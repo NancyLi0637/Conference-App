@@ -42,9 +42,9 @@ public class AttendeeManager extends UserManager implements Serializable {
         return attendees;
     }
 
-    public ArrayList<String> getAttendeeIDs(){
+    public ArrayList<String> getAttendeeIDs() {
         ArrayList<String> attendeeIDs = new ArrayList<>();
-        for(Attendee attendee : attendees){
+        for (Attendee attendee : attendees) {
             attendeeIDs.add(attendee.getUserID());
         }
         return attendeeIDs;
@@ -102,9 +102,9 @@ public class AttendeeManager extends UserManager implements Serializable {
     }
 
     @Override
-    public ArrayList<ArrayList<String>> generateAccountInfo(){
+    public ArrayList<ArrayList<String>> generateAccountInfo() {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
-        for(Attendee attendee : attendees){
+        for (Attendee attendee : attendees) {
             ArrayList<String> info = new ArrayList<>();
             info.add(attendee.getUserName());
             info.add(attendee.getType());
@@ -116,9 +116,9 @@ public class AttendeeManager extends UserManager implements Serializable {
     }
 
 
-    public ArrayList<ArrayList<String>> generateVIPAccountInfo(){
+    public ArrayList<ArrayList<String>> generateVIPAccountInfo() {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
-        for(VIPUser vipUser : vipUsers){
+        for (VIPUser vipUser : vipUsers) {
             ArrayList<String> info = new ArrayList<>();
             info.add(vipUser.getUserName());
             info.add(vipUser.getType());

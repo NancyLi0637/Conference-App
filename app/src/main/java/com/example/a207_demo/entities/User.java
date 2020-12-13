@@ -71,10 +71,18 @@ public abstract class User implements Serializable {
         this.userID = userID;
     }
 
+    /**
+     * setFriendList
+     * @param friendList ArrayList<String> friendList
+     */
     public void setFriendList(ArrayList<String> friendList) {
         this.friendList = friendList;
     }
 
+    /**
+     * setAnnouncements
+     * @param announcements ArrayList<String> announcements
+     */
     public void setAnnouncements(ArrayList<String> announcements) {
         this.announcements = announcements;
     }
@@ -85,9 +93,14 @@ public abstract class User implements Serializable {
      * @param userId the userID of the new friend to add
      */
     public void addFriend(String userId) {
-        friendList.add(userId);
+        if (!friendList.contains(userId)) friendList.add(userId);
     }
 
+    /**
+     * addAnnouncement
+     *
+     * @param announcement String announcement
+     */
     public void addAnnouncement(String announcement) {
         this.announcements.add(announcement);
     }
@@ -148,6 +161,12 @@ public abstract class User implements Serializable {
         return friendList;
     }
 
+
+    /**
+     * getAnnouncements
+     *
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getAnnouncements() {
         return this.announcements;
     }
